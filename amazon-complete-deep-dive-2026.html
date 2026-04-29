@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Corporation — Complete Deep Dive | April 2026</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:#0E1F3D; --navy-mid:#1A3461; --navy-light:#2A4A82;
+    --blue:#0057A8; --blue-light:#E8F0FA;
+    --teal:#00748A; --teal-light:#E5F4F7;
+    --gold:#B07D00; --gold-light:#FDF5DC;
+    --green:#1A6B3A; --green-light:#E6F4EC;
+    --orange:#B85000; --orange-light:#FFF0E5;
+    --red:#A8001E; --red-light:#FAEAED;
+    --purple:#6B2D8B; --purple-light:#F3E8FA;
+    --amazon:#FF9900; --amazon-dark:#C67600; --amazon-light:#FFF5E6;
+    --gray-50:#F8F9FA; --gray-100:#F0F1F3; --gray-200:#E2E4E8;
+    --gray-400:#9AA0AB; --gray-600:#5A6270; --gray-800:#2C3240;
+    --text:#1A1E2A; --border:#D0D4DC;
+    --shadow-sm:0 1px 3px rgba(14,31,61,0.08);
+    --radius:4px; --radius-lg:8px;
+  }
+  html { font-size: 15px; scroll-behavior: smooth; }
+  body { font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif; color:var(--text); background:#ECEEF2; line-height:1.7; }
+  .brand-bar { background:var(--amazon-dark); height:5px; width:100%; position:sticky; top:0; z-index:100; }
+  .firm-header { background:var(--navy); color:white; padding:28px 56px 24px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+  .firm-logo { display:flex; align-items:center; gap:16px; }
+  .firm-logo-mark { width:44px; height:44px; background:white; border-radius:3px; display:flex; align-items:center; justify-content:center; }
+  .firm-logo-mark span { font-size:20px; font-weight:900; color:var(--navy); }
+  .firm-name { font-size:1.05rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+  .firm-tagline { font-size:.72rem; opacity:.55; letter-spacing:.06em; text-transform:uppercase; margin-top:2px; }
+  .header-meta { text-align:right; font-size:.75rem; opacity:.65; line-height:1.8; }
+  .doc-header { background:white; padding:40px 56px 36px; border-bottom:4px solid var(--amazon); box-shadow:var(--shadow-sm); }
+  .doc-label { font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--amazon-dark); margin-bottom:10px; }
+  .doc-title { font-size:2.3rem; font-weight:800; color:var(--navy); line-height:1.15; margin-bottom:8px; }
+  .doc-subtitle { font-size:1.05rem; color:var(--gray-600); margin-bottom:20px; }
+  .doc-meta-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
+  .doc-meta-item label { font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gray-400); display:block; margin-bottom:3px; }
+  .doc-meta-item span { font-size:.85rem; font-weight:600; color:var(--gray-800); }
+  .layout { display:grid; grid-template-columns:250px 1fr; min-height:calc(100vh - 200px); }
+  .sidebar { background:var(--navy); padding:24px 0 40px; position:sticky; top:5px; height:calc(100vh - 5px); overflow-y:auto; }
+  .sidebar-section { margin-bottom:6px; }
+  .sidebar-heading { font-size:.62rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); padding:10px 18px 5px; }
+  .sidebar a { display:block; padding:6px 18px; font-size:.77rem; color:rgba(255,255,255,.7); text-decoration:none; border-left:3px solid transparent; transition:all .15s; }
+  .sidebar a:hover { background:rgba(255,255,255,.07); color:white; border-left-color:var(--amazon); }
+  .main { background:#ECEEF2; padding:28px 36px 80px; }
+  .section { background:white; border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); margin-bottom:24px; overflow:hidden; }
+  .section-header { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%); color:white; padding:18px 26px; display:flex; align-items:center; gap:14px; }
+  .section-header.amazon-hdr { background:linear-gradient(135deg,#C67600 0%,#E8860A 100%); }
+  .section-header.aws-hdr { background:linear-gradient(135deg,#1A3461 0%,#0057A8 100%); }
+  .section-header.green-hdr { background:linear-gradient(135deg,#1A6B3A 0%,#2E8B57 100%); }
+  .section-header.teal-hdr { background:linear-gradient(135deg,#005A6B 0%,#00748A 100%); }
+  .section-header.purple-hdr { background:linear-gradient(135deg,#4A1A6B 0%,#6B2D8B 100%); }
+  .section-header.red-hdr { background:linear-gradient(135deg,#6B0015 0%,#A8001E 100%); }
+  .section-number { background:rgba(255,255,255,.15); border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-size:.75rem; font-weight:700; flex-shrink:0; }
+  .section-title { font-size:1.05rem; font-weight:700; }
+  .section-body { padding:26px; }
+  .subsection { margin-bottom:26px; }
+  .subsection:last-child { margin-bottom:0; }
+  .subsection-title { font-size:.9rem; font-weight:700; color:var(--navy); margin-bottom:10px; padding-bottom:6px; border-bottom:2px solid var(--amazon-light); }
+  p { margin-bottom:12px; font-size:.88rem; color:var(--gray-800); }
+  p:last-child { margin-bottom:0; }
+  .callout { border-radius:var(--radius); padding:15px 18px; margin:16px 0; display:flex; gap:12px; }
+  .callout-icon { font-size:1rem; flex-shrink:0; margin-top:2px; }
+  .callout-body { flex:1; }
+  .callout-title { font-size:.75rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:3px; }
+  .callout-text { font-size:.83rem; }
+  .callout.blue { background:var(--blue-light); border-left:4px solid var(--blue); }
+  .callout.blue .callout-title { color:var(--blue); }
+  .callout.gold { background:var(--gold-light); border-left:4px solid var(--gold); }
+  .callout.gold .callout-title { color:var(--gold); }
+  .callout.green { background:var(--green-light); border-left:4px solid var(--green); }
+  .callout.green .callout-title { color:var(--green); }
+  .callout.red { background:var(--red-light); border-left:4px solid var(--red); }
+  .callout.red .callout-title { color:var(--red); }
+  .callout.teal { background:var(--teal-light); border-left:4px solid var(--teal); }
+  .callout.teal .callout-title { color:var(--teal); }
+  .callout.orange { background:var(--orange-light); border-left:4px solid var(--orange); }
+  .callout.orange .callout-title { color:var(--orange); }
+  .callout.purple { background:var(--purple-light); border-left:4px solid var(--purple); }
+  .callout.purple .callout-title { color:var(--purple); }
+  .callout.amazon { background:var(--amazon-light); border-left:4px solid var(--amazon); }
+  .callout.amazon .callout-title { color:var(--amazon-dark); }
+  .stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:16px 0; }
+  .stat-grid-3 { grid-template-columns:repeat(3,1fr); }
+  .stat-grid-2 { grid-template-columns:repeat(2,1fr); }
+  .stat-card { background:var(--gray-50); border:1px solid var(--border); border-radius:var(--radius); padding:16px; text-align:center; }
+  .stat-value { font-size:1.5rem; font-weight:800; color:var(--navy); line-height:1.1; }
+  .stat-label { font-size:.71rem; color:var(--gray-600); margin-top:4px; text-transform:uppercase; letter-spacing:.05em; font-weight:600; }
+  .stat-sub { font-size:.69rem; color:var(--gray-400); margin-top:2px; }
+  .stat-card.blue { border-top:3px solid var(--blue); }
+  .stat-card.green { border-top:3px solid var(--green); }
+  .stat-card.gold { border-top:3px solid var(--gold); }
+  .stat-card.teal { border-top:3px solid var(--teal); }
+  .stat-card.red { border-top:3px solid var(--red); }
+  .stat-card.orange { border-top:3px solid var(--orange); }
+  .stat-card.purple { border-top:3px solid var(--purple); }
+  .stat-card.amazon { border-top:3px solid var(--amazon); }
+  .table-wrap { overflow-x:auto; margin:14px 0; border-radius:var(--radius); border:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; font-size:.82rem; }
+  thead tr { background:var(--navy); color:white; }
+  th { padding:9px 13px; text-align:left; font-size:.71rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; }
+  td { padding:8px 13px; border-bottom:1px solid var(--gray-100); color:var(--gray-800); vertical-align:top; }
+  tr:last-child td { border-bottom:none; }
+  tr:nth-child(even) td { background:var(--gray-50); }
+  .tag { display:inline-block; padding:2px 7px; border-radius:20px; font-size:.67rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+  .tag-green { background:var(--green-light); color:var(--green); }
+  .tag-red { background:var(--red-light); color:var(--red); }
+  .tag-gold { background:var(--gold-light); color:var(--gold); }
+  .tag-blue { background:var(--blue-light); color:var(--blue); }
+  .tag-gray { background:var(--gray-100); color:var(--gray-600); }
+  .tag-orange { background:var(--orange-light); color:var(--orange); }
+  .tag-teal { background:var(--teal-light); color:var(--teal); }
+  .tag-purple { background:var(--purple-light); color:var(--purple); }
+  .tag-amazon { background:var(--amazon-light); color:var(--amazon-dark); }
+  .bar-row { display:flex; align-items:center; gap:10px; margin:7px 0; }
+  .bar-label { font-size:.78rem; font-weight:600; width:200px; flex-shrink:0; color:var(--gray-800); }
+  .bar-track { flex:1; height:10px; background:var(--gray-200); border-radius:20px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:20px; }
+  .bar-val { font-size:.75rem; font-weight:700; width:70px; text-align:right; color:var(--gray-800); }
+  ul.bullet { padding-left:20px; margin:8px 0 12px; }
+  ul.bullet li { font-size:.86rem; color:var(--gray-800); margin-bottom:5px; line-height:1.5; }
+  .highlight-box { background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%); color:white; border-radius:var(--radius-lg); padding:22px 26px; margin:18px 0; }
+  .highlight-box h3 { font-size:.95rem; font-weight:700; margin-bottom:8px; }
+  .highlight-box p { color:rgba(255,255,255,.85); font-size:.85rem; margin-bottom:6px; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:14px 0; }
+  .three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:14px 0; }
+  .card { background:var(--gray-50); border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
+  .card.blue-border { border-left:4px solid var(--blue); }
+  .card.green-border { border-left:4px solid var(--green); }
+  .card.gold-border { border-left:4px solid var(--gold); }
+  .card.teal-border { border-left:4px solid var(--teal); }
+  .card.amazon-border { border-left:4px solid var(--amazon); }
+  .card-title { font-size:.83rem; font-weight:700; color:var(--navy); margin-bottom:6px; }
+  .card-body { font-size:.82rem; color:var(--gray-800); }
+  .timeline-item { display:flex; gap:14px; margin-bottom:16px; }
+  .timeline-dot { width:11px; height:11px; border-radius:50%; background:var(--amazon); margin-top:5px; flex-shrink:0; }
+  .timeline-date { font-size:.71rem; font-weight:700; color:var(--amazon-dark); text-transform:uppercase; letter-spacing:.05em; }
+  .timeline-text { font-size:.84rem; color:var(--gray-800); margin-top:2px; }
+  sup { font-size:.65em; vertical-align:super; color:var(--amazon-dark); font-weight:700; }
+  .sources-section { background:var(--gray-50); border-top:2px solid var(--border); padding:26px; }
+  .sources-section h2 { font-size:.83rem; font-weight:700; color:var(--navy); margin-bottom:14px; text-transform:uppercase; letter-spacing:.06em; }
+  .source-category { margin-bottom:12px; }
+  .source-category-label { font-size:.71rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--gray-600); margin-bottom:5px; }
+  .source-list { list-style:none; padding:0; }
+  .source-list li { font-size:.77rem; color:var(--gray-700); margin-bottom:3px; padding-left:12px; position:relative; }
+  .source-list li::before { content:''; position:absolute; left:0; top:9px; width:6px; height:1px; background:var(--gray-400); }
+  .source-list a { color:var(--blue); text-decoration:none; }
+  .source-list a:hover { text-decoration:underline; }
+  @media(max-width:900px){
+    .layout{grid-template-columns:1fr} .sidebar{position:static;height:auto}
+    .stat-grid{grid-template-columns:repeat(2,1fr)} .doc-meta-grid{grid-template-columns:repeat(2,1fr)}
+    .two-col,.three-col{grid-template-columns:1fr} .firm-header{padding:20px 24px;flex-direction:column;align-items:flex-start}
+    .doc-header{padding:24px} .main{padding:16px}
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-bar"></div>
+<header class="firm-header">
+  <div class="firm-logo">
+    <div class="firm-logo-mark"><span>B</span></div>
+    <div>
+      <div class="firm-name">Buzzi &amp; Associates</div>
+      <div class="firm-tagline">Technology Intelligence &amp; Investment Research</div>
+    </div>
+  </div>
+  <div class="header-meta">Report Date: April 27, 2026<br>Classification: Internal Research<br>Reference: RES-AMZN-2026-FULL</div>
+</header>
+
+<div class="doc-header">
+  <div class="doc-label">Full Company Deep Dive — All Business Lines, All Drivers</div>
+  <div class="doc-title">Amazon.com, Inc. (AMZN)</div>
+  <div class="doc-subtitle">From the Everything Store to the Everything Company — AWS, Advertising, Healthcare, Robotics, Satellites, AI &amp; the $200B Capex Bet</div>
+  <div class="doc-meta-grid">
+    <div class="doc-meta-item"><label>FY2025 Revenue</label><span>$716.9B (+12.4%)</span></div>
+    <div class="doc-meta-item"><label>AWS Annual Run Rate</label><span>$142B (Q4 2025)</span></div>
+    <div class="doc-meta-item"><label>2026 Capex Plan</label><span>$200B</span></div>
+    <div class="doc-meta-item"><label>Consensus Target</label><span>$281–$287 (64 Buys)</span></div>
+    <div class="doc-meta-item"><label>Anthropic Investment</label><span>Up to $33B total</span></div>
+  </div>
+</div>
+
+<div class="layout">
+<nav class="sidebar">
+  <div class="sidebar-section">
+    <div class="sidebar-heading">Overview</div>
+    <a href="#exec-summary">Executive Summary</a>
+    <a href="#financials">FY2025 Financials</a>
+    <a href="#andy-jassy">Andy Jassy &amp; Strategy</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-heading">Core Retail</div>
+    <a href="#north-america">North America E-Commerce</a>
+    <a href="#international">International</a>
+    <a href="#marketplace">3P Marketplace ($800B GMV)</a>
+    <a href="#advertising">Advertising ($68B)</a>
+    <a href="#prime">Prime &amp; Subscriptions</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-heading">AWS</div>
+    <a href="#aws-core">AWS Core Cloud</a>
+    <a href="#aws-ai">AWS AI &amp; Bedrock</a>
+    <a href="#trainium">Trainium/Inferentia Custom Silicon</a>
+    <a href="#anthropic">Anthropic Partnership ($33B)</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-heading">Operations</div>
+    <a href="#logistics">Logistics &amp; Fulfillment</a>
+    <a href="#robotics">Amazon Robotics (1M+ robots)</a>
+    <a href="#capex">$200B Capex Plan</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-heading">New Bets</div>
+    <a href="#healthcare">Healthcare (One Medical + Pharmacy)</a>
+    <a href="#kuiper">Amazon Leo Satellites</a>
+    <a href="#devices">Devices &amp; Alexa+</a>
+    <a href="#entertainment">Prime Video &amp; Entertainment</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-heading">Investment Analysis</div>
+    <a href="#competitors">Competitive Landscape</a>
+    <a href="#risks">Risk Register</a>
+    <a href="#stock">Stock Thesis (Bull/Bear)</a>
+    <a href="#sources">Sources</a>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ═══ 1. EXECUTIVE SUMMARY ════════════════════════════════════════ -->
+<div class="section" id="exec-summary">
+  <div class="section-header">
+    <div class="section-number">1</div>
+    <div class="section-title">Executive Summary — What Amazon Is in 2026</div>
+  </div>
+  <div class="section-body">
+    <div class="highlight-box">
+      <h3>The One-Paragraph Thesis</h3>
+      <p>Amazon is simultaneously the world's largest retailer, largest cloud provider, third-largest advertising platform, most sophisticated logistics operator, a leading AI infrastructure company, a healthcare provider, a satellite internet company, a content studio, and a consumer electronics maker — all in one. In FY2025, it generated $716.9 billion in revenue and $77.7 billion in net income. The central tension: the retail/logistics engine is a low-margin, capex-heavy business that generates volume and data; AWS is a high-margin ($35B+ gross profit per quarter) cash machine that funds everything else; and advertising is the surprise profit engine now generating $68B+ per year at software-like margins. The $200B capex plan for 2026 is the defining near-term story — a bet that AI infrastructure demand is structural, not cyclical, and that Amazon's custom silicon (Trainium) can reduce its NVIDIA dependency while lowering costs for customers who commit to AWS.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card amazon"><div class="stat-value">$716.9B</div><div class="stat-label">FY2025 Revenue</div><div class="stat-sub">+12.4% YoY; larger than Walmart</div></div>
+      <div class="stat-card blue"><div class="stat-value">$128.7B</div><div class="stat-label">AWS FY2025 Revenue</div><div class="stat-sub">+20% YoY; $142B annualized run rate</div></div>
+      <div class="stat-card green"><div class="stat-value">$68B+</div><div class="stat-label">Advertising Revenue FY2025</div><div class="stat-sub">+22–24% quarterly growth</div></div>
+      <div class="stat-card gold"><div class="stat-value">$200B</div><div class="stat-label">2026 Capex Plan</div><div class="stat-sub">+52% vs 2025; primarily AWS AI infra</div></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Segment</th><th>FY2025 Revenue</th><th>YoY Growth</th><th>% of Total</th><th>Operating Margin</th><th>Character</th></tr></thead>
+        <tbody>
+          <tr><td>North America (retail + ads)</td><td>$426.3B</td><td>+10%</td><td>59.5%</td><td>~7–8%</td><td><span class="tag tag-gold">High volume, low margin; improving</span></td></tr>
+          <tr><td>International (retail + ads)</td><td>$161.9B</td><td>+13%</td><td>22.6%</td><td>~1–3%</td><td><span class="tag tag-orange">Breakeven to slim profit; early growth</span></td></tr>
+          <tr><td>AWS (cloud + AI)</td><td>$128.7B</td><td>+20%</td><td>18.0%</td><td>~35%</td><td><span class="tag tag-green">High margin; funds the company</span></td></tr>
+          <tr><td>Advertising Services</td><td>~$68B</td><td>+22–24%</td><td>9.5%</td><td>~70%+ est.</td><td><span class="tag tag-green">Software-margin business; fastest growing</span></td></tr>
+          <tr><td>Subscription Services</td><td>~$47B</td><td>+11%</td><td>6.6%</td><td>Mixed (includes content costs)</td><td><span class="tag tag-blue">Recurring; anchor for ecosystem</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.78rem;color:var(--gray-600);margin-top:8px;">Note: Amazon's reported segments are North America, International, and AWS. Advertising and Subscription are disclosed revenue lines within segments.</p>
+  </div>
+</div>
+
+<!-- ═══ 2. FY2025 FINANCIALS ════════════════════════════════════════ -->
+<div class="section" id="financials">
+  <div class="section-header green-hdr">
+    <div class="section-number">2</div>
+    <div class="section-title">FY2025 Financial Deep Dive</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Revenue &amp; Profit Trajectory</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>Revenue</th><th>YoY Growth</th><th>Operating Income</th><th>Net Income</th><th>AWS Revenue</th></tr></thead>
+          <tbody>
+            <tr><td>FY2021</td><td>$469.8B</td><td>+22%</td><td>$24.9B</td><td>$33.4B</td><td>$62.2B</td></tr>
+            <tr><td>FY2022</td><td>$513.9B</td><td>+9%</td><td>$12.2B</td><td>($2.7B loss)</td><td>$80.1B</td></tr>
+            <tr><td>FY2023</td><td>$574.8B</td><td>+12%</td><td>$36.9B</td><td>$30.4B</td><td>$90.8B</td></tr>
+            <tr><td>FY2024</td><td>$637.9B</td><td>+11%</td><td>$68.6B</td><td>$59.2B</td><td>$107.6B</td></tr>
+            <tr><td>FY2025</td><td><strong>$716.9B</strong></td><td>+12%</td><td><strong>$80.0B</strong></td><td><strong>$77.7B</strong></td><td><strong>$128.7B</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The story of Amazon's profitability is the story of AWS maturing. In FY2022, Amazon reported a $2.7B net loss — Amazon's retail business was barely break-even, and AWS was not yet large enough to carry the whole enterprise during a year of heavy investment and post-pandemic normalization. By FY2025, AWS's $45.6B in operating income is subsidizing Amazon's massive logistics build-out, content spend, healthcare expansion, and Kuiper satellite program simultaneously. AWS is the engine that makes the flywheel spin.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Q4 2025 — The Most Recent Quarter</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$187.8B</div><div class="stat-label">Q4 2025 Revenue</div><div class="stat-sub">Amazon's largest quarter ever</div></div>
+        <div class="stat-card blue"><div class="stat-value">$35.6B</div><div class="stat-label">AWS Q4 Revenue</div><div class="stat-sub">+24% YoY — 3-year high growth rate</div></div>
+        <div class="stat-card green"><div class="stat-value">$21.3B</div><div class="stat-label">Advertising Q4 Revenue</div><div class="stat-sub">+23% YoY</div></div>
+        <div class="stat-card gold"><div class="stat-value">$12.47B</div><div class="stat-label">AWS Q4 Operating Income</div><div class="stat-sub">35% operating margin</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">The Profit Concentration Reality</div>
+      <div class="callout blue">
+        <div class="callout-icon">📊</div>
+        <div class="callout-body">
+          <div class="callout-title">AWS Is Amazon's Profit Engine</div>
+          <div class="callout-text">AWS represents 18% of Amazon's revenue but generates approximately 57% of its total operating income. The retail/logistics business ($588B in revenue) earns operating income of roughly $34B — a ~5.8% margin. AWS earns $45.6B in operating income on $128.7B revenue — a 35% margin. Amazon's total stock market valuation is largely a bet on AWS continuing to grow at 20%+ per year while the retail business generates enough cash flow to be self-sustaining. If AWS slows meaningfully, the investment thesis collapses even though retail alone is the world's largest commerce operation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 3. ANDY JASSY ════════════════════════════════════════════════ -->
+<div class="section" id="andy-jassy">
+  <div class="section-header">
+    <div class="section-number">3</div>
+    <div class="section-title">Andy Jassy &amp; Amazon's Strategic Identity</div>
+  </div>
+  <div class="section-body">
+    <p>Andy Jassy became Amazon's CEO in July 2021, succeeding Jeff Bezos. Jassy was the founding leader of AWS — he built it from scratch — which means Amazon's current CEO is, at his core, a cloud infrastructure executive. His strategic priorities since taking the helm: (1) aggressively cut costs in underperforming retail segments (2022–2023 layoffs of ~27,000 employees), (2) restore AWS growth momentum after a post-COVID slowdown, (3) position Amazon as an AI-first company rather than a cloud company that also does AI, and (4) defend Prime's value proposition against streaming competition.</p>
+    <div class="callout amazon">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-title">Jassy's Most Important Strategic Statement (2026 Shareholder Letter)</div>
+        <div class="callout-text">Jassy's April 2026 shareholder letter defended the $200B capex plan: "AI capacity is being monetized as quickly as it is installed. We have never seen demand like this in AWS's 20-year history. We are not over-building — we are under-building relative to what customers are asking for." This is the single most important line in Amazon's investment thesis — if true, $200B in capex generates commensurate revenue; if wrong, Amazon faces a massive capex hangover similar to what telecom companies experienced in the early 2000s.</div>
+      </div>
+    </div>
+    <p>Jassy has also been explicit that AI will reduce Amazon's total corporate headcount — Amazon has 1,000+ generative AI projects in development or deployed internally, ranging from warehouse robotics optimization to AWS customer service automation. The long-term goal: run a $1T+ revenue business with meaningfully fewer people than today through AI-driven efficiency across every function.</p>
+  </div>
+</div>
+
+<!-- ═══ 4. NORTH AMERICA ════════════════════════════════════════════ -->
+<div class="section" id="north-america">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">4</div>
+    <div class="section-title">North America — The $426B Retail Engine</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">What's In This Segment</div>
+      <p>The North America segment includes all U.S. and Canadian retail revenue: first-party product sales (Amazon sells directly), third-party marketplace fees, advertising services sold to North American customers, and subscription revenue. At $426.3B in FY2025, it is the single largest retail operation in U.S. history by revenue, surpassing Walmart's U.S. segment.</p>
+      <div class="stat-grid stat-grid-3">
+        <div class="stat-card amazon"><div class="stat-value">$426.3B</div><div class="stat-label">FY2025 Revenue</div><div class="stat-sub">+10% YoY</div></div>
+        <div class="stat-card green"><div class="stat-value">~7–8%</div><div class="stat-label">Operating Margin</div><div class="stat-sub">Up from near-zero in FY2022</div></div>
+        <div class="stat-card blue"><div class="stat-value">~38%</div><div class="stat-label">US E-Commerce Market Share</div><div class="stat-sub">vs. Walmart ~7%, Target ~2%</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Revenue Mix Within North America</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Revenue Source</th><th>Est. FY2025</th><th>Growth</th><th>Margin Profile</th></tr></thead>
+          <tbody>
+            <tr><td>Online stores (1P product sales)</td><td>~$255B</td><td>+8%</td><td>Low (1–3% gross margin on product)</td></tr>
+            <tr><td>Third-party seller services (fees)</td><td>~$172B</td><td>+11%</td><td>High (~70%+ gross margin — pure fee income)</td></tr>
+            <tr><td>Advertising services (NA portion)</td><td>~$45B</td><td>+22%</td><td>Very high (~70%+ — pure margin)</td></tr>
+            <tr><td>Subscription services (NA)</td><td>~$35B</td><td>+11%</td><td>Mixed (content costs drag margin)</td></tr>
+            <tr><td>Physical stores (Whole Foods, Amazon Go)</td><td>~$21B</td><td>+4%</td><td>Grocery margins (~3–5%)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Same-Day Delivery Expansion</div>
+      <p>Amazon is investing over $4 billion to triple its rural delivery network by end of 2026, expanding same-day/next-day delivery to 4,000+ smaller cities and towns. This is both a customer acquisition strategy (rural households who gain Prime same-day access often dramatically increase purchasing frequency) and a logistics network densification play that makes the last-mile cost per package fall as volume rises in a given geography. The $4B is also a moat-building investment: building out rural last-mile infrastructure is a 3–5 year project that competitors (Walmart, Target, Shopify merchants) cannot replicate quickly.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 5. INTERNATIONAL ════════════════════════════════════════════ -->
+<div class="section" id="international">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">5</div>
+    <div class="section-title">International — $161.9B &amp; The Long Road to Profitability</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Segment Overview</div>
+      <div class="stat-grid stat-grid-3">
+        <div class="stat-card amazon"><div class="stat-value">$161.9B</div><div class="stat-label">FY2025 Revenue</div><div class="stat-sub">+13% YoY (10% ex-FX)</div></div>
+        <div class="stat-card gold"><div class="stat-value">~1–3%</div><div class="stat-label">Operating Margin</div><div class="stat-sub">Recently profitable; was loss-making through FY2023</div></div>
+        <div class="stat-card green"><div class="stat-value">+16% YoY</div><div class="stat-label">Q2 2025 International Growth</div><div class="stat-sub">Outpacing North America</div></div>
+      </div>
+      <p>Amazon's International segment reached profitability in FY2023 and has maintained thin but positive operating margins since. The segment covers: UK, Germany, France, Italy, Spain (European operations), Japan, Australia, India, Brazil, Canada (overlap with NA), Mexico, and several smaller markets. The most strategically important emerging market is India, where Amazon has invested $26B+ cumulatively and competes head-to-head with Reliance's JioMart and Flipkart (owned by Walmart).</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Key International Markets</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Market</th><th>Amazon Position</th><th>Key Competitor</th><th>Profitability</th><th>Strategic Priority</th></tr></thead>
+          <tbody>
+            <tr><td>UK</td><td>#1 e-commerce</td><td>eBay, local retailers</td><td>Profitable</td><td><span class="tag tag-green">Core mature market</span></td></tr>
+            <tr><td>Germany</td><td>#1 e-commerce</td><td>Zalando, Otto</td><td>Profitable</td><td><span class="tag tag-green">Core mature market</span></td></tr>
+            <tr><td>Japan</td><td>#1 e-commerce</td><td>Rakuten</td><td>Profitable</td><td><span class="tag tag-green">Core mature market</span></td></tr>
+            <tr><td>India</td><td>#2 (behind Flipkart)</td><td>Flipkart (Walmart), JioMart</td><td>Investing; not profitable</td><td><span class="tag tag-orange">High priority; $26B+ invested</span></td></tr>
+            <tr><td>Australia</td><td>#2 (behind eBay locally)</td><td>eBay, Kogan</td><td>Near breakeven</td><td><span class="tag tag-gold">Growing</span></td></tr>
+            <tr><td>Brazil</td><td>#2–3</td><td>Mercado Libre, Magazine Luiza</td><td>Loss-making</td><td><span class="tag tag-orange">Long-term bet</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 6. MARKETPLACE ══════════════════════════════════════════════ -->
+<div class="section" id="marketplace">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">6</div>
+    <div class="section-title">Third-Party Marketplace — $800B GMV &amp; Amazon's Hidden Profit Engine</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">The Scale Is Staggering</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$800B+</div><div class="stat-label">Total 2025 GMV</div><div class="stat-sub">3P sellers: $575B; 1P: $255B</div></div>
+        <div class="stat-card green"><div class="stat-value">69%</div><div class="stat-label">3P Share of Total GMV</div><div class="stat-sub">Up from 60% in 2019</div></div>
+        <div class="stat-card blue"><div class="stat-value">$172.2B</div><div class="stat-label">Seller Services Revenue</div><div class="stat-sub">FY2025; +11% YoY</div></div>
+        <div class="stat-card gold"><div class="stat-value">9.7M</div><div class="stat-label">Active Sellers Globally</div><div class="stat-sub">Top 1.6% drive 50% of 3P GMV</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Why the Marketplace Economics Are the Real Story</div>
+      <p>When Amazon sells a product directly (1P), it buys inventory at wholesale, stores it, ships it, handles returns — generating roughly 1–3% gross margin. When a third-party seller sells through Amazon (3P), Amazon collects a referral fee (8–15% of sale price), FBA fulfillment fees, storage fees, and advertising spend — generating an effective take rate of approximately 30–45% of the gross merchandise value it facilitates. Amazon earns more money facilitating a $100 third-party sale than selling a $100 product directly.</p>
+      <div class="callout green">
+        <div class="callout-icon">💰</div>
+        <div class="callout-body">
+          <div class="callout-title">The Marketplace Take Rate Math</div>
+          <div class="callout-text">At $575B in 3P GMV and $172B in seller services revenue, Amazon captures a blended ~30% of third-party GMV as fee revenue. On a high-margin basis (these are fee streams, not product sales), this generates substantial incremental profit. The shift from 60% 3P GMV (2019) to 69% 3P GMV (2025) is one of the most structurally bullish trends in Amazon's business — every percentage point shift from 1P to 3P at current volumes generates approximately $5–6B in additional high-margin fee revenue.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">The FTC Antitrust Case</div>
+      <p>The FTC's ongoing antitrust lawsuit against Amazon (filed 2023) centers on Amazon's marketplace practices: specifically, whether Amazon penalizes sellers who offer lower prices on other platforms (the "anti-discounting" allegation), and whether Amazon's "buy box" algorithm unfairly favors sellers who use FBA. The buy box suppression practice — removing "Add to Cart" buttons from sellers who raised prices due to tariff costs — became a flashpoint in early 2026 when sellers raised tariff-related prices. The FTC case is a multi-year legal process; outcomes range from behavioral remedies to structural separation. Most analysts consider the most severe outcomes (forcing Amazon to divest marketplace from retail) unlikely but not impossible.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 7. ADVERTISING ═══════════════════════════════════════════════ -->
+<div class="section" id="advertising">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">7</div>
+    <div class="section-title">Advertising — The $68B Business Wall Street Underestimates</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Why Amazon Advertising Is Structurally Dominant</div>
+      <p>Amazon's advertising business is fundamentally different from Google's and Meta's — and likely more defensible. When a consumer searches for "running shoes" on Google, Google knows they are interested in running shoes. When a consumer searches for "running shoes" on Amazon, Amazon knows they are about to buy running shoes. This purchase-intent signal is the most commercially valuable signal in digital advertising, making Amazon advertising the highest-converting ad format in e-commerce. Brands get measurable return on ad spend directly attributable to sales, in a closed-loop system Amazon controls entirely.</p>
+      <div class="stat-grid stat-grid-3">
+        <div class="stat-card amazon"><div class="stat-value">$68B+</div><div class="stat-label">FY2025 Advertising Revenue</div><div class="stat-sub">Surpassed $60B milestone</div></div>
+        <div class="stat-card green"><div class="stat-value">22–24%</div><div class="stat-label">Quarterly Growth Rate</div><div class="stat-sub">Outpacing Google &amp; Meta</div></div>
+        <div class="stat-card blue"><div class="stat-value">~$79B</div><div class="stat-label">2026 Projected Revenue</div><div class="stat-sub">WARC forecast</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Advertising Products &amp; the Prime Video Expansion</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Product</th><th>Description</th><th>Scale &amp; Trend</th></tr></thead>
+          <tbody>
+            <tr><td>Sponsored Products</td><td>Search-result ads for 3P sellers; most of Amazon ad revenue; direct PPC</td><td>Largest; still growing double-digits; core cash flow</td></tr>
+            <tr><td>Sponsored Brands</td><td>Brand banner ads above search results; brand awareness tool</td><td>Growing; premium CPMs</td></tr>
+            <tr><td>Sponsored Display</td><td>Programmatic display ads on Amazon properties and off-Amazon inventory</td><td>Expanding off-Amazon reach; competing with TradeDesk</td></tr>
+            <tr><td>Prime Video Ads</td><td>Streaming ad inventory; launched January 2024; full-funnel video</td><td>Contributing "meaningfully" to Q4 2025 ad revenue; earliest innings</td></tr>
+            <tr><td>Amazon DSP</td><td>Demand-side platform for programmatic buying using Amazon's first-party data</td><td>Premium product; first-party data moat unmatched in era of cookie deprecation</td></tr>
+            <tr><td>Amazon Marketing Cloud</td><td>Clean-room data platform; brands analyze their customers' Amazon behavior</td><td>Expanding enterprise adoption; positions Amazon in measurement space</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout teal">
+        <div class="callout-icon">📺</div>
+        <div class="callout-body">
+          <div class="callout-title">Prime Video Ads: The Next Growth Layer</div>
+          <div class="callout-text">Amazon introduced mandatory ads on Prime Video in January 2024. With ~200M Prime members globally watching Prime Video, this is a streaming ad inventory with scale comparable to Netflix (which launched ads earlier). The unique advantage: Amazon knows its Prime Video viewers are also shopping on Amazon — it can close the loop between "watched an ad for a blender" and "bought a blender." This cross-channel attribution is the holy grail of advertising and no other streaming platform has Amazon's commercial data depth. Thursday Night Football ($1B/year rights) adds sports advertising inventory on top. Analysts project Prime Video could be a $5–10B standalone advertising business by 2028.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 8. PRIME ══════════════════════════════════════════════════════ -->
+<div class="section" id="prime">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">8</div>
+    <div class="section-title">Prime &amp; Subscriptions — The $47B Flywheel Anchor</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Prime by the Numbers</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">220M</div><div class="stat-label">Global Prime Members</div><div class="stat-sub">~180M in the United States</div></div>
+        <div class="stat-card green"><div class="stat-value">$47B</div><div class="stat-label">FY2025 Subscription Revenue</div><div class="stat-sub">Includes Prime + other subscriptions</div></div>
+        <div class="stat-card blue"><div class="stat-value">$12.6B</div><div class="stat-label">Q3 2025 Subscription Revenue</div><div class="stat-sub">Record quarter; +11.5% YoY</div></div>
+        <div class="stat-card gold"><div class="stat-value">$139/yr</div><div class="stat-label">Prime Annual Fee (US)</div><div class="stat-sub">$14.99/month; last raised Feb 2022</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">What Prime Members Get — And Why They Stay</div>
+      <p>Amazon Prime has evolved from a "free 2-day shipping" offer into a comprehensive lifestyle subscription. Current Prime benefits in the US include:</p>
+      <ul class="bullet">
+        <li>Free same-day / next-day / 2-day shipping on 300M+ eligible items</li>
+        <li>Prime Video (streaming films, series, live sports including Thursday Night Football)</li>
+        <li>Prime Music (100M+ songs, ad-free)</li>
+        <li>Prime Gaming (free monthly games + in-game content)</li>
+        <li>Prime Reading (rotating library of ebooks and magazines)</li>
+        <li>Amazon Fresh / Whole Foods delivery discounts</li>
+        <li>Early access to Lightning Deals</li>
+        <li>Amazon Photos (unlimited photo storage)</li>
+        <li>Alexa+ (free for Prime members; $19.99/month standalone)</li>
+      </ul>
+      <p>The value bundle is the retention mechanism. A Prime member who uses shipping + Prime Video + Prime Music and Alexa+ is receiving roughly $600–$800/year in individual service value for $139/year. The churn rate on U.S. Prime is reported at approximately 6–8% per year — among the lowest subscription churn rates for any consumer service globally. Prime members spend approximately 2.5× more on Amazon annually than non-Prime customers.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ 9. AWS CORE CLOUD ════════════════════════════════════════════ -->
+<div class="section" id="aws-core">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">9</div>
+    <div class="section-title">AWS Core Cloud — The $142B Annual Run-Rate Machine</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">AWS at a Glance</div>
+      <div class="stat-grid">
+        <div class="stat-card blue"><div class="stat-value">$128.7B</div><div class="stat-label">FY2025 Revenue</div><div class="stat-sub">+20% YoY; 18% of Amazon total revenue</div></div>
+        <div class="stat-card green"><div class="stat-value">$35.6B</div><div class="stat-label">Q4 2025 Revenue</div><div class="stat-sub">+24% YoY — fastest growth in 13 quarters</div></div>
+        <div class="stat-card amazon"><div class="stat-value">$244B</div><div class="stat-label">Remaining Order Backlog</div><div class="stat-sub">+40% YoY; +22% sequential — multi-year contracted demand</div></div>
+        <div class="stat-card gold"><div class="stat-value">35%</div><div class="stat-label">AWS Operating Margin</div><div class="stat-sub">Generates ~60%+ of Amazon's total operating income</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">AWS Revenue Trajectory</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>AWS Revenue</th><th>YoY Growth</th><th>AWS Operating Income</th><th>Q4 Run Rate</th><th>Context</th></tr></thead>
+          <tbody>
+            <tr><td>FY2021</td><td>$62.2B</td><td>+37%</td><td>$18.5B</td><td>~$70B</td><td>Post-COVID cloud surge</td></tr>
+            <tr><td>FY2022</td><td>$80.1B</td><td>+29%</td><td>$22.8B</td><td>~$85B</td><td>Growth deceleration; enterprise cloud cost optimization begins</td></tr>
+            <tr><td>FY2023</td><td>$90.8B</td><td>+13%</td><td>$24.6B</td><td>~$95B</td><td>Cloud optimization cycle troughs; AI demand picks up</td></tr>
+            <tr><td>FY2024</td><td>$107.6B</td><td>+18%</td><td>$35.0B</td><td>~$115B</td><td>AI-driven reacceleration; margins expand sharply</td></tr>
+            <tr><td>FY2025</td><td>$128.7B</td><td>+20%</td><td>~$43B est.</td><td>$142B (annl'd)</td><td>Q4 at 24% — re-acceleration; $244B backlog</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Global Cloud Market Share</div>
+      <p>AWS has held cloud market leadership since 2006. Despite Azure and Google Cloud narrowing the gap over the past five years, AWS remains the dominant platform by revenue, customer count, and service breadth.</p>
+      <div style="margin:14px 0;">
+        <div class="bar-row"><div class="bar-label">AWS (Amazon)</div><div class="bar-track"><div class="bar-fill" style="width:32%;background:var(--amazon);"></div></div><div class="bar-val">32%</div></div>
+        <div class="bar-row"><div class="bar-label">Azure (Microsoft)</div><div class="bar-track"><div class="bar-fill" style="width:22%;background:var(--blue);"></div></div><div class="bar-val">22%</div></div>
+        <div class="bar-row"><div class="bar-label">Google Cloud (GCP)</div><div class="bar-track"><div class="bar-fill" style="width:12%;background:var(--teal);"></div></div><div class="bar-val">12%</div></div>
+        <div class="bar-row"><div class="bar-label">Alibaba Cloud</div><div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--gold);"></div></div><div class="bar-val">4%</div></div>
+        <div class="bar-row"><div class="bar-label">Other Providers</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--gray-400);"></div></div><div class="bar-val">30%</div></div>
+      </div>
+      <p style="font-size:.78rem;color:var(--gray-600);">Q4 2025 market share estimates; Synergy Research Group. Combined Big Three = 66% of worldwide cloud infrastructure market.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Why the $244B Backlog Matters</div>
+      <p>The AWS "remaining performance obligations" backlog — meaning contracted future revenue not yet recognized — reached $244 billion at year-end 2025, up 40% year-over-year and 22% in a single quarter. This is extraordinary: it means AWS has locked in nearly two years of revenue visibility at current run rates, and the pipeline is growing faster than revenue. Enterprise customers typically sign 3–5 year cloud commitments. The $57B sequential backlog increase in Q4 2025 alone represents one of the largest single-quarter enterprise software/cloud commitments ever recorded, driven by enterprises accelerating AI infrastructure decisions before capacity constraints tighten further.</p>
+      <div class="callout blue">
+        <div class="callout-icon">🔒</div>
+        <div class="callout-body">
+          <div class="callout-title">Backlog as a Leading Indicator</div>
+          <div class="callout-text">At $244B backlog and a $142B annualized run rate, AWS has roughly 1.7 years of revenue locked in contracts. When the backlog growth rate (+40%) exceeds the revenue growth rate (+24%), it is a mathematical signal that future revenue will accelerate. Some analysts project AWS growth could reach 35–38% by H2 2026 as this contracted revenue converts to recognized revenue — which would make AWS the fastest-growing major cloud in the world for that period.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">AWS Service Catalog — Why Switching Costs Are Real</div>
+      <div class="three-col">
+        <div class="card blue-border"><div class="card-title">Compute (EC2, Lambda, ECS/EKS)</div><div class="card-body">200+ instance types; Graviton4 ARM chips; Lambda serverless; Fargate containers. Graviton4 delivers 30% better performance per watt vs x86.</div></div>
+        <div class="card green-border"><div class="card-title">Storage (S3, EBS, Glacier)</div><div class="card-body">S3 stores >400 trillion objects; 99.999999999% (11 9s) durability; the de facto global object storage standard.</div></div>
+        <div class="card teal-border"><div class="card-title">Database (RDS, DynamoDB, Redshift)</div><div class="card-body">DynamoDB handles trillions of requests daily (used by major retailers on Prime Day); Aurora serverless; Redshift for petabyte analytics.</div></div>
+        <div class="card gold-border"><div class="card-title">Networking (VPC, CloudFront, Direct Connect)</div><div class="card-body">620+ Points of Presence globally; 35 Availability Zones; Direct Connect at 100 Gbps for enterprise hybrid cloud.</div></div>
+        <div class="card amazon-border"><div class="card-title">AI/ML (SageMaker, Bedrock, Rekognition)</div><div class="card-body">Amazon SageMaker is the leading ML development platform; Bedrock is the unified gen AI gateway; Rekognition handles 10B+ image analyses daily.</div></div>
+        <div class="card blue-border"><div class="card-title">Security (IAM, GuardDuty, Shield)</div><div class="card-body">Zero-trust IAM framework; GuardDuty threat detection; Shield DDoS mitigation; Nitro hypervisor with hardware-enforced isolation.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 10. AWS AI & BEDROCK ══════════════════════════════════════════ -->
+<div class="section" id="aws-ai">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">10</div>
+    <div class="section-title">AWS AI &amp; Amazon Bedrock — $15B Run Rate and Accelerating</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">AI Revenue Hits Escape Velocity</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$15B+</div><div class="stat-label">AWS AI Run Rate (Q1 2026)</div><div class="stat-sub">CEO Andy Jassy confirmed; fastest-growing service line</div></div>
+        <div class="stat-card green"><div class="stat-value">100K+</div><div class="stat-label">Bedrock Customer Organizations</div><div class="stat-sub">Startups to Fortune 500 across every industry</div></div>
+        <div class="stat-card blue"><div class="stat-value">$20B+</div><div class="stat-label">Custom Silicon Run Rate</div><div class="stat-sub">Trainium + Inferentia surpassed $20B annualized per Jassy Q1 2026</div></div>
+        <div class="stat-card gold"><div class="stat-value">80%</div><div class="stat-label">AgentCore Hackathon Adoption</div><div class="stat-sub">80% of 600 agents in AWS AI hackathon built on Bedrock AgentCore</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Amazon Bedrock — The Foundation Model Marketplace</div>
+      <p>Amazon Bedrock is a fully managed service that provides a single API to access over 100 foundation models from Amazon and third-party AI companies. It is the central distribution layer for enterprise generative AI on AWS — and the primary vehicle driving AWS AI revenue.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Model Family</th><th>Provider</th><th>Capability</th><th>Key Use Cases</th></tr></thead>
+          <tbody>
+            <tr><td>Amazon Nova (Micro, Lite, Pro, Premier)</td><td>Amazon</td><td>Text, vision, multimodal</td><td>Cost-optimized, high-speed enterprise tasks; Alexa+ backbone</td></tr>
+            <tr><td>Claude (Haiku 3.5, Sonnet 4.5, Opus 4)</td><td>Anthropic</td><td>Advanced reasoning, coding, analysis</td><td>Enterprise reasoning, legal analysis, code generation</td></tr>
+            <tr><td>Llama 3.3 / Llama 4</td><td>Meta</td><td>Open-weight, customizable</td><td>Fine-tuning for domain-specific tasks; open source compliance</td></tr>
+            <tr><td>Command R+</td><td>Cohere</td><td>Retrieval-augmented generation</td><td>Enterprise search, document QA</td></tr>
+            <tr><td>Mistral Large 2</td><td>Mistral AI</td><td>European-compliant LLM</td><td>EU data residency requirements; multilingual</td></tr>
+            <tr><td>Stability AI</td><td>Stability AI</td><td>Image / video generation</td><td>Creative assets, marketing content</td></tr>
+            <tr><td>Amazon Titan</td><td>Amazon</td><td>Text embeddings, image</td><td>RAG pipelines, semantic search</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Bedrock AgentCore — The Enterprise Agentic Platform</div>
+      <p>Launched in October 2025, Bedrock AgentCore is Amazon's enterprise AI agent deployment framework. It provides memory management, tool use orchestration, multi-agent coordination, and secure execution sandboxes for autonomous AI workflows. The 80% adoption rate in a 600-developer hackathon suggests strong developer mindshare. Early production use cases include autonomous finance reconciliation agents, IT ticket routing systems, and customer service agents handling end-to-end resolution without human intervention.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">AI Products Across Amazon's Consumer Surface</div>
+      <div class="two-col">
+        <div class="card amazon-border">
+          <div class="card-title">Rufus — AI Shopping Assistant</div>
+          <div class="card-body">Rufus is embedded in the Amazon shopping app and website, answering purchase questions ("Is this good for cold weather hiking?"), comparing products, and generating personalized recommendations. It draws on Amazon's 30+ years of purchase graph data — a training dataset no competitor can replicate. Rufus was rolled out globally in 2025 and is now the primary product discovery interface on Amazon for hundreds of millions of users.</div>
+        </div>
+        <div class="card blue-border">
+          <div class="card-title">Amazon Q — Enterprise AI Assistant</div>
+          <div class="card-body">Amazon Q is the AWS-native generative AI assistant for enterprise software development and data analytics. It integrates with 40+ AWS services, can generate code, run SQL queries, summarize documents, and triage incidents. Amazon Q Business allows enterprises to connect it to internal knowledge bases (Confluence, SharePoint, S3) with fine-grained access controls. Positioned directly against GitHub Copilot and Microsoft Copilot for enterprise.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 11. TRAINIUM / INFERENTIA ════════════════════════════════════ -->
+<div class="section" id="trainium">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">11</div>
+    <div class="section-title">Custom Silicon — Trainium &amp; Inferentia: AWS's NVIDIA Alternative</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Why Amazon Built Its Own Chips</div>
+      <p>Amazon's custom silicon strategy was born from two realities: (1) NVIDIA GPUs are supply-constrained and expensive; and (2) Amazon's own AI workloads — training and serving Alexa, recommendation systems, search ranking, fraud detection, and now Claude via Anthropic — are so large that even marginal efficiency gains on custom chips translate into billions of dollars in annual cost savings. The goal is not to eliminate NVIDIA from AWS — NVIDIA remains dominant and AWS sells NVIDIA instances — but to offer a credible alternative that improves AWS margins and gives customers a cost-optimized option for specific workload types.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Trainium3 — AWS's 3nm Flagship</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">2.52 PFLOPS</div><div class="stat-label">MXFP8 Compute per Chip</div><div class="stat-sub">4.4× more performance than Trainium2</div></div>
+        <div class="stat-card blue"><div class="stat-value">144GB</div><div class="stat-label">HBM3e Memory per Chip</div><div class="stat-sub">3.9× higher memory bandwidth vs Tr2</div></div>
+        <div class="stat-card green"><div class="stat-value">40%</div><div class="stat-label">Power Reduction</div><div class="stat-sub">vs Trainium2; liquid-cooled; data center cost driver</div></div>
+        <div class="stat-card gold"><div class="stat-value">TSMC 3nm</div><div class="stat-label">Process Node (N3P)</div><div class="stat-sub">Same generation as Apple M4 / NVIDIA Rubin</div></div>
+      </div>
+      <p>Trainium3 features 8 NeuronCore-v4 engines per chip, each with 128×128 BF16 and 512×128 MXFP8 systolic arrays, plus 32 MiB of dedicated SRAM per engine. The liquid-cooling requirement is a deliberate design choice that reduces operating temperatures and enables higher sustained clock speeds — at the cost of requiring purpose-built data center infrastructure.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Trainium4 — The NVIDIA Hybrid Strategy (H2 2026 / Early 2027)</div>
+      <p>Trainium4 represents a significant strategic evolution. In addition to delivering approximately 6× the FP4 throughput, 3× FP8 performance, 4× more HBM4 memory bandwidth, and 2× memory capacity vs. Trainium3, Trainium4 will support <strong>NVIDIA's NVLink Fusion interconnect</strong> alongside UALink. This means Trainium4 chips can operate in the same cluster as NVIDIA GPUs — enabling "hybrid" compute clusters that combine Trainium's cost efficiency for inference with NVIDIA's Blackwell/Rubin architecture for training. This is a remarkable strategic move: rather than forcing customers to choose between Trainium and NVIDIA, Amazon is building chips that plug into NVIDIA's ecosystem. Apple, OpenAI, and Anthropic have all reportedly been piloting Amazon's Trainium chips, a significant signal of external confidence in the silicon.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Chip</th><th>Process</th><th>FP8 Compute</th><th>Memory</th><th>Key Feature</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Trainium2</td><td>TSMC 4nm</td><td>~0.57 PFLOPS</td><td>HBM2e</td><td>First large-scale deployment; Project Rainier</td><td><span class="tag tag-green">Production — 1M+ deployed</span></td></tr>
+            <tr><td>Trainium3</td><td>TSMC 3nm N3P</td><td>2.52 PFLOPS</td><td>144GB HBM3e</td><td>4.4× Tr2 perf; liquid-cooled; 40% lower power</td><td><span class="tag tag-green">Production — ramping 2026</span></td></tr>
+            <tr><td>Trainium4</td><td>TSMC 2nm est.</td><td>~7.5 PFLOPS est.</td><td>8-stack HBM4</td><td>NVLink Fusion support; 6× FP4 vs Tr3</td><td><span class="tag tag-gold">H2 2026 / Early 2027</span></td></tr>
+            <tr><td>Inferentia2</td><td>TSMC 7nm</td><td>Optimized for inference</td><td>32GB</td><td>190 TOPS; $0.0002/inference token target</td><td><span class="tag tag-green">Production</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Project Rainier — The World's Largest AI Cluster</div>
+      <p>Project Rainier is a dedicated Amazon compute cluster built specifically for Anthropic's Claude training. It became fully operational in mid-2025 with 500,000 Trainium2 chips deployed across multiple US data centers. As of Q1 2026, Rainier holds over 1 million Trainium2 chips total. Under the expanded April 2026 Anthropic deal, Amazon is committed to bringing nearly 1 gigawatt of combined Trainium2 and Trainium3 capacity online by end of 2026, with a 5 gigawatt total commitment over the deal's lifetime. At current chip densities, 5 GW of Trainium capacity would represent one of the largest AI compute infrastructure commitments in history.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 12. ANTHROPIC PARTNERSHIP ════════════════════════════════════ -->
+<div class="section" id="anthropic">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">12</div>
+    <div class="section-title">Anthropic Partnership — Up to $33B Invested; $100B AWS Commitment</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">The Most Important AI Partnership in Cloud History</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$33B</div><div class="stat-label">Amazon Total Equity Commitment</div><div class="stat-sub">$8B prior + $5B April 2026 + up to $20B milestone-based</div></div>
+        <div class="stat-card blue"><div class="stat-value">$100B</div><div class="stat-label">Anthropic-to-AWS Compute Spend</div><div class="stat-sub">10-year commitment; secures Trainium as primary training platform</div></div>
+        <div class="stat-card green"><div class="stat-value">$350B</div><div class="stat-label">Anthropic Pre-Money Valuation</div><div class="stat-sub">April 2026 round; Google also invested; values Anthropic at ~100× revenue</div></div>
+        <div class="stat-card gold"><div class="stat-value">$30B+</div><div class="stat-label">Claude Revenue Run Rate</div><div class="stat-sub">Anthropic est.; 100,000+ customers on Bedrock</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Deal Structure and Timeline</div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">September 2023</div>
+          <div class="timeline-text">Amazon announces initial $4B staged investment in Anthropic. AWS named "preferred cloud provider" for Anthropic. Claude models made available on Amazon Bedrock.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">March 2024</div>
+          <div class="timeline-text">Amazon completes $4B tranche. Anthropic announces Claude 3 family (Haiku, Sonnet, Opus) exclusively on Amazon Bedrock at launch.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">Late 2024</div>
+          <div class="timeline-text">Amazon invests additional $4B (total $8B). Project Rainier launched — 500,000 Trainium2 chip cluster dedicated to Anthropic Claude training.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">April 20–21, 2026</div>
+          <div class="timeline-text">Amazon announces up to $25B additional investment ($5B new equity at $350B valuation + up to $20B milestone-linked). Anthropic commits $100B to AWS over 10 years. Deal includes 5 GW of Trainium capacity; nearly 1 GW live by end of 2026. Claude integrated into Alexa+.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">2036 (Deal Horizon)</div>
+          <div class="timeline-text">$100B AWS spend commitment covers Trainium2, Trainium3, Trainium4, and future generations plus Graviton CPUs across US, Asia, and European data centers.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Strategic Logic — Why This Deal Changes AWS's Competitive Position</div>
+      <div class="callout green">
+        <div class="callout-icon">♟</div>
+        <div class="callout-body">
+          <div class="callout-title">The Anthropic Bet Is Actually a Trainium Bet</div>
+          <div class="callout-text">On the surface, the $33B Amazon-Anthropic deal is a venture investment in a frontier AI lab. Beneath the surface, it is Amazon's guarantee that Trainium will become the dominant training platform for the world's most capable AI models. When Claude trains on Trainium3 and Trainium4 at petawatt-scale, Amazon engineering teams get unparalleled real-world feedback to improve future Trainium generations — the same virtuous cycle that made NVIDIA's CUDA ecosystem so defensible. Every Claude model improvement validates Trainium's architecture. Every new Trainium chip that Anthropic adopts increases switching costs. And the $100B AWS spend commitment locks Anthropic's growth into AWS capacity for a decade.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 13. LOGISTICS & FULFILLMENT ══════════════════════════════════ -->
+<div class="section" id="logistics">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">13</div>
+    <div class="section-title">Logistics &amp; Fulfillment — The $98.5B Moat No One Can Replicate</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">The Scale of Amazon's Logistics Empire</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$98.5B</div><div class="stat-label">Annual Logistics Spend</div><div class="stat-sub">Largest logistics operator in the US by package volume</div></div>
+        <div class="stat-card blue"><div class="stat-value">46%</div><div class="stat-label">AMZL Share of Own Deliveries</div><div class="stat-sub">Amazon Logistics (AMZL) vs UPS/FedEx/USPS</div></div>
+        <div class="stat-card green"><div class="stat-value">300M+</div><div class="stat-label">Same-Day Eligible Items</div><div class="stat-sub">Urban cores; expanding to rural by 2026</div></div>
+        <div class="stat-card gold"><div class="stat-value">3.5%</div><div class="stat-label">Inbound Seller Surcharge</div><div class="stat-sub">Applied to 3P sellers since March 2024; tariff pass-through</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Amazon Logistics (AMZL) — From Last-Mile to Everything</div>
+      <p>Amazon Logistics began in 2015 as a last-mile delivery overflow for UPS and FedEx. Today it delivers 46% of Amazon's own packages and is expanding into third-party logistics for non-Amazon merchants. AMZL's competitive advantage is density: it delivers 6–8 packages per stop vs. UPS/FedEx at 2–3, because it only serves Amazon-concentrated urban residential routes. This density makes AMZL structurally cheaper per package than legacy carriers on those routes.</p>
+      <p>In 2025, Amazon introduced a 3.5% inbound placement surcharge for third-party sellers sending inventory to Amazon fulfillment centers — a direct revenue line that monetizes the $98.5B logistics investment. Analysts estimate this surcharge generates $3–5B in incremental annual revenue.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Rural Expansion — The Untapped Last Frontier</div>
+      <p>Amazon is investing $4 billion to triple its rural delivery network by 2026. Same-Day and Next-Day delivery — previously concentrated in top-50 metro areas — is expanding to thousands of smaller communities. This is both a competitive moat move (preventing Walmart from owning rural Prime) and an advertising move: rural Prime members who receive faster delivery renew at higher rates and spend more per order. Amazon also operates 4,000+ pickup locations (Amazon Hub, Whole Foods, Kohl's partnerships) as a low-cost alternative to last-mile residential delivery.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Why No Competitor Can Replicate This</div>
+      <div class="two-col">
+        <div class="card green-border">
+          <div class="card-title">19-Year Head Start</div>
+          <div class="card-body">Amazon has been building fulfillment centers since 2005. Its current network includes 200+ fulfillment centers, 1,000+ delivery stations, and 200+ sortation centers — a $150B+ asset base built over nearly two decades. Walmart's logistics network is extensive but optimized for store replenishment, not individual package delivery.</div>
+        </div>
+        <div class="card amazon-border">
+          <div class="card-title">Inventory Placement Intelligence</div>
+          <div class="card-body">Amazon uses ML models to pre-position inventory closest to likely buyers before orders are placed — called "inventory regionalization." This allows same-day/next-day delivery without expensive expedited shipping. The prediction accuracy is a function of 30 years of purchase data that no new entrant can replicate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 14. AMAZON ROBOTICS ═══════════════════════════════════════════ -->
+<div class="section" id="robotics">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">14</div>
+    <div class="section-title">Amazon Robotics — 1M+ Robots, $12B Annual Savings Target</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">The Robotic Fulfillment Revolution</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">1M+</div><div class="stat-label">Robots Deployed Globally</div><div class="stat-sub">Across 200+ fulfillment centers; largest industrial robot fleet</div></div>
+        <div class="stat-card green"><div class="stat-value">$12B</div><div class="stat-label">Projected Annual Savings</div><div class="stat-sub">Target by 2026; automation reduces per-unit fulfillment cost</div></div>
+        <div class="stat-card blue"><div class="stat-value">50%</div><div class="stat-label">Manual Activity Automation Target</div><div class="stat-sub">By 2026; up from ~30% today</div></div>
+        <div class="stat-card gold"><div class="stat-value">75%</div><div class="stat-label">Faster Inventory Identification</div><div class="stat-sub">Sequoia system vs. previous generation</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Amazon's Robot Family</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Robot System</th><th>Function</th><th>Key Capability</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sequoia</strong></td><td>Multi-level containerized inventory system</td><td>Identifies + stores inventory 75% faster; 30M item capacity (5× prior); reduces worker travel</td><td><span class="tag tag-green">Production — multiple sites</span></td></tr>
+            <tr><td><strong>Hercules</strong></td><td>Drive unit / mobile shelf mover</td><td>Brings pods of items to stationary human pickers; eliminates walking miles per shift</td><td><span class="tag tag-green">Production — 750K+ units</span></td></tr>
+            <tr><td><strong>Sparrow</strong></td><td>Individual item picking arm</td><td>Uses ML vision to identify and pick individual products from mixed totes — handles 65% of Amazon's catalog</td><td><span class="tag tag-green">Production</span></td></tr>
+            <tr><td><strong>Cardinal</strong></td><td>Heavy package handling</td><td>AI-powered robotic arm sorts packages up to 50 lbs; reduces heavy-lifting injuries</td><td><span class="tag tag-green">Production</span></td></tr>
+            <tr><td><strong>Proteus</strong></td><td>Autonomous mobile robot</td><td>First fully autonomous ground-level robot; works alongside humans without caged zones</td><td><span class="tag tag-green">Production</span></td></tr>
+            <tr><td><strong>Vulcan</strong></td><td>Tactile-feedback picking arm</td><td>Uses force sensors to "feel" objects; handles soft/irregular items previous robots couldn't grasp</td><td><span class="tag tag-gold">Pilot 2025–2026</span></td></tr>
+            <tr><td><strong>Blue Jay</strong></td><td>Ceiling-mounted sorting system</td><td>Overhead conveyor with AI routing (Project Eluna decision model); zero floor footprint</td><td><span class="tag tag-gold">Pilot — Shreveport FC</span></td></tr>
+            <tr><td><strong>Robin</strong></td><td>Outbound package sorting</td><td>Reads labels and sorts packages to carrier routes; 100% accuracy target</td><td><span class="tag tag-green">Production</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Shreveport — The Template for the Next-Generation FC</div>
+      <p>Amazon's Shreveport, Louisiana fulfillment center is the testbed for its "10-system" automation integration — running Sequoia, Hercules, Sparrow, Cardinal, Proteus, Vulcan, Blue Jay/Project Eluna, Robin, and two additional experimental platforms simultaneously. At full automation density, this facility handles roughly 10× more items per square foot per day than Amazon's first-generation fulfillment centers from 2005–2015. If the Shreveport template scales, Amazon's fulfillment cost per unit should decline meaningfully over the next 5 years even as labor costs rise.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 15. $200B CAPEX PLAN ══════════════════════════════════════════ -->
+<div class="section" id="capex">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">15</div>
+    <div class="section-title">The $200B Capex Bet — The Largest Infrastructure Commitment in Corporate History</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Scale and Context</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$200B</div><div class="stat-label">2026 Capex Guidance</div><div class="stat-sub">+52% vs $131.8B in FY2025</div></div>
+        <div class="stat-card blue"><div class="stat-value">$131.8B</div><div class="stat-label">FY2025 Actual Capex</div><div class="stat-sub">Already a record at the time; +28% vs 2024</div></div>
+        <div class="stat-card green"><div class="stat-value">~$700B</div><div class="stat-label">Big Tech Combined AI Capex 2026</div><div class="stat-sub">Amazon + Microsoft + Google + Meta; largest single-year tech capex in history</div></div>
+        <div class="stat-card gold"><div class="stat-value">&gt;60%</div><div class="stat-label">AWS Share of Amazon Capex</div><div class="stat-sub">Data centers, power, servers, networking, silicon</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Where the $200B Goes</div>
+      <div class="three-col">
+        <div class="card amazon-border">
+          <div class="card-title">AWS Data Centers (Primary — ~55%)</div>
+          <div class="card-body">New hyperscale campuses in Virginia, Ohio, Oregon (US); UK, Germany, France, Japan, Singapore, UAE (international). Each campus requires land, power infrastructure, cooling, fiber, and network buildout. Lead time from announcement to operational: 18–36 months.</div>
+        </div>
+        <div class="card blue-border">
+          <div class="card-title">Custom Silicon Fabs &amp; Packaging (~20%)</div>
+          <div class="card-body">Trainium3 production ramp at TSMC; Inferentia2 scale-up; Trainium4 NRE and tape-out; CoWoS-L advanced packaging capacity reservations; server rack and power distribution manufacturing for NVL-equivalent rack systems.</div>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">AI Consumer Products &amp; Logistics (~25%)</div>
+          <div class="card-body">Alexa+ compute infrastructure (Nova + Claude serving at 600M device scale); Rufus AI shopping inference; Amazon Leo satellite production and launch vehicles; rural fulfillment center expansion; Sequoia/robotics deployment in new FCs.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">The ROI Question — Why $200B Is a Bet, Not a Guarantee</div>
+      <p>The $200B capex number triggered a short-term stock selloff when announced in Q4 2025. Free cash flow will compress materially in 2026 as capex exceeds depreciation by a large margin. The thesis requires two things to be true: (1) AI demand continues to grow and does not plateau due to model efficiency improvements (the DeepSeek / Jevons Paradox debate), and (2) Amazon's custom silicon (Trainium) allows it to serve that demand at lower cost than pure NVIDIA-based capacity, protecting margins. The $244B backlog and the $15B+ AI run rate suggest condition #1 is currently tracking well. Condition #2 is the larger open question — Trainium4's NVLink Fusion compatibility is the key hedge that lets Amazon serve demand even if customers prefer NVIDIA architectures.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 16. HEALTHCARE ════════════════════════════════════════════════ -->
+<div class="section" id="healthcare">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">16</div>
+    <div class="section-title">Healthcare — One Medical, Amazon Pharmacy &amp; the GLP-1 Play</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Amazon's Healthcare Stack</div>
+      <div class="three-col">
+        <div class="card amazon-border">
+          <div class="card-title">One Medical — Primary Care</div>
+          <div class="card-body">Acquired February 2023 for $3.9B. ~200+ clinic locations nationwide. Same/next-day appointments; AI-assisted visit notes; integrated with Amazon Pharmacy. Key differentiator: physicians see patients via app in minutes, not days. $199/year membership for individuals.</div>
+        </div>
+        <div class="card blue-border">
+          <div class="card-title">Amazon Pharmacy</div>
+          <div class="card-body">Prescription fulfillment and delivery to 4,500+ US cities. RxPass $5/month for generic medications. Price transparency — shows upfront costs before ordering. Integrates with Prime for free delivery. Disrupts traditional retail pharmacy (CVS, Walgreens) model.</div>
+        </div>
+        <div class="card green-border">
+          <div class="card-title">Amazon Clinic</div>
+          <div class="card-body">Telehealth for common conditions (UTIs, pink eye, hair loss, birth control) without insurance. Pay-per-visit pricing, typically $35–$75. No subscription required. Acts as a patient acquisition funnel into One Medical for complex care needs.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">GLP-1 Program Launch — April 21, 2026</div>
+      <p>On April 21, 2026, Amazon launched a comprehensive GLP-1 weight management program integrating One Medical primary care with Amazon Pharmacy, directly challenging Hims &amp; Hers, Ro, and Noom. The program provides:</p>
+      <ul class="bullet">
+        <li><strong>Upfront pricing transparency:</strong> GLP-1 medications starting at $25/month with insurance; oral semaglutide from ~$149/month cash-pay; injectable semaglutide from ~$299/month cash-pay</li>
+        <li><strong>Integrated primary care:</strong> Regular One Medical check-ins, lab work, and monitoring included in program fee</li>
+        <li><strong>Amazon Pharmacy fulfillment:</strong> Medications delivered to door; no pharmacy trip required</li>
+        <li><strong>AI-assisted monitoring:</strong> Alexa+ and Amazon Health app check-ins between appointments</li>
+      </ul>
+      <div class="callout gold">
+        <div class="callout-icon">💊</div>
+        <div class="callout-body">
+          <div class="callout-title">Why GLP-1 Is a Strategic Masterstroke</div>
+          <div class="callout-text">GLP-1 drugs (Ozempic/Wegovy/Zepbound) represent the fastest-growing prescription category in US pharmaceutical history, projected to reach $130B+ in annual global sales by 2030. Amazon's combination of One Medical (trusted prescriber), Amazon Pharmacy (fulfillment and transparent pricing), and Prime membership (distribution relationship with 220M members) gives it a vertically integrated GLP-1 delivery stack that legacy pharmacy chains cannot match. When news broke, shares of Hims &amp; Hers, Viking Therapeutics, and other specialty weight-loss providers fell sharply — suggesting the market believes Amazon's entry is existentially threatening to smaller players in this space.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 17. AMAZON LEO / KUIPER ═══════════════════════════════════════ -->
+<div class="section" id="kuiper">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">17</div>
+    <div class="section-title">Amazon Leo (Project Kuiper) — 7,727 Satellites, Mid-2026 Consumer Launch</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Mission: Broadband for the Unconnected 4 Billion</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">231</div><div class="stat-label">Production Satellites in Orbit</div><div class="stat-sub">As of April 2026; 9 launch missions completed</div></div>
+        <div class="stat-card blue"><div class="stat-value">7,727</div><div class="stat-label">Total Constellation Planned</div><div class="stat-sub">3,236 FCC Gen1 license + 4,500 approved Jan 2026</div></div>
+        <div class="stat-card green"><div class="stat-value">Mid-2026</div><div class="stat-label">Consumer Service Launch</div><div class="stat-sub">Delayed from late 2025; FCC deadline July 30, 2026</div></div>
+        <div class="stat-card gold"><div class="stat-value">$10B+</div><div class="stat-label">Estimated Total Investment</div><div class="stat-sub">Satellite production, launch vehicles, ground stations</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Project Timeline and FCC Requirements</div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">2019</div>
+          <div class="timeline-text">Amazon Leo subsidiary formed; FCC license application filed for 3,236-satellite constellation in LEO (590–630km orbits).</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">July 2020</div>
+          <div class="timeline-text">FCC grants license for 3,236 satellites; requires 50% deployed by July 30, 2026 and remainder by July 30, 2029.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">April 2025</div>
+          <div class="timeline-text">First 27 production satellites launched aboard United Launch Alliance Atlas V. First batch of production-spec satellites — distinct from the 2 earlier prototype birds.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">November 2025</div>
+          <div class="timeline-text">Project Kuiper rebranded as Amazon Leo.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">January 2026</div>
+          <div class="timeline-text">FCC approves 4,500 additional satellites (new total: 7,727); FCC requires 50% of expanded fleet by February 2032 and remainder by February 2035.</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div>
+          <div class="timeline-date">Mid-2026 (Target)</div>
+          <div class="timeline-text">Consumer broadband service launch; requires 5 additional launch missions in rapid succession to meet FCC July 2026 half-constellation deadline. Launch vehicles secured with ULA, Arianespace, Blue Origin New Glenn, and SpaceX Falcon 9.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Amazon Leo vs. Starlink — The Competitive Picture</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Metric</th><th>Amazon Leo</th><th>SpaceX Starlink</th></tr></thead>
+          <tbody>
+            <tr><td>Satellites planned</td><td>7,727</td><td>42,000 (authorized)</td></tr>
+            <tr><td>Satellites in orbit (Apr 2026)</td><td>~231 production</td><td>~7,000+</td></tr>
+            <tr><td>Consumer service status</td><td>Mid-2026 launch</td><td>Active; 4M+ subscribers</td></tr>
+            <tr><td>Orbit altitude</td><td>~590–630 km</td><td>~550 km (Gen2)</td></tr>
+            <tr><td>Latency target</td><td>&lt;30ms</td><td>20–40ms currently</td></tr>
+            <tr><td>Speed target</td><td>400 Mbps down</td><td>200–400 Mbps currently</td></tr>
+            <tr><td>Hardware cost</td><td>Customer terminal TBD</td><td>$599 one-time + $120/month</td></tr>
+            <tr><td>AWS integration</td><td>Direct ground-to-AWS backhaul</td><td>Azure partnership (Starlink)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Amazon's key differentiator vs. Starlink is the AWS integration: Amazon Leo ground stations will connect directly into AWS data centers, enabling ultra-low-latency cloud access for enterprises and governments in remote areas. This makes Leo more than a consumer broadband play — it is an AWS expansion strategy for geographies currently underserved by terrestrial fiber.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 18. DEVICES & ALEXA+ ══════════════════════════════════════════ -->
+<div class="section" id="devices">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">18</div>
+    <div class="section-title">Devices &amp; Alexa+ — 600M Installed Base, Agentic AI Goes Mainstream</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">The Device Ecosystem</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">600M+</div><div class="stat-label">Alexa-Enabled Devices Globally</div><div class="stat-sub">Echo, Fire TV, Ring, Kindle, third-party integrations</div></div>
+        <div class="stat-card blue"><div class="stat-value">Feb 4, 2026</div><div class="stat-label">Alexa+ US Nationwide Launch</div><div class="stat-sub">Free for Prime; $19.99/month standalone</div></div>
+        <div class="stat-card green"><div class="stat-value">2 AIs</div><div class="stat-label">Amazon Nova + Anthropic Claude</div><div class="stat-sub">Nova for speed/voice; Claude for complex reasoning</div></div>
+        <div class="stat-card gold"><div class="stat-value">UK / Spain</div><div class="stat-label">International Rollout</div><div class="stat-sub">UK Mar 2026; Spain Apr 2026; Europe ongoing</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Alexa+ — What "Agentic AI" Means in Practice</div>
+      <p>Alexa+ is a fundamentally redesigned Alexa built on a dual-model architecture: Amazon Nova handles real-time voice responsiveness and device commands (optimized for &lt;300ms response latency), while Anthropic Claude handles complex multi-step reasoning tasks that require deep analysis, external API orchestration, and contextual memory. This split-model design is intentional — Nova is faster and cheaper per query; Claude is more capable for complex tasks. Together they enable what Amazon calls "agentic AI" — Alexa+ can autonomously complete multi-step goals across services without the user needing to issue each micro-command.</p>
+      <div class="two-col">
+        <div class="card amazon-border">
+          <div class="card-title">Agentic Capability Examples</div>
+          <div class="card-body">
+            <ul class="bullet">
+              <li>Book a restaurant via OpenTable — searches menus, checks availability, confirms booking</li>
+              <li>Order an Uber Eats — navigates app, selects restaurant, places order, tracks delivery</li>
+              <li>Text a babysitter — drafts, reviews context, sends via Messages integration</li>
+              <li>Reschedule a doctor appointment — navigates One Medical calendar, finds new slot</li>
+              <li>Set up smart home routines — chains 20+ device actions from a single natural language request</li>
+              <li>Compare insurance quotes — fills forms on third-party sites, returns ranked options</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card blue-border">
+          <div class="card-title">Device Hardware Lineup</div>
+          <div class="card-body">
+            <ul class="bullet">
+              <li><strong>Echo Dot / Echo / Echo Show:</strong> ~50M+ units sold annually; Alexa+ enabled</li>
+              <li><strong>Fire TV (Stick / Cube / Omni):</strong> 200M+ cumulative sold; streaming + Alexa</li>
+              <li><strong>Ring:</strong> 20M+ active devices; video doorbell + security ecosystem</li>
+              <li><strong>Kindle:</strong> 40M+ active readers; e-ink displays + Prime Reading</li>
+              <li><strong>Blink:</strong> Low-cost security cameras integrated with Ring/Alexa</li>
+              <li><strong>Amazon Halo Rise:</strong> Sleep tracking + wellness; pairs with Alexa health routines</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Devices as a Commerce and Data Flywheel</div>
+      <p>Amazon's devices business has never been primarily a hardware-margin business — it operates devices at or near cost, monetizing through subscription revenue (Prime, Kindle Unlimited, Music Unlimited), advertising (Fire TV ads, Alexa skills ads), and purchase data. A household that owns an Echo, Fire TV, Ring, and Kindle is deeply embedded in the Amazon ecosystem. Alexa+ expands this further: every interaction — voice search, appointment booking, grocery order, home automation command — generates behavioral data that refines both advertising targeting and product recommendations.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 19. PRIME VIDEO & ENTERTAINMENT ══════════════════════════════ -->
+<div class="section" id="entertainment">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">19</div>
+    <div class="section-title">Prime Video &amp; Entertainment — $22.4B Content Spend, Sports Anchor Strategy</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Content Investment at Scale</div>
+      <div class="stat-grid">
+        <div class="stat-card amazon"><div class="stat-value">$22.4B</div><div class="stat-label">2025 Content Spend</div><div class="stat-sub">+10% YoY; video + music + gaming</div></div>
+        <div class="stat-card blue"><div class="stat-value">$1B/yr</div><div class="stat-label">Thursday Night Football Rights</div><div class="stat-sub">NFL package; started 2022; exclusive streaming</div></div>
+        <div class="stat-card green"><div class="stat-value">#1</div><div class="stat-label">Largest Streaming Sports Investor 2026</div><div class="stat-sub">Ampere Analysis; ahead of DAZN for first time</div></div>
+        <div class="stat-card gold"><div class="stat-value">$14.2B</div><div class="stat-label">Combined Streaming Sports Rights 2026</div><div class="stat-sub">Amazon leads as streaming platforms collectively spend record</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Sports Rights Portfolio</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sport / Property</th><th>Rights</th><th>Annual Value</th><th>Term</th><th>Strategic Purpose</th></tr></thead>
+          <tbody>
+            <tr><td>NFL Thursday Night Football</td><td>Exclusive US streaming</td><td>~$1B/year</td><td>2022–2033</td><td>Flagship Prime Video live event; weekly reach anchor</td></tr>
+            <tr><td>NBA (new deal)</td><td>Friday + Saturday package</td><td>$1.8B/year est.</td><td>2025–2036</td><td>Year-round sports calendar; NBA younger demographics</td></tr>
+            <tr><td>UEFA Champions League</td><td>Germany, Italy, UK rights</td><td>€300M+/year est.</td><td>2024–2027</td><td>European Prime Video subscriber acquisition anchor</td></tr>
+            <tr><td>English Premier League</td><td>UK highlight packages</td><td>£90M/year est.</td><td>Various</td><td>UK subscriber retention</td></tr>
+            <tr><td>US Open Tennis</td><td>Streaming in UK / EU</td><td>Undisclosed</td><td>Multi-year</td><td>Fill calendar around football seasons</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Prime Video Ads — The Transformational Move</div>
+      <p>In January 2024, Amazon introduced mandatory ads on Prime Video for all US subscribers unless they pay an additional $2.99/month to remove them. With approximately 200M Prime members globally watching Prime Video, this created one of the largest streaming ad inventories in the world overnight — and unlike Netflix (which also launched ads), Amazon can close the purchase loop. A viewer watching an ad for a product on Prime Video can buy that product on Amazon.com with one click. This "shoppable TV" capability — closing the loop between ad exposure and purchase — is Amazon's unique superpower in streaming advertising. Analysts project Prime Video advertising could reach $5–10B as a standalone advertising revenue line by 2028.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">MGM — The Content Library</div>
+      <p>Amazon completed the $8.45B MGM acquisition in March 2022. The MGM library includes 4,000+ film titles (James Bond franchise, Rocky, Silence of the Lambs, Legally Blonde, etc.) and 17,000+ TV episodes. MGM+ streaming channel is available as a Prime Video add-on. Beyond the content library, MGM brought Amazon Studios a feature-film production studio and theatrical distribution relationships — capabilities that pure streaming players like Netflix already had but Amazon needed to build credibility in the theatrical-to-streaming window market.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 20. COMPETITIVE LANDSCAPE ════════════════════════════════════ -->
+<div class="section" id="competitors">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">20</div>
+    <div class="section-title">Competitive Landscape — Fighting on Five Fronts Simultaneously</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Front 1: Cloud — AWS vs. Azure vs. GCP</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Provider</th><th>FY2025 Revenue</th><th>YoY Growth</th><th>Market Share</th><th>AI Differentiator</th><th>Key Risk to AWS</th></tr></thead>
+          <tbody>
+            <tr><td><strong>AWS (Amazon)</strong></td><td>$128.7B</td><td>+20%</td><td>32%</td><td>Bedrock model marketplace; Trainium; Anthropic exclusive access</td><td>Azure's Microsoft 365 + OpenAI integration; GCP's Gemini + Vertex</td></tr>
+            <tr><td><strong>Azure (Microsoft)</strong></td><td>~$100B</td><td>+25%</td><td>22%</td><td>OpenAI integration; Copilot for Microsoft 365 (300M+ seats)</td><td>Wins where Microsoft Office/Teams already deployed</td></tr>
+            <tr><td><strong>Google Cloud (GCP)</strong></td><td>~$48B</td><td>+28%</td><td>12%</td><td>Gemini 2.0; TPU v7 Ironwood; Vertex AI; fastest Q4 growth (+48%)</td><td>Search + YouTube distribution gives Gemini massive reach</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Key dynamic: multi-cloud adoption hit 89% among enterprises in 2025 (up from 76% in 2024), meaning most enterprises run all three. AWS wins on depth of services (200+ vs. Azure's ~100), breadth of database/analytics offerings, and the Bedrock model marketplace. Azure wins on enterprise software integration. GCP wins on data/analytics workloads and Kubernetes-native architectures.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Front 2: Retail — Amazon vs. Walmart, Target, Temu/Shein</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Competitor</th><th>Online GMV</th><th>Key Threat</th><th>Amazon's Moat</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Walmart</strong></td><td>$100B+ est.</td><td>Grocery (60% of US basket); curbside pickup; Walmart+ growing vs. Prime</td><td>Prime bundle value; 3P marketplace depth; faster urban delivery</td></tr>
+            <tr><td><strong>Temu / Shein</strong></td><td>$35B+ combined</td><td>Ultra-low-price Chinese cross-border; Gen Z acquisition; direct-from-factory model</td><td>145% tariffs devastate Temu model; Amazon's quality control; Prime trust</td></tr>
+            <tr><td><strong>Target</strong></td><td>$30B+</td><td>Same-day drive-up; brand aesthetics; Target Circle loyalty</td><td>Selection breadth (350M items vs. Target's ~1M); AWS-enabled recommendations</td></tr>
+            <tr><td><strong>Shopify</strong></td><td>$235B+ GMV (total platform)</td><td>Powers 2M+ independent merchants; builds direct brand relationships vs. Amazon dependency</td><td>Amazon's distribution reach; Buy with Prime button integration into Shopify</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Front 3: Advertising — Amazon vs. Google, Meta</div>
+      <div style="margin:14px 0;">
+        <div class="bar-row"><div class="bar-label">Google (Alphabet)</div><div class="bar-track"><div class="bar-fill" style="width:39%;background:var(--blue);"></div></div><div class="bar-val">~$265B</div></div>
+        <div class="bar-row"><div class="bar-label">Meta Platforms</div><div class="bar-track"><div class="bar-fill" style="width:24%;background:var(--navy-mid);"></div></div><div class="bar-val">~$162B</div></div>
+        <div class="bar-row"><div class="bar-label">Amazon Advertising</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:var(--amazon);"></div></div><div class="bar-val">~$68B</div></div>
+        <div class="bar-row"><div class="bar-label">TikTok / ByteDance</div><div class="bar-track"><div class="bar-fill" style="width:7%;background:var(--teal);"></div></div><div class="bar-val">~$46B</div></div>
+      </div>
+      <p>Amazon's advertising is unique in that it captures purchase-intent signals — customers on Amazon are actively looking to buy, not browsing social media. Google captures interest-intent (search); Meta captures attention-intent (social). Amazon's conversion rates (click-to-purchase) are consistently higher than equivalent Google Shopping or Meta catalog ads because the purchase path is frictionless — ad click → Amazon product page → buy with one click.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Front 4: AI Assistants — Alexa+ vs. ChatGPT, Gemini, Siri</div>
+      <div class="two-col">
+        <div class="card amazon-border">
+          <div class="card-title">Amazon Alexa+ Advantage</div>
+          <div class="card-body">600M installed devices provide an unmatched physical distribution network. Free for 220M Prime members creates instant mass adoption. Agentic commerce integration (buy on Amazon, order food, book rides) is natively available. Nova + Claude dual-model architecture handles both speed-sensitive and reasoning-intensive tasks.</div>
+        </div>
+        <div class="card blue-border">
+          <div class="card-title">Key Competitors</div>
+          <div class="card-body"><strong>ChatGPT (OpenAI):</strong> 500M+ weekly users; operator API ecosystem; GPT-4o native multimodal. <strong>Gemini (Google):</strong> Android/Search/Gmail integration; 1.5B device reach. <strong>Siri (Apple):</strong> 1.5B iOS devices; Apple Intelligence integration; privacy positioning. <strong>Copilot (Microsoft):</strong> Microsoft 365 integration; 300M+ enterprise seats.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 21. RISK REGISTER ════════════════════════════════════════════ -->
+<div class="section" id="risks">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">21</div>
+    <div class="section-title">Risk Register — Eight Risks That Could Break the Thesis</div>
+  </div>
+  <div class="section-body">
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Risk</th><th>Severity</th><th>Probability</th><th>Amazon's Hedge</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><strong>China Tariffs — 3P Seller Margin Squeeze</strong><br>145% tariffs on Chinese imports (125% base + 20% fentanyl) hit ~70% of Amazon 3P goods sourced from China. Sellers raise prices → demand falls → GMV and take rate revenue compressed. Amazon penalized sellers who raised prices, triggering buy-box suppression controversy and accelerating the FTC case.</td>
+            <td><span class="tag tag-red">High</span></td>
+            <td><span class="tag tag-orange">High</span></td>
+            <td>3.5% seller surcharge monetizes the disruption; accelerating non-Chinese sourcing alternatives; tariff uncertainty creates near-term but may normalize after US-China trade framework emerges</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><strong>FTC Antitrust Trial — October 2026</strong><br>FTC alleges Amazon illegally maintains monopoly power through buy-box suppression, Prime seller fees, and self-preferencing of Amazon-branded products. Trial scheduled October 2026. Potential remedies: forced divestiture of AMZL logistics arm, mandatory fee caps on 3P sellers, elimination of buy-box algorithmic weighting.</td>
+            <td><span class="tag tag-red">High</span></td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td>Legal appeals extend timeline years beyond initial ruling; structural remedies take 5–10 years to implement; Amazon is simultaneously settling smaller FTC cases (paid $2.5B in dark patterns case) to demonstrate good faith</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><strong>$200B Capex ROI Risk</strong><br>If AI demand growth slows — due to model efficiency breakthroughs (DeepSeek effect), enterprise AI adoption delays, or macroeconomic slowdown — the $200B capex commitment creates massive depreciation and interest cost that compresses free cash flow for 3–5 years without the revenue growth to justify it.</td>
+            <td><span class="tag tag-red">High</span></td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td>$244B backlog provides 2-year revenue visibility; Jevons Paradox (cheaper AI = more usage) is the historical pattern; Trainium's lower cost vs. NVIDIA preserves margin even if growth rate slows</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><strong>AWS Market Share Erosion</strong><br>Azure's Microsoft 365 integration (300M+ enterprise seats already paying Microsoft) creates natural migration path for enterprise AI workloads. GCP's fastest growth rate among the Big Three (+28% vs AWS +20%) suggests Amazon is not winning proportionally on AI. Azure OpenAI gives Microsoft a model narrative to match Bedrock.</td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td>Multi-cloud adoption means AWS losing share doesn't imply absolute revenue decline; Bedrock model marketplace and Trainium cost advantage are defensive; $244B backlog is growing faster than revenue</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><strong>Amazon Leo Satellite Execution Risk</strong><br>Mid-2026 FCC deadline requires launching 1,618+ additional satellites in 5 rapid launch missions. Any launch failure or delay risks FCC license violation. Technology risk: terminal hardware pricing must compete with Starlink's established $599/$120/month model while Starlink has a 3-year head start and 4M+ subscribers.</td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td>Multi-vehicle launch contract (ULA, Blue Origin, Arianespace, SpaceX) diversifies launch risk; FCC historically grants extensions for good-faith efforts; AWS backhaul integration is Leo's unique enterprise value proposition</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><strong>Trainium Execution vs. NVIDIA CUDA Moat</strong><br>Customers and developers have 19 years of CUDA tooling built around NVIDIA. Trainium's NeuronSDK is less mature. If Trainium3/4 underperforms specs, or developer adoption remains limited to Anthropic workloads, the custom silicon strategy fails to reduce NVIDIA dependency and the cost savings thesis collapses.</td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td><span class="tag tag-orange">Medium-High</span></td>
+            <td>Trainium4 NVLink Fusion support is the hedge — it doesn't require switching from NVIDIA, just augmenting. Apple and OpenAI pilots signal outside confidence. Anthropic's $100B AWS commitment forces 10 years of Trainium R&amp;D feedback loop.</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><strong>Prime Growth Ceiling</strong><br>US Prime membership is approaching saturation at ~180M members in a country of ~130M households. Churn (~6–8%) must be offset by new subscriber acquisition that is mathematically harder. International Prime growth requires localizing the full benefit bundle (local content, fast delivery) in markets where Amazon's logistics network is immature.</td>
+            <td><span class="tag tag-blue">Low-Medium</span></td>
+            <td><span class="tag tag-orange">High (US saturation)</span></td>
+            <td>Alexa+ included free for Prime creates new renewal incentive; Prime benefit expansion (GLP-1, One Medical integration) increases perceived value; international markets (India, Brazil, EU) provide runway for years</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><strong>EU Digital Markets Act / Global Regulatory Pressure</strong><br>EU Digital Markets Act (DMA) designates Amazon as a "gatekeeper." Mandatory interoperability requirements could force changes to Prime ecosystem (e.g., allowing competing logistics to access Prime badge), algorithmic transparency requirements for buy-box, and data sharing mandates that undermine Amazon's advertising targeting advantage.</td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td><span class="tag tag-gold">Medium</span></td>
+            <td>EU is ~22% of revenue but lower-margin; DMA compliance costs manageable; precedent from Apple's EU compliance (alternative app stores) suggests operational workarounds; international political dynamics shift unpredictably</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 22. STOCK THESIS ══════════════════════════════════════════════ -->
+<div class="section" id="stock">
+  <div class="section-header amazon-hdr">
+    <div class="section-number">22</div>
+    <div class="section-title">Stock Thesis — Bull Case $325, Bear Case $175, Consensus $286</div>
+  </div>
+  <div class="section-body">
+    <div class="subsection">
+      <div class="subsection-title">Analyst Consensus (April 2026)</div>
+      <div class="stat-grid">
+        <div class="stat-card green"><div class="stat-value">42</div><div class="stat-label">Buy / Strong Buy Ratings</div><div class="stat-sub">Zero sell ratings; 3 holds — overwhelmingly bullish</div></div>
+        <div class="stat-card amazon"><div class="stat-value">$286</div><div class="stat-label">Average Price Target</div><div class="stat-sub">Range: $175 (low) to $325 (high); ~14% average upside</div></div>
+        <div class="stat-card blue"><div class="stat-value">$325</div><div class="stat-label">Bull Case Target</div><div class="stat-sub">AWS acceleration to 35%+; Anthropic stake value; advertising re-rating</div></div>
+        <div class="stat-card red"><div class="stat-value">$175</div><div class="stat-label">Bear Case Target</div><div class="stat-sub">Capex ROI failure; FTC structural remedy; FCF compression</div></div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Bull Case — Why $325 is Achievable</div>
+      <div class="callout green">
+        <div class="callout-icon">📈</div>
+        <div class="callout-body">
+          <div class="callout-title">The Bull Case (12-month target: $325)</div>
+          <div class="callout-text"><strong>AWS re-accelerates to 35%+ growth in H2 2026</strong> as the $244B backlog converts to revenue. At 35% growth, AWS exits 2026 at a ~$185B+ annualized run rate. Apply a 12× EV/revenue multiple (comparable to Azure's valuation on Microsoft), and AWS alone is worth ~$2.2T — more than Amazon's current entire market cap. Add: (1) advertising at $80B+ run rate re-rating to a 20× revenue multiple (comparable to Meta/Google) = $1.6T; (2) retail business at 1× revenue = ~$700B; (3) Anthropic equity stake at $350B valuation, Amazon's ~25% stake = ~$87B. Sum-of-parts suggests Amazon is deeply undervalued relative to its component businesses. Alexa+ becomes a new monetization layer. Leo starts contributing by 2028.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Bear Case — Why $175 is on the Table</div>
+      <div class="callout red">
+        <div class="callout-icon">📉</div>
+        <div class="callout-body">
+          <div class="callout-title">The Bear Case (12-month target: $175)</div>
+          <div class="callout-text"><strong>The $200B capex bet misfires.</strong> If AI demand normalizes (DeepSeek-style efficiency gains reduce compute needs per workload), the $200B annual capex cycle produces assets that depreciate faster than they generate returns. Free cash flow drops to near-zero or negative for 2–3 years. Simultaneously: (1) FTC wins a structural remedy forcing AMZL divestiture, removing Amazon's key retail profitability driver; (2) 145% tariffs cause sustained 3P seller attrition, reducing GMV and take-rate revenue; (3) Azure continues gaining cloud market share, preventing AWS from reaching the 35%+ growth needed to justify current valuation. At 15× trailing earnings with compressed FCF, AMZN at $175 implies a ~$1.8T market cap — a significant de-rating from current levels.</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Valuation Framework — Sum-of-Parts</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Business Segment</th><th>2026E Revenue / Metric</th><th>Multiple Applied</th><th>Estimated Value</th><th>Rationale</th></tr></thead>
+          <tbody>
+            <tr><td>AWS Core Cloud</td><td>$170B+ (35% growth)</td><td>12× EV/Revenue</td><td>~$2.0T</td><td>Azure trades at 12–14× on Microsoft; pure cloud margin justifies premium</td></tr>
+            <tr><td>Advertising Services</td><td>$85B+ est.</td><td>18× EV/Revenue</td><td>~$1.5T</td><td>Meta at 22×; Google at 18×; Amazon earns slight discount due to retail context</td></tr>
+            <tr><td>North America + International Retail</td><td>$600B+ GMV</td><td>1.2× Revenue</td><td>~$700B</td><td>Walmart at 0.8×; premium for logistics moat, Prime flywheel, margin improvement trajectory</td></tr>
+            <tr><td>Anthropic Equity Stake</td><td>~$87B at $350B valuation</td><td>—</td><td>~$87B</td><td>Amazon holds ~25% post-April 2026 round; valued at $350B pre-money</td></tr>
+            <tr><td>Subscriptions + Devices + Other</td><td>$47B subscriptions</td><td>4× Revenue</td><td>~$190B</td><td>Discount for device hardware economics; premium for Prime recurring revenue quality</td></tr>
+            <tr><td><strong>Sum of Parts (Gross)</strong></td><td></td><td></td><td><strong>~$4.5T</strong></td><td>Implies current market cap offers meaningful discount to intrinsic value</td></tr>
+            <tr><td>Corporate overhead / debt / minority discounts</td><td></td><td></td><td><em>(~$300B)</em></td><td>Net debt negative (cash-rich); overhead discount applied</td></tr>
+            <tr><td><strong>Net Intrinsic Value Estimate</strong></td><td></td><td></td><td><strong>~$4.2T</strong></td><td>Vs. current market cap of ~$2.1T — implies meaningful upside if AWS thesis holds</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:.78rem;color:var(--gray-600);margin-top:8px;">Note: Sum-of-parts analysis is illustrative; uses growth-case revenue estimates and peer multiples. Actual multiples will depend on AWS growth trajectory, capex resolution, and macro environment. This does not constitute investment advice.</p>
+    </div>
+    <div class="subsection">
+      <div class="subsection-title">Key Catalysts to Watch</div>
+      <div class="three-col">
+        <div class="card green-border">
+          <div class="card-title">Near-Term (0–6 months)</div>
+          <div class="card-body">
+            <ul class="bullet">
+              <li>Q1 2026 earnings (Apr 29) — AWS growth rate; advertising; margins</li>
+              <li>Amazon Leo first 5 launch missions — FCC deadline July 2026</li>
+              <li>Alexa+ subscriber count disclosure</li>
+              <li>Trainium3 ramp progress — any Trainium vs. NVIDIA win announcements</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card gold-border">
+          <div class="card-title">Medium-Term (6–18 months)</div>
+          <div class="card-body">
+            <ul class="bullet">
+              <li>FTC antitrust trial outcome (October 2026)</li>
+              <li>AWS growth trajectory — does it reach 35%+?</li>
+              <li>Trainium4 launch and NVLink Fusion customer adoption</li>
+              <li>Amazon Leo consumer launch pricing vs. Starlink</li>
+              <li>One Medical / Pharmacy healthcare revenue disclosure</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card blue-border">
+          <div class="card-title">Long-Term (18+ months)</div>
+          <div class="card-body">
+            <ul class="bullet">
+              <li>Anthropic IPO or secondary — crystallizes Amazon's stake value</li>
+              <li>Amazon Leo profitability — 3,236-satellite constellation at full capacity</li>
+              <li>Autonomous logistics (drone delivery, humanoid robots in FCs)</li>
+              <li>Healthcare revenue — can One Medical + Pharmacy reach $10B?</li>
+              <li>Trainium as external chip — will Amazon sell Trainium to third parties?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SOURCES ═══════════════════════════════════════════════════════ -->
+<div class="section" id="sources">
+  <div class="section-header">
+    <div class="section-number">SRC</div>
+    <div class="section-title">Sources &amp; References</div>
+  </div>
+  <div class="sources-section">
+    <div class="source-category">
+      <div class="source-category-label">Primary Financial Sources</div>
+      <ul class="source-list">
+        <li>Amazon.com, Inc. — 2025 Annual Report (Form 10-K), February 2026. SEC EDGAR.</li>
+        <li>Amazon Q4 FY2025 Earnings Release &amp; Slides — February 2026. <a href="https://ir.aboutamazon.com">ir.aboutamazon.com</a></li>
+        <li>Amazon Q1 FY2026 Earnings Transcript — April 29, 2026 (Andy Jassy, Brian Olsavsky).</li>
+        <li>Futurum Group — "Amazon Q4 FY2025: Revenue Beat, AWS +24% Amid $200B Capex Plan." February 2026.</li>
+        <li>Global Data Center Hub — "Amazon Q4 2025 Earnings: The $200B Infrastructure Mandate." February 2026.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">AWS &amp; Cloud Infrastructure</div>
+      <ul class="source-list">
+        <li>Outperforming the Market — "Amazon: AWS Acceleration in 2026." Substack, 2026.</li>
+        <li>eSparkInfo — "AWS Stats 2026: Cloud Market Share &amp; Growth Insights."</li>
+        <li>Last Week in AWS Blog — "AWS in 2026: The Year of Proving They Still Know How to Operate." 2026.</li>
+        <li>Synergy Research Group — Quarterly Cloud Market Share Reports, Q4 2025.</li>
+        <li>Revolgy — "Who's Winning the Q2 2025 AI Cloud Race: AWS, Microsoft, or Google Cloud?" 2025.</li>
+        <li>SwotPal — "Amazon SWOT Analysis 2026: AWS AI $15B Run Rate &amp; Q1 Earnings Apr 29." April 2026.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Trainium / Custom Silicon</div>
+      <ul class="source-list">
+        <li>SemiAnalysis — "AWS Trainium3 Deep Dive: A Potential Challenger Approaching." 2026.</li>
+        <li>TechCrunch — "An Exclusive Tour of Amazon's Trainium Lab, the Chip That's Won Over Anthropic, OpenAI, Even Apple." March 22, 2026.</li>
+        <li>Data Centre Magazine — "Trainium3: New AWS Chip Promises 4× Performance Boost." 2026.</li>
+        <li>Awesome Agents — "AWS Trainium3: Amazon's 3nm AI Accelerator." 2026.</li>
+        <li>Nerd Level Tech — "Amazon-Anthropic $100B Deal: 5GW of AWS Trainium Compute." 2026.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Anthropic Partnership</div>
+      <ul class="source-list">
+        <li>Anthropic — "Anthropic and Amazon Expand Collaboration for Up to 5 GW of Compute." April 20, 2026. <a href="https://www.anthropic.com/news/anthropic-amazon-compute">anthropic.com</a></li>
+        <li>About Amazon — "Amazon Invests Additional $5 Billion in Anthropic AI." April 2026. <a href="https://www.aboutamazon.com">aboutamazon.com</a></li>
+        <li>CNBC — "Amazon to Invest Up to Another $25 Billion in Anthropic." April 20, 2026.</li>
+        <li>SiliconANGLE — "Amazon to Invest Up to $25B in Anthropic as Part of Expanded Cloud Partnership." April 20, 2026.</li>
+        <li>Tech Africa News — "Amazon and Anthropic Expand Partnership with $100 Billion AWS Commitment." April 21, 2026.</li>
+        <li>Global Data Center Hub — "Amazon Commits Up to $33B to Anthropic Against $100B AWS Spend Pledge." April 2026.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Logistics, Robotics &amp; Operations</div>
+      <ul class="source-list">
+        <li>About Amazon — "Amazon Has More Than 1 Million Robots That Sort, Lift, and Deliver." 2025. <a href="https://www.aboutamazon.com/news/operations/amazon-robotics-robots-fulfillment-center">aboutamazon.com</a></li>
+        <li>The Supply Chain Xchange — "New Amazon DC Utilizes 10× More Robots for Enhanced Operations (Shreveport)." 2025.</li>
+        <li>Logistics Viewpoints — "2025 Update: Amazon's Supply Chain Keeps Rewriting the Playbook." September 2025.</li>
+        <li>Nightview Capital — "The Automation Bet: How Amazon Robotics Is Transforming Its Long-term Profit Engine." 2025.</li>
+        <li>FutureTekNow — "Amazon's 1 Million Robots Milestone and New AI Model." 2025.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Healthcare</div>
+      <ul class="source-list">
+        <li>Axios — "Amazon One Medical Launches National GLP-1 Weight-Loss Program." April 21, 2026.</li>
+        <li>CNBC — "Amazon Launches GLP-1 Weight Loss Program, Promising 'Fast, Convenient' Access." April 21, 2026.</li>
+        <li>Healthcare Dive — "Amazon One Medical Launches Weight Management Program Including GLP-1 Drugs." April 2026.</li>
+        <li>Fierce Healthcare — "Amazon One Medical Launches GLP-1 Program Integrated with Primary Care." April 2026.</li>
+        <li>About Amazon — "Amazon One Medical Introduces Weight Management." April 2026. <a href="https://www.aboutamazon.com/news/retail/amazon-glp1-management-program">aboutamazon.com</a></li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Amazon Leo (Kuiper) Satellites</div>
+      <ul class="source-list">
+        <li>About Amazon — "Amazon Leo Completes Ninth Mission, Two More on Deck." 2026. <a href="https://www.aboutamazon.com/news/innovation-at-amazon/project-kuiper-satellite-rocket-launch-progress-updates">aboutamazon.com</a></li>
+        <li>Wikipedia — "Amazon Leo." Updated April 2026. <a href="https://en.wikipedia.org/wiki/Amazon_Leo">en.wikipedia.org</a></li>
+        <li>Cape Canaveral Today / National Today — "Amazon's Project Kuiper Satellite Internet Set to Launch in Mid-2026." April 11, 2026.</li>
+        <li>SatelliteInternet.com — "Amazon Leo: Starlink Rival's Launch Date, Cost, &amp; Analysis." 2026.</li>
+        <li>SpaceNews — "Beta Project Kuiper Broadband Services Pushed to Early 2025." 2024.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Alexa+ &amp; Devices</div>
+      <ul class="source-list">
+        <li>Anthropic — "Claude and Alexa+." April 2026. <a href="https://www.anthropic.com/news/claude-and-alexa-plus">anthropic.com</a></li>
+        <li>TechCrunch — "Alexa+, Amazon's AI Assistant, Is Now Available to Everyone in the US." February 4, 2026.</li>
+        <li>CNBC — "Amazon Makes Alexa+ AI Assistant Available to Everyone in the US Nearly a Year After Launch." February 2026.</li>
+        <li>About Amazon — "Alexa+ Arrives in Spain as Amazon's Next-Generation AI." April 23, 2026. <a href="https://www.aboutamazon.com/news/devices/alexa-plus-international-launch">aboutamazon.com</a></li>
+        <li>Fortune — "Amazon's New AI-Powered Alexa Is Finally Here—for $20 a Month." February 26, 2025.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Prime Video &amp; Entertainment</div>
+      <ul class="source-list">
+        <li>Variety — "Amazon Content Spending in 2025 Was $22.4 Billion, Up 10%." 2026.</li>
+        <li>Amazon Advertising — "Prime Video Delivers Thursday Night Football's Most-Watched Season." 2025.</li>
+        <li>Inside World Football — "Amazon Lead Way as Broadcast Streaming Giants Line Up $14.2bn Sports Rights Spend." February 2, 2026.</li>
+        <li>Amazon Advertising Library — "TNF on Prime Video 2025 Season Viewership Insights." 2025.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Capital Expenditures &amp; AI Infrastructure</div>
+      <ul class="source-list">
+        <li>Data Center Dynamics — "Amazon Capex to Hit $200bn in 2026, Will Mostly Fund AWS Data Centers." February 2026.</li>
+        <li>Converge Digest — "Amazon Ties $200 Billion 2026 Capex Plan to AI, AWS, and Custom Silicon." 2026.</li>
+        <li>Intellectia.ai — "Amazon $200B CapEx: AI Spending Guide." 2026.</li>
+        <li>Futurum Group — "AI Capex 2026: The $690B Infrastructure Sprint." 2026.</li>
+        <li>Visual Capitalist — "Charted: The $448B AI Spending Surge by Big Tech." 2026.</li>
+        <li>247 Wall St — "Amazon's $200 Billion AI Spending Spree Is Lighting the Fuse for Explosive Growth." April 4, 2026.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Regulatory, Tariffs &amp; Antitrust</div>
+      <ul class="source-list">
+        <li>Fortune — "Some Desperate Sellers Say Amazon Is Penalizing Them for Raising Prices to Combat Trump's China Tariffs." 2025.</li>
+        <li>Fortune — "Amazon CEO Andy Jassy Sings a Different Tune on Tariffs, Saying the Pain of Higher Prices Is Coming Soon in 2026." January 21, 2026.</li>
+        <li>National Law Review — "Amazon Settles FTC Dark Patterns Case with $2.5B Payout." 2025.</li>
+        <li>ITIF — "The FTC's Amazon-Temu Blunder: Working With China to Target American Tech." January 31, 2025.</li>
+      </ul>
+    </div>
+    <div class="source-category">
+      <div class="source-category-label">Stock Analysis &amp; Valuation</div>
+      <ul class="source-list">
+        <li>MarketBeat — "Amazon.com (AMZN) Stock Forecast and Price Target 2026." April 2026. <a href="https://www.marketbeat.com/stocks/NASDAQ/AMZN/forecast/">marketbeat.com</a></li>
+        <li>TipRanks — "Amazon.Com, Inc. (AMZN) Stock Forecast, Price Targets and Analysts Predictions." April 2026.</li>
+        <li>Stock Analysis — "Amazon.com (AMZN) Stock Forecast &amp; Analyst Price Targets." April 2026.</li>
+        <li>Yahoo Finance — "A $61 Billion Reason to Buy Amazon Stock for 2026." 2026.</li>
+        <li>FinBold — "AI Predicts Amazon Stock Price After Q1 2026 Earnings." April 2026.</li>
+        <li>The Motley Fool — "What Wall Street Thinks Amazon Will Be Worth 1 Year From Now." January 2, 2026.</li>
+      </ul>
+    </div>
+    <p style="font-size:.75rem;color:var(--gray-600);margin-top:20px;padding-top:14px;border-top:1px solid var(--border);">
+      <strong>Disclaimer:</strong> This report is prepared for internal research and educational purposes only. All financial projections, valuations, and analyst estimates are sourced from public reporting and third-party research. Nothing in this document constitutes investment advice. Estimates and forward-looking statements are subject to material uncertainty. Data as of April 27, 2026.
+    </p>
+  </div>
+</div>
+
+</main>
+</div>
+</body>
+</html>
