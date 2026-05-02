@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alcohol &amp; Breastfeeding — Deep Dive 2026</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:     #1A6B3A;
+      --green-mid: #228B4A;
+      --green-lt:  #E6F4EC;
+      --navy:      #0E1F3D;
+      --blue:      #0057A8;
+      --amber:     #B45309;
+      --amber-lt:  #FEF3C7;
+      --red:       #B91C1C;
+      --red-lt:    #FEE2E2;
+      --gray-50:   #F8F9FA;
+      --gray-100:  #F0F1F3;
+      --gray-200:  #E2E4E8;
+      --gray-400:  #9AA0AB;
+      --gray-600:  #5A6270;
+      --gray-800:  #2C3240;
+      --border:    #D0D4DC;
+      --text:      #1A1E2A;
+    }
+    html { font-size: 15px; scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: #ECEEF2; color: var(--text); min-height: 100vh; }
+
+    /* ── TOP BAR & HEADER ── */
+    .top-bar { background: var(--green); height: 5px; width: 100%; }
+    .header { background: linear-gradient(135deg, #0F3D21 0%, #1A6B3A 100%); color: white; padding: 44px 48px 40px; }
+    .header-label { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; opacity: .55; margin-bottom: 10px; }
+    .header-title { font-size: 2rem; font-weight: 800; letter-spacing: -.02em; line-height: 1.15; margin-bottom: 8px; }
+    .header-sub { font-size: .92rem; opacity: .65; max-width: 600px; line-height: 1.65; margin-bottom: 24px; }
+    .header-stats { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hstat { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; padding: 12px 18px; min-width: 130px; }
+    .hstat-val { font-size: 1.4rem; font-weight: 800; line-height: 1; margin-bottom: 3px; }
+    .hstat-lbl { font-size: .68rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+
+    /* ── NAV ── */
+    .nav-bar { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-link { display: block; padding: 14px 16px; font-size: .78rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--gray-600); text-decoration: none; border-bottom: 2px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s; }
+    .nav-link:hover { color: var(--green); border-bottom-color: var(--green-lt); }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* ── BOTTOM LINE BOX ── */
+    .bottom-line { background: var(--green-lt); border: 1.5px solid #7DCEA0; border-radius: 10px; padding: 24px 28px; margin-bottom: 40px; }
+    .bottom-line-label { font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+    .bottom-line-title { font-size: 1.1rem; font-weight: 800; color: #0F3D21; margin-bottom: 12px; }
+    .bottom-line ul { padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
+    .bottom-line li { font-size: .9rem; color: #1A3D28; line-height: 1.55; }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 48px; }
+    .section-title { font-size: 1.25rem; font-weight: 800; color: var(--navy); margin-bottom: 6px; padding-bottom: 10px; border-bottom: 2px solid var(--green-lt); }
+    .section-sub { font-size: .85rem; color: var(--gray-600); margin-bottom: 20px; line-height: 1.6; }
+    .prose { font-size: .9rem; color: var(--gray-800); line-height: 1.7; margin-bottom: 14px; }
+    .prose strong { color: var(--text); }
+
+    /* ── CALLOUT BOXES ── */
+    .callout { border-radius: 8px; padding: 18px 22px; margin-bottom: 18px; }
+    .callout-green  { background: var(--green-lt); border-left: 4px solid var(--green); }
+    .callout-amber  { background: var(--amber-lt); border-left: 4px solid #D97706; }
+    .callout-red    { background: var(--red-lt);   border-left: 4px solid var(--red); }
+    .callout-blue   { background: #E8F0FA;          border-left: 4px solid var(--blue); }
+    .callout-gray   { background: var(--gray-100);  border-left: 4px solid var(--gray-400); }
+    .callout-title  { font-size: .72rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 7px; }
+    .ct-green  { color: var(--green); }
+    .ct-amber  { color: var(--amber); }
+    .ct-red    { color: var(--red); }
+    .ct-blue   { color: var(--blue); }
+    .ct-gray   { color: var(--gray-600); }
+    .callout p { font-size: .88rem; line-height: 1.6; color: var(--gray-800); margin-bottom: 6px; }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout ul { padding-left: 18px; }
+    .callout li { font-size: .88rem; line-height: 1.6; color: var(--gray-800); margin-bottom: 4px; }
+
+    /* ── WAIT TIME TABLE ── */
+    .wait-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 18px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .wait-table thead { background: var(--green); color: white; }
+    .wait-table th { padding: 11px 14px; text-align: left; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .wait-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); }
+    .wait-table tbody tr:last-child td { border-bottom: none; }
+    .wait-table tbody tr:nth-child(odd) { background: var(--gray-50); }
+    .wait-table tbody tr:nth-child(even) { background: white; }
+    .drinks-num { font-weight: 700; color: var(--navy); }
+    .wait-time { font-weight: 700; color: var(--green); }
+
+    /* ── WEIGHT TABLE ── */
+    .weight-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 18px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .weight-table thead { background: var(--navy); color: white; }
+    .weight-table th { padding: 11px 14px; text-align: left; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .weight-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); }
+    .weight-table tbody tr:last-child td { border-bottom: none; }
+    .weight-table tbody tr:nth-child(odd) { background: var(--gray-50); }
+    .weight-table tbody tr:nth-child(even) { background: white; }
+
+    /* ── MYTH/FACT CARDS ── */
+    .myth-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 18px; }
+    .myth-card { border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+    .myth-header { display: flex; gap: 0; }
+    .myth-label { padding: 10px 16px; font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; min-width: 80px; display: flex; align-items: center; }
+    .myth-label-myth { background: var(--red-lt); color: var(--red); }
+    .myth-label-fact { background: var(--green-lt); color: var(--green); }
+    .myth-text { padding: 10px 16px; font-size: .88rem; font-weight: 600; color: var(--gray-800); background: var(--gray-50); flex: 1; display: flex; align-items: center; }
+    .myth-body { padding: 12px 16px; font-size: .87rem; color: var(--gray-600); line-height: 1.6; background: white; border-top: 1px solid var(--border); }
+
+    /* ── RECOMMENDATION CARD ── */
+    .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 18px; }
+    .rec-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    .rec-num { font-size: 1.8rem; font-weight: 900; color: var(--green-lt); margin-bottom: 4px; line-height: 1; }
+    .rec-title { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .rec-body { font-size: .83rem; color: var(--gray-600); line-height: 1.55; }
+
+    /* ── DATA HIGHLIGHT ── */
+    .data-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .data-box { flex: 1; min-width: 140px; background: white; border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; text-align: center; }
+    .data-val { font-size: 1.6rem; font-weight: 800; color: var(--green); line-height: 1; margin-bottom: 4px; }
+    .data-lbl { font-size: .72rem; color: var(--gray-600); line-height: 1.4; }
+
+    /* ── SOURCES ── */
+    .sources-grid { display: flex; flex-direction: column; gap: 8px; }
+    .source-item { background: white; border: 1px solid var(--border); border-radius: 6px; padding: 12px 16px; font-size: .83rem; }
+    .source-item a { color: var(--blue); text-decoration: none; font-weight: 600; }
+    .source-item a:hover { text-decoration: underline; }
+    .source-type { font-size: .65rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 3px; }
+
+    /* ── FOOTER ── */
+    .footer { text-align: center; font-size: .75rem; color: var(--gray-400); padding: 32px 24px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 600px) {
+      .header { padding: 28px 20px 24px; } .header-title { font-size: 1.5rem; }
+      .container { padding: 28px 16px 60px; }
+      .hstat { min-width: 100px; }
+      .rec-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="header">
+  <div class="header-label">Health &amp; Medical Research &nbsp;·&nbsp; 2026</div>
+  <div class="header-title">Alcohol &amp; Breastfeeding — Deep Dive 2026</div>
+  <div class="header-sub">A comprehensive evidence review: how alcohol transfers to breast milk, how much is safe, how long to wait, and what the research actually says about risks to your baby.</div>
+  <div class="header-stats">
+    <div class="hstat">
+      <div class="hstat-val">~2 hrs</div>
+      <div class="hstat-lbl">Wait per drink</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-val">5–6%</div>
+      <div class="hstat-lbl">Dose reaching baby</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-val">20–23%</div>
+      <div class="hstat-lbl">Milk intake drop</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-val">30–60 min</div>
+      <div class="hstat-lbl">Peak in milk</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-inner">
+    <a class="nav-link" href="#bottom-line">Bottom Line</a>
+    <a class="nav-link" href="#transfer">How It Transfers</a>
+    <a class="nav-link" href="#wait-times">Wait Times</a>
+    <a class="nav-link" href="#effects-baby">Effects on Baby</a>
+    <a class="nav-link" href="#milk-supply">Milk Supply</a>
+    <a class="nav-link" href="#pump-dump">Pump &amp; Dump</a>
+    <a class="nav-link" href="#newborns">Newborns</a>
+    <a class="nav-link" href="#long-term">Long-Term</a>
+    <a class="nav-link" href="#practical">Practical Guide</a>
+    <a class="nav-link" href="#sources">Sources</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- BOTTOM LINE -->
+  <div id="bottom-line" class="bottom-line">
+    <div class="bottom-line-label">Bottom Line</div>
+    <div class="bottom-line-title">What you need to know in 60 seconds</div>
+    <ul>
+      <li><strong>Zero alcohol is the safest option</strong> — but moderate drinking (1 standard drink/day) is not known to cause harm when timed correctly.</li>
+      <li><strong>Alcohol in your blood = alcohol in your milk.</strong> Concentration is nearly identical. It peaks in milk 30–60 minutes after drinking.</li>
+      <li><strong>Wait ~2 hours per drink</strong> before nursing. 2 drinks = 4 hours. 3 drinks = 6 hours. Body weight affects this.</li>
+      <li><strong>Pumping &amp; dumping does nothing to remove alcohol from milk.</strong> Only time clears it. Pump only for comfort or to maintain supply schedule.</li>
+      <li><strong>Baby gets ~5–6% of your dose</strong> — but even this small amount reduces milk intake by 20–23% and disrupts sleep.</li>
+      <li><strong>Newborns under 8 weeks are higher risk</strong> — their livers metabolize alcohol at roughly half the adult rate.</li>
+      <li><strong>Heavy drinking is a clear hazard</strong> — reduced milk supply, motor development delays, and FASD risk at sustained high exposure.</li>
+    </ul>
+  </div>
+
+  <!-- SECTION 1: HOW IT TRANSFERS -->
+  <div id="transfer" class="section">
+    <div class="section-title">How Alcohol Gets Into Breast Milk</div>
+    <div class="section-sub">The mechanism is passive diffusion — and it's direct, fast, and mirrors your blood alcohol level almost exactly.</div>
+
+    <div class="prose">
+      Alcohol is a small, water-soluble molecule that crosses freely between your bloodstream and breast milk through passive diffusion. Unlike many drugs, it doesn't require a transport mechanism — it moves down the concentration gradient, meaning the alcohol level in your milk <strong>tracks your blood alcohol level in near real-time.</strong>
+    </div>
+
+    <div class="data-row">
+      <div class="data-box">
+        <div class="data-val">30–60 min</div>
+        <div class="data-lbl">Time to peak concentration in milk after drinking</div>
+      </div>
+      <div class="data-box">
+        <div class="data-val">≈ Equal</div>
+        <div class="data-lbl">Milk alcohol level vs. blood alcohol level</div>
+      </div>
+      <div class="data-box">
+        <div class="data-val">5–6%</div>
+        <div class="data-lbl">Weight-adjusted maternal dose reaching infant</div>
+      </div>
+      <div class="data-box">
+        <div class="data-val">2–3 hrs</div>
+        <div class="data-lbl">Detectable in milk after 1 standard drink</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      A foundational study measuring actual milk concentrations found the average peak level was <strong>0.32 g/L at 1 hour</strong> after alcohol ingestion, dropping to 0.20 g/L at 2 hours and 0.05 g/L at 3 hours. Peak timing shifts with food — eating before or during drinking delays the peak but doesn't reduce total exposure.
+    </div>
+
+    <div class="callout callout-blue">
+      <div class="callout-title ct-blue">What Is a "Standard Drink"?</div>
+      <p>In the US, one standard drink = 14 grams of pure alcohol. This equals approximately: 12 oz regular beer (5% ABV), 5 oz wine (12% ABV), or 1.5 oz distilled spirits (40% ABV). Craft beers and strong cocktails often count as 1.5–2+ standard drinks.</p>
+    </div>
+
+    <div class="prose">
+      As your blood alcohol falls — through your liver metabolizing the alcohol — the concentration in your milk falls in parallel. This is the key principle: <strong>if your blood is clear, your milk is clear.</strong> The two are coupled. There is no lag, no "storage" of alcohol in milk tissue.
+    </div>
+  </div>
+
+  <!-- SECTION 2: WAIT TIMES -->
+  <div id="wait-times" class="section">
+    <div class="section-title">How Long to Wait Before Breastfeeding</div>
+    <div class="section-sub">The 2-hour-per-drink rule is a practical minimum. Actual clearance depends on body weight, whether you ate, and total drinks consumed.</div>
+
+    <table class="wait-table">
+      <thead>
+        <tr>
+          <th>Drinks Consumed</th>
+          <th>Minimum Wait Time</th>
+          <th>Detection Window in Milk</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="drinks-num">1 drink</td>
+          <td class="wait-time">2 – 2.5 hours</td>
+          <td>~2 – 3 hours</td>
+          <td>Safest window; timing from when you finish drinking</td>
+        </tr>
+        <tr>
+          <td class="drinks-num">2 drinks</td>
+          <td class="wait-time">4 – 5 hours</td>
+          <td>~4 – 5 hours</td>
+          <td>Have a pre-pumped bottle available if baby needs to feed</td>
+        </tr>
+        <tr>
+          <td class="drinks-num">3 drinks</td>
+          <td class="wait-time">6 – 8 hours</td>
+          <td>~6 – 8 hours</td>
+          <td>Plan ahead; pump before drinking to stockpile</td>
+        </tr>
+        <tr>
+          <td class="drinks-num">4+ drinks</td>
+          <td class="wait-time">8+ hours</td>
+          <td>8+ hours</td>
+          <td>Serious risk to supply; pump on schedule for comfort only</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-amber">
+      <div class="callout-title ct-amber">The Clock Starts When You Finish Drinking — Not When You Start</div>
+      <p>If you drink over a 2-hour dinner, start counting from when you had your last sip, not when you opened the first drink. Eating food during or before drinking also delays peak absorption and slightly extends the clearance window.</p>
+    </div>
+
+    <div class="prose">
+      Body weight is the most underappreciated variable in the wait-time calculation. Heavier women have greater blood volume and faster absolute clearance per drink:
+    </div>
+
+    <table class="weight-table">
+      <thead>
+        <tr>
+          <th>Body Weight</th>
+          <th>Wait Time per Drink</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>120 lb (54 kg)</td>
+          <td>~2.5 hours</td>
+        </tr>
+        <tr>
+          <td>150 lb (68 kg)</td>
+          <td>~2.25 hours</td>
+        </tr>
+        <tr>
+          <td>180 lb (82 kg)</td>
+          <td>~2.0 hours</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="prose">
+      Online calculators from InfantRisk and Milkology allow you to enter your exact weight and number of drinks for a personalized time-to-zero estimate. These are more precise than the flat "2 hours per drink" rule, especially for lighter mothers or when more than 1–2 drinks are involved.
+    </div>
+
+    <div class="callout callout-green">
+      <div class="callout-title ct-green">Practical Strategy: Drink Right After a Feeding</div>
+      <p>The best real-world timing is to nurse your baby first, then have a drink. This gives you the maximum possible window before the next feeding — usually 2–3 hours for a newborn, longer for older babies — during which your body clears most or all of the alcohol naturally without requiring any intervention.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3: EFFECTS ON BABY -->
+  <div id="effects-baby" class="section">
+    <div class="section-title">What Happens to Baby After Exposure</div>
+    <div class="section-sub">Even small amounts of alcohol in milk produce measurable effects on infants — primarily reduced milk intake, sleep disruption, and for regular heavy exposure, developmental delays.</div>
+
+    <div class="prose">
+      While the absolute dose reaching the infant is small (~5–6% of the mother's weight-adjusted dose), infants are not miniature adults. Their blood-brain barriers are immature, their livers process alcohol at roughly half the adult rate, and their nervous systems are in a critical developmental window.
+    </div>
+
+    <div class="callout callout-amber">
+      <div class="callout-title ct-amber">Short-Term Effects (Documented)</div>
+      <ul>
+        <li><strong>20–23% reduction in milk intake</strong> during the hours following maternal alcohol consumption — infants nurse less, likely due to altered milk taste and reduced milk ejection</li>
+        <li><strong>Infant agitation</strong> — increased fussiness and crying after consuming alcohol-exposed milk</li>
+        <li><strong>Disrupted sleep-wake cycles</strong> — babies sleep more initially but wake more frequently; total sleep time decreases</li>
+        <li><strong>Altered feeding behavior</strong> — studies documented changes in infant suckling patterns after alcohol exposure through milk</li>
+      </ul>
+    </div>
+
+    <div class="prose">
+      A landmark study in the <em>New England Journal of Medicine</em> (Mennella & Beauchamp, 1991) was among the first to document that infants consumed significantly less milk when mothers had consumed alcohol — not because they were sedated, but because the taste and smell of the milk changed, and because letdown was impaired. The infants compensated by feeding more frequently in subsequent hours, but total intake remained lower.
+    </div>
+
+    <div class="callout callout-red">
+      <div class="callout-title ct-red">Heavy or Frequent Drinking: Serious Concerns</div>
+      <ul>
+        <li><strong>Motor development delays</strong> — the more alcohol infants consumed through breast milk over time, the lower their scores on motor development indices. This is one of the more consistently replicated findings in the literature.</li>
+        <li><strong>FASD risk</strong> — sustained heavy alcohol use during the breastfeeding period is associated with a roughly 6-fold increase in the likelihood of an FASD diagnosis, with more severe growth delay, physical anomalies, and poorer cognitive and behavioral outcomes.</li>
+        <li><strong>Sudden infant death syndrome (SIDS)</strong> — excessive alcohol consumption during breastfeeding is listed as a contributing risk factor, though the independent mechanism is not fully established.</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-gray">
+      <div class="callout-title ct-gray">Important Context on "Not Harmful" Claims</div>
+      <p>The frequently cited finding that "moderate drinking is not known to be harmful" reflects a genuine evidence gap as much as a safety endorsement. Research on sub-threshold neurological effects from occasional low-level alcohol exposure through milk is sparse. The studies that exist are reassuring for occasional single-drink consumption. They are not reassuring for regular daily drinking, even at one drink per day in the context of an exclusively breastfed newborn.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 4: MILK SUPPLY -->
+  <div id="milk-supply" class="section">
+    <div class="section-title">Effects on Milk Supply &amp; Letdown</div>
+    <div class="section-sub">Alcohol is not a galactagogue. It suppresses oxytocin, delays letdown, and reduces total milk production — the opposite of folklore.</div>
+
+    <div class="prose">
+      A persistent cultural myth holds that beer — particularly dark beer — boosts milk supply. This was plausible because barley and hops contain polysaccharides that do raise serum prolactin levels. However, higher prolactin doesn't translate to more milk when oxytocin — the hormone that actually triggers milk ejection — is simultaneously suppressed by the alcohol.
+    </div>
+
+    <div class="data-row">
+      <div class="data-box">
+        <div class="data-val">18%</div>
+        <div class="data-lbl">Reduction in oxytocin response at 0.5 g/kg alcohol dose</div>
+      </div>
+      <div class="data-box">
+        <div class="data-val">80%</div>
+        <div class="data-lbl">Reduction in oxytocin response at 1.5 g/kg alcohol dose</div>
+      </div>
+      <div class="data-box">
+        <div class="data-val">~20%</div>
+        <div class="data-lbl">Overall reduction in milk consumed by infant in hours after drinking</div>
+      </div>
+      <div class="data-box">
+        <div class="data-val">23%</div>
+        <div class="data-lbl">Reduction in milk intake after alcoholic beer vs. non-alcoholic beer</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      The mechanism is well-established: alcohol inhibits the release of oxytocin from the posterior pituitary, blunting the milk ejection reflex. At moderate doses, letdown is delayed by ~30 seconds. At higher doses, delay extends to over 5 minutes. Studies confirmed this is a central (brain-level) effect on oxytocin release — not a direct effect on breast tissue — because exogenous oxytocin given to drinking mothers completely overrides the impairment.
+    </div>
+
+    <div class="callout callout-amber">
+      <div class="callout-title ct-amber">The Beer Myth — Debunked</div>
+      <p>Alcoholic beer raises prolactin but simultaneously suppresses oxytocin. Net result: infants actually consumed 23% <em>less</em> milk after their mothers drank alcoholic beer versus non-alcoholic beer. Non-alcoholic beer has no negative effect and the barley/hops polysaccharides may marginally support supply — but regular beer is counterproductive as a galactagogue.</p>
+    </div>
+
+    <div class="prose">
+      For mothers concerned about supply, the takeaway is straightforward: alcohol doesn't help and actively hurts during the hours of peak exposure. If you're already working to maintain supply, drinking adds a variable that works against you. The effect is temporary — supply recovers as alcohol clears — but repeated episodes create a pattern of reduced infant intake that can compound over time.
+    </div>
+  </div>
+
+  <!-- SECTION 5: PUMP & DUMP -->
+  <div id="pump-dump" class="section">
+    <div class="section-title">Pumping &amp; Dumping — The Truth</div>
+    <div class="section-sub">One of the most persistent and consequential myths in breastfeeding. Here's what the science actually says.</div>
+
+    <div class="myth-grid">
+      <div class="myth-card">
+        <div class="myth-header">
+          <div class="myth-label myth-label-myth">Myth</div>
+          <div class="myth-text">Pumping and dumping removes alcohol from your system faster</div>
+        </div>
+        <div class="myth-body">False. Pumping removes milk from your breast, but alcohol is in your <em>blood</em>. Your breast continuously produces new milk from your bloodstream. As long as there is alcohol in your blood, any new milk produced will also contain alcohol at the same concentration. Pumping and dumping cannot outpace your body's milk production. Only time — and liver metabolism — clears it.</div>
+      </div>
+
+      <div class="myth-card">
+        <div class="myth-header">
+          <div class="myth-label myth-label-myth">Myth</div>
+          <div class="myth-text">If your milk has alcohol in it, drinking it will make the baby drunk</div>
+        </div>
+        <div class="myth-body">Unlikely at moderate maternal consumption. The infant receives approximately 5–6% of the mother's weight-adjusted dose. Even in a theoretical binge-drinking scenario, the absolute alcohol quantity delivered to the infant via milk is very small — though not negligible for a newborn. The concern is consistent repeated sub-threshold exposure, not acute intoxication from occasional moderate drinking.</div>
+      </div>
+
+      <div class="myth-card">
+        <div class="myth-header">
+          <div class="myth-label myth-label-fact">Fact</div>
+          <div class="myth-text">There IS a legitimate reason to pump after drinking — but not to remove alcohol</div>
+        </div>
+        <div class="myth-body">If you are past your usual feeding interval and your breasts are engorged, pump for <em>physical comfort</em> and to maintain your supply schedule. Missing pumps can reduce supply over time. Just discard the pumped milk if you drank within the clearance window — but know that you're discarding it because of the wait-time requirement, not because pumping made your milk any safer.</div>
+      </div>
+
+      <div class="myth-card">
+        <div class="myth-header">
+          <div class="myth-label myth-label-fact">Fact</div>
+          <div class="myth-text">The "if you're safe to drive, you're safe to nurse" rule is a useful heuristic</div>
+        </div>
+        <div class="myth-body">Legal driving limit in the US is 0.08% BAC. At this level, your breast milk alcohol concentration would also be approximately 0.08 g/L — still above optimal zero, but a reasonable practical benchmark for low-to-moderate exposure. If you feel impaired, your milk likely still has meaningful alcohol levels. Trust your body's signals as a rough guide, and use the 2-hour-per-drink rule as the actual standard.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: NEWBORNS -->
+  <div id="newborns" class="section">
+    <div class="section-title">Special Considerations: Newborns &amp; Age</div>
+    <div class="section-sub">Infant age matters significantly. Newborns are the highest-risk group and deserve the most caution.</div>
+
+    <div class="callout callout-red">
+      <div class="callout-title ct-red">Under 8 Weeks: Extra Caution Warranted</div>
+      <p>Neonates metabolize alcohol at approximately <strong>half the rate of adults</strong> due to immature liver enzyme systems — specifically, alcohol dehydrogenase (ADH) activity is substantially lower in the first weeks of life. This means the same milk alcohol concentration produces a proportionally higher and longer-lasting exposure in a newborn versus a 4-month-old.</p>
+      <p style="margin-top:8px;">Current clinical guidance from lactation specialists recommends avoiding or minimizing alcohol entirely until your baby is at least 8 weeks old. If you do drink in the newborn period, the 2-hour-per-drink minimum is a floor, not a guaranteed safety threshold.</p>
+    </div>
+
+    <div class="prose">
+      As infants mature, their metabolic capacity increases — a 3-month-old processes alcohol more efficiently than a 3-week-old, and a 6-month-old more efficiently still. By 3 months, the infant's ADH activity is meaningfully higher, though still below adult levels. This is why many clinicians are less concerned about an occasional glass of wine at a 6-month well visit than they are in the immediate postpartum period.
+    </div>
+
+    <div class="callout callout-amber">
+      <div class="callout-title ct-amber">Feeding Frequency Matters Too</div>
+      <p>A newborn nursing every 1.5–2 hours leaves essentially no safe window for alcohol clearance. An older baby on a 3–4 hour feeding schedule gives the mother much more time to clear even 1–2 drinks between sessions. This is a practical reason why the same amount of drinking carries different risk at different stages.</p>
+    </div>
+
+    <div class="callout callout-gray">
+      <div class="callout-title ct-gray">Premature Infants</div>
+      <p>Preemies have even less metabolic capacity than full-term newborns. If your baby was premature, treat the risk profile as if your baby is younger than their chronological age — use their corrected gestational age to calibrate your caution level.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 7: LONG-TERM -->
+  <div id="long-term" class="section">
+    <div class="section-title">Long-Term Risks &amp; Research Gaps</div>
+    <div class="section-sub">What we know, what we don't, and where the honest uncertainty lies.</div>
+
+    <div class="prose">
+      The research literature on alcohol and breastfeeding has a significant asymmetry: short-term, measurable effects (letdown suppression, milk intake reduction, sleep disruption) are reasonably well-documented. Long-term neurodevelopmental effects from low-to-moderate chronic exposure are substantially understudied.
+    </div>
+
+    <div class="callout callout-green">
+      <div class="callout-title ct-green">What We Know With Reasonable Confidence</div>
+      <ul>
+        <li>Occasional, well-timed moderate drinking (1 drink, 2+ hour wait) produces no documented clinically significant harm in healthy, term infants</li>
+        <li>Motor development is the most sensitive documented outcome — delays correlate with frequency and dose of alcohol exposure through milk</li>
+        <li>Heavy drinking during breastfeeding carries real, documented risks including supply suppression, growth issues, and developmental concerns</li>
+        <li>The acute pharmacological effects of low-dose alcohol exposure (disrupted sleep, reduced intake) are well-established and transient</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-amber">
+      <div class="callout-title ct-amber">What Is Not Well-Studied</div>
+      <ul>
+        <li>Long-term neurodevelopmental effects (cognitive, behavioral, emotional) from regular low-level alcohol exposure through milk over months</li>
+        <li>Whether 1 drink/day over 6–12 months of breastfeeding produces cumulative sub-threshold effects not visible in short-term studies</li>
+        <li>Dose-response thresholds for effects specifically in the breastfed infant population (as opposed to direct fetal alcohol exposure in pregnancy)</li>
+        <li>Interaction effects with other factors: formula supplementation, maternal nutrition, infant genetic variation in alcohol metabolism</li>
+      </ul>
+    </div>
+
+    <div class="prose">
+      The honest summary is: <strong>the evidence base for the "moderate drinking is safe" claim rests primarily on the absence of documented harm in short-to-medium-term studies, not on the presence of definitive long-term safety data.</strong> That's a meaningful distinction. For most parents making real-world decisions, occasional, well-timed moderate drinking represents a low-risk choice. For parents who want to minimize every possible variable, zero alcohol remains the cleanest option.
+    </div>
+  </div>
+
+  <!-- SECTION 8: PRACTICAL GUIDE -->
+  <div id="practical" class="section">
+    <div class="section-title">Practical Guide — What To Actually Do</div>
+    <div class="section-sub">Condensed actionable guidance based on the research above.</div>
+
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-num">1</div>
+        <div class="rec-title">Nurse first, drink after</div>
+        <div class="rec-body">Feed your baby immediately before having a drink. This gives you the maximum possible window — typically 2–3 hours — for the alcohol to clear before the next feed.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">2</div>
+        <div class="rec-title">Eat before or while drinking</div>
+        <div class="rec-body">Food slows alcohol absorption and delays peak blood alcohol concentration. Drinking on an empty stomach accelerates peak timing and increases peak concentration.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">3</div>
+        <div class="rec-title">Stock expressed milk in advance</div>
+        <div class="rec-body">If you know you'll be drinking at an event, pump milk in advance and refrigerate or freeze it. Use this for any feeds that fall within the clearance window.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">4</div>
+        <div class="rec-title">Know your real wait time</div>
+        <div class="rec-body">2 hours per drink is a guideline, not a guarantee. Use your body weight and total drinks consumed. If you're lighter or drank more, wait longer. InfantRisk has a free calculator.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">5</div>
+        <div class="rec-title">Pump on schedule — discard if needed</div>
+        <div class="rec-body">If you're engorged and still within the clearance window, pump to maintain supply and comfort. Discard the milk. The alcohol in discarded milk does not affect the milk produced after clearance.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">6</div>
+        <div class="rec-title">Be more cautious with newborns</div>
+        <div class="rec-body">Under 8 weeks: strongly consider avoiding alcohol entirely. If you do drink, use the strictest possible timing. The newborn's immature liver makes even low exposure proportionally more impactful.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-red">
+      <div class="callout-title ct-red">Do Not Breastfeed If</div>
+      <ul>
+        <li>You feel intoxicated or impaired — your milk almost certainly still contains significant alcohol</li>
+        <li>You have had 3+ drinks and fewer than 6 hours have passed</li>
+        <li>You have a premature or medically fragile newborn and have consumed any alcohol without adequate clearance time</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div id="sources" class="section">
+    <div class="section-title">Sources</div>
+    <div class="section-sub">Peer-reviewed literature, clinical databases, and institutional guidance used in this report.</div>
+    <div class="sources-grid">
+
+      <div class="source-item">
+        <div class="source-type">NIH Clinical Database</div>
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK501469/" target="_blank">Alcohol — Drugs and Lactation Database (LactMed®), NCBI Bookshelf</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Comprehensive clinical reference for alcohol pharmacokinetics in lactation</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">US Government / CDC</div>
+        <a href="https://www.cdc.gov/breastfeeding-special-circumstances/hcp/vaccine-medication-drugs/alcohol.html" target="_blank">Alcohol | Breastfeeding Special Circumstances — CDC</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Official CDC guidance on alcohol use during breastfeeding</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Peer-Reviewed / NIH PMC</div>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6707164/" target="_blank">Alcohol's Effect on Lactation — PMC / NIH</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Review of oxytocin inhibition, letdown impairment, and milk supply effects</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Peer-Reviewed / NIH PMC</div>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4987236/" target="_blank">Breastfeeding and Maternal Alcohol Use: Prevalence and Effects on Child Outcomes and FASD — PMC</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">FASD risk, motor development delays, and long-term outcomes</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Peer-Reviewed / NIH PMC</div>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12365457/" target="_blank">Maternal Smoking and Alcohol Use in Association with Breastfeeding — Scoping Review, PMC 2025</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">2025 scoping review of infant health outcomes and maternal alcohol use</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Classic Study / NEJM</div>
+        <a href="https://www.nejm.org/doi/full/10.1056/NEJM199110033251401" target="_blank">The Transfer of Alcohol to Human Milk: Effects on Flavor and the Infant's Behavior — NEJM, 1991</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Foundational study documenting reduced milk intake and altered infant behavior</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Clinical / PubMed</div>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/11585986/" target="_blank">Alcohol and Breast Feeding: Calculation of Time to Zero Level in Milk — PubMed</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Body-weight-adjusted clearance time calculations</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Clinical Resource</div>
+        <a href="https://www.infantrisk.com/content/alcohol-breastfeeding-whats-your-time-zero" target="_blank">Alcohol &amp; Breastfeeding: What's Your Time-to-Zero? — InfantRisk Center</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Practical clearance calculator and clinical guidance from Texas Tech</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Professional Organization</div>
+        <a href="https://llli.org/breastfeeding-info/alcohol/" target="_blank">Drinking Alcohol and Breastfeeding — La Leche League International</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Practitioner-reviewed guidance for nursing mothers</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Hospital / Academic Medical Center</div>
+        <a href="https://www.nm.org/healthbeat/healthy-tips/pumping-and-dumping-myths" target="_blank">Pumping and Dumping Myths — Northwestern Medicine</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Clinical debunking of pump-and-dump misconceptions</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Clinical Guidance / 2025</div>
+        <a href="https://www.in.gov/health/mch/files/Breastfeeding-and-Substance-Use-Guidance-2025-rev.pdf" target="_blank">Breastfeeding and Substance Use Guidance 2025 — Indiana State Dept. of Health</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">2025 clinical guidance document covering alcohol thresholds and timing</div>
+      </div>
+
+      <div class="source-item">
+        <div class="source-type">Mayo Clinic</div>
+        <a href="https://www.mayoclinic.org/healthy-lifestyle/infant-and-toddler-health/expert-answers/breast-feeding-and-alcohol/faq-20057985" target="_blank">Breastfeeding and Alcohol: Is it OK to Drink? — Mayo Clinic</a>
+        <div style="font-size:.8rem;color:var(--gray-400);margin-top:3px;">Expert FAQ on safety and timing recommendations</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Personal research library &nbsp;·&nbsp; Independent analysis &nbsp;·&nbsp; Not medical advice &nbsp;·&nbsp; Consult your physician or lactation consultant for personal guidance
+</div>
+
+</body>
+</html>
