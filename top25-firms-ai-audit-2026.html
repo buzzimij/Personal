@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI in Audit: The 2026 Landscape — Top 25 US Accounting Firms</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #050709;
+    --bg-secondary: #0d1117;
+    --bg-card: #111820;
+    --bg-card-hover: #16202c;
+    --gold: #c4a050;
+    --gold-light: #e0c070;
+    --gold-dim: #8a6e32;
+    --silver: #9ba8b5;
+    --silver-light: #c0ccd8;
+    --text-primary: #e8edf2;
+    --text-secondary: #8a96a4;
+    --text-muted: #556070;
+    --border: #1e2a38;
+    --border-gold: #3a2e1a;
+    --red: #c0392b;
+    --red-dim: #5a1f1a;
+    --green: #27ae60;
+    --green-dim: #1a4a2e;
+    --blue-accent: #1e6fa8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    background: linear-gradient(160deg, #050709 0%, #0a1020 50%, #050709 100%);
+    border-bottom: 1px solid var(--border-gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(196,160,80,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 80px);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 60px;
+  }
+  .cover-meta-item {
+    text-align: center;
+  }
+  .cover-meta-item .label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .cover-divider {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 60px;
+  }
+  .cover-toc {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 700px;
+  }
+  .toc-pill {
+    background: rgba(196,160,80,0.08);
+    border: 1px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: var(--gold-dim);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .toc-pill:hover {
+    background: rgba(196,160,80,0.16);
+    color: var(--gold);
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section {
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    line-height: 1.2;
+  }
+  .section-title span { color: var(--gold); }
+  .section-intro {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 820px;
+    line-height: 1.75;
+  }
+
+  /* ── EXECUTIVE SUMMARY ── */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .exec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .exec-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .exec-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+  .exec-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ── SCORING METHODOLOGY ── */
+  .scoring-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .score-dim {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    border-top: 3px solid var(--gold);
+  }
+  .score-dim-weight {
+    font-size: 32px;
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .score-dim-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .score-dim-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ── RANKINGS TABLE ── */
+  .rankings-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 36px;
+    font-size: 13px;
+  }
+  .rankings-table thead tr {
+    border-bottom: 1px solid var(--border-gold);
+  }
+  .rankings-table thead th {
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .rankings-table thead th.center { text-align: center; }
+  .rankings-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .rankings-table tbody tr:hover { background: var(--bg-card-hover); }
+  .rankings-table td {
+    padding: 14px 10px;
+    vertical-align: middle;
+  }
+  .rankings-table td.center { text-align: center; }
+
+  .rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .rank-gold { background: rgba(196,160,80,0.2); color: var(--gold); border: 1px solid var(--gold-dim); }
+  .rank-silver { background: rgba(155,168,181,0.15); color: var(--silver-light); border: 1px solid #445566; }
+  .rank-bronze { background: rgba(90,55,30,0.3); color: #c88050; border: 1px solid #5a3520; }
+  .rank-mid { background: rgba(30,40,55,0.6); color: var(--text-secondary); border: 1px solid var(--border); }
+  .rank-low { background: rgba(60,20,20,0.4); color: #a06060; border: 1px solid var(--red-dim); }
+
+  .firm-name-cell {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+  }
+  .firm-tier-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+  }
+  .tier-gold { background: rgba(196,160,80,0.15); color: var(--gold); }
+  .tier-silver { background: rgba(155,168,181,0.12); color: var(--silver); }
+  .tier-red { background: rgba(192,57,43,0.15); color: #e07060; }
+
+  .score-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .score-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    min-width: 60px;
+  }
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+  .fill-gold { background: linear-gradient(90deg, var(--gold-dim), var(--gold)); }
+  .fill-silver { background: linear-gradient(90deg, #445, var(--silver)); }
+  .fill-red { background: linear-gradient(90deg, var(--red-dim), var(--red)); }
+
+  .score-total {
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .score-gold { color: var(--gold); }
+  .score-silver { color: var(--silver-light); }
+  .score-red { color: #c07060; }
+
+  .dim-score {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 22px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .ds-high { background: rgba(196,160,80,0.15); color: var(--gold); }
+  .ds-mid { background: rgba(155,168,181,0.1); color: var(--silver); }
+  .ds-low { background: rgba(192,57,43,0.12); color: #c07060; }
+
+  .pe-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(30,111,168,0.2);
+    color: #5aaddd;
+    border: 1px solid rgba(30,111,168,0.3);
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  /* ── FIRM PROFILES ── */
+  .profiles-section { padding: 60px 0; }
+  .profile-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .profile-header:hover { background: var(--bg-card-hover); }
+  .profile-rank-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .prb-gold { background: rgba(196,160,80,0.15); color: var(--gold); border: 2px solid var(--gold-dim); }
+  .prb-silver { background: rgba(155,168,181,0.1); color: var(--silver-light); border: 2px solid #445; }
+  .prb-red { background: rgba(192,57,43,0.1); color: #c07060; border: 2px solid var(--red-dim); }
+
+  .profile-header-info { flex: 1; }
+  .profile-firm-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .profile-meta-line {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .profile-meta-line span { color: var(--text-secondary); margin-right: 16px; }
+  .profile-score-summary {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .profile-total-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .profile-score-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .profile-chevron {
+    color: var(--text-muted);
+    font-size: 18px;
+    transition: transform 0.3s;
+    margin-left: 12px;
+  }
+
+  .profile-body {
+    display: none;
+    padding: 0 28px 28px;
+    border-top: 1px solid var(--border);
+  }
+  .profile-body.open { display: block; }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .profile-section-block {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .psb-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .psb-content {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+  .psb-content strong { color: var(--text-primary); }
+
+  .bottom-line-block {
+    margin-top: 20px;
+    background: linear-gradient(135deg, rgba(196,160,80,0.06), rgba(196,160,80,0.02));
+    border: 1px solid var(--border-gold);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+  }
+  .bl-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .bl-text {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .score-breakdown-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .sbd-item {
+    flex: 1;
+    min-width: 100px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .sbd-val {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .sbd-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+  }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .tag-gold { background: rgba(196,160,80,0.1); border-color: var(--border-gold); color: var(--gold-dim); }
+
+  /* ── APPENDIX ── */
+  .source-list { list-style: none; }
+  .source-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .source-list li a { color: var(--gold-dim); text-decoration: none; }
+  .source-list li a:hover { color: var(--gold); text-decoration: underline; }
+
+  /* ── PCAOB BADGE ── */
+  .pcaob-ok { color: var(--green); font-weight: 600; }
+  .pcaob-warn { color: #e0a040; font-weight: 600; }
+  .pcaob-flag { color: var(--red); font-weight: 600; }
+  .pcaob-na { color: var(--text-muted); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .page { padding: 0 20px; }
+    .cover { padding: 40px 20px; }
+    .profile-header { flex-wrap: wrap; }
+    .profile-score-summary { text-align: left; }
+    .rankings-table { font-size: 12px; }
+    .rankings-table .hide-mobile { display: none; }
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 8px; background: var(--bg-secondary); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+  }
+  footer span { color: var(--gold-dim); }
+
+  /* ── INTRO ALERT BOX ── */
+  .alert-box {
+    background: rgba(196,160,80,0.06);
+    border: 1px solid var(--border-gold);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+  .alert-box strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     COVER PAGE
+══════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-eyebrow">Confidential Research Report · Prepared for Director/Partner-Track CPA</div>
+  <h1 class="cover-title">AI in Audit:<br><span>The 2026 Landscape</span></h1>
+  <p class="cover-subtitle">Which of the Top 25 US Accounting Firms Are Building the Infrastructure — and the Leadership Seats — That Matter in 3–5 Years</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><div class="label">Report Date</div><div class="value">May 11, 2026</div></div>
+    <div class="cover-meta-item"><div class="label">Firms Covered</div><div class="value">25</div></div>
+    <div class="cover-meta-item"><div class="label">Scoring Dimensions</div><div class="value">5</div></div>
+    <div class="cover-meta-item"><div class="label">Data Currency</div><div class="value">Q1–Q2 2026</div></div>
+  </div>
+  <div class="cover-divider"></div>
+  <div class="cover-toc">
+    <a class="toc-pill" href="#exec-summary">Executive Summary</a>
+    <a class="toc-pill" href="#methodology">Scoring Methodology</a>
+    <a class="toc-pill" href="#rankings">Rankings Table</a>
+    <a class="toc-pill" href="#profiles">Firm Profiles</a>
+    <a class="toc-pill" href="#appendix">Sources</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     EXECUTIVE SUMMARY
+══════════════════════════════════════════ -->
+<div class="page">
+<div class="section" id="exec-summary">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">Executive <span>Summary</span></h2>
+  <p class="section-intro">Seven key findings from across the Top 25 US accounting firms, curated for a CPA with national office audit methodology experience who is evaluating employers for a Director/Partner-level AI + Audit leadership role over a 3–5 year horizon.</p>
+
+  <div class="alert-box">
+    <strong>Merger Note:</strong> Baker Tilly and Moss Adams completed their combination on June 3, 2025, forming the 6th-largest US CPA firm by revenue (~$3.1B combined), backed by Hellman &amp; Friedman at a $7B valuation. They are treated as a single entity throughout this report under the Baker Tilly name.
+  </div>
+
+  <div class="exec-grid">
+    <div class="exec-card">
+      <div class="exec-num">1</div>
+      <div class="exec-text"><strong>The Big 4 have each committed $1B+ to AI in audit.</strong> PwC ($1B AI-native audit platform targeting end-to-end automation by calendar 2026), EY ($1B Assurance technology investment with April 2026 enterprise-scale agentic AI rollout), KPMG ($2B Microsoft alliance with KPMG Clara and Workbench), and Deloitte (multi-billion AI transformation with Omnia platform expansion) are not just announcing — they are deploying. These are leadership-seat factories for AI + audit right now.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-num">2</div>
+      <div class="exec-text"><strong>RSM is the most compelling mid-market play.</strong> A $1B three-year tech investment, a fully operational AI audit ecosystem (RSM Luca + Ask Luca launched January 2026), 4,000+ assurance professionals, and a dedicated agentic AI assurance roadmap. RSM is the only non-Big-4 firm with this level of audit-specific AI specificity and investment at scale.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-num">3</div>
+      <div class="exec-text"><strong>Private equity is the accelerant.</strong> 10+ of the top 30 firms are now PE-backed. Baker Tilly (H&amp;F), Grant Thornton (New Mountain Capital), Citrin Cooperman (Blackstone), Cherry Bekaert (Parthenon), Wipfli (New Mountain Capital), Sikich (Bain Capital), Armanino (Further Global), and CRI (Centerbridge) all carry PE capital. PE-backed firms move faster on tech investment — but also face more pressure on utilization, which creates urgency for AI that reduces headcount-to-revenue ratios.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-num">4</div>
+      <div class="exec-text"><strong>Grant Thornton just crossed a critical threshold.</strong> The May 2026 launch of GTAP (Grant Thornton Analytics &amp; Automation Platform) — built from scratch as the intelligent core of audit delivery — combined with New Mountain Capital backing and a $1B+ advisor AI investment, puts GT firmly in the tier just below the Big 4 for audit AI trajectory. The leadership role here is being built in real time.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-num">5</div>
+      <div class="exec-text"><strong>PCAOB inspection pressure correlates with AI urgency.</strong> Grant Thornton (48% Part I.A deficiency rate, 2024) and RSM (41%) face the most acute quality pressure among annually-inspected firms. Firms under PCAOB scrutiny have direct board-level incentive to deploy AI as a quality remedy — which translates to leadership seats with real mandate and budget.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-num">6</div>
+      <div class="exec-text"><strong>EisnerAmper punches above its weight.</strong> The March 2026 launch of the EisnerAI Audit Design Agent — built in collaboration with Microsoft Foundry — deployed across all EisnerAmper audits in 2026 makes this a surprise over-performer for a firm its size. For a Director-level role where you can own the entire program rather than be a layer inside a Big 4 bureaucracy, EisnerAmper deserves serious consideration.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-num">7</div>
+      <div class="exec-text"><strong>The bottom tier is real.</strong> Several top-25 firms (Plante Moran, Wipfli, CohnReznick, Withum, PKF O'Connor Davies) show thought leadership content about AI but limited evidence of audit-specific deployment, proprietary tooling, or dedicated AI audit leadership roles. For someone with your background, these are lifestyle choices, not career accelerators — unless a PE-backed transformation is imminent.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCORING METHODOLOGY
+══════════════════════════════════════════ -->
+<div class="section" id="methodology">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">Scoring <span>Methodology</span></h2>
+  <p class="section-intro">Each firm is scored on 100 points across five weighted dimensions, calibrated specifically for a senior CPA evaluating long-term employer fit for an AI + audit methodology leadership role. Being fully deployed today is NOT the primary criterion — trajectory, commitment depth, and the existence or creation of leadership seats matters more.</p>
+
+  <div class="scoring-grid">
+    <div class="score-dim">
+      <div class="score-dim-weight">25 pts</div>
+      <div class="score-dim-title">Strategic Commitment to AI in Audit</div>
+      <div class="score-dim-desc">Leadership public commitments, dollar amounts announced, board-level buy-in, timeline specificity. Are they putting money where the press release is?</div>
+    </div>
+    <div class="score-dim">
+      <div class="score-dim-weight">25 pts</div>
+      <div class="score-dim-title">Audit-Specific AI Trajectory</div>
+      <div class="score-dim-desc">Are tools being built for assurance specifically — risk assessment, sampling, workpaper automation, anomaly detection — or is this generic AI / tax/advisory work? Audit-specific deployment scores higher.</div>
+    </div>
+    <div class="score-dim">
+      <div class="score-dim-weight">20 pts</div>
+      <div class="score-dim-title">Hiring &amp; Talent Investment</div>
+      <div class="score-dim-desc">Active job postings for AI + audit roles, recent hires of AI/tech leaders in the assurance practice, whether a leadership seat exists or is being created. Firm headcount growth trajectory.</div>
+    </div>
+    <div class="score-dim">
+      <div class="score-dim-weight">15 pts</div>
+      <div class="score-dim-title">Firm Health &amp; Growth</div>
+      <div class="score-dim-desc">Revenue growth rate, PE backing (as a proxy for investment velocity), merger momentum, balance sheet stability, and market position trajectory.</div>
+    </div>
+    <div class="score-dim">
+      <div class="score-dim-weight">15 pts</div>
+      <div class="score-dim-title">Innovation Culture</div>
+      <div class="score-dim-desc">Speed of adoption, number and depth of external technology partnerships, dedicated AI labs or innovation centers, evidence that the firm rewards experimentation and tolerates the cost of change.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     RANKINGS TABLE
+══════════════════════════════════════════ -->
+<div class="section" id="rankings">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">Rankings <span>Table</span></h2>
+  <p class="section-intro">All 25 firms ranked by total score. Color coding: <span style="color:var(--gold)">Gold (75–100)</span> = Top Tier target employers; <span style="color:var(--silver-light)">Silver (55–74)</span> = Solid opportunity with caveats; <span style="color:#c07060">Red (0–54)</span> = Not where you want to invest your career in this window.</p>
+
+  <div style="overflow-x:auto;">
+  <table class="rankings-table">
+    <thead>
+      <tr>
+        <th style="width:50px">Rank</th>
+        <th>Firm</th>
+        <th class="hide-mobile">US Revenue</th>
+        <th class="hide-mobile center">Strategic<br>Commit (25)</th>
+        <th class="hide-mobile center">Audit AI<br>Traj (25)</th>
+        <th class="hide-mobile center">Hiring<br>Signal (20)</th>
+        <th class="hide-mobile center">Firm<br>Health (15)</th>
+        <th class="hide-mobile center">Innovation<br>Culture (15)</th>
+        <th>Total</th>
+        <th class="hide-mobile">Tier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- GOLD TIER -->
+      <tr>
+        <td><span class="rank-badge rank-gold">1</span></td>
+        <td><a href="#firm-pwc" class="firm-name-cell" style="text-decoration:none;color:inherit">PwC</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$23B (US)</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">24</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">25</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">19</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">14</span></td>
+        <td><span class="score-total score-gold">96</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">2</span></td>
+        <td><a href="#firm-ey" class="firm-name-cell" style="text-decoration:none;color:inherit">EY</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$20B (US)</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">24</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">24</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">18</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">14</span></td>
+        <td><span class="score-total score-gold">94</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">3</span></td>
+        <td><a href="#firm-kpmg" class="firm-name-cell" style="text-decoration:none;color:inherit">KPMG</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$12B (US)</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">24</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">24</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">18</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">14</span></td>
+        <td><span class="score-total score-gold">93</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">4</span></td>
+        <td><a href="#firm-deloitte" class="firm-name-cell" style="text-decoration:none;color:inherit">Deloitte</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$28B (US)</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">23</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">23</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">18</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">15</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td><span class="score-total score-gold">92</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">5</span></td>
+        <td><a href="#firm-rsm" class="firm-name-cell" style="text-decoration:none;color:inherit">RSM US</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$3.8B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">23</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">24</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">17</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td><span class="score-total score-gold">90</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">6</span></td>
+        <td><a href="#firm-gt" class="firm-name-cell" style="text-decoration:none;color:inherit">Grant Thornton</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$2.37B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">22</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">22</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">17</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td><span class="score-total score-gold">88</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">7</span></td>
+        <td><a href="#firm-bdo" class="firm-name-cell" style="text-decoration:none;color:inherit">BDO USA</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$3.2B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">21</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">20</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">17</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-gold">83</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">8</span></td>
+        <td><a href="#firm-bakertilly" class="firm-name-cell" style="text-decoration:none;color:inherit">Baker Tilly</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$3.1B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">20</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">18</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">17</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">15</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-gold">82</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">9</span></td>
+        <td><a href="#firm-eisneramper" class="firm-name-cell" style="text-decoration:none;color:inherit">EisnerAmper</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$700M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">20</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">21</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">15</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td><span class="score-total score-gold">80</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-gold">10</span></td>
+        <td><a href="#firm-forvis" class="firm-name-cell" style="text-decoration:none;color:inherit">Forvis Mazars</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$2.24B (US)</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">17</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">16</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">16</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-gold">74</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-gold">Gold</span></td>
+      </tr>
+      <!-- SILVER TIER -->
+      <tr>
+        <td><span class="rank-badge rank-silver">11</span></td>
+        <td><a href="#firm-crowe" class="firm-name-cell" style="text-decoration:none;color:inherit">Crowe LLP</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$1.0B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">16</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">16</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-silver">69</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">12</span></td>
+        <td><a href="#firm-cbiz" class="firm-name-cell" style="text-decoration:none;color:inherit">CBIZ</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$2.76B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">15</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-high">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td><span class="score-total score-silver">67</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">13</span></td>
+        <td><a href="#firm-aprio" class="firm-name-cell" style="text-decoration:none;color:inherit">Aprio</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$615M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">17</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">15</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td><span class="score-total score-silver">67</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">14</span></td>
+        <td><a href="#firm-armanino" class="firm-name-cell" style="text-decoration:none;color:inherit">Armanino</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$640M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">15</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-silver">66</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">15</span></td>
+        <td><a href="#firm-cherrybekaert" class="firm-name-cell" style="text-decoration:none;color:inherit">Cherry Bekaert</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$550M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-silver">64</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">16</span></td>
+        <td><a href="#firm-sikich" class="firm-name-cell" style="text-decoration:none;color:inherit">Sikich</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$450M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">14</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td><span class="score-total score-silver">63</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">17</span></td>
+        <td><a href="#firm-cla" class="firm-name-cell" style="text-decoration:none;color:inherit">CLA (CliftonLarsonAllen)</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$1.5B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td><span class="score-total score-silver">61</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">18</span></td>
+        <td><a href="#firm-withum" class="firm-name-cell" style="text-decoration:none;color:inherit">Withum</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$580M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td><span class="score-total score-silver">60</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">19</span></td>
+        <td><a href="#firm-eidebailly" class="firm-name-cell" style="text-decoration:none;color:inherit">Eide Bailly</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$650M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td><span class="score-total score-silver">58</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-silver">20</span></td>
+        <td><a href="#firm-cri" class="firm-name-cell" style="text-decoration:none;color:inherit">Carr, Riggs &amp; Ingram</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$500M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">13</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">10</span></td>
+        <td><span class="score-total score-silver">58</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-silver">Silver</span></td>
+      </tr>
+      <!-- RED TIER -->
+      <tr>
+        <td><span class="rank-badge rank-bronze">21</span></td>
+        <td><a href="#firm-plantemoran" class="firm-name-cell" style="text-decoration:none;color:inherit">Plante Moran</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$1.1B</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">10</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td><span class="score-total score-red">53</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-red">Lagging</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-mid">22</span></td>
+        <td><a href="#firm-cohnreznick" class="firm-name-cell" style="text-decoration:none;color:inherit">CohnReznick</a></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$600M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">10</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">10</span></td>
+        <td><span class="score-total score-red">52</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-red">Lagging</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-mid">23</span></td>
+        <td><a href="#firm-wipfli" class="firm-name-cell" style="text-decoration:none;color:inherit">Wipfli</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$612M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">10</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td><span class="score-total score-red">51</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-red">Lagging</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-low">24</span></td>
+        <td><a href="#firm-pkfod" class="firm-name-cell" style="text-decoration:none;color:inherit">PKF O'Connor Davies</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$420M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">10</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td><span class="score-total score-red">48</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-red">Lagging</span></td>
+      </tr>
+      <tr>
+        <td><span class="rank-badge rank-low">25</span></td>
+        <td><a href="#firm-citrin" class="firm-name-cell" style="text-decoration:none;color:inherit">Citrin Cooperman</a> <span class="pe-tag">PE</span></td>
+        <td class="hide-mobile" style="color:var(--text-secondary)">~$985M</td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">10</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">9</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">11</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-mid">12</span></td>
+        <td class="hide-mobile center"><span class="dim-score ds-low">8</span></td>
+        <td><span class="score-total score-red">50</span></td>
+        <td class="hide-mobile"><span class="firm-tier-badge tier-red">Lagging</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div><!-- close rankings page div -->
+
+<!-- ══════════════════════════════════════════
+     FIRM PROFILES
+══════════════════════════════════════════ -->
+<div class="page">
+<div class="profiles-section" id="profiles">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title" style="margin-bottom:12px">Firm <span>Profiles</span></h2>
+  <p class="section-intro" style="margin-bottom:36px">Click any firm header to expand its full profile. Ranked #1–25.</p>
+
+<!-- ─── #1 PwC ─── -->
+<div class="profile-card" id="firm-pwc">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">1</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">PwC (PricewaterhouseCoopers)</div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$23B</span>
+        <span>US Headcount: ~55,000</span>
+        <span>Structure: Partner-owned</span>
+        <span style="color:var(--gold)">PCAOB: Big 4 (20% deficiency rate, improved 2024)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">96</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">24</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">25</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">19</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">14</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">14</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">PwC has committed <strong>$1 billion</strong> to an AI-native audit platform, described as a "next generation audit" with end-to-end AI automation targeted for <strong>calendar 2026 audits</strong>. Shawn Panson, PwC's US Assurance Transformation Leader, stated publicly that a fully integrated AI audit process would be in place for calendar 2026. Global AI investment across the firm exceeds $4B.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>GL.ai</strong>: ML-powered general ledger anomaly detection, co-developed with H2O.ai, scanning billions of transactions in milliseconds. <strong>PwC Check</strong>: AI-powered document tie-out and financial statement review. The $1B platform is designed as a full audit workflow system — risk assessment through sign-off — not a point tool.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">Active hiring for Assurance Technology Directors, AI Audit Transformation leads, and Audit Innovation roles across multiple US offices. Internal talent development program focuses on upskilling all assurance staff on AI tools. PwC has positioned AI competency as a core career requirement, not optional.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Part I.A deficiency rate dropped to <span class="pcaob-ok">~20%</span> for Big 4 aggregate in 2024 (down from 26% in 2023). PwC specifically is not a PCAOB outlier. The AI audit investment is proactive, not reactive — positioning for quality as a competitive differentiator, not a remediation effort.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why PwC for an AI + Audit Leadership Role</div>
+      <div class="bl-text">PwC is the #1 target if you want to be inside the engine room of the most ambitious audit transformation in the profession. The $1B platform is real, the timeline is now, and Assurance Transformation is a named leadership track with multiple Director-level seats. The risk: PwC is enormous — you will be one of several AI audit leaders, not the person building the program. If you want to own the full vision, rank this #2 and put RSM or Grant Thornton at #1. But if you want resources, scale, and the credibility of being at PwC during a transformational moment, this is the top pick.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #2 EY ─── -->
+<div class="profile-card" id="firm-ey">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">2</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">EY (Ernst &amp; Young)</div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$20B</span>
+        <span>Global Headcount: ~406,000</span>
+        <span>Structure: Partner-owned (global network)</span>
+        <span style="color:var(--gold)">PCAOB: Big 4 (improved 2024)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">94</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">24</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">24</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">18</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">14</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">14</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content"><strong>$1 billion, four-year Assurance technology investment</strong> announced as part of the global "All In" strategy. In April 2026, EY announced the global rollout of enterprise-scale <strong>agentic AI in Assurance</strong> — encompassing 130,000 Assurance professionals, 160,000 audit engagements across 150+ countries. The 150-agent AI framework deployed to 80,000 tax professionals (2026) demonstrates the firm's capacity to operate at true enterprise AI scale.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>EY Canvas</strong>: Global assurance platform processing 1.4 trillion lines of journal entry data annually, now integrated with Microsoft Azure, Microsoft Foundry, and Microsoft Fabric. <strong>EY Helix Analyzers</strong>: A growing library of sector-specific analyzers for risk assessment, anomaly detection, and audit evidence. <strong>EY Intelligent Checklists</strong>: GenAI-powered disclosure guidance released 2025. 30+ new capabilities released in 2025 alone.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">EY has an active Assurance Transformation leadership track. The April 2026 agentic AI rollout created dozens of new leadership positions for AI Assurance, Audit Technology, and methodology roles globally. Workforce grew 3.4% to 406,206 in FY2025 despite industry headwinds — a deliberate growth signal.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Big 4 aggregate deficiency rate improved to <span class="pcaob-ok">~20%</span> in 2024. EY's 2025 Audit Quality Report demonstrates proactive investment in quality as a strategic priority. The AI investment explicitly links to quality outcomes, not just efficiency — a sophisticated framing that creates demand for methodology leaders, not just technologists.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why EY for an AI + Audit Leadership Role</div>
+      <div class="bl-text">EY's April 2026 global agentic AI rollout in Assurance is the largest single AI deployment in the history of the audit profession. If you want to be at the center of an inflection point — where your methodology background intersects directly with enterprise AI deployment — EY is the place. The firm's explicit framing around audit quality (not just efficiency) means your national office QC experience is directly applicable. Watch for EY's Assurance Transformation and Audit Innovation practice hiring in H2 2026; the new wave of leadership roles are being created right now.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #3 KPMG ─── -->
+<div class="profile-card" id="firm-kpmg">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">3</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">KPMG</div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$12B</span>
+        <span>Global Headcount: ~275,000</span>
+        <span>Structure: Partner-owned (global network)</span>
+        <span style="color:var(--gold)">PCAOB: Big 4 (improved 2024)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">93</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">24</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">24</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">18</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">14</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content"><strong>$2 billion, 5-year AI alliance with Microsoft</strong> — the single largest disclosed audit AI investment in the profession. The investment covers AI tools for audit, tax, and advisory across the global organization. KPMG is the only Big 4 firm with a publicly disclosed, audit-specific dollar figure at this scale.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>KPMG Clara</strong>: Smart Audit Platform built on Azure, using AI agents to automate substantive procedures and journal entry analysis via the Financial Report Analyzer AI engine. <strong>KPMG Workbench</strong> (launched June 2025): Multi-agent AI platform with 50 active AI assistants and ~1,000 in development, running on Microsoft Azure AI Foundry. Pilot results showed <strong>35% reduction in hours</strong> on vouching and workpaper assembly across banking, consumer, and energy clients.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">Active search for Audit Technology, Clara platform management, and AI Assurance methodology roles. KPMG's Microsoft alliance creates a dedicated AI development track within audit — a unique hiring signal that the firm is building internal AI capability, not just licensing tools. Headcount roughly stable; quality over quantity hiring posture.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Big 4 aggregate improved to <span class="pcaob-ok">~20%</span> in 2024. KPMG explicitly links Clara's AI capabilities to improving audit quality outcomes. The 35% efficiency gain in pilot engagements is being framed publicly as a quality story, not just a cost story — which is the right framing for regulatory credibility.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why KPMG for an AI + Audit Leadership Role</div>
+      <div class="bl-text">KPMG's $2B Microsoft investment is not marketing — the Clara platform and Workbench are real, deployed tools with measurable efficiency results. KPMG ranks #3 (not #1) primarily because PwC and EY have slightly more aggressive timelines and more publicly visible Assurance-specific hiring signals. But KPMG is arguably the most technologically sophisticated Big 4 firm in audit AI right now, and the Clara platform leadership team is one of the most sought-after destinations in the profession. If you have any Microsoft technology fluency, KPMG should be your top target.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #4 Deloitte ─── -->
+<div class="profile-card" id="firm-deloitte">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">4</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Deloitte</div>
+      <div class="profile-meta-line">
+        <span>Global Revenue: $70.5B</span>
+        <span>Global Headcount: ~470,000</span>
+        <span>Structure: Partner-owned</span>
+        <span style="color:var(--gold)">PCAOB: Big 4 (improved 2024)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">92</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">23</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">23</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">18</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">15</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">Deloitte has multi-billion AI investment embedded in its <strong>Omnia global audit platform</strong>. In July 2025, Deloitte announced significant new GenAI and agentic AI capabilities within Omnia, including risk identification, financial statement analysis, and documentation review. The <strong>Trustworthy AI framework</strong> governs all AI audit deployments, embedding governance and controls throughout the lifecycle. Deloitte's "Zora AI" (March 2025, procurement/finance automation) demonstrates the firm's capability to build functional AI agents.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>Deloitte Omnia</strong>: Global cloud-based audit platform with embedded GenAI — financial statement tie-out, documentation review, and risk factor identification from external sources. <strong>Argus</strong>: AI extraction tool for contracts, invoices, and financial statements, flagging anomalies for human review. Agentic AI roadmap for audit published publicly in 2026, outlining multi-agent audit workflow automation.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">Deloitte is the largest firm by revenue globally and has sustained headcount growth (~10,000 net adds in FY2025). Active Director-level hiring in Audit Innovation, Omnia Platform leadership, and Trustworthy AI for Assurance. The Deloitte AI Institute is the firm's primary intellectual hub — a visible career track for methodology + AI leaders.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Big 4 aggregate <span class="pcaob-ok">~20%</span> deficiency rate (2024, improved). Deloitte's Omnia platform is explicitly linked to audit quality improvement in regulatory submissions. The Trustworthy AI framework is designed partly as PCAOB preparedness — anticipating that regulators will require governance documentation around AI-assisted audit judgments.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why Deloitte for an AI + Audit Leadership Role</div>
+      <div class="bl-text">Deloitte ranks #4 (not #1) primarily because it is the most complex, most layered organization on this list — getting to a role where you have real influence over AI audit methodology requires navigating more internal politics than at PwC or EY. But Deloitte's scale, the Omnia platform's global reach, and the Deloitte AI Institute make it the best platform for someone who wants to become a globally recognized thought leader in AI + audit over a 5–10 year horizon. The Trustworthy AI framework work is the most sophisticated governance-focused audit AI work in the profession — directly relevant to national office QC experience.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #5 RSM US ─── -->
+<div class="profile-card" id="firm-rsm">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">5</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">RSM US LLP</div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$3.8B</span>
+        <span>US Assurance Staff: ~4,000+</span>
+        <span>Structure: Partner-owned</span>
+        <span style="color:var(--pcaob-warn)">PCAOB: 41% deficiency rate (2024) — improvement mandate</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">90</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">23</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">24</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">17</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content"><strong>$1 billion over 3 years</strong> announced June 2025, focused on agentic AI integration across all service lines. RSM is the first non-Big-4 firm to cross the $1B threshold for technology investment. The investment explicitly targets assurance, tax, and consulting — in that order — signaling that assurance AI is the priority deployment vehicle.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>RSM Luca</strong>: Full digital audit ecosystem using AI to automate routine tasks, analyze complex data sets, and identify audit risk areas — the most purpose-built audit AI platform outside the Big 4. <strong>Ask Luca</strong> (launched January 2026): GenAI tool providing real-time guidance from RSM's assurance manuals, practice aids, and technical guides to 4,000+ assurance professionals. <strong>RSM Atlas</strong>: AI-powered compliance platform. <strong>DASH</strong> (ServiceNow-powered): Client request management AI.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">RSM is actively building its Assurance AI leadership team. The Ask Luca launch and Luca platform expansion create demand for Director-level roles in Audit Technology, Methodology AI, and Agentic AI Assurance. RSM's mid-market positioning means a Director here has broader scope than a comparable role at Big 4 — you build the program, not execute someone else's vision.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">PCAOB 2024 inspection: <span class="pcaob-warn">41% Part I.A deficiency rate</span> — 7 of 17 audits reviewed had insufficient evidence. This is a material quality issue at the national level and creates direct, board-level urgency to deploy AI as a quality remediation tool. For a national office methodology leader, this is not a red flag — it is a mandate. RSM needs exactly what you bring, and the AI tools (Luca) are being deployed as the quality improvement vehicle.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why RSM for an AI + Audit Leadership Role</div>
+      <div class="bl-text">RSM is the single best target if you want to own the AI + audit methodology program at a firm where you have real authority. The $1B investment is committed, Ask Luca is live, and the PCAOB quality pressure creates executive-level urgency that translates directly into budget and mandate for a Director/Partner of Audit AI Methodology. At RSM, you are not a layer — you are the person. The 41% PCAOB deficiency rate is the firm's burning platform, and Luca is the fire extinguisher. They need a senior methodology person who understands both the quality risk and the AI toolkit. That is precisely the profile of a 12-year national office CPA. This is the best alignment of need, timing, and authority in the top 10.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #6 Grant Thornton ─── -->
+<div class="profile-card" id="firm-gt">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">6</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Grant Thornton <span class="pe-tag">PE: New Mountain Capital</span></div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$2.37B</span>
+        <span>Global Headcount: ~73,000</span>
+        <span>Structure: PE-backed (March 2024)</span>
+        <span style="color:#e07060">PCAOB: 48% deficiency rate (2024) — highest among GNFs</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">88</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">22</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">22</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">17</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">14</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">New Mountain Capital backed GT's US operations in March 2024, immediately accelerating technology investment. In September 2025, GT Advisors invested <strong>$1 billion+ to equip the multinational workforce with AI tools</strong>. Microsoft 365 Copilot deployed across the entire platform workforce. The GTAP platform launch (May 2026) is the culmination of post-PE investment in audit technology — built from scratch, not retrofitted.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>GTAP (Grant Thornton Analytics &amp; Automation Platform)</strong>, launched May 7, 2026: AI-powered audit delivery platform with automation, analytics, and data-driven insights embedded into each stage of the audit lifecycle. Built as the "intelligent core of audit delivery" — not a point tool. Initial deployment for private company audits in 2026, with public company audit rollout planned for 2027. <strong>CompliAI</strong>: Proprietary AI solution for client risk and control assessment (custom LLM).</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">GTAP's May 2026 launch created immediate demand for Audit Technology leaders, Platform implementation directors, and Methodology AI roles. New Mountain Capital's playbook with PE-backed professional services firms always includes a wave of senior technology hires in year 1–2 post-investment. GT is currently in that window — leadership seats are being created, not filled.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">PCAOB 2024: <span class="pcaob-flag">48% Part I.A deficiency rate</span> — 13 of 27 audits with insufficient evidence. This is the highest deficiency rate among the annually-inspected Global Network Firms. This creates the most acute board-level urgency of any firm on this list. GTAP is explicitly being deployed as the quality remediation vehicle — meaning the role you want comes with the highest internal mandate of any firm outside the Big 4.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why Grant Thornton for an AI + Audit Leadership Role</div>
+      <div class="bl-text">Grant Thornton in May 2026 is RSM in January 2025 — right at the inflection point where PE capital, a quality crisis, and a brand-new platform converge. GTAP just launched. The firm needs people who understand audit methodology at the national level AND can operationalize AI deployment. The 48% PCAOB deficiency rate is not a scarlet letter — it's a job description. GT's PE structure means decisions get made faster, compensation is competitive, and the tech investment is real. If you want to be the person who builds the AI audit methodology program at a firm that desperately needs it and has just received the capital to fund it, Grant Thornton may be the #1 opportunity in the profession right now.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #7 BDO USA ─── -->
+<div class="profile-card" id="firm-bdo">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">7</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">BDO USA</div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$3.2B</span>
+        <span>Structure: Partner-owned</span>
+        <span style="color:var(--gold)">PCAOB: Part I.A improved (2024)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">83</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">21</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">20</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">17</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">BDO launched its comprehensive AI strategy in <strong>May 2025</strong> backed by a global AI investment exceeding <strong>$1 billion over five years</strong>. The strategy integrates agentic AI-powered tools across all service lines, with a Responsible AI governance framework and a firm-wide AI learning curriculum. BDO is the third non-Big-4 firm to cross the $1B threshold.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>Risk Assessment Coach</strong>: In evaluation — AI tool that observes audit documentation and provides actionable feedback rooted in firm guidance and regulatory standards (directly relevant to PCAOB quality expectations). <strong>BDO DocPro</strong>: Enterprise document processing using AI-driven workflows for structured and unstructured documents. BDO has also published research showing finance leaders increasingly believe technology delivers cost reductions in audit (29% → 46%, 2024–2025).</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">BDO's Audit Innovation team is actively expanding. The Risk Assessment Coach development indicates a need for senior methodology leaders who can bridge AI capability with PCAOB-defensible audit documentation standards. BDO is a strong employer for someone who wants a genuine hybrid methodology/AI role at a firm with national reach but slightly less bureaucratic complexity than Big 4.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">BDO's 2024 PCAOB inspection showed improvement from prior years for GNF aggregate. The Risk Assessment Coach tool is the most PCAOB-aligned AI tool described by any mid-tier firm — it explicitly maps to the PCAOB's primary concern about risk assessment quality. This is sophisticated positioning that signals quality-focused leadership at the top of the firm.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why BDO for an AI + Audit Leadership Role</div>
+      <div class="bl-text">BDO's Risk Assessment Coach concept is the most intellectually aligned AI tool with your national office QC background — it's literally a tool that reviews audit documentation against firm standards and regulatory requirements. If that tool gets built and deployed, someone needs to own the methodology logic that powers it. BDO is a strong #3 alternative to RSM and Grant Thornton: strong investment, clear audit-specific direction, and a firm that is partner-owned with stable governance. The knock: BDO's innovation culture is slightly more conservative than GT or EY, and the investment timeline is five years, not three — a slower burn.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #8 Baker Tilly ─── -->
+<div class="profile-card" id="firm-bakertilly">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">8</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Baker Tilly (incl. Moss Adams) <span class="pe-tag">PE: Hellman &amp; Friedman</span></div>
+      <div class="profile-meta-line">
+        <span>Combined Revenue: ~$3.1B</span>
+        <span>Combined Staff: ~11,500</span>
+        <span>Structure: PE-backed (H&amp;F, $7B valuation)</span>
+        <span style="color:var(--text-secondary)">PCAOB: Not annually inspected (private company focus)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">82</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">20</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">18</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">17</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">15</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">The June 2025 combination of Baker Tilly and Moss Adams, backed by Hellman &amp; Friedman at a <strong>$7 billion valuation</strong>, created a $3.1B advisory and accounting firm targeting <strong>$6 billion in revenue by 2030</strong>. H&amp;F's existing investment in Baker Tilly (pre-merger) has driven significant technology investment; the combined firm is expected to accelerate AI investment materially post-merger. The firm's explicit "Better is Better" positioning signals quality-differentiation strategy — not just scale.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content">Specific audit AI tools are not yet publicly named post-merger, which is expected given the June 2025 close date — the combined firm's technology roadmap is in consolidation. Baker Tilly's pre-merger AI advisory practice was well-regarded. Moss Adams had invested in data analytics for audit. The integration period (2025–2026) is when the combined platform will be defined — making now the right time to enter for someone who wants to shape that definition.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">Post-merger integration is actively creating new technology and methodology leadership roles as the firm consolidates two national office infrastructures into one. H&amp;F's playbook for professional services PE investments consistently includes a wave of senior technology leadership hires in the 12–24 months post-close. Baker Tilly is in that window now, targeting the $6B revenue goal by 2030 that requires significant AI investment.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Baker Tilly primarily serves private companies and is not among the annually PCAOB-inspected firms (triennially inspected). Quality posture appears solid — no significant public PCAOB issues noted. The PE backing does create pressure for utilization efficiency, which translates into AI investment for capacity expansion.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why Baker Tilly for an AI + Audit Leadership Role</div>
+      <div class="bl-text">The Baker Tilly/Moss Adams combination is the most interesting wildcard on this list. A $7B valuation, $6B revenue target by 2030, and a PE firm (H&amp;F) that knows exactly how to use capital to build market leaders. The merger creates a once-in-a-decade opportunity to join as the firm defines its combined technology platform — including audit AI. The risk: post-merger integration is messy, and the firm's audit AI tools are not yet defined publicly. If you join in 2026–2027 as the AI audit methodology leader, you are building on a blank canvas with massive PE-backed resources. High risk, high upside. Strongly consider if you want to build something, not join something already built.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #9 EisnerAmper ─── -->
+<div class="profile-card" id="firm-eisneramper">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">9</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">EisnerAmper <span class="pe-tag">PE: TowerBrook Capital</span></div>
+      <div class="profile-meta-line">
+        <span>Revenue: ~$700M</span>
+        <span>Structure: PE-backed (APS)</span>
+        <span class="pcaob-na">PCAOB: Triennial inspection cycle</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">80</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-gold">20</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-gold">21</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">15</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">EisnerAmper is the biggest surprise in the top tier. In March 2026, the firm announced its collaboration with <strong>Microsoft</strong> to develop the <strong>EisnerAI Audit Design Agent</strong>, running on Microsoft Foundry. This is not aspirational — the agent is in deployment and will be used across all EisnerAmper audits in 2026. For a firm of $700M in revenue to be deploying a Microsoft Foundry-based audit AI agent ahead of firms many times its size is a significant signal about culture and leadership.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content"><strong>EisnerAI Audit Design Agent</strong> (deployed 2026): Research and insight partner for auditors, synthesizing information across systems and identifying key patterns. Built on Microsoft Foundry, designed to modernize how audits are performed. This is the most specific, most recently deployed audit AI tool of any firm in the Silver/Gold tier outside the Big 4 + RSM + GT. The firm is not experimenting — it is deploying.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">The EisnerAI Audit Design Agent rollout creates demand for a Director-level owner of the program — someone who bridges audit methodology (what should the agent be checking?) with AI governance (how do we ensure it's PCAOB-defensible?). This is precisely the profile of a national office QC professional with AI fluency. At $700M in revenue, this person would have firm-wide visibility, not departmental.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Triennial inspection cycle (not annually inspected). No significant recent PCAOB issues in public domain. The Audit Design Agent deployment suggests the firm is proactively managing quality risk through technology — the right governance posture.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why EisnerAmper for an AI + Audit Leadership Role</div>
+      <div class="bl-text">EisnerAmper is the best-kept secret on this list. A $700M firm that just deployed a Microsoft Foundry-based audit AI agent across all its audits in 2026 — ahead of firms three times its size. At this scale, a Director of AI Audit Methodology owns the entire program: you are not one of twelve. You are the person. If you want maximum authority, minimum bureaucracy, and the ability to point to a deployed system you built, EisnerAmper deserves serious consideration alongside RSM and Grant Thornton. The firm's PE backing (TowerBrook) provides resources and speed. The main risk: if you grow beyond this role in 3 years, the next step may require leaving the firm to find a bigger platform.</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTE: profiles 1-9 above -->
+<!-- ─── #10 Forvis Mazars ─── -->
+<div class="profile-card" id="firm-forvis">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-gold">10</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Forvis Mazars</div>
+      <div class="profile-meta-line">
+        <span>US Revenue: ~$2.24B</span>
+        <span>US Headcount: ~7,000+</span>
+        <span>Structure: Partner-owned (global network)</span>
+        <span class="pcaob-na">PCAOB: Triennial cycle (primarily private company)</span>
+      </div>
+    </div>
+    <div class="profile-score-summary">
+      <div class="profile-total-score score-gold">74</div>
+      <div class="profile-score-label">/ 100</div>
+    </div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">17</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">16</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">16</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">Forvis Mazars grew global revenue 11% to $5.7B (FY2024–25) and US revenue 4% to $2.24B. The firm has a published Technology &amp; AI strategy page and active thought leadership on AI in audit. The 2025 Integrated Report highlights strategic AI investments. No specific dollar commitment has been publicly disclosed — a notable gap versus RSM, BDO, and Baker Tilly. The firm's global network (40,000+ professionals, 100+ countries) provides infrastructure but also complexity.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Audit-Specific AI Tools</div>
+        <div class="psb-content">Forvis Mazars uses AI for financial data analysis, anomaly flagging, and predictive analytics in audit. No proprietary, named audit AI platform has been publicly announced as of Q2 2026. The firm's innovation philosophy focuses on automating repetitive audit functions to free up time for client interaction — a valid approach, but without a named platform, it is difficult to assess deployment depth. The global Mazars network provides potential access to European audit AI investment not captured in US-specific searches.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">Forvis Mazars added 1,000+ team members post-combination (FY2025). The US practice is actively growing. AI strategy roles are being created within the combined firm — the integration of Forvis (ex-BKD + ex-DHG) with Mazars' European AI investments creates a genuine technology leadership opportunity. The firm's IA Insights program (July 2025) and AI lifecycle auditing events signal active hiring for AI + assurance professionals.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">PCAOB Posture</div>
+        <div class="psb-content">Primarily private company audit focus; triennial inspection cycle. No significant PCAOB issues in recent public record. The Mazars global network has historically had strong European regulatory relationships, which may accelerate AI governance sophistication in the US practice.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line: Why Forvis Mazars for an AI + Audit Leadership Role</div>
+      <div class="bl-text">Forvis Mazars sits at the border of the Gold and Silver tiers — it has the scale ($2.24B US, $5.7B global), the growth trajectory (11% global), and the post-merger integration energy to create significant leadership opportunities. The key risk is the absence of a named, deployed audit AI platform — which makes it hard to know what leadership role you'd actually own. This is worth a conversation with a senior Forvis Mazars audit partner to understand what's being built and whether a Director of Audit AI is in the roadmap. Strong candidate for a second-tier target; not a first-call firm.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #11 Crowe LLP ─── -->
+<div class="profile-card" id="firm-crowe">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">11</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Crowe LLP</div>
+      <div class="profile-meta-line"><span>Revenue: ~$1.0B</span><span>Structure: Partner-owned</span><span class="pcaob-na">PCAOB: Triennial cycle</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">69</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">16</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">16</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">14</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Crowe has an expanded OpenAI (ChatGPT Enterprise + APIs) partnership announced January 2025, integrated into Audit, Tax, and Consulting. <strong>Crowe Clarity</strong>: AI-powered knowledge assistant for auditors, integrated into the Crowe Insight platform, allowing natural language queries of audit guidance. <strong>Crowe Studio.AI</strong>: Internal AI team activating AI within existing tools. The approach is methodical and quality-focused, not flashy — consistent with Crowe's brand.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Crowe and Eide Bailly were reported in late 2025 as "testing the PE investor market" — suggesting PE investment may be imminent, which would dramatically accelerate tech investment. Partner-owned culture currently rewards methodical innovation. Active hiring for Audit Technology roles. Reports suggest Crowe is interested in PE to fund the next growth phase.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Crowe is a solid Silver tier firm — OpenAI partnership is real, Crowe Clarity is deployed, and the culture rewards quality. The missing piece is scale of investment and urgency. Watch closely: if Crowe closes a PE deal in 2026, it immediately moves to Gold tier and becomes a top target. As of May 2026, it is a credible employer but not a priority call.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #12 CBIZ ─── -->
+<div class="profile-card" id="firm-cbiz">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">12</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">CBIZ (incl. CBIZ CPAs, formerly MHM)</div>
+      <div class="profile-meta-line"><span>Revenue: ~$2.76B (FY2025)</span><span>Structure: Publicly traded (NYSE: CBZ)</span><span class="pcaob-na">PCAOB: Triennial cycle (attest entity is CBIZ CPAs)</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">67</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">15</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">14</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">14</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Post-Marcum Position</div>
+        <div class="psb-content">CBIZ completed the acquisition of Marcum LLP (attest entity becoming CBIZ CPAs) in November 2024, creating a $2.76B firm with 52% revenue growth in FY2025. AI and automation are stated 2026 priorities with 60+ dedicated technology professionals. CEO Jerry Grisko has publicly committed to AI-driven organic growth in 2026. CBIZ's publicly traded status (NYSE: CBZ) means investment decisions are transparent and subject to earnings pressure.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Integration of Marcum's national office with CBIZ CPAs' methodology infrastructure is creating Director-level roles in audit technology and quality. The Marcum AI Readiness Assessment practice is being integrated into CBIZ. 2026 growth target of 2–5% organic creates incentive to deploy efficiency tools (AI) to expand capacity without proportional headcount growth.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">CBIZ is in post-acquisition integration mode — which creates genuine leadership opportunities but also organizational uncertainty. The publicly traded structure adds complexity (quarterly earnings pressure on investment). Worth monitoring in H2 2026 once integration stabilizes. Not a first-call target, but a credible second-tier option if the integration audit AI role crystallizes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #13 Aprio ─── -->
+<div class="profile-card" id="firm-aprio">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">13</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Aprio <span class="pe-tag">PE: Audax Group</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$615M</span><span>Rank: #20 (AT 2026)</span><span>Structure: PE-backed (APS)</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">67</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">17</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">15</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Aprio announced a <strong>five-year, $300M AI and automation investment</strong> (July 2025), including acquisition of <strong>TimeCredit AI</strong> (2024 AICPA Startup Accelerator company). Governance through an Aprio AI Council — cross-functional leadership group. TimeCredit CEO joined as Senior Director of AI Transformation. Partnership with Intuit for AI-powered advisory. April 2026: Added partners in AI strategy and complex audit, signaling continued audit-specific AI hiring.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Aprio climbed to #20 on AT 2026 Top 100 (up from #24 in 2025) and was named a Fastest-Growing Firm. PE-backed growth trajectory is visible. The AI Council structure and TimeCredit acquisition signal the firm is investing seriously, but $300M over five years is a smaller commitment per-revenue than RSM ($1B / $3.8B revenue) — approximately equal on a proportional basis. Active partner-level AI + audit hiring in April 2026 is the strongest recent signal.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Aprio is punching above its weight for a $615M firm — $300M investment, AI acquisition, PE backing, and explicit audit AI partner hiring. Ranked Silver because the audit AI tools are still pre-deployment in terms of visible named platform, but the trajectory is clearly upward. Worth a call if you want a smaller firm (more authority) that is genuinely investing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #14 Armanino ─── -->
+<div class="profile-card" id="firm-armanino">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">14</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Armanino <span class="pe-tag">PE: Further Global</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$640M</span><span>Structure: PE-backed (APS), minority investment</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">66</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">14</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">15</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Armanino is genuinely tech-forward for its size. <strong>DataSnipper partnership</strong> (April 2026): Agentic AI deployment for internal audit, risk management, and compliance. <strong>Accrual partnership</strong> (February 2026): AI-native accounting platform with expansion into audit planned for 2026–beyond. Further Global Capital (PE) minority investment supports technology investment acceleration. "Substantial productivity gains" from AI reported by firm leadership. Known for PE-backed company advisory work — a strong tech-client base.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Armanino is actively acquiring and partnering to build AI capability (DataSnipper, Accrual). Culture is explicitly technology-forward and entrepreneurial — unusual for a firm this size. The DataSnipper partnership focuses on internal audit, not external — an important distinction if you are focused on external audit. The audit expansion from Accrual partnership is planned for 2026+, which means roles may emerge in the near term.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Armanino has strong AI partnership activity and a genuinely innovative culture. The limitation is that most AI work is advisory/internal audit focused rather than external audit methodology — a meaningful gap for someone with your national office background. Worth a conversation if you are open to internal audit advisory; less compelling if you want to stay in external audit methodology. The Accrual platform expansion into external audit in 2026+ could change this picture.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #15 Cherry Bekaert ─── -->
+<div class="profile-card" id="firm-cherrybekaert">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">15</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Cherry Bekaert <span class="pe-tag">PE: Parthenon Capital</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$550M</span><span>Rank: #17 (AT 2026, up from #20)</span><span>Structure: PE-backed</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">64</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">14</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Cherry Bekaert rose to #17 on AT 2026 Top 100 (up from #20), reflecting strong PE-backed growth. <strong>Enkrypt AI alliance</strong> (February 2026): AI security, compliance, and governance offerings including ISO 42001 alignment and real-time AI guardrails. <strong>MindBridge partnership</strong>: AI-driven analytics for audit engagements (documented case study). Parthenon Capital backing (since June 2022) has funded 15 acquisitions. Firm's own assurance partner publicly cautioned that "AI is far from a silver bullet" and scalability is the primary challenge — a refreshingly honest posture that suggests methodical rather than theatrical AI deployment.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Active hiring for CFO advisory and technology leadership. Parthenon Capital's track record includes technology-enabled professional services growth. The MindBridge + Enkrypt AI partnership combination signals the firm understands audit AI governance and AI risk — important capability adjacencies. 15 acquisitions in 4 years signals an acquisitive growth culture.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Cherry Bekaert's honest internal assessment about AI scalability challenges is actually reassuring — they know what they don't have yet. The MindBridge analytics deployment for audit plus the AI governance work through Enkrypt AI suggests they are building real capability. The firm is on a strong growth trajectory (#17 and rising), PE-backed, and acquisitive. A credible Silver tier target if you value a firm where you can be an early AI audit leader with room to grow as the firm grows around you.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #16 Sikich ─── -->
+<div class="profile-card" id="firm-sikich">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">16</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Sikich <span class="pe-tag">PE: Bain Capital</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$450M</span><span>Headcount: ~2,000</span><span>Structure: PE-backed ($250M Bain investment)</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">63</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">14</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Sikich received $250M from Bain Capital in May 2024, maintaining CEO Chris Geier's control and leadership. Revenue grew ~300% under Geier's tenure. Named one of AT's 2026 Best Accounting Firms for Technology (top 10 of 10). April 2026 acquisition of Burwood Group (IT consulting) signals continued technology services expansion. Bain's capital is primarily being deployed through M&amp;A and consulting capability build-out rather than a named audit AI platform. No specific external audit AI tool publicly disclosed as of Q2 2026.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Named AT 2026 Best Firm for Technology — one of only 10 firms so recognized. Strong technology consulting culture. Bain Capital backing means capital is available. The Burwood Group acquisition adds significant IT consulting depth. The hiring signal for AI + external audit methodology is weaker than for AI + technology consulting. If your target is audit-specific, Sikich is a stretch. If you are open to a broader AI + professional services role, this is a strong option.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Sikich is a technology-forward firm with real PE capital (Bain) and strong growth momentum. The gap is audit-specific AI deployment — the firm's AI energy is focused on consulting and technology services. If the role you want is "Director of AI for Audit Methodology," Sikich is probably not the right fit in 2026. If you are open to "Head of Audit + Advisory AI Transformation," this is a credible target. Watch for any audit AI platform announcement in H2 2026.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #17 CLA ─── -->
+<div class="profile-card" id="firm-cla">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">17</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">CLA (CliftonLarsonAllen)</div>
+      <div class="profile-meta-line"><span>Revenue: ~$1.5B</span><span>Structure: Partner-owned</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">61</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">CLA earned two Microsoft Solutions Partner designations in January 2026 — <strong>Data &amp; AI (Azure)</strong> and <strong>Digital &amp; App Innovation (Azure)</strong>. These are legitimate technical credentialing achievements that signal real Azure AI capability. Dembo Jones merger (August 2025) expanded Mid-Atlantic presence. No named proprietary audit AI platform publicly announced. The Microsoft partner designations suggest CLA is deploying Azure-based AI tools internally, but the specifics have not been publicly disclosed as of Q2 2026.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">CLA serves primarily private companies and not-for-profit / government entities — a client base with lower AI audit urgency than public company audit clients. Active on Workday for hiring across audit, consulting, and technology. The Microsoft partnership designations suggest internal technology talent is being built. Not a high-velocity AI + audit employer as of 2026, but a stable, growing firm with improving technology credentials.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">CLA is a solid, well-run firm that is investing in AI infrastructure (Microsoft partnership) without making a dramatic public commitment. For a Director/Partner level AI + audit role, CLA is a lifestyle choice — not a career accelerator. Good culture, stable employer, and the Microsoft credentials are real. But without an audit AI platform and a client base that demands public company audit AI innovation, you would likely be building from a standing start with limited urgency. Consider only if other targets don't materialize.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #18 Withum ─── -->
+<div class="profile-card" id="firm-withum">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">18</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Withum</div>
+      <div class="profile-meta-line"><span>Revenue: ~$580M</span><span>Structure: Partner-owned</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">60</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Withum launched a cloud-based digital audit platform (November 2024) with AI and ML integration — securely extracting client financial history within minutes, enabling continuous auditing throughout an engagement. A dedicated <strong>withum.ai</strong> website launched in late 2024, offering AI strategy, implementation, and governance services. Tax Transformation Platform launched in 2026. Remote Audit Innovation practice is a differentiated service offering. No specific publicly disclosed investment amount.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Withum's cloud audit platform is more deployment-ready than many firms in this tier, with continuous auditing enabled. The withum.ai website signals genuine AI services ambition. Strong technology client base (tech sector specialty). The missing piece is scale — $580M firm with strong innovation culture but limited resources compared to RSM/BDO/GT. No PE backing limits investment velocity.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Withum is the most underrated firm in the Silver tier. The cloud audit platform is real and deployed — not aspirational. If Withum takes PE investment (which reports suggest is being explored), it immediately becomes a top-5 target. As of May 2026, it is a credible Silver — strong technology DNA, deployed audit platform, and an innovation culture that is genuine. Watch for PE announcement. If PE closes in 2026, move this to your active target list.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #19 Eide Bailly ─── -->
+<div class="profile-card" id="firm-eidebailly">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">19</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Eide Bailly</div>
+      <div class="profile-meta-line"><span>Revenue: ~$650M</span><span>Structure: Partner-owned (PE exploration reported)</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">58</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Eide Bailly uses Wolters Kluwer's integrated audit approach with AI analytics. The firm achieved peak performance with Wolters Kluwer's platform, suggesting strong technology adoption discipline. Acquired Hamilton Tharp (May 2025) to enter San Diego market. Data Analytics &amp; Intelligence practice is an active service line. PE exploration reported in late 2025 — if it closes, investment in audit AI accelerates significantly. No proprietary audit AI platform disclosed.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Eide Bailly is a strong regional/national firm with excellent culture rankings. The PE exploration signal is the most important data point for forward-looking assessment. If Bain, New Mountain, or another PE firm backs Eide Bailly in 2026 (as with Crowe, Withum, Armanino before them), this immediately becomes a priority target. As of today, it is a solid employer for someone who values culture and stability over career acceleration in AI.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Same watch-and-wait logic as Crowe and Withum — PE-backed version of Eide Bailly would be a very different target than today's version. Solid Silver, but not a priority call unless you have a strong network connection there or the PE deal closes before you accept another offer.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #20 Carr, Riggs & Ingram ─── -->
+<div class="profile-card" id="firm-cri">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">20</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Carr, Riggs &amp; Ingram (CRI) <span class="pe-tag">PE: Centerbridge + Bessemer</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$500M</span><span>Headcount: ~2,000</span><span>Structure: PE-backed</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-silver">58</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">13</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">10</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">CRI made the most decisive audit AI platform decision of any Silver-tier firm: in April 2026, <strong>CRI chose the full Caseware DAS (Dynamic Audit Solution) Suite</strong> — cloud-first, agentic AI-powered audit platform — for a full US rollout beginning summer 2026. This is not an experiment — it is a platform commitment. Caseware DAS is among the leading third-party audit AI platforms. Centerbridge and Bessemer PE backing funds M&amp;A and technology-driven service delivery, per stated investment plans.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">The Caseware DAS rollout beginning summer 2026 creates immediate demand for audit methodology leaders who can manage platform implementation, train staff, and ensure PCAOB-defensible documentation standards. This is a real, time-bound leadership opportunity. The firm plans to use PE capital for "M&amp;A, technology-driven service delivery, and client-centered innovation." Centerbridge is a sophisticated PE sponsor with professional services experience.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">CRI's Caseware DAS commitment elevates it above most Silver firms. The platform rollout starting summer 2026 creates a specific, immediate window for an audit technology/methodology Director who can own implementation and ongoing governance. The firm is smaller ($500M) but PE-backed with growing M&amp;A momentum. If you want a mid-size, PE-backed firm with an active audit platform rollout and the ability to own it, CRI should be in your active interview pipeline — not on a watch list.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #21 Plante Moran ─── -->
+<div class="profile-card" id="firm-plantemoran">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">21</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Plante Moran</div>
+      <div class="profile-meta-line"><span>Revenue: ~$1.1B</span><span>Headcount: ~3,800</span><span>Structure: Partner-owned</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-red">53</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">10</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">Plante Moran is a highly respected firm with strong culture rankings and over $1B in revenue — but as of Q2 2026, there is no publicly disclosed audit AI platform, no major tech investment announcement, and no named AI audit tools. The firm uses Microsoft Azure, Hugging Face, and data visualization tools. The AI innovation content on their website is primarily thought leadership (articles, webinars) rather than deployment announcements. AI and internal audit integration is discussed as an educational topic, not a deployment status update.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">Plante Moran consistently ranks as one of the best accounting firms to work for — exceptional culture, low turnover. But "best place to work" and "best place to build an AI audit leadership career in 2026" are different criteria. No specific AI + audit leadership hiring signals detected. The firm is partner-owned with no announced PE interest, limiting investment velocity relative to PE-backed peers.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Plante Moran is a great firm to work for — and the wrong firm for this specific career goal. At $1.1B revenue, partner-owned, with no deployed audit AI platform and no announced investment, you would be building on a blank canvas with limited resources and no urgency. If work-life balance and culture are your top criteria, Plante Moran is excellent. If AI + audit leadership in 3–5 years is your goal, this is not the vehicle. Do not shortlist unless you receive a specific, director-level AI audit role inquiry from the firm itself.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #22 CohnReznick ─── -->
+<div class="profile-card" id="firm-cohnreznick">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">22</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">CohnReznick</div>
+      <div class="profile-meta-line"><span>Revenue: ~$600M</span><span>Structure: Partner-owned</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-red">52</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">10</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">10</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Tools</div>
+        <div class="psb-content">CohnReznick hired Yuying Chen-Wynn as Global Leader, Strategic AI in September 2025 — a genuine leadership signal. The Data &amp; AI services practice helps clients govern and automate compliance. 73 Strings partnership (March 2026) adds AI-driven valuation analytics. However, the AI work is predominantly in advisory, valuation, and client-facing Data &amp; AI consulting — <strong>not external audit methodology</strong>. No named external audit AI platform or tool has been publicly disclosed.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">The Global Leader, Strategic AI hire shows the firm understands it needs AI leadership. But the role appears to be firm-wide and advisory-focused, not audit-specific. CohnReznick has a strong PE-backed company and real estate client base — sectors where AI advisory is high-value. The audit practice is not the AI innovation driver here.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">CohnReznick is investing in AI — but not in external audit AI. The Global Leader, Strategic AI role and the Data &amp; AI practice are advisory-focused. If you want to pivot from audit methodology to AI advisory, CohnReznick is worth a look. If you want to stay anchored in external audit + AI methodology, this is the wrong firm. Ranked 22nd accordingly.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #23 Wipfli ─── -->
+<div class="profile-card" id="firm-wipfli">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-silver">23</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Wipfli <span class="pe-tag">PE: New Mountain Capital</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$612M (FY2025)</span><span>Structure: PE-backed (August 2025)</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-red">51</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-red">10</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">AI Strategy &amp; Investment</div>
+        <div class="psb-content">Wipfli secured a minority investment from New Mountain Capital in August 2025 — the same PE firm that backed Grant Thornton US. This is the most important forward-looking signal for Wipfli. However, as of Q2 2026 (9 months post-investment), no audit AI platform announcement has been made. Wipfli's AI consulting services help mid-market clients with AI strategy and implementation, but this is client-facing advisory, not internal audit AI deployment. Revenue grew 3.8% to $612M in FY2025 — modest growth for a firm that just received PE investment.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring &amp; Culture Signal</div>
+        <div class="psb-content">New Mountain Capital's track record (Grant Thornton US) suggests they will push for audit technology investment. Wipfli tripled in size over 10 years and completed 34 acquisitions — strong M&amp;A culture. The 2026 AI + audit platform announcement that hasn't happened yet is the key event to watch. As of May 2026, Wipfli is a "wait and see" employer for AI + audit leadership — it could become a strong option in H2 2026 or 2027 as New Mountain Capital's investment thesis plays out.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Wipfli's New Mountain Capital backing is the most interesting signal about its future trajectory, but it has not yet translated into visible audit AI investment 9 months post-deal. Compare this to Grant Thornton, which launched GTAP 14 months after New Mountain's investment — Wipfli may be on a similar timeline. If you are making a 2026 decision, Wipfli is a watch-and-wait. If you are planning a 2027 move, check back in Q3 2026. Ranked 23rd for current state, not future potential.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #24 PKF O'Connor Davies ─── -->
+<div class="profile-card" id="firm-pkfod">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-red">24</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">PKF O'Connor Davies <span class="pe-tag">PE: Investcorp + PSP</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$420M</span><span>Structure: PE-backed</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-red">48</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-red">10</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">Assessment</div>
+        <div class="psb-content">PKF O'Connor Davies received PE investment from Investcorp and PSP Investments in November 2024, specifically to fund "cutting-edge technology and new service lines." However, as of Q2 2026, no specific audit AI platform, tool, or Director-level hire in AI + audit has been publicly announced. The firm ranked #9 on Vault's 2026 Accounting 25 and has an outstanding internship program — strong culture and talent indicators. The PE capital has yet to translate into visible audit AI deployment.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">PE investment is fresh (November 2024 close). Technology investment may be in early planning stages. The firm's stated PE use of proceeds includes "cutting-edge technology" — but the announcement timeline suggests any audit AI platform is 12–24 months away from announcement. Not a 2026 target; potentially a 2027–2028 watch.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Too early in the PE investment cycle to be a priority target for AI + audit leadership in 2026. Strong firm, great culture, fresh PE capital — but the technology roadmap has not yet been published. Come back in Q4 2026 or Q1 2027 to reassess.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── #25 Citrin Cooperman ─── -->
+<div class="profile-card" id="firm-citrin">
+  <div class="profile-header" onclick="toggleProfile(this)">
+    <div class="profile-rank-badge prb-red">25</div>
+    <div class="profile-header-info">
+      <div class="profile-firm-name">Citrin Cooperman <span class="pe-tag">PE: Blackstone (from New Mountain Capital, 2025)</span></div>
+      <div class="profile-meta-line"><span>Revenue: ~$985M (near $1B milestone)</span><span>Structure: PE-backed (Blackstone, 15x EBITDA valuation)</span><span class="pcaob-na">PCAOB: Triennial</span></div>
+    </div>
+    <div class="profile-score-summary"><div class="profile-total-score score-red">50</div><div class="profile-score-label">/ 100</div></div>
+    <div class="profile-chevron">▼</div>
+  </div>
+  <div class="profile-body">
+    <div class="score-breakdown-row">
+      <div class="sbd-item"><div class="sbd-val score-red">10</div><div class="sbd-label">Strategic Commit</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">9</div><div class="sbd-label">Audit AI Traj</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">11</div><div class="sbd-label">Hiring Signal</div></div>
+      <div class="sbd-item"><div class="sbd-val score-silver">12</div><div class="sbd-label">Firm Health</div></div>
+      <div class="sbd-item"><div class="sbd-val score-red">8</div><div class="sbd-label">Innovation Culture</div></div>
+    </div>
+    <div class="profile-grid">
+      <div class="profile-section-block">
+        <div class="psb-label">Assessment</div>
+        <div class="psb-content">Citrin Cooperman completed the first PE-to-PE "flip" in accounting history in 2025 — New Mountain Capital to Blackstone at 15x EBITDA (~$985M revenue). Blackstone's ownership signals strong growth ambition and financial engineering sophistication. An AI-focused partner (Jessie Kanter) is leading audit innovation including agentic AI workpaper automation (per Journal of Accountancy, February 2026). However, as of Q2 2026, this work is described as "stretching for more than a year" still in development — not yet deployed at scale. Approaching $1B revenue milestone is the most significant near-term event.</div>
+      </div>
+      <div class="profile-section-block">
+        <div class="psb-label">Hiring Signal</div>
+        <div class="psb-content">Blackstone's track record in professional services PE suggests they will push Citrin Cooperman toward a $1B+ revenue scale, likely through M&amp;A and technology investment. The agentic AI workpaper work led by Kanter is audit-specific and potentially the most interesting AI audit project at a non-top-10 firm. The challenge: Blackstone's 3–5 year hold period means the firm is being managed for an exit, which can create internal tensions around long-term investment.</div>
+      </div>
+    </div>
+    <div class="bottom-line-block">
+      <div class="bl-label">Bottom Line</div>
+      <div class="bl-text">Citrin Cooperman ranks 25th not because it is a bad firm — Blackstone backing, near-$1B revenue, and an audit AI partner doing real agentic workpaper work are all positive signals. It ranks here because the audit AI deployment is still in progress (not deployed), the Blackstone "flip" creates exit-focused management dynamics, and the firm lacks the urgency of PCAOB pressure that drives RSM and GT's AI investment mandate. Worth a conversation — specifically with Jessie Kanter's team — but not a priority target over RSM, GT, EisnerAmper, or Baker Tilly.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- close profiles section -->
+</div><!-- close profiles page div -->
+
+<!-- ══════════════════════════════════════════
+     APPENDIX / SOURCES
+══════════════════════════════════════════ -->
+<div class="page">
+<div class="section" id="appendix">
+  <div class="section-label">Appendix</div>
+  <h2 class="section-title">Sources &amp; <span>References</span></h2>
+  <p class="section-intro" style="margin-bottom:28px">Research conducted May 2026. All sources are publicly available as of the report date.</p>
+  <ul class="source-list">
+    <li><strong>Rankings &amp; Revenue</strong> — <a href="https://www.accountingtoday.com/2026-the-top-100-firms-and-regional-leaders" target="_blank">Accounting Today 2026 Top 100 Firms &amp; Regional Leaders</a></li>
+    <li><strong>Baker Tilly / Moss Adams Merger</strong> — <a href="https://www.journalofaccountancy.com/news/2025/apr/baker-tilly-moss-adams-merge-to-create-6th-largest-us-cpa-firm/" target="_blank">Journal of Accountancy: Baker Tilly, Moss Adams merge to create 6th-largest US CPA firm (April 2025)</a></li>
+    <li><strong>Baker Tilly / Moss Adams Merger Close</strong> — <a href="https://cpatrendlines.com/2025/06/09/moss-adams-baker-tilly-merger-bigger-isnt-better-better-is-better/" target="_blank">CPA Trendlines: Moss Adams-Baker Tilly Merger (June 2025)</a></li>
+    <li><strong>RSM $1B AI Investment</strong> — <a href="https://rsmus.com/newsroom/2025/rsm-announces-1-billion-investment-in-technology-to-accelerate-ai-strategy-and-drive-next-level-innovative-solutions-for-clients.html" target="_blank">RSM Newsroom: $1 Billion Technology Investment (June 2025)</a></li>
+    <li><strong>RSM Ask Luca Launch</strong> — <a href="https://rsmus.com/newsroom/2026/rsm-launches-ask-luca.html" target="_blank">RSM Newsroom: RSM Launches Ask Luca (January 2026)</a></li>
+    <li><strong>PwC AI-Native Audit Platform</strong> — <a href="https://www.accountingtoday.com/news/pwc-expects-end-to-end-ai-audit-automation-within-2026" target="_blank">Accounting Today: PwC expects end-to-end AI audit automation within 2026</a></li>
+    <li><strong>PwC Audit Transformation</strong> — <a href="https://www.pwc.com/us/en/services/audit-assurance/library/transforming-the-audit.html" target="_blank">PwC: How PwC is transforming the audit with AI and advanced technology</a></li>
+    <li><strong>EY Agentic AI in Assurance (April 2026)</strong> — <a href="https://www.ey.com/en_us/newsroom/2026/04/ey-launches-enterprise-scale-agentic-ai-to-redefine-the-audit-experience-for-the-ai-era" target="_blank">EY Newsroom: EY launches enterprise-scale agentic AI to redefine the audit experience (April 2026)</a></li>
+    <li><strong>EY Assurance AI Integration (April 2025)</strong> — <a href="https://www.ey.com/en_gl/newsroom/2025/04/ey-announces-large-scale-integration-of-leading-edge-ai-technology-into-global-assurance-technology-platform" target="_blank">EY Global Newsroom: Large-scale AI integration into EY Canvas (April 2025)</a></li>
+    <li><strong>KPMG $2B Microsoft Alliance</strong> — <a href="https://www.cfodive.com/news/kpmg-to-spend-2b-in-expanded-ai-alliance-with-microsoft/687353/" target="_blank">CFO Dive: KPMG to spend $2B in expanded AI alliance with Microsoft</a></li>
+    <li><strong>KPMG Workbench Launch</strong> — <a href="https://kpmg.com/us/en/media/news/kpmg-launches-kpmg-workbench-a-multi-agent-ai-platform.html" target="_blank">KPMG: KPMG launches KPMG Workbench multi-agent AI platform (June 2025)</a></li>
+    <li><strong>KPMG Clara AI Advances</strong> — <a href="https://kpmg.com/us/en/media/news/kpmg-clara-smart-audit-platform.html" target="_blank">KPMG: KPMG Advances AI Integration in KPMG Clara Smart Audit Platform</a></li>
+    <li><strong>Deloitte Omnia AI Expansion</strong> — <a href="https://www.deloitte.com/us/en/about/press-room/deloitte-expands-AI-capabilities-in-omnia-global-audit-platform.html" target="_blank">Deloitte: Expands AI Capabilities in Omnia Global Audit Platform (July 2025)</a></li>
+    <li><strong>Deloitte Agentic AI in Audit</strong> — <a href="https://www.deloitte.com/us/en/services/audit-assurance/blogs/accounting-finance/agentic-ai-in-audit.html" target="_blank">Deloitte: Agentic AI in audit — next-gen approach</a></li>
+    <li><strong>BDO $1B AI Strategy</strong> — <a href="https://www.cpapracticeadvisor.com/2025/05/27/bdo-launches-1-billion-ai-strategy/161670/" target="_blank">CPA Practice Advisor: BDO Launches $1 Billion AI Strategy (May 2025)</a></li>
+    <li><strong>BDO Audit Innovation</strong> — <a href="https://www.bdo.com/services/audit-assurance/audit-services/audit-innovation" target="_blank">BDO: Audit Innovation (official page)</a></li>
+    <li><strong>Grant Thornton GTAP Launch</strong> — <a href="https://www.grantthornton.com/insights/press-releases/2026/may/grant-thornton-launches-gtap-audit-transformation-us" target="_blank">Grant Thornton: Launches gtap to transform audit delivery (May 2026)</a></li>
+    <li><strong>Grant Thornton PE &amp; $1B Advisor Investment</strong> — <a href="https://www.grantthornton.com/insights/press-releases/2025/september/gt-advisors-invest-to-arm-the-multinational-workforce" target="_blank">Grant Thornton: GT Advisors invest $1B+ to equip workforce with AI (September 2025)</a></li>
+    <li><strong>Forvis Mazars Revenue &amp; Rankings</strong> — <a href="https://www.forvismazars.us/about-us/newsroom/news-releases/forvis-mazars-is-the-nations-no-8-firm-by-annual-revenue" target="_blank">Forvis Mazars: Nation's No. 8 firm by annual revenue</a></li>
+    <li><strong>Crowe OpenAI Partnership</strong> — <a href="https://www.crowe.com/news/crowe-propels-business-transformation-with-openai" target="_blank">Crowe: Propels Business Transformation with OpenAI (January 2025)</a></li>
+    <li><strong>EisnerAmper AI Audit Design Agent</strong> — <a href="https://www.cpapracticeadvisor.com/2026/03/20/eisneramper-rolls-out-in-house-ai-audit-design-agent/180020/" target="_blank">CPA Practice Advisor: EisnerAmper Rolls Out AI Audit Design Agent (March 2026)</a></li>
+    <li><strong>Aprio $300M AI Commitment</strong> — <a href="https://insidepublicaccounting.com/2025/07/24/aprios-300m-ai-commitment-gains-momentum-with-acquisition-of-timecredit-ai/" target="_blank">Inside Public Accounting: Aprio's $300M AI Commitment (July 2025)</a></li>
+    <li><strong>Armanino DataSnipper Partnership</strong> — <a href="https://www.cpapracticeadvisor.com/2026/04/14/armanino-partners-with-datasnipper-to-advance-agentic-ai-in-internal-audit-and-risk-advisory/181634/" target="_blank">CPA Practice Advisor: Armanino Partners with DataSnipper (April 2026)</a></li>
+    <li><strong>Cherry Bekaert Enkrypt AI Alliance</strong> — <a href="https://www.prnewswire.com/news-releases/cherry-bekaert-strengthens-ai-security-and-compliance-offerings-through-enkrypt-ai-alliance-302694748.html" target="_blank">PRNewswire: Cherry Bekaert Strengthens AI Security via Enkrypt AI (February 2026)</a></li>
+    <li><strong>Wipfli New Mountain Capital Investment</strong> — <a href="https://www.wipfli.com/news/2025/wipfli-secures-strategic-investment" target="_blank">Wipfli: Secures Strategic Investment from New Mountain Capital (August 2025)</a></li>
+    <li><strong>Sikich Bain Capital Investment</strong> — <a href="https://www.baincapital.com/news/technology-enabled-professional-services-firm-sikich-secures-250-million-minority-growth" target="_blank">Bain Capital: Sikich Secures $250M Minority Growth Investment (May 2024)</a></li>
+    <li><strong>CBIZ Marcum Acquisition</strong> — <a href="https://www.globenewswire.com/news-release/2026/02/25/3244975/0/en/CBIZ-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results.html" target="_blank">GlobeNewswire: CBIZ Full-Year 2025 Financial Results (February 2026)</a></li>
+    <li><strong>CRI Caseware DAS Commitment</strong> — <a href="https://markets.financialcontent.com/stocks/article/gnwcq-2026-4-21-carr-riggs-and-ingram-chooses-caseware-and-the-dynamic-audit-solution-das-suite-to-power-its-audit-future-for-the-agentic-age" target="_blank">Financial Content: CRI Chooses Caseware DAS Suite (April 2026)</a></li>
+    <li><strong>PCAOB 2024 Inspection Results</strong> — <a href="https://pcaobus.org/news-events/news-releases/news-release-detail/pcaob-posts-report-detailing-significant-improvements-across-largest-firms--alongside-inspection-results-in-record-time" target="_blank">PCAOB: 2024 Inspection Results — Significant Improvements Across Largest Firms</a></li>
+    <li><strong>PCAOB 2024 RSM Inspection Report</strong> — <a href="https://assets.pcaobus.org/pcaob-dev/docs/default-source/inspections/reports/documents/104-2025-100-rsm.pdf" target="_blank">PCAOB: 2024 RSM US Inspection Report (May 2025)</a></li>
+    <li><strong>PCAOB 2024 Grant Thornton Inspection Report</strong> — <a href="https://assets.pcaobus.org/pcaob-dev/docs/default-source/inspections/documents/104-2025-038-gt.pdf" target="_blank">PCAOB: 2024 Grant Thornton Inspection Report (February 2025)</a></li>
+    <li><strong>PE in Accounting Firms Overview</strong> — <a href="https://www.cfobrew.com/stories/2024/11/20/private-equity-now-has-a-stake-in-10-of-the-top-30-cpa-firms" target="_blank">CFO Brew: Private equity now has a stake in 10 of the top 30 CPA firms (November 2024)</a></li>
+    <li><strong>Fieldguide $75M Series C</strong> — <a href="https://www.fieldguide.io/blog/series-c-announcement" target="_blank">Fieldguide: $75M Series C from Goldman Sachs (February 2026)</a></li>
+    <li><strong>AI Transforming Audit — JOA</strong> — <a href="https://www.journalofaccountancy.com/issues/2026/feb/how-ai-is-transforming-the-audit-and-what-it-means-for-cpas.html" target="_blank">Journal of Accountancy: How AI is transforming the audit (February 2026)</a></li>
+    <li><strong>Withum Cloud Audit Platform</strong> — <a href="https://www.withum.com/resources/withum-announces-cloud-based-audit-innovation-that-fosters-enhanced-techniques-and-insights/" target="_blank">Withum: Cloud-Based Audit Innovation (November 2024)</a></li>
+    <li><strong>Citrin Cooperman Blackstone PE Flip</strong> — <a href="https://www.pehub.com/eisneramper-wipfli-hope-to-attract-new-pe-investments-sources-say/" target="_blank">PE Hub: PE Flip Context (2025)</a></li>
+    <li><strong>CohnReznick Global AI Leader Hire</strong> — <a href="https://www.cohnreznick.com/insights/cohnreznick-hires-global-leader-strategic-ai" target="_blank">CohnReznick: Hires Global Leader, Strategic AI (September 2025)</a></li>
+    <li><strong>Big 4 AI Agents Overview 2026</strong> — <a href="https://chatfin.ai/blog/big-4-ai-agents-ey-kpmg-deloitte-pwc-finance-teams-2026/" target="_blank">ChatFin: The Big 4 AI Takeover — EY's 150 Agents, KPMG's $2B Bet, and Deloitte's Zora (2026)</a></li>
+  </ul>
+</div>
+</div>
+
+<footer>
+  <p>AI in Audit: The 2026 Landscape &nbsp;|&nbsp; <span>Research Report</span> &nbsp;|&nbsp; Prepared May 11, 2026</p>
+  <p style="margin-top:8px">For personal career strategy use only. All data sourced from public disclosures, press releases, regulatory filings, and trade publications. Scores reflect the author's analytical judgment and should not be construed as endorsements or investment advice.</p>
+</footer>
+
+<script>
+function toggleProfile(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.profile-chevron');
+  if (body.classList.contains('open')) {
+    body.classList.remove('open');
+    chevron.style.transform = 'rotate(0deg)';
+  } else {
+    body.classList.add('open');
+    chevron.style.transform = 'rotate(180deg)';
+  }
+}
+
+// Open the top 10 profiles by default on load
+document.addEventListener('DOMContentLoaded', function() {
+  const topCards = document.querySelectorAll('.profile-card');
+  topCards.forEach((card, index) => {
+    if (index < 10) {
+      const body = card.querySelector('.profile-body');
+      const chevron = card.querySelector('.profile-chevron');
+      if (body) body.classList.add('open');
+      if (chevron) chevron.style.transform = 'rotate(180deg)';
+    }
+  });
+});
+</script>
+</body>
+</html>
+
