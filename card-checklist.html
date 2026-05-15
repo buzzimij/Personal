@@ -106,6 +106,16 @@ td.side{font-size:11px;width:60px}
     <option value="">All Sides</option>
     <option>Light</option><option>Dark</option><option>N/A</option>
   </select>
+  <select id="filtType" onchange="render()">
+    <option value="">All Types</option>
+    <option>Character</option><option>Creature</option><option>Device</option>
+    <option>Effect</option><option>Epic Event</option><option>Interrupt</option>
+    <option>Jedi Test</option><option>Location</option><option>Objective</option>
+    <option>Starship</option><option>Vehicle</option><option>Weapon</option>
+    <option>Admiral's Order</option><option>Imperial</option><option>Rebel</option>
+    <option>Site</option><option>Sector</option><option>System</option>
+    <option>Pokemon</option><option>Trainer</option><option>Energy</option>
+  </select>
   <select id="filtOwned" onchange="render()">
     <option value="">Show All</option>
     <option value="owned">Owned Only</option>
@@ -2499,11 +2509,13 @@ function filtered(){
   const r=document.getElementById('filtRarity').value;
   const sd=document.getElementById('filtSide').value;
   const ow=document.getElementById('filtOwned').value;
+  const ty=document.getElementById('filtType').value;
   return CARDS.filter(c=>{
     if(currentSet!=='all' && c.set!==currentSet) return false;
     if(q && !c.name.toLowerCase().includes(q) && !c.num.toLowerCase().includes(q)) return false;
     if(r && c.rarity!==r) return false;
     if(sd && c.side!==sd) return false;
+    if(ty && c.type!==ty) return false;
     if(ow==='owned' && !owned.has(c.id)) return false;
     if(ow==='missing' && owned.has(c.id)) return false;
     return true;
