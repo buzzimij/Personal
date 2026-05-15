@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Card Checklist</title>
+<style>
+:root{--bg:#0a0d14;--s1:#111520;--s2:#161c2a;--b:#1e2535;--gold:#c4a050;--blue:#4b9ee8;--green:#4be87a;--red:#e85050;--purple:#9b6be8;--text:#d4d8e8;--sub:#7a8098;--muted:#4a5068}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'SF Mono','Cascadia Code',monospace;font-size:13px;line-height:1.6}
+#app{display:grid;grid-template-rows:auto auto 1fr;height:100vh}
+/* HEADER */
+header{background:var(--s1);border-bottom:1px solid var(--b);padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:16px;color:var(--gold);letter-spacing:.1em;font-weight:700;white-space:nowrap}
+.header-stats{display:flex;gap:12px;flex-wrap:wrap;flex:1}
+.stat-pill{background:var(--bg);border:1px solid var(--b);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--sub)}
+.stat-pill span{color:var(--green);font-weight:700}
+/* CONTROLS */
+#controls{background:var(--s2);border-bottom:1px solid var(--b);padding:10px 20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select,input[type=text]{background:var(--bg);border:1px solid var(--b);color:var(--text);padding:5px 10px;border-radius:4px;font-family:inherit;font-size:12px;outline:none}
+select:focus,input:focus{border-color:var(--gold)}
+#search{width:200px}
+.btn{background:var(--bg);border:1px solid var(--b);color:var(--sub);padding:5px 12px;border-radius:4px;cursor:pointer;font-family:inherit;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn.active{border-color:var(--gold);color:var(--gold);background:rgba(196,160,80,.08)}
+.sep{color:var(--muted);font-size:10px}
+/* MAIN */
+#main{display:grid;grid-template-columns:220px 1fr;overflow:hidden}
+/* SIDEBAR */
+#sidebar{background:var(--s1);border-right:1px solid var(--b);overflow-y:auto;padding:12px 0}
+.game-group{margin-bottom:4px}
+.game-label{padding:8px 14px 4px;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.set-item{padding:7px 14px;cursor:pointer;border-left:2px solid transparent;display:flex;justify-content:space-between;align-items:center;transition:all .15s}
+.set-item:hover{background:var(--s2);color:var(--text)}
+.set-item.active{border-left-color:var(--gold);background:var(--s2);color:var(--gold)}
+.set-item .set-name{font-size:12px;color:inherit}
+.set-item .set-prog{font-size:10px;color:var(--muted)}
+.set-item .set-bar{height:2px;background:var(--b);border-radius:1px;margin-top:4px;overflow:hidden}
+.set-item .set-fill{height:100%;background:var(--green);border-radius:1px;transition:width .3s}
+/* CARD TABLE */
+#content{overflow:auto;background:var(--bg)}
+table{width:100%;border-collapse:collapse;min-width:600px}
+thead th{position:sticky;top:0;background:var(--s2);padding:8px 12px;text-align:left;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--b);white-space:nowrap;cursor:pointer;user-select:none}
+thead th:hover{color:var(--gold)}
+thead th.sorted{color:var(--gold)}
+tbody tr{border-bottom:1px solid rgba(30,37,53,.7);transition:background .1s}
+tbody tr:hover{background:var(--s1)}
+tbody tr.owned{background:rgba(75,232,122,.04)}
+tbody tr.owned:hover{background:rgba(75,232,122,.07)}
+td{padding:7px 12px;vertical-align:middle}
+td.check{width:36px;text-align:center}
+td.check input[type=checkbox]{width:15px;height:15px;accent-color:var(--green);cursor:pointer}
+td.num{color:var(--muted);font-size:11px;width:70px}
+td.name{color:var(--text);font-weight:600}
+td.set-col{color:var(--sub);font-size:11px}
+td.rarity{font-size:11px}
+td.type-col{color:var(--sub);font-size:11px}
+td.side{font-size:11px;width:60px}
+.r-holo{color:#f5d76e}
+.r-rare{color:var(--gold)}
+.r-uncommon{color:var(--blue)}
+.r-common{color:var(--sub)}
+.r-secret{color:var(--purple)}
+.r-r1{color:#f5d76e}
+.r-r2{color:var(--gold)}
+.r-u1{color:var(--blue)}
+.r-u2{color:#7ab8e8}
+.r-c1{color:#5a8098}
+.r-c2{color:var(--sub)}
+.r-c3{color:var(--muted)}
+.side-light{color:#e8d44b}
+.side-dark{color:#e87a4b}
+.badge{display:inline-block;padding:1px 7px;border-radius:3px;font-size:10px;font-weight:600;letter-spacing:.05em}
+.badge-partial{background:rgba(232,80,80,.1);color:var(--red);border:1px solid rgba(232,80,80,.3)}
+.partial-notice{padding:20px;color:var(--sub);font-size:12px;line-height:1.8}
+.partial-notice a{color:var(--blue)}
+/* EMPTY */
+.empty{padding:40px;text-align:center;color:var(--muted);font-size:13px}
+/* PROGRESS BAR FOOTER */
+.prog-footer{position:sticky;bottom:0;background:var(--s2);border-top:1px solid var(--b);padding:6px 16px;display:flex;align-items:center;gap:16px;font-size:11px;color:var(--sub)}
+.prog-bar-wrap{flex:1;height:4px;background:var(--b);border-radius:2px;overflow:hidden}
+.prog-bar-fill{height:100%;background:var(--green);border-radius:2px;transition:width .4s}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <h1>&#9670; CARD CHECKLIST</h1>
+  <div class="header-stats">
+    <div class="stat-pill">Total: <span id="statTotal">0</span></div>
+    <div class="stat-pill">Owned: <span id="statOwned">0</span></div>
+    <div class="stat-pill">Missing: <span id="statMissing">0</span></div>
+    <div class="stat-pill">Complete: <span id="statPct">0%</span></div>
+  </div>
+  <button class="btn" onclick="clearAll()">Clear All</button>
+  <button class="btn" onclick="checkAll()">Check Visible</button>
+</header>
+<div id="controls">
+  <input type="text" id="search" placeholder="Search cards..." oninput="render()">
+  <select id="filtRarity" onchange="render()">
+    <option value="">All Rarities</option>
+    <option>Holo Rare</option><option>Rare</option><option>Uncommon</option><option>Common</option>
+    <option>Secret Rare</option><option>R1</option><option>R2</option><option>U1</option><option>U2</option><option>C1</option><option>C2</option>
+  </select>
+  <select id="filtSide" onchange="render()">
+    <option value="">All Sides</option>
+    <option>Light</option><option>Dark</option><option>N/A</option>
+  </select>
+  <select id="filtOwned" onchange="render()">
+    <option value="">Show All</option>
+    <option value="owned">Owned Only</option>
+    <option value="missing">Missing Only</option>
+  </select>
+  <span class="sep">|</span>
+  <span style="font-size:11px;color:var(--muted)">Sort:</span>
+  <button class="btn" id="sortNum" onclick="setSort('num')">Number</button>
+  <button class="btn" id="sortName" onclick="setSort('name')">Name</button>
+  <button class="btn" id="sortRarity" onclick="setSort('rarity')">Rarity</button>
+</div>
+<div id="main">
+  <div id="sidebar"></div>
+  <div id="content">
+    <table>
+      <thead>
+        <tr>
+          <th class="check"></th>
+          <th onclick="setSort('num')">#</th>
+          <th onclick="setSort('name')">Name</th>
+          <th onclick="setSort('set')">Set</th>
+          <th onclick="setSort('rarity')">Rarity</th>
+          <th>Type</th>
+          <th>Side</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="prog-footer">
+      <span id="footerLabel">All Sets</span>
+      <div class="prog-bar-wrap"><div class="prog-bar-fill" id="footerBar" style="width:0%"></div></div>
+      <span id="footerPct">0 / 0</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// ─── CARD DATABASE ────────────────────────────────────────────────────────────
+// Fields: id, set, setName, game, num, name, rarity, type, side
+// side: 'Light' | 'Dark' | 'N/A'
+// rarity for Pokemon: 'Holo Rare' | 'Rare' | 'Uncommon' | 'Common' | 'Secret Rare'
+// rarity for SW CCG: 'R1' | 'R2' | 'U1' | 'U2' | 'C1' | 'C2' | 'C3'
+// rarity for Topps: 'Normal' | 'Silver Foil' | 'Rainbow Foil'
+
+const SETS = [
+  {id:'base',      name:'Base Set (1999)',        game:'Pokemon',  complete:true,  total:102},
+  {id:'jungle',    name:'Jungle (1999)',           game:'Pokemon',  complete:true,  total:64},
+  {id:'fossil',    name:'Fossil (1999)',           game:'Pokemon',  complete:true,  total:62},
+  {id:'base2',     name:'Base Set 2 (2000)',       game:'Pokemon',  complete:false, total:130},
+  {id:'rocket',    name:'Team Rocket (2000)',      game:'Pokemon',  complete:false, total:83},
+  {id:'gymheroes', name:'Gym Heroes (2000)',       game:'Pokemon',  complete:false, total:132},
+  {id:'premiere',  name:'Premiere (1995)',         game:'SWCCG',    complete:true,  total:324},
+  {id:'anh',       name:'A New Hope (1996)',       game:'SWCCG',    complete:true,  total:162},
+  {id:'hoth',      name:'Hoth (1996)',             game:'SWCCG',    complete:false, total:162},
+  {id:'dagobah',   name:'Dagobah (1997)',          game:'SWCCG',    complete:false, total:180},
+  {id:'cloudcity', name:'Cloud City (1997)',       game:'SWCCG',    complete:false, total:180},
+  {id:'jabba',     name:"Jabba's Palace (1998)",   game:'SWCCG',    complete:false, total:180},
+  {id:'se',        name:'Special Edition (1998)',  game:'SWCCG',    complete:false, total:324},
+  {id:'endor',     name:'Endor (1999)',            game:'SWCCG',    complete:false, total:180},
+  {id:'ds2',       name:'Death Star II (2000)',    game:'SWCCG',    complete:false, total:180},
+  {id:'topps1',    name:'Topps Series 1 (1999)',   game:'Topps',    complete:true,  total:90},
+];
+
+const RAW = [
+// ── POKEMON BASE SET ──────────────────────────────────────────────────────
+['base','1/102','Alakazam','Holo Rare','Psychic','N/A'],
+['base','2/102','Blastoise','Holo Rare','Water','N/A'],
+['base','3/102','Chansey','Holo Rare','Colorless','N/A'],
+['base','4/102','Charizard','Holo Rare','Fire','N/A'],
+['base','5/102','Clefairy','Holo Rare','Colorless','N/A'],
+['base','6/102','Gyarados','Holo Rare','Water','N/A'],
+['base','7/102','Hitmonchan','Holo Rare','Fighting','N/A'],
+['base','8/102','Machamp','Holo Rare','Fighting','N/A'],
+['base','9/102','Magneton','Holo Rare','Lightning','N/A'],
+['base','10/102','Mewtwo','Holo Rare','Psychic','N/A'],
+['base','11/102','Nidoking','Holo Rare','Poison','N/A'],
+['base','12/102','Ninetales','Holo Rare','Fire','N/A'],
+['base','13/102','Poliwrath','Holo Rare','Water','N/A'],
+['base','14/102','Raichu','Holo Rare','Lightning','N/A'],
+['base','15/102','Venusaur','Holo Rare','Grass','N/A'],
+['base','16/102','Zapdos','Holo Rare','Lightning','N/A'],
+['base','17/102','Beedrill','Rare','Grass','N/A'],
+['base','18/102','Dragonair','Rare','Colorless','N/A'],
+['base','19/102','Dugtrio','Rare','Fighting','N/A'],
+['base','20/102','Electabuzz','Rare','Lightning','N/A'],
+['base','21/102','Electrode','Rare','Lightning','N/A'],
+['base','22/102','Pidgeotto','Rare','Colorless','N/A'],
+['base','23/102','Arcanine','Uncommon','Fire','N/A'],
+['base','24/102','Charmeleon','Uncommon','Fire','N/A'],
+['base','25/102','Dewgong','Uncommon','Water','N/A'],
+['base','26/102','Dratini','Uncommon','Colorless','N/A'],
+['base','27/102','Farfetch\'d','Uncommon','Colorless','N/A'],
+['base','28/102','Growlithe','Uncommon','Fire','N/A'],
+['base','29/102','Haunter','Uncommon','Psychic','N/A'],
+['base','30/102','Ivysaur','Uncommon','Grass','N/A'],
+['base','31/102','Jynx','Uncommon','Psychic','N/A'],
+['base','32/102','Kadabra','Uncommon','Psychic','N/A'],
+['base','33/102','Kakuna','Uncommon','Grass','N/A'],
+['base','34/102','Machoke','Uncommon','Fighting','N/A'],
+['base','35/102','Magikarp','Uncommon','Water','N/A'],
+['base','36/102','Magmar','Uncommon','Fire','N/A'],
+['base','37/102','Nidorino','Uncommon','Poison','N/A'],
+['base','38/102','Poliwhirl','Uncommon','Water','N/A'],
+['base','39/102','Porygon','Uncommon','Colorless','N/A'],
+['base','40/102','Raticate','Uncommon','Colorless','N/A'],
+['base','41/102','Seel','Uncommon','Water','N/A'],
+['base','42/102','Wartortle','Uncommon','Water','N/A'],
+['base','43/102','Abra','Common','Psychic','N/A'],
+['base','44/102','Bulbasaur','Common','Grass','N/A'],
+['base','45/102','Caterpie','Common','Grass','N/A'],
+['base','46/102','Charmander','Common','Fire','N/A'],
+['base','47/102','Diglett','Common','Fighting','N/A'],
+['base','48/102','Doduo','Common','Colorless','N/A'],
+['base','49/102','Drowzee','Common','Psychic','N/A'],
+['base','50/102','Gastly','Common','Psychic','N/A'],
+['base','51/102','Koffing','Common','Psychic','N/A'],
+['base','52/102','Machop','Common','Fighting','N/A'],
+['base','53/102','Magnemite','Common','Lightning','N/A'],
+['base','54/102','Metapod','Common','Grass','N/A'],
+['base','55/102','Nidoran♂','Common','Poison','N/A'],
+['base','56/102','Onix','Common','Fighting','N/A'],
+['base','57/102','Pidgey','Common','Colorless','N/A'],
+['base','58/102','Pikachu','Common','Lightning','N/A'],
+['base','59/102','Poliwag','Common','Water','N/A'],
+['base','60/102','Ponyta','Common','Fire','N/A'],
+['base','61/102','Rattata','Common','Colorless','N/A'],
+['base','62/102','Sandshrew','Common','Fighting','N/A'],
+['base','63/102','Squirtle','Common','Water','N/A'],
+['base','64/102','Starmie','Common','Water','N/A'],
+['base','65/102','Staryu','Common','Water','N/A'],
+['base','66/102','Tangela','Common','Grass','N/A'],
+['base','67/102','Voltorb','Common','Lightning','N/A'],
+['base','68/102','Vulpix','Common','Fire','N/A'],
+['base','69/102','Weedle','Common','Grass','N/A'],
+['base','70/102','Clefairy Doll','Rare','Trainer','N/A'],
+['base','71/102','Computer Search','Rare','Trainer','N/A'],
+['base','72/102','Devolution Spray','Rare','Trainer','N/A'],
+['base','73/102','Imposter Professor Oak','Rare','Trainer','N/A'],
+['base','74/102','Item Finder','Uncommon','Trainer','N/A'],
+['base','75/102','Lass','Uncommon','Trainer','N/A'],
+['base','76/102','Pokémon Breeder','Uncommon','Trainer','N/A'],
+['base','77/102','Pokémon Trader','Uncommon','Trainer','N/A'],
+['base','78/102','Scoop Up','Uncommon','Trainer','N/A'],
+['base','79/102','Super Energy Removal','Uncommon','Trainer','N/A'],
+['base','80/102','Defender','Uncommon','Trainer','N/A'],
+['base','81/102','Energy Retrieval','Uncommon','Trainer','N/A'],
+['base','82/102','Full Heal','Uncommon','Trainer','N/A'],
+['base','83/102','Maintenance','Uncommon','Trainer','N/A'],
+['base','84/102','PlusPower','Uncommon','Trainer','N/A'],
+['base','85/102','Pokémon Center','Uncommon','Trainer','N/A'],
+['base','86/102','Pokémon Flute','Uncommon','Trainer','N/A'],
+['base','87/102','Pokédex','Uncommon','Trainer','N/A'],
+['base','88/102','Professor Oak','Uncommon','Trainer','N/A'],
+['base','89/102','Revive','Uncommon','Trainer','N/A'],
+['base','90/102','Super Potion','Uncommon','Trainer','N/A'],
+['base','91/102','Bill','Common','Trainer','N/A'],
+['base','92/102','Energy Removal','Common','Trainer','N/A'],
+['base','93/102','Gust of Wind','Common','Trainer','N/A'],
+['base','94/102','Potion','Common','Trainer','N/A'],
+['base','95/102','Switch','Common','Trainer','N/A'],
+['base','96/102','Double Colorless Energy','Common','Energy','N/A'],
+['base','97/102','Fighting Energy','Common','Energy','N/A'],
+['base','98/102','Fire Energy','Common','Energy','N/A'],
+['base','99/102','Grass Energy','Common','Energy','N/A'],
+['base','100/102','Lightning Energy','Common','Energy','N/A'],
+['base','101/102','Psychic Energy','Common','Energy','N/A'],
+['base','102/102','Water Energy','Common','Energy','N/A'],
+// ── POKEMON JUNGLE ────────────────────────────────────────────────────────
+['jungle','1/64','Clefable','Holo Rare','Colorless','N/A'],
+['jungle','2/64','Electrode','Holo Rare','Lightning','N/A'],
+['jungle','3/64','Flareon','Holo Rare','Fire','N/A'],
+['jungle','4/64','Jolteon','Holo Rare','Lightning','N/A'],
+['jungle','5/64','Kangaskhan','Holo Rare','Colorless','N/A'],
+['jungle','6/64','Mr. Mime','Holo Rare','Psychic','N/A'],
+['jungle','7/64','Nidoqueen','Holo Rare','Poison','N/A'],
+['jungle','8/64','Pidgeot','Holo Rare','Colorless','N/A'],
+['jungle','9/64','Pinsir','Holo Rare','Grass','N/A'],
+['jungle','10/64','Scyther','Holo Rare','Grass','N/A'],
+['jungle','11/64','Snorlax','Holo Rare','Colorless','N/A'],
+['jungle','12/64','Vaporeon','Holo Rare','Water','N/A'],
+['jungle','13/64','Venomoth','Holo Rare','Grass','N/A'],
+['jungle','14/64','Victreebel','Holo Rare','Grass','N/A'],
+['jungle','15/64','Vileplume','Holo Rare','Grass','N/A'],
+['jungle','16/64','Wigglytuff','Holo Rare','Colorless','N/A'],
+['jungle','17/64','Clefable','Rare','Colorless','N/A'],
+['jungle','18/64','Electrode','Rare','Lightning','N/A'],
+['jungle','19/64','Flareon','Rare','Fire','N/A'],
+['jungle','20/64','Jolteon','Rare','Lightning','N/A'],
+['jungle','21/64','Kangaskhan','Rare','Colorless','N/A'],
+['jungle','22/64','Mr. Mime','Rare','Psychic','N/A'],
+['jungle','23/64','Nidoqueen','Rare','Poison','N/A'],
+['jungle','24/64','Pidgeot','Rare','Colorless','N/A'],
+['jungle','25/64','Pinsir','Rare','Grass','N/A'],
+['jungle','26/64','Scyther','Rare','Grass','N/A'],
+['jungle','27/64','Snorlax','Rare','Colorless','N/A'],
+['jungle','28/64','Vaporeon','Rare','Water','N/A'],
+['jungle','29/64','Venomoth','Rare','Grass','N/A'],
+['jungle','30/64','Victreebel','Rare','Grass','N/A'],
+['jungle','31/64','Vileplume','Rare','Grass','N/A'],
+['jungle','32/64','Wigglytuff','Rare','Colorless','N/A'],
+['jungle','33/64','Butterfree','Uncommon','Grass','N/A'],
+['jungle','34/64','Dodrio','Uncommon','Colorless','N/A'],
+['jungle','35/64','Exeggutor','Uncommon','Grass','N/A'],
+['jungle','36/64','Fearow','Uncommon','Colorless','N/A'],
+['jungle','37/64','Gloom','Uncommon','Grass','N/A'],
+['jungle','38/64','Lickitung','Uncommon','Colorless','N/A'],
+['jungle','39/64','Marowak','Uncommon','Fighting','N/A'],
+['jungle','40/64','Nidorina','Uncommon','Poison','N/A'],
+['jungle','41/64','Parasect','Uncommon','Grass','N/A'],
+['jungle','42/64','Persian','Uncommon','Colorless','N/A'],
+['jungle','43/64','Primeape','Uncommon','Fighting','N/A'],
+['jungle','44/64','Rapidash','Uncommon','Fire','N/A'],
+['jungle','45/64','Rhydon','Uncommon','Fighting','N/A'],
+['jungle','46/64','Seaking','Uncommon','Water','N/A'],
+['jungle','47/64','Tauros','Uncommon','Colorless','N/A'],
+['jungle','48/64','Weepinbell','Uncommon','Grass','N/A'],
+['jungle','49/64','Bellsprout','Common','Grass','N/A'],
+['jungle','50/64','Cubone','Common','Fighting','N/A'],
+['jungle','51/64','Eevee','Common','Colorless','N/A'],
+['jungle','52/64','Exeggcute','Common','Grass','N/A'],
+['jungle','53/64','Goldeen','Common','Water','N/A'],
+['jungle','54/64','Jigglypuff','Common','Colorless','N/A'],
+['jungle','55/64','Mankey','Common','Fighting','N/A'],
+['jungle','56/64','Meowth','Common','Colorless','N/A'],
+['jungle','57/64','Nidoran♀','Common','Poison','N/A'],
+['jungle','58/64','Oddish','Common','Grass','N/A'],
+['jungle','59/64','Paras','Common','Grass','N/A'],
+['jungle','60/64','Pikachu','Common','Lightning','N/A'],
+['jungle','61/64','Rhyhorn','Common','Fighting','N/A'],
+['jungle','62/64','Spearow','Common','Colorless','N/A'],
+['jungle','63/64','Venonat','Common','Grass','N/A'],
+['jungle','64/64','Poké Ball','Common','Trainer','N/A'],
+// ── POKEMON FOSSIL ────────────────────────────────────────────────────────
+['fossil','1/62','Aerodactyl','Holo Rare','Fighting','N/A'],
+['fossil','2/62','Articuno','Holo Rare','Water','N/A'],
+['fossil','3/62','Ditto','Holo Rare','Colorless','N/A'],
+['fossil','4/62','Dragonite','Holo Rare','Colorless','N/A'],
+['fossil','5/62','Gengar','Holo Rare','Psychic','N/A'],
+['fossil','6/62','Haunter','Holo Rare','Psychic','N/A'],
+['fossil','7/62','Hitmonlee','Holo Rare','Fighting','N/A'],
+['fossil','8/62','Hypno','Holo Rare','Psychic','N/A'],
+['fossil','9/62','Kabutops','Holo Rare','Fighting','N/A'],
+['fossil','10/62','Lapras','Holo Rare','Water','N/A'],
+['fossil','11/62','Magneton','Holo Rare','Lightning','N/A'],
+['fossil','12/62','Moltres','Holo Rare','Fire','N/A'],
+['fossil','13/62','Muk','Holo Rare','Grass','N/A'],
+['fossil','14/62','Raichu','Holo Rare','Lightning','N/A'],
+['fossil','15/62','Zapdos','Holo Rare','Lightning','N/A'],
+['fossil','16/62','Aerodactyl','Rare','Fighting','N/A'],
+['fossil','17/62','Articuno','Rare','Water','N/A'],
+['fossil','18/62','Ditto','Rare','Colorless','N/A'],
+['fossil','19/62','Dragonite','Rare','Colorless','N/A'],
+['fossil','20/62','Gengar','Rare','Psychic','N/A'],
+['fossil','21/62','Haunter','Rare','Psychic','N/A'],
+['fossil','22/62','Hitmonlee','Rare','Fighting','N/A'],
+['fossil','23/62','Hypno','Rare','Psychic','N/A'],
+['fossil','24/62','Kabutops','Rare','Fighting','N/A'],
+['fossil','25/62','Lapras','Rare','Water','N/A'],
+['fossil','26/62','Magneton','Rare','Lightning','N/A'],
+['fossil','27/62','Moltres','Rare','Fire','N/A'],
+['fossil','28/62','Muk','Rare','Grass','N/A'],
+['fossil','29/62','Raichu','Rare','Lightning','N/A'],
+['fossil','30/62','Zapdos','Rare','Lightning','N/A'],
+['fossil','31/62','Arbok','Uncommon','Poison','N/A'],
+['fossil','32/62','Cloyster','Uncommon','Water','N/A'],
+['fossil','33/62','Gastly','Uncommon','Psychic','N/A'],
+['fossil','34/62','Golbat','Uncommon','Poison','N/A'],
+['fossil','35/62','Golduck','Uncommon','Water','N/A'],
+['fossil','36/62','Golem','Uncommon','Fighting','N/A'],
+['fossil','37/62','Graveler','Uncommon','Fighting','N/A'],
+['fossil','38/62','Kingler','Uncommon','Water','N/A'],
+['fossil','39/62','Magmar','Uncommon','Fire','N/A'],
+['fossil','40/62','Omastar','Uncommon','Water','N/A'],
+['fossil','41/62','Sandslash','Uncommon','Fighting','N/A'],
+['fossil','42/62','Seadra','Uncommon','Water','N/A'],
+['fossil','43/62','Slowbro','Uncommon','Psychic','N/A'],
+['fossil','44/62','Tentacruel','Uncommon','Water','N/A'],
+['fossil','45/62','Weezing','Uncommon','Poison','N/A'],
+['fossil','46/62','Ekans','Common','Poison','N/A'],
+['fossil','47/62','Geodude','Common','Fighting','N/A'],
+['fossil','48/62','Grimer','Common','Poison','N/A'],
+['fossil','49/62','Horsea','Common','Water','N/A'],
+['fossil','50/62','Kabuto','Common','Fighting','N/A'],
+['fossil','51/62','Krabby','Common','Water','N/A'],
+['fossil','52/62','Omanyte','Common','Water','N/A'],
+['fossil','53/62','Psyduck','Common','Water','N/A'],
+['fossil','54/62','Shellder','Common','Water','N/A'],
+['fossil','55/62','Slowpoke','Common','Psychic','N/A'],
+['fossil','56/62','Tentacool','Common','Water','N/A'],
+['fossil','57/62','Zubat','Common','Poison','N/A'],
+['fossil','58/62','Mr. Fuji','Uncommon','Trainer','N/A'],
+['fossil','59/62','Energy Search','Common','Trainer','N/A'],
+['fossil','60/62','Gambler','Common','Trainer','N/A'],
+['fossil','61/62','Recycle','Common','Trainer','N/A'],
+['fossil','62/62','Mysterious Fossil','Common','Trainer','N/A'],
+// ── TEAM ROCKET (partial) ─────────────────────────────────────────────────
+['rocket','1/82','Dark Alakazam','Holo Rare','Psychic','N/A'],
+['rocket','2/82','Dark Arbok','Holo Rare','Poison','N/A'],
+['rocket','3/82','Dark Blastoise','Holo Rare','Water','N/A'],
+['rocket','4/82','Dark Charizard','Holo Rare','Fire','N/A'],
+['rocket','5/82','Dark Dragonite','Holo Rare','Colorless','N/A'],
+['rocket','6/82','Dark Dugtrio','Holo Rare','Fighting','N/A'],
+['rocket','7/82','Dark Golbat','Holo Rare','Poison','N/A'],
+['rocket','8/82','Dark Gyarados','Holo Rare','Water','N/A'],
+['rocket','9/82','Dark Hypno','Holo Rare','Psychic','N/A'],
+['rocket','10/82','Dark Machamp','Holo Rare','Fighting','N/A'],
+['rocket','11/82','Dark Magneton','Holo Rare','Lightning','N/A'],
+['rocket','12/82','Dark Slowbro','Holo Rare','Psychic','N/A'],
+['rocket','13/82','Dark Vileplume','Holo Rare','Grass','N/A'],
+['rocket','14/82','Dark Weezing','Holo Rare','Poison','N/A'],
+['rocket','15/82','Here Comes Team Rocket!','Holo Rare','Trainer','N/A'],
+['rocket','16/82','Rocket\'s Sneak Attack','Holo Rare','Trainer','N/A'],
+['rocket','17/82','Rainbow Energy','Holo Rare','Energy','N/A'],
+['rocket','18/82','Dark Alakazam','Rare','Psychic','N/A'],
+['rocket','19/82','Dark Arbok','Rare','Poison','N/A'],
+['rocket','20/82','Dark Blastoise','Rare','Water','N/A'],
+['rocket','21/82','Dark Charizard','Rare','Fire','N/A'],
+['rocket','22/82','Dark Dragonite','Rare','Colorless','N/A'],
+['rocket','23/82','Dark Dugtrio','Rare','Fighting','N/A'],
+['rocket','24/82','Dark Golbat','Rare','Poison','N/A'],
+['rocket','25/82','Dark Gyarados','Rare','Water','N/A'],
+['rocket','26/82','Dark Hypno','Rare','Psychic','N/A'],
+['rocket','27/82','Dark Machamp','Rare','Fighting','N/A'],
+['rocket','28/82','Dark Magneton','Rare','Lightning','N/A'],
+['rocket','29/82','Dark Slowbro','Rare','Psychic','N/A'],
+['rocket','30/82','Dark Vileplume','Rare','Grass','N/A'],
+['rocket','31/82','Dark Weezing','Rare','Poison','N/A'],
+['rocket','32/82','Dark Charmeleon','Uncommon','Fire','N/A'],
+['rocket','33/82','Dark Dragonair','Uncommon','Colorless','N/A'],
+['rocket','34/82','Dark Electrode','Uncommon','Lightning','N/A'],
+['rocket','35/82','Dark Flareon','Uncommon','Fire','N/A'],
+['rocket','36/82','Dark Gloom','Uncommon','Grass','N/A'],
+['rocket','37/82','Dark Golduck','Uncommon','Water','N/A'],
+['rocket','38/82','Dark Jolteon','Uncommon','Lightning','N/A'],
+['rocket','39/82','Dark Kadabra','Uncommon','Psychic','N/A'],
+['rocket','40/82','Dark Machoke','Uncommon','Fighting','N/A'],
+['rocket','41/82','Dark Muk','Uncommon','Poison','N/A'],
+['rocket','42/82','Dark Persian','Uncommon','Colorless','N/A'],
+['rocket','43/82','Dark Primeape','Uncommon','Fighting','N/A'],
+['rocket','44/82','Dark Rapidash','Uncommon','Fire','N/A'],
+['rocket','45/82','Dark Vaporeon','Uncommon','Water','N/A'],
+['rocket','46/82','Dark Wartortle','Uncommon','Water','N/A'],
+['rocket','47/82','Magikarp','Uncommon','Water','N/A'],
+['rocket','48/82','Porygon','Uncommon','Colorless','N/A'],
+['rocket','49/82','Abra','Common','Psychic','N/A'],
+['rocket','50/82','Charmander','Common','Fire','N/A'],
+['rocket','51/82','Diglett','Common','Fighting','N/A'],
+['rocket','52/82','Dratini','Common','Colorless','N/A'],
+['rocket','53/82','Drowzee','Common','Psychic','N/A'],
+['rocket','54/82','Eevee','Common','Colorless','N/A'],
+['rocket','55/82','Ekans','Common','Poison','N/A'],
+['rocket','56/82','Grimer','Common','Poison','N/A'],
+['rocket','57/82','Koffing','Common','Poison','N/A'],
+['rocket','58/82','Machop','Common','Fighting','N/A'],
+['rocket','59/82','Magnemite','Common','Lightning','N/A'],
+['rocket','60/82','Mankey','Common','Fighting','N/A'],
+['rocket','61/82','Meowth','Common','Colorless','N/A'],
+['rocket','62/82','Oddish','Common','Grass','N/A'],
+['rocket','63/82','Ponyta','Common','Fire','N/A'],
+['rocket','64/82','Psyduck','Common','Water','N/A'],
+['rocket','65/82','Rattata','Common','Colorless','N/A'],
+['rocket','66/82','Slowpoke','Common','Psychic','N/A'],
+['rocket','67/82','Squirtle','Common','Water','N/A'],
+['rocket','68/82','Voltorb','Common','Lightning','N/A'],
+['rocket','69/82','Zubat','Common','Poison','N/A'],
+['rocket','70/82','Challenge!','Uncommon','Trainer','N/A'],
+['rocket','71/82','Charity','Uncommon','Trainer','N/A'],
+['rocket','72/82','Computer Error','Uncommon','Trainer','N/A'],
+['rocket','73/82','Goop Gas Attack','Uncommon','Trainer','N/A'],
+['rocket','74/82','Nightly Garbage Run','Uncommon','Trainer','N/A'],
+['rocket','75/82','Rocket\'s Training Gym','Uncommon','Trainer','N/A'],
+['rocket','76/82','Sleep!','Uncommon','Trainer','N/A'],
+['rocket','77/82','The Boss\'s Way','Uncommon','Trainer','N/A'],
+['rocket','78/82','Digger','Common','Trainer','N/A'],
+['rocket','79/82','Full Heal Energy','Common','Energy','N/A'],
+['rocket','80/82','Potion Energy','Common','Energy','N/A'],
+['rocket','81/82','Warp Point','Common','Trainer','N/A'],
+['rocket','82/82','Recycle Energy','Common','Energy','N/A'],
+['rocket','83/82','Dark Raichu','Secret Rare','Lightning','N/A'],
+// ── SW CCG PREMIERE — LIGHT SIDE ──────────────────────────────────────────
+['premiere','LS','2X-3KPR (Tooex)','U1','Character','Light'],
+['premiere','LS','Beru Lars','U2','Character','Light'],
+['premiere','LS','Biggs Darklighter','R2','Character','Light'],
+['premiere','LS','BoShek','U1','Character','Light'],
+['premiere','LS','C-3PO (See-Threepio)','R1','Character','Light'],
+['premiere','LS','CZ-3 (Seezee-Three)','C1','Character','Light'],
+['premiere','LS','Dice Ibegon','R2','Character','Light'],
+['premiere','LS','Dutch','R1','Character','Light'],
+['premiere','LS','Figrin D\'an','U2','Character','Light'],
+['premiere','LS','General Dodonna','U1','Character','Light'],
+['premiere','LS','Han Solo','R1','Character','Light'],
+['premiere','LS','Jawa','C2','Character','Light'],
+['premiere','LS','Jek Porkins','U1','Character','Light'],
+['premiere','LS','Kabe','U1','Character','Light'],
+['premiere','LS','Kal\'Falnl C\'ndros','R1','Character','Light'],
+['premiere','LS','Leesub Sirln','R2','Character','Light'],
+['premiere','LS','Leia Organa','R1','Character','Light'],
+['premiere','LS','LIN-V8K (Elleyein-Veeatekay)','C1','Character','Light'],
+['premiere','LS','Luke Skywalker','R1','Character','Light'],
+['premiere','LS','Momaw Nadon','U2','Character','Light'],
+['premiere','LS','Obi-Wan Kenobi','R1','Character','Light'],
+['premiere','LS','Owen Lars','U1','Character','Light'],
+['premiere','LS','Pops','U1','Character','Light'],
+['premiere','LS','R2-X2 (Artoo-Extoo)','C2','Character','Light'],
+['premiere','LS','R4-E1 (Arfour-Eeone)','C2','Character','Light'],
+['premiere','LS','Rebel Guard','C2','Character','Light'],
+['premiere','LS','Rebel Pilot','C2','Character','Light'],
+['premiere','LS','Rebel Trooper','C3','Character','Light'],
+['premiere','LS','Red Leader','R1','Character','Light'],
+['premiere','LS','Shistavanen Wolfman','C2','Character','Light'],
+['premiere','LS','Talz','C2','Character','Light'],
+['premiere','LS','WED-9-M1 \'Bantha\' Droid','R2','Character','Light'],
+['premiere','LS','Wioslea','U1','Character','Light'],
+['premiere','LS','Caller','U2','Device','Light'],
+['premiere','LS','Electrobinoculars','C2','Device','Light'],
+['premiere','LS','Fusion Generator Supply Tanks','C2','Device','Light'],
+['premiere','LS','Hydroponics Station','U2','Device','Light'],
+['premiere','LS','Restraining Bolt','C2','Device','Light'],
+['premiere','LS','Targeting Computer','U1','Device','Light'],
+['premiere','LS','Tatooine Utility Belt','C2','Device','Light'],
+['premiere','LS','Vaporator','C2','Device','Light'],
+['premiere','LS','A Tremor In The Force','U1','Effect','Light'],
+['premiere','LS','Affect Mind','R1','Effect','Light'],
+['premiere','LS','Beggar','R1','Effect','Light'],
+['premiere','LS','Crash Site Memorial','U1','Effect','Light'],
+['premiere','LS','Death Star Plans','R1','Effect','Light'],
+['premiere','LS','Demotion','R2','Effect','Light'],
+['premiere','LS','Disarmed','R1','Effect','Light'],
+['premiere','LS','Ellorrs Madak','C2','Effect','Light'],
+['premiere','LS','Eyes In The Dark','U1','Effect','Light'],
+['premiere','LS','Jawa Siesta','U1','Effect','Light'],
+['premiere','LS','Kessel Run','R2','Effect','Light'],
+['premiere','LS','K\'lor\'slug','R1','Effect','Light'],
+['premiere','LS','Lightsaber Proficiency','R1','Effect','Light'],
+['premiere','LS','Mantellian Savrip','R2','Effect','Light'],
+['premiere','LS','Nightfall','U1','Effect','Light'],
+['premiere','LS','Obi-Wan\'s Cape','R1','Effect','Light'],
+['premiere','LS','Our Most Desperate Hour','R1','Effect','Light'],
+['premiere','LS','Plastoid Armor','U2','Effect','Light'],
+['premiere','LS','Rebel Planners','R2','Effect','Light'],
+['premiere','LS','Restricted Deployment','U1','Effect','Light'],
+['premiere','LS','Revolution','R1','Effect','Light'],
+['premiere','LS','Rycar Ryjerd','U1','Effect','Light'],
+['premiere','LS','Sai\'torr Kal Fas','C2','Effect','Light'],
+['premiere','LS','Special Modifications','U1','Effect','Light'],
+['premiere','LS','Traffic Control','U2','Effect','Light'],
+['premiere','LS','Tusken Breath Mask','U1','Effect','Light'],
+['premiere','LS','Yavin Sentry','U2','Effect','Light'],
+['premiere','LS','Yerka Mig','U1','Effect','Light'],
+['premiere','LS','A Few Maneuvers','C2','Interrupt','Light'],
+['premiere','LS','Alter','U1','Interrupt','Light'],
+['premiere','LS','Beru Stew','U2','Interrupt','Light'],
+['premiere','LS','Cantina Brawl','R1','Interrupt','Light'],
+['premiere','LS','Collision!','C2','Interrupt','Light'],
+['premiere','LS','Combined Attack','C2','Interrupt','Light'],
+['premiere','LS','Don\'t Get Cocky','R1','Interrupt','Light'],
+['premiere','LS','Don\'t Underestimate Our Chances','C1','Interrupt','Light'],
+['premiere','LS','Droid Shutdown','C2','Interrupt','Light'],
+['premiere','LS','Escape Pod','U2','Interrupt','Light'],
+['premiere','LS','Friendly Fire','C2','Interrupt','Light'],
+['premiere','LS','Full Throttle','R2','Interrupt','Light'],
+['premiere','LS','Gift Of The Mentor','R1','Interrupt','Light'],
+['premiere','LS','Han\'s Back','U2','Interrupt','Light'],
+['premiere','LS','Han\'s Dice','C2','Interrupt','Light'],
+['premiere','LS','Hear Me Baby, Hold Together','C2','Interrupt','Light'],
+['premiere','LS','Help Me Obi-Wan Kenobi','R1','Interrupt','Light'],
+['premiere','LS','How Did We Get Into This Mess?','U2','Interrupt','Light'],
+['premiere','LS','Hyper Escape','C2','Interrupt','Light'],
+['premiere','LS','Into The Garbage Chute, Flyboy','R2','Interrupt','Light'],
+['premiere','LS','It Could Be Worse','C2','Interrupt','Light'],
+['premiere','LS','I\'ve Got A Bad Feeling About This','C2','Interrupt','Light'],
+['premiere','LS','Jedi Presence','R1','Interrupt','Light'],
+['premiere','LS','Krayt Dragon Howl','R1','Interrupt','Light'],
+['premiere','LS','Leia\'s Back','U2','Interrupt','Light'],
+['premiere','LS','Luke\'s Back','U2','Interrupt','Light'],
+['premiere','LS','Move Along...','R1','Interrupt','Light'],
+['premiere','LS','Nabrun Leids','U2','Interrupt','Light'],
+['premiere','LS','Narrow Escape','C2','Interrupt','Light'],
+['premiere','LS','Noble Sacrifice','R2','Interrupt','Light'],
+['premiere','LS','Old Ben','C2','Interrupt','Light'],
+['premiere','LS','On The Edge','R2','Interrupt','Light'],
+['premiere','LS','Out Of Nowhere','U2','Interrupt','Light'],
+['premiere','LS','Panic','U1','Interrupt','Light'],
+['premiere','LS','Radar Scanner','C2','Interrupt','Light'],
+['premiere','LS','Rebel Barrier','C2','Interrupt','Light'],
+['premiere','LS','Rebel Reinforcements','C1','Interrupt','Light'],
+['premiere','LS','Return Of A Jedi','U2','Interrupt','Light'],
+['premiere','LS','Scomp Link Access','C2','Interrupt','Light'],
+['premiere','LS','Sense','U1','Interrupt','Light'],
+['premiere','LS','Skywalkers','R1','Interrupt','Light'],
+['premiere','LS','Solo Han','R2','Interrupt','Light'],
+['premiere','LS','Spaceport Speeders','U2','Interrupt','Light'],
+['premiere','LS','Surprise Assault','C1','Interrupt','Light'],
+['premiere','LS','Thank The Maker','R2','Interrupt','Light'],
+['premiere','LS','The Bith Shuffle','C2','Interrupt','Light'],
+['premiere','LS','The Force Is Strong With This One','R2','Interrupt','Light'],
+['premiere','LS','This Is All Your Fault','U1','Interrupt','Light'],
+['premiere','LS','Utinni!','R1','Interrupt','Light'],
+['premiere','LS','Warrior\'s Courage','R2','Interrupt','Light'],
+['premiere','LS','We\'re Doomed','C2','Interrupt','Light'],
+['premiere','LS','Alderaan','U2','Location','Light'],
+['premiere','LS','Dantooine','U1','Location','Light'],
+['premiere','LS','Death Star: Detention Block Control Room','U2','Location','Light'],
+['premiere','LS','Death Star: Docking Bay 327','C2','Location','Light'],
+['premiere','LS','Death Star: Trash Compactor','U1','Location','Light'],
+['premiere','LS','Kessel','U2','Location','Light'],
+['premiere','LS','Tatooine','C2','Location','Light'],
+['premiere','LS','Tatooine: Cantina','R2','Location','Light'],
+['premiere','LS','Tatooine: Docking Bay 94','C2','Location','Light'],
+['premiere','LS','Tatooine: Dune Sea','C1','Location','Light'],
+['premiere','LS','Tatooine: Jawa Camp','C1','Location','Light'],
+['premiere','LS','Tatooine: Lars\' Moisture Farm','C1','Location','Light'],
+['premiere','LS','Tatooine: Mos Eisley','U2','Location','Light'],
+['premiere','LS','Tatooine: Obi-Wan\'s Hut','R1','Location','Light'],
+['premiere','LS','Yavin 4','C2','Location','Light'],
+['premiere','LS','Yavin 4: Docking Bay','C1','Location','Light'],
+['premiere','LS','Yavin 4: Jungle','C2','Location','Light'],
+['premiere','LS','Yavin 4: Massassi Throne Room','R1','Location','Light'],
+['premiere','LS','Yavin 4: Massassi War Room','U2','Location','Light'],
+['premiere','LS','Corellian Corvette','U2','Starship','Light'],
+['premiere','LS','Gold 1','R2','Starship','Light'],
+['premiere','LS','Gold 5','R2','Starship','Light'],
+['premiere','LS','Millennium Falcon','R1','Starship','Light'],
+['premiere','LS','Red 1','U1','Starship','Light'],
+['premiere','LS','Red 3','R2','Starship','Light'],
+['premiere','LS','X-wing','C2','Starship','Light'],
+['premiere','LS','Y-wing','C2','Starship','Light'],
+['premiere','LS','Lift Tube','C2','Vehicle','Light'],
+['premiere','LS','Luke\'s X-34 Landspeeder','U2','Vehicle','Light'],
+['premiere','LS','Sandcrawler','R2','Vehicle','Light'],
+['premiere','LS','SoroSuub V-35 Landspeeder','C2','Vehicle','Light'],
+['premiere','LS','Blaster','C2','Weapon','Light'],
+['premiere','LS','Blaster Rifle','C1','Weapon','Light'],
+['premiere','LS','Han\'s Heavy Blaster Pistol','R2','Weapon','Light'],
+['premiere','LS','Jedi Lightsaber','U1','Weapon','Light'],
+['premiere','LS','Leia\'s Sporting Blaster','U1','Weapon','Light'],
+['premiere','LS','Obi-Wan\'s Lightsaber','R1','Weapon','Light'],
+['premiere','LS','Proton Torpedoes','C2','Weapon','Light'],
+['premiere','LS','Quad Laser Cannon','U1','Weapon','Light'],
+['premiere','LS','Tagge Seeker','R2','Weapon','Light'],
+['premiere','LS','Tarkin Seeker','R2','Weapon','Light'],
+['premiere','LS','Timer Mine','C2','Weapon','Light'],
+// ── SW CCG PREMIERE — DARK SIDE ───────────────────────────────────────────
+['premiere','DS','5D6-RA-7 (Fivedesix)','R1','Character','Dark'],
+['premiere','DS','Admiral Motti','R2','Character','Dark'],
+['premiere','DS','Chief Bast','U1','Character','Dark'],
+['premiere','DS','Colonel Wullf Yularen','U1','Character','Dark'],
+['premiere','DS','Commander Praji','U2','Character','Dark'],
+['premiere','DS','Darth Vader','R1','Character','Dark'],
+['premiere','DS','Dathcha','U1','Character','Dark'],
+['premiere','DS','Death Star Trooper','C2','Character','Dark'],
+['premiere','DS','Djas Puhr','R2','Character','Dark'],
+['premiere','DS','Dr. Evazan','R2','Character','Dark'],
+['premiere','DS','DS-61-2','U1','Character','Dark'],
+['premiere','DS','DS-61-3','R1','Character','Dark'],
+['premiere','DS','EG-6 (Eegee-Six)','U2','Character','Dark'],
+['premiere','DS','Feltipern Trevagg','U1','Character','Dark'],
+['premiere','DS','Garindan','R2','Character','Dark'],
+['premiere','DS','General Tagge','R2','Character','Dark'],
+['premiere','DS','Grand Moff Tarkin','R1','Character','Dark'],
+['premiere','DS','Imperial Pilot','C2','Character','Dark'],
+['premiere','DS','Imperial Trooper Guard','C2','Character','Dark'],
+['premiere','DS','Jawa','C2','Character','Dark'],
+['premiere','DS','Kitik Keed\'kak','R1','Character','Dark'],
+['premiere','DS','Labria','R2','Character','Dark'],
+['premiere','DS','Lieutenant Tanbris','U2','Character','Dark'],
+['premiere','DS','LIN-V8M (Elleyein-Veeateemm)','C1','Character','Dark'],
+['premiere','DS','M\'iiyoom Onith','U2','Character','Dark'],
+['premiere','DS','MSE-6 \'Mouse\' Droid','U1','Character','Dark'],
+['premiere','DS','Myo','R2','Character','Dark'],
+['premiere','DS','Ponda Baba','U1','Character','Dark'],
+['premiere','DS','Prophetess','U1','Character','Dark'],
+['premiere','DS','R1-G4 (Arone-Geefour)','C2','Character','Dark'],
+['premiere','DS','R4-M9 (Arfour-Emmnine)','C2','Character','Dark'],
+['premiere','DS','Stormtrooper','C3','Character','Dark'],
+['premiere','DS','Tonnika Sisters','R1','Character','Dark'],
+['premiere','DS','Tusken Raider','C2','Character','Dark'],
+['premiere','DS','WED15-I662 \'Treadwell\' Droid','R2','Character','Dark'],
+['premiere','DS','Wuher','U2','Character','Dark'],
+['premiere','DS','Blaster Scope','U1','Device','Dark'],
+['premiere','DS','Caller','U2','Device','Dark'],
+['premiere','DS','Comlink','C1','Device','Dark'],
+['premiere','DS','Droid Detector','C2','Device','Dark'],
+['premiere','DS','Fusion Generator Supply Tanks','C2','Device','Dark'],
+['premiere','DS','Observation Holocam','U2','Device','Dark'],
+['premiere','DS','Restraining Bolt','C2','Device','Dark'],
+['premiere','DS','Stormtrooper Backpack','C2','Device','Dark'],
+['premiere','DS','Stormtrooper Utility Belt','C2','Device','Dark'],
+['premiere','DS','A Disturbance In The Force','U1','Effect','Dark'],
+['premiere','DS','Baniss Keeg','C2','Effect','Dark'],
+['premiere','DS','Blast Door Controls','U2','Effect','Dark'],
+['premiere','DS','Blaster Rack','U1','Effect','Dark'],
+['premiere','DS','Dark Hours','U2','Effect','Dark'],
+['premiere','DS','Death Star Sentry','U1','Effect','Dark'],
+['premiere','DS','Disarmed','R1','Effect','Dark'],
+['premiere','DS','Expand The Empire','R1','Effect','Dark'],
+['premiere','DS','Fear Will Keep Them In Line','R2','Effect','Dark'],
+['premiere','DS','I Find Your Lack Of Faith Disturbing','R1','Effect','Dark'],
+['premiere','DS','I\'ve Lost Artoo!','U1','Effect','Dark'],
+['premiere','DS','Jawa Pack','U1','Effect','Dark'],
+['premiere','DS','Juri Juice','R2','Effect','Dark'],
+['premiere','DS','Ket Maliss','C2','Effect','Dark'],
+['premiere','DS','Lateral Damage','R2','Effect','Dark'],
+['premiere','DS','Luke? Luuuuke!','U1','Effect','Dark'],
+['premiere','DS','Macroscan','C2','Effect','Dark'],
+['premiere','DS','Molator','R1','Effect','Dark'],
+['premiere','DS','Organa\'s Ceremonial Necklace','R1','Effect','Dark'],
+['premiere','DS','Presence Of The Force','R1','Effect','Dark'],
+['premiere','DS','Reactor Terminal','U2','Effect','Dark'],
+['premiere','DS','Send A Detachment Down','R1','Effect','Dark'],
+['premiere','DS','Sunsdown','U1','Effect','Dark'],
+['premiere','DS','Tactical Re-Call','R2','Effect','Dark'],
+['premiere','DS','Wrong Turn','U1','Effect','Dark'],
+['premiere','DS','Your Eyes Can Deceive You','U1','Effect','Dark'],
+['premiere','DS','Alter','U1','Interrupt','Dark'],
+['premiere','DS','Boring Conversation Anyway','R1','Interrupt','Dark'],
+['premiere','DS','Charming To The Last','R2','Interrupt','Dark'],
+['premiere','DS','Collateral Damage','C2','Interrupt','Dark'],
+['premiere','DS','Counter Assault','C1','Interrupt','Dark'],
+['premiere','DS','Dark Collaboration','R1','Interrupt','Dark'],
+['premiere','DS','Dark Jedi Presence','R1','Interrupt','Dark'],
+['premiere','DS','Dark Maneuvers','C2','Interrupt','Dark'],
+['premiere','DS','Dead Jawa','C2','Interrupt','Dark'],
+['premiere','DS','Elis Helrot','U2','Interrupt','Dark'],
+['premiere','DS','Emergency Deployment','U1','Interrupt','Dark'],
+['premiere','DS','Evacuate?','U2','Interrupt','Dark'],
+['premiere','DS','Full Scale Alert','U2','Interrupt','Dark'],
+['premiere','DS','Gravel Storm','U2','Interrupt','Dark'],
+['premiere','DS','I Have You Now','R2','Interrupt','Dark'],
+['premiere','DS','Imperial Barrier','C2','Interrupt','Dark'],
+['premiere','DS','Imperial Code Cylinder','C2','Interrupt','Dark'],
+['premiere','DS','Imperial Reinforcements','C1','Interrupt','Dark'],
+['premiere','DS','It\'s Worse','C2','Interrupt','Dark'],
+['premiere','DS','I\'ve Got A Problem Here','C2','Interrupt','Dark'],
+['premiere','DS','Kintan Strider','C1','Interrupt','Dark'],
+['premiere','DS','Limited Resources','U2','Interrupt','Dark'],
+['premiere','DS','Local Trouble','R1','Interrupt','Dark'],
+['premiere','DS','Lone Pilot','R2','Interrupt','Dark'],
+['premiere','DS','Lone Warrior','R2','Interrupt','Dark'],
+['premiere','DS','Look Sir, Droids','R1','Interrupt','Dark'],
+['premiere','DS','Moment Of Triumph','R2','Interrupt','Dark'],
+['premiere','DS','Nevar Yalnal','R2','Interrupt','Dark'],
+['premiere','DS','Ommni Box','C2','Interrupt','Dark'],
+['premiere','DS','Overload','C2','Interrupt','Dark'],
+['premiere','DS','Physical Choke','R1','Interrupt','Dark'],
+['premiere','DS','Precise Attack','C2','Interrupt','Dark'],
+['premiere','DS','Scanning Crew','C2','Interrupt','Dark'],
+['premiere','DS','Sense','U1','Interrupt','Dark'],
+['premiere','DS','Set For Stun','C2','Interrupt','Dark'],
+['premiere','DS','Takeel','C2','Interrupt','Dark'],
+['premiere','DS','Tallon Roll','C2','Interrupt','Dark'],
+['premiere','DS','The Circle Is Now Complete','R1','Interrupt','Dark'],
+['premiere','DS','The Empire\'s Back','U1','Interrupt','Dark'],
+['premiere','DS','Trinto Duaba','U1','Interrupt','Dark'],
+['premiere','DS','Trooper Charge','U2','Interrupt','Dark'],
+['premiere','DS','Tusken Scavengers','C2','Interrupt','Dark'],
+['premiere','DS','Utinni!','R1','Interrupt','Dark'],
+['premiere','DS','Vader\'s Eye','R1','Interrupt','Dark'],
+['premiere','DS','We\'re All Gonna Be A Lot Thinner!','R1','Interrupt','Dark'],
+['premiere','DS','You Overestimate Their Chances','C1','Interrupt','Dark'],
+['premiere','DS','Your Powers Are Weak, Old Man','R1','Interrupt','Dark'],
+['premiere','DS','Alderaan','R1','Location','Dark'],
+['premiere','DS','Dantooine','U1','Location','Dark'],
+['premiere','DS','Death Star: Central Core','U2','Location','Dark'],
+['premiere','DS','Death Star: Detention Block Corridor','C1','Location','Dark'],
+['premiere','DS','Death Star: Docking Bay 327','C2','Location','Dark'],
+['premiere','DS','Death Star: Level 4 Military Corridor','U1','Location','Dark'],
+['premiere','DS','Death Star: War Room','U2','Location','Dark'],
+['premiere','DS','Kessel','U2','Location','Dark'],
+['premiere','DS','Tatooine','C2','Location','Dark'],
+['premiere','DS','Tatooine: Cantina','R2','Location','Dark'],
+['premiere','DS','Tatooine: Docking Bay 94','C2','Location','Dark'],
+['premiere','DS','Tatooine: Jawa Camp','C1','Location','Dark'],
+['premiere','DS','Tatooine: Jundland Wastes','C1','Location','Dark'],
+['premiere','DS','Tatooine: Lars\' Moisture Farm','U2','Location','Dark'],
+['premiere','DS','Tatooine: Mos Eisley','C1','Location','Dark'],
+['premiere','DS','Yavin 4','C2','Location','Dark'],
+['premiere','DS','Yavin 4: Docking Bay','C2','Location','Dark'],
+['premiere','DS','Yavin 4: Jungle','U2','Location','Dark'],
+['premiere','DS','Black 2','R1','Starship','Dark'],
+['premiere','DS','Black 3','U1','Starship','Dark'],
+['premiere','DS','Devastator','R1','Starship','Dark'],
+['premiere','DS','Imperial-Class Star Destroyer','U1','Starship','Dark'],
+['premiere','DS','TIE Advanced x1','U2','Starship','Dark'],
+['premiere','DS','TIE Fighter','C2','Starship','Dark'],
+['premiere','DS','TIE Scout','C2','Starship','Dark'],
+['premiere','DS','Vader\'s Custom TIE','R1','Starship','Dark'],
+['premiere','DS','Bantha','U2','Vehicle','Dark'],
+['premiere','DS','Lift Tube','C2','Vehicle','Dark'],
+['premiere','DS','Sandcrawler','R2','Vehicle','Dark'],
+['premiere','DS','Ubrikkian 9000 Z001','C2','Vehicle','Dark'],
+['premiere','DS','Assault Rifle','R2','Weapon','Dark'],
+['premiere','DS','Blaster Rifle','C2','Weapon','Dark'],
+['premiere','DS','Boosted TIE Cannon','U1','Weapon','Dark'],
+['premiere','DS','Dark Jedi Lightsaber','U1','Weapon','Dark'],
+['premiere','DS','Gaderffii Stick','C2','Weapon','Dark'],
+['premiere','DS','Han Seeker','R2','Weapon','Dark'],
+['premiere','DS','Imperial Blaster','C2','Weapon','Dark'],
+['premiere','DS','Ion Cannon','U1','Weapon','Dark'],
+['premiere','DS','Laser Projector','U2','Weapon','Dark'],
+['premiere','DS','Light Repeating Blaster Rifle','R1','Weapon','Dark'],
+['premiere','DS','Luke Seeker','R2','Weapon','Dark'],
+['premiere','DS','Timer Mine','C2','Weapon','Dark'],
+['premiere','DS','Turbolaser Battery','R2','Weapon','Dark'],
+['premiere','DS','Vader\'s Lightsaber','R1','Weapon','Dark'],
+// ── SW CCG A NEW HOPE — LIGHT SIDE ────────────────────────────────────────
+['anh','LS','Arcona','C2','Character','Light'],
+['anh','LS','Brainiac','R1','Character','Light'],
+['anh','LS','Chewbacca','R2','Character','Light'],
+['anh','LS','Commander Evram Lajaie','C1','Character','Light'],
+['anh','LS','Commander Vanden Willard','U2','Character','Light'],
+['anh','LS','Corellian','C2','Character','Light'],
+['anh','LS','Doikk Na\'ts','U2','Character','Light'],
+['anh','LS','Garouf Lafoe','U2','Character','Light'],
+['anh','LS','Het Nkik','U2','Character','Light'],
+['anh','LS','Hunchback','R1','Character','Light'],
+['anh','LS','Ickabel G\'ont','U2','Character','Light'],
+['anh','LS','M-HYD \'Binary\' Droid','U1','Character','Light'],
+['anh','LS','Nalan Cheel','U2','Character','Light'],
+['anh','LS','R2-D2 (Artoo-Detoo)','R2','Character','Light'],
+['anh','LS','R5-D4 (Arfive-Defour)','C2','Character','Light'],
+['anh','LS','RA-7 (Aray-Seven)','C2','Character','Light'],
+['anh','LS','Rebel Commander','C2','Character','Light'],
+['anh','LS','Rebel Squad Leader','C3','Character','Light'],
+['anh','LS','Rebel Tech','C1','Character','Light'],
+['anh','LS','Saurin','C2','Character','Light'],
+['anh','LS','Tiree','U2','Character','Light'],
+['anh','LS','Tzizvvt','R2','Character','Light'],
+['anh','LS','Wedge Antilles','R1','Character','Light'],
+['anh','LS','Zutton','C1','Character','Light'],
+['anh','LS','Fire Extinguisher','U2','Device','Light'],
+['anh','LS','Magnetic Suction Tube','R2','Device','Light'],
+['anh','LS','Rectenna','C2','Device','Light'],
+['anh','LS','Remote','C2','Device','Light'],
+['anh','LS','Sensor Panel','U2','Device','Light'],
+['anh','LS','Cell 2187','R1','Effect','Light'],
+['anh','LS','Commence Recharging','R2','Effect','Light'],
+['anh','LS','Eject! Eject!','C2','Effect','Light'],
+['anh','LS','Grappling Hook','C2','Effect','Light'],
+['anh','LS','Logistical Delay','U2','Effect','Light'],
+['anh','LS','Luke\'s Cape','R1','Effect','Light'],
+['anh','LS','Merc Sunlet','C2','Effect','Light'],
+['anh','LS','Scanner Techs','U1','Effect','Light'],
+['anh','LS','Solomahal','C2','Effect','Light'],
+['anh','LS','They\'re On Dantooine','R1','Effect','Light'],
+['anh','LS','Undercover','U2','Effect','Light'],
+['anh','LS','What\'re You Tryin\' To Push On Us?','U2','Effect','Light'],
+['anh','LS','Attack Run','R2','Epic Event','Light'],
+['anh','LS','Advance Preparation','U1','Interrupt','Light'],
+['anh','LS','Alternatives To Fighting','U1','Interrupt','Light'],
+['anh','LS','Blast The Door, Kid!','C2','Interrupt','Light'],
+['anh','LS','Blue Milk','C2','Interrupt','Light'],
+['anh','LS','Corellian Slip','C2','Interrupt','Light'],
+['anh','LS','Double Agent','R2','Interrupt','Light'],
+['anh','LS','Grimtaash','C2','Interrupt','Light'],
+['anh','LS','Houjix','C2','Interrupt','Light'],
+['anh','LS','I Have A Very Bad Feeling About This','C2','Interrupt','Light'],
+['anh','LS','I\'m Here To Rescue You','U1','Interrupt','Light'],
+['anh','LS','Let The Wookiee Win','R1','Interrupt','Light'],
+['anh','LS','Out Of Commission','U2','Interrupt','Light'],
+['anh','LS','Quite A Mercenary','C2','Interrupt','Light'],
+['anh','LS','Sabotage','U1','Interrupt','Light'],
+['anh','LS','Sorry About The Mess','U1','Interrupt','Light'],
+['anh','LS','Wookiee Roar','R1','Interrupt','Light'],
+['anh','LS','You\'re All Clear Kid!','R1','Interrupt','Light'],
+['anh','LS','Clak\'dor VII','R2','Location','Light'],
+['anh','LS','Corellia','R1','Location','Light'],
+['anh','LS','Death Star: Trench','R2','Location','Light'],
+['anh','LS','Dejarik Hologameboard','R1','Location','Light'],
+['anh','LS','Kashyyyk','C1','Location','Light'],
+['anh','LS','Ralltiir','C1','Location','Light'],
+['anh','LS','Sandcrawler: Loading Bay','R1','Location','Light'],
+['anh','LS','Yavin 4: Briefing Room','U1','Location','Light'],
+['anh','LS','Yavin 4: Massassi Ruins','U1','Location','Light'],
+['anh','LS','Gold 2','U1','Starship','Light'],
+['anh','LS','Red 2','R1','Starship','Light'],
+['anh','LS','Red 5','R1','Starship','Light'],
+['anh','LS','Red 6','U1','Starship','Light'],
+['anh','LS','Tantive IV','R1','Starship','Light'],
+['anh','LS','Y-wing Assault Squadron','U1','Starship','Light'],
+['anh','LS','Incom T-16 Skyhopper','C2','Vehicle','Light'],
+['anh','LS','Rogue Bantha','U1','Vehicle','Light'],
+['anh','LS','Bowcaster','R2','Weapon','Light'],
+['anh','LS','Jawa Ion Gun','C2','Weapon','Light'],
+['anh','LS','Luke\'s Hunting Rifle','U1','Weapon','Light'],
+['anh','LS','Motti Seeker','R2','Weapon','Light'],
+['anh','LS','SW-4 Ion Cannon','R2','Weapon','Light'],
+// ── SW CCG A NEW HOPE — DARK SIDE ─────────────────────────────────────────
+['anh','DS','Advosze','C2','Character','Dark'],
+['anh','DS','Captain Khurgee','U1','Character','Dark'],
+['anh','DS','Dannik Jerriko','R1','Character','Dark'],
+['anh','DS','Danz Borin','U2','Character','Dark'],
+['anh','DS','Death Star Gunner','C1','Character','Dark'],
+['anh','DS','Defel','C2','Character','Dark'],
+['anh','DS','DS-61-4','R2','Character','Dark'],
+['anh','DS','Greedo','R1','Character','Dark'],
+['anh','DS','Hem Dazon','R1','Character','Dark'],
+['anh','DS','Imperial Commander','C2','Character','Dark'],
+['anh','DS','Imperial Squad Leader','C3','Character','Dark'],
+['anh','DS','IT-O (Eyetee-Oh)','R1','Character','Dark'],
+['anh','DS','Lirin Car\'n','U2','Character','Dark'],
+['anh','DS','Lt. Pol Treidum','C1','Character','Dark'],
+['anh','DS','Lt. Shann Childsen','U1','Character','Dark'],
+['anh','DS','Mosep','U2','Character','Dark'],
+['anh','DS','Officer Evax','C1','Character','Dark'],
+['anh','DS','R2-Q2 (Artoo-Kyootoo)','C2','Character','Dark'],
+['anh','DS','R3-T6 (Arthree-Teesix)','R1','Character','Dark'],
+['anh','DS','R5-A2 (Arfive-Aytoo)','C2','Character','Dark'],
+['anh','DS','Reegesk','U2','Character','Dark'],
+['anh','DS','Reserve Pilot','U1','Character','Dark'],
+['anh','DS','Rodian','C2','Character','Dark'],
+['anh','DS','Tech Mo\'r','U2','Character','Dark'],
+['anh','DS','Trooper Davin Felth','R2','Character','Dark'],
+['anh','DS','U-3PO (Yoo-Threepio)','R1','Character','Dark'],
+['anh','DS','URoRRuR\'R\'R','U2','Character','Dark'],
+['anh','DS','WED15-l7 \'Septoid\' Droid','U2','Character','Dark'],
+['anh','DS','Dianoga','R2','Creature','Dark'],
+['anh','DS','Death Star Tractor Beam','R2','Device','Dark'],
+['anh','DS','Hypo','R1','Device','Dark'],
+['anh','DS','Laser Gate','U2','Device','Dark'],
+['anh','DS','Magnetic Suction Tube','R2','Device','Dark'],
+['anh','DS','Tractor Beam','U1','Device','Dark'],
+['anh','DS','Astromech Shortage','U2','Effect','Dark'],
+['anh','DS','Besieged','R2','Effect','Dark'],
+['anh','DS','Come With Me','C2','Effect','Dark'],
+['anh','DS','Dark Waters','R2','Effect','Dark'],
+['anh','DS','Hyperwave Scan','U1','Effect','Dark'],
+['anh','DS','Imperial Justice','C2','Effect','Dark'],
+['anh','DS','Krayt Dragon Bones','U1','Effect','Dark'],
+['anh','DS','Maneuver Check','R2','Effect','Dark'],
+['anh','DS','Program Trap','U1','Effect','Dark'],
+['anh','DS','Spice Mines Of Kessel','R1','Effect','Dark'],
+['anh','DS','Swilla Corey','C2','Effect','Dark'],
+['anh','DS','Tentacle','C2','Effect','Dark'],
+['anh','DS','There\'ll Be Hell To Pay','U2','Effect','Dark'],
+['anh','DS','Undercover','U2','Effect','Dark'],
+['anh','DS','Commence Primary Ignition','R2','Epic Event','Dark'],
+['anh','DS','Evader','U1','Interrupt','Dark'],
+['anh','DS','Ghhhk','C2','Interrupt','Dark'],
+['anh','DS','I\'m On The Leader','R1','Interrupt','Dark'],
+['anh','DS','Informant','U1','Interrupt','Dark'],
+['anh','DS','Monnok','C2','Interrupt','Dark'],
+['anh','DS','Ng\'ok','C2','Interrupt','Dark'],
+['anh','DS','Oo-ta Goo-ta, Solo?','C2','Interrupt','Dark'],
+['anh','DS','Retract The Bridge','R1','Interrupt','Dark'],
+['anh','DS','Sniper','U1','Interrupt','Dark'],
+['anh','DS','Stunning Leader','C2','Interrupt','Dark'],
+['anh','DS','This Is Some Rescue!','U1','Interrupt','Dark'],
+['anh','DS','We Have A Prisoner','C2','Interrupt','Dark'],
+['anh','DS','Death Star','R2','Location','Dark'],
+['anh','DS','Death Star: Conference Room','U1','Location','Dark'],
+['anh','DS','Imperial Holotable','R1','Location','Dark'],
+['anh','DS','Kashyyyk','C1','Location','Dark'],
+['anh','DS','Kiffex','R1','Location','Dark'],
+['anh','DS','Ralltiir','C1','Location','Dark'],
+['anh','DS','Sandcrawler: Droid Junkheap','R1','Location','Dark'],
+['anh','DS','Tatooine: Bluffs','R1','Location','Dark'],
+['anh','DS','Black 4','U2','Starship','Dark'],
+['anh','DS','Conquest','R1','Starship','Dark'],
+['anh','DS','TIE Assault Squadron','U1','Starship','Dark'],
+['anh','DS','TIE Vanguard','C2','Starship','Dark'],
+['anh','DS','Victory-Class Star Destroyer','U1','Starship','Dark'],
+['anh','DS','Bespin Motors Void Spider THX 1138','C2','Vehicle','Dark'],
+['anh','DS','Mobquet A-1 Deluxe Floater','C2','Vehicle','Dark'],
+['anh','DS','Enhanced TIE Laser Cannon','C2','Weapon','Dark'],
+['anh','DS','Jawa Blaster','C2','Weapon','Dark'],
+['anh','DS','Leia Seeker','R2','Weapon','Dark'],
+['anh','DS','Superlaser','R2','Weapon','Dark'],
+['anh','DS','URoRRuR\'R\'R\'s Hunting Rifle','U1','Weapon','Dark'],
+// ── TOPPS SERIES 1 ────────────────────────────────────────────────────────
+['topps1','1','Bulbasaur','Normal','Pokemon','N/A'],
+['topps1','2','Ivysaur','Normal','Pokemon','N/A'],
+['topps1','3','Venusaur','Normal','Pokemon','N/A'],
+['topps1','4','Charmander','Normal','Pokemon','N/A'],
+['topps1','5','Charmeleon','Normal','Pokemon','N/A'],
+['topps1','6','Charizard','Normal','Pokemon','N/A'],
+['topps1','7','Squirtle','Normal','Pokemon','N/A'],
+['topps1','8','Wartortle','Normal','Pokemon','N/A'],
+['topps1','9','Blastoise','Normal','Pokemon','N/A'],
+['topps1','10','Caterpie','Normal','Pokemon','N/A'],
+['topps1','11','Metapod','Normal','Pokemon','N/A'],
+['topps1','12','Butterfree','Normal','Pokemon','N/A'],
+['topps1','13','Weedle','Normal','Pokemon','N/A'],
+['topps1','14','Kakuna','Normal','Pokemon','N/A'],
+['topps1','15','Beedrill','Normal','Pokemon','N/A'],
+['topps1','16','Pidgey','Normal','Pokemon','N/A'],
+['topps1','17','Pidgeotto','Normal','Pokemon','N/A'],
+['topps1','18','Pidgeot','Normal','Pokemon','N/A'],
+['topps1','19','Rattata','Normal','Pokemon','N/A'],
+['topps1','20','Raticate','Normal','Pokemon','N/A'],
+['topps1','21','Spearow','Normal','Pokemon','N/A'],
+['topps1','22','Fearow','Normal','Pokemon','N/A'],
+['topps1','23','Ekans','Normal','Pokemon','N/A'],
+['topps1','24','Arbok','Normal','Pokemon','N/A'],
+['topps1','25','Pikachu','Normal','Pokemon','N/A'],
+['topps1','26','Raichu','Normal','Pokemon','N/A'],
+['topps1','27','Sandshrew','Normal','Pokemon','N/A'],
+['topps1','28','Sandslash','Normal','Pokemon','N/A'],
+['topps1','29','Nidoran♀','Normal','Pokemon','N/A'],
+['topps1','30','Nidorina','Normal','Pokemon','N/A'],
+['topps1','31','Nidoqueen','Normal','Pokemon','N/A'],
+['topps1','32','Nidoran♂','Normal','Pokemon','N/A'],
+['topps1','33','Nidorino','Normal','Pokemon','N/A'],
+['topps1','34','Nidoking','Normal','Pokemon','N/A'],
+['topps1','35','Clefairy','Normal','Pokemon','N/A'],
+['topps1','36','Clefable','Normal','Pokemon','N/A'],
+['topps1','37','Vulpix','Normal','Pokemon','N/A'],
+['topps1','38','Ninetales','Normal','Pokemon','N/A'],
+['topps1','39','Jigglypuff','Normal','Pokemon','N/A'],
+['topps1','40','Wigglytuff','Normal','Pokemon','N/A'],
+['topps1','41','Zubat','Normal','Pokemon','N/A'],
+['topps1','42','Golbat','Normal','Pokemon','N/A'],
+['topps1','43','Oddish','Normal','Pokemon','N/A'],
+['topps1','44','Gloom','Normal','Pokemon','N/A'],
+['topps1','45','Vileplume','Normal','Pokemon','N/A'],
+['topps1','46','Paras','Normal','Pokemon','N/A'],
+['topps1','47','Parasect','Normal','Pokemon','N/A'],
+['topps1','48','Venonat','Normal','Pokemon','N/A'],
+['topps1','49','Venomoth','Normal','Pokemon','N/A'],
+['topps1','50','Diglett','Normal','Pokemon','N/A'],
+['topps1','51','Dugtrio','Normal','Pokemon','N/A'],
+['topps1','52','Meowth','Normal','Pokemon','N/A'],
+['topps1','53','Persian','Normal','Pokemon','N/A'],
+['topps1','54','Psyduck','Normal','Pokemon','N/A'],
+['topps1','55','Golduck','Normal','Pokemon','N/A'],
+['topps1','56','Mankey','Normal','Pokemon','N/A'],
+['topps1','57','Primeape','Normal','Pokemon','N/A'],
+['topps1','58','Growlithe','Normal','Pokemon','N/A'],
+['topps1','59','Arcanine','Normal','Pokemon','N/A'],
+['topps1','60','Poliwag','Normal','Pokemon','N/A'],
+['topps1','61','Poliwhirl','Normal','Pokemon','N/A'],
+['topps1','62','Poliwrath','Normal','Pokemon','N/A'],
+['topps1','63','Abra','Normal','Pokemon','N/A'],
+['topps1','64','Kadabra','Normal','Pokemon','N/A'],
+['topps1','65','Alakazam','Normal','Pokemon','N/A'],
+['topps1','66','Machop','Normal','Pokemon','N/A'],
+['topps1','67','Machoke','Normal','Pokemon','N/A'],
+['topps1','68','Machamp','Normal','Pokemon','N/A'],
+['topps1','69','Bellsprout','Normal','Pokemon','N/A'],
+['topps1','70','Weepinbell','Normal','Pokemon','N/A'],
+['topps1','71','Victreebel','Normal','Pokemon','N/A'],
+['topps1','72','Tentacool','Normal','Pokemon','N/A'],
+['topps1','73','Tentacruel','Normal','Pokemon','N/A'],
+['topps1','74','Geodude','Normal','Pokemon','N/A'],
+['topps1','75','Graveler','Normal','Pokemon','N/A'],
+['topps1','76','Golem','Normal','Pokemon','N/A'],
+['topps1','TV1','Ash Ketchum','Normal','Character','N/A'],
+['topps1','TV2','Pikachu (Ash\'s)','Normal','Character','N/A'],
+['topps1','TV3','Misty','Normal','Character','N/A'],
+['topps1','TV4','Brock','Normal','Character','N/A'],
+['topps1','TV5','Staryu (Misty\'s)','Normal','Character','N/A'],
+['topps1','TV6','Geodude (Brock\'s)','Normal','Character','N/A'],
+['topps1','TV7','Professor Oak','Normal','Character','N/A'],
+['topps1','TV8','Gary Oak','Normal','Character','N/A'],
+['topps1','TV9','Jessie','Normal','Character','N/A'],
+['topps1','TV10','James','Normal','Character','N/A'],
+['topps1','TV11','Meowth (Team Rocket)','Normal','Character','N/A'],
+['topps1','TV12','Jessie\'s Arbok','Normal','Character','N/A'],
+['topps1','TV13','James\'s Weezing','Normal','Character','N/A'],
+['topps1','CL','Checklist Card','Normal','Checklist','N/A'],
+// Silver Foil variants (same cards)
+['topps1','1-S','Bulbasaur','Silver Foil','Pokemon','N/A'],
+['topps1','6-S','Charizard','Silver Foil','Pokemon','N/A'],
+['topps1','9-S','Blastoise','Silver Foil','Pokemon','N/A'],
+['topps1','25-S','Pikachu','Silver Foil','Pokemon','N/A'],
+['topps1','TV1-S','Ash Ketchum','Silver Foil','Character','N/A'],
+// Rainbow Foil variants (key cards)
+['topps1','1-R','Bulbasaur','Rainbow Foil','Pokemon','N/A'],
+['topps1','6-R','Charizard','Rainbow Foil','Pokemon','N/A'],
+['topps1','9-R','Blastoise','Rainbow Foil','Pokemon','N/A'],
+['topps1','25-R','Pikachu','Rainbow Foil','Pokemon','N/A'],
+['topps1','TV1-R','Ash Ketchum','Rainbow Foil','Character','N/A'],
+];
+
+// Build card objects
+const CARDS = RAW.map((r,i)=>({id:i, set:r[0], num:r[1], name:r[2], rarity:r[3], type:r[4], side:r[5]}));
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let owned = new Set(JSON.parse(localStorage.getItem('cc_owned')||'[]'));
+let currentSet = 'all';
+let sortField = 'num';
+let sortDir = 1;
+
+function save(){localStorage.setItem('cc_owned',JSON.stringify([...owned]))}
+
+function toggle(id){
+  if(owned.has(id)) owned.delete(id); else owned.add(id);
+  save(); updateStats(); updateSidebar();
+}
+
+// ─── FILTERS ──────────────────────────────────────────────────────────────────
+function filtered(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const r=document.getElementById('filtRarity').value;
+  const sd=document.getElementById('filtSide').value;
+  const ow=document.getElementById('filtOwned').value;
+  return CARDS.filter(c=>{
+    if(currentSet!=='all' && c.set!==currentSet) return false;
+    if(q && !c.name.toLowerCase().includes(q) && !c.num.toLowerCase().includes(q)) return false;
+    if(r && c.rarity!==r) return false;
+    if(sd && c.side!==sd) return false;
+    if(ow==='owned' && !owned.has(c.id)) return false;
+    if(ow==='missing' && owned.has(c.id)) return false;
+    return true;
+  });
+}
+
+// ─── SORT ─────────────────────────────────────────────────────────────────────
+const RARITY_ORDER={'Holo Rare':0,'Secret Rare':1,'Rainbow Foil':2,'Silver Foil':3,'R1':4,'Rare':4,'R2':5,'U1':6,'Normal':7,'Uncommon':7,'U2':8,'C1':9,'Common':9,'C2':10,'C3':11};
+
+function setSort(f){
+  if(sortField===f) sortDir*=-1; else {sortField=f;sortDir=1;}
+  document.querySelectorAll('#controls .btn[id^=sort]').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById('sort'+f.charAt(0).toUpperCase()+f.slice(1));
+  if(el) el.classList.add('active');
+  render();
+}
+
+function sortCards(arr){
+  return [...arr].sort((a,b)=>{
+    let va,vb;
+    if(sortField==='rarity'){va=RARITY_ORDER[a.rarity]??99;vb=RARITY_ORDER[b.rarity]??99;}
+    else if(sortField==='num'){va=a.num;vb=b.num;}
+    else {va=a[sortField]||'';vb=b[sortField]||'';}
+    if(va<vb) return -sortDir;
+    if(va>vb) return sortDir;
+    return 0;
+  });
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function rarityClass(r){
+  const map={'Holo Rare':'r-holo','Rare':'r-rare','Secret Rare':'r-secret','Uncommon':'r-uncommon','Common':'r-common','R1':'r-r1','R2':'r-r2','U1':'r-u1','U2':'r-u2','C1':'r-c1','C2':'r-c2','C3':'r-c3','Normal':'r-common','Silver Foil':'r-uncommon','Rainbow Foil':'r-holo'};
+  return map[r]||'r-common';
+}
+
+function render(){
+  const cards = sortCards(filtered());
+  const tbody = document.getElementById('tbody');
+  const setInfo = SETS.find(s=>s.id===currentSet);
+  tbody.innerHTML = cards.map(c=>{
+    const isOwned=owned.has(c.id);
+    const sideClass=c.side==='Light'?'side-light':c.side==='Dark'?'side-dark':'';
+    const setName=SETS.find(s=>s.id===c.set)?.name||c.set;
+    return `<tr class="${isOwned?'owned':''}" onclick="toggle(${c.id})">
+      <td class="check"><input type="checkbox" ${isOwned?'checked':''} onclick="event.stopPropagation();toggle(${c.id})"></td>
+      <td class="num">${c.num}</td>
+      <td class="name">${c.name}</td>
+      <td class="set-col">${currentSet==='all'?setName:''}</td>
+      <td class="rarity"><span class="${rarityClass(c.rarity)}">${c.rarity}</span></td>
+      <td class="type-col">${c.type}</td>
+      <td class="side"><span class="${sideClass}">${c.side==='N/A'?'—':c.side}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Footer
+  const total=cards.length;
+  const ownedCount=cards.filter(c=>owned.has(c.id)).length;
+  const pct=total?Math.round(ownedCount/total*100):0;
+  document.getElementById('footerLabel').textContent=setInfo?setInfo.name:'All Sets';
+  document.getElementById('footerBar').style.width=pct+'%';
+  document.getElementById('footerPct').textContent=`${ownedCount} / ${total}`;
+  updateStats();
+}
+
+function updateStats(){
+  const total=CARDS.length;
+  const ownedCount=owned.size;
+  document.getElementById('statTotal').textContent=total;
+  document.getElementById('statOwned').textContent=ownedCount;
+  document.getElementById('statMissing').textContent=total-ownedCount;
+  document.getElementById('statPct').textContent=Math.round(ownedCount/total*100)+'%';
+}
+
+function updateSidebar(){
+  const games=['Pokemon','SWCCG','Topps'];
+  const gameLabels={Pokemon:'Pokémon TCG','SWCCG':'Star Wars CCG','Topps':'Topps Pokémon'};
+  let html='';
+  games.forEach(g=>{
+    const sets=SETS.filter(s=>s.game===g);
+    html+=`<div class="game-group"><div class="game-label">${gameLabels[g]}</div>`;
+    sets.forEach(s=>{
+      const cards=CARDS.filter(c=>c.set===s.id);
+      const ownedCount=cards.filter(c=>owned.has(c.id)).length;
+      const total=cards.length;
+      const pct=total?Math.round(ownedCount/total*100):0;
+      const isActive=currentSet===s.id;
+      html+=`<div class="set-item ${isActive?'active':''}" onclick="selectSet('${s.id}')">
+        <div>
+          <div class="set-name">${s.name}${!s.complete?' <span class="badge badge-partial">partial</span>':''}</div>
+          <div class="set-prog">${ownedCount}/${total} · ${pct}%</div>
+          <div class="set-bar"><div class="set-fill" style="width:${pct}%"></div></div>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  // All sets option
+  const allActive=currentSet==='all';
+  document.getElementById('sidebar').innerHTML=
+    `<div class="set-item ${allActive?'active':''}" onclick="selectSet('all')" style="margin-bottom:8px;border-bottom:1px solid var(--b)">
+      <div><div class="set-name" style="color:var(--gold)">All Cards</div>
+      <div class="set-prog">${owned.size}/${CARDS.length} · ${Math.round(owned.size/CARDS.length*100)}%</div></div>
+    </div>`+html;
+}
+
+function selectSet(id){
+  currentSet=id;
+  updateSidebar();
+  render();
+  document.getElementById('content').scrollTop=0;
+}
+
+function clearAll(){
+  if(confirm('Clear ALL checked cards?')){owned.clear();save();render();updateSidebar();}}
+
+function checkAll(){
+  filtered().forEach(c=>owned.add(c.id));
+  save();render();updateSidebar();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+setSort('num');
+updateSidebar();
+render();
+</script>
+</body>
+</html>
