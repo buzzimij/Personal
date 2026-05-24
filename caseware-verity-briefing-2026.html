@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CaseWare Verity — Firm Briefing | May 2026</title>
+<style>
+:root {
+  --bg: #09090f;
+  --s1: #0f1018;
+  --s2: #14151f;
+  --b: #1e2030;
+  --b2: #252840;
+  --gold: #c9a84c;
+  --gold2: #e8c870;
+  --blue: #4e9de8;
+  --blue2: #7bb8f0;
+  --green: #4be87a;
+  --red: #e8504e;
+  --purple: #9b72e8;
+  --teal: #4be8d4;
+  --text: #d8dce8;
+  --sub: #7a80a0;
+  --muted: #464870;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px; line-height: 1.75; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { color: var(--blue2); text-decoration: underline; }
+
+/* ── LAYOUT ── */
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* ── HEADER ── */
+.masthead { border-bottom: 1px solid var(--b2); padding: 32px 0 24px; margin-bottom: 40px; }
+.firm-label { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+h1 { font-size: 32px; font-weight: 700; color: var(--gold2); line-height: 1.2; margin-bottom: 8px; }
+.subtitle { font-size: 16px; color: var(--sub); font-style: italic; margin-bottom: 18px; }
+.meta-row { display: flex; gap: 24px; flex-wrap: wrap; }
+.meta-pill { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 11px; background: var(--s2); border: 1px solid var(--b2); border-radius: 20px; padding: 3px 12px; color: var(--sub); }
+.meta-pill strong { color: var(--gold); }
+
+/* ── NAV ── */
+.toc { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; }
+.toc-title { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 32px; }
+.toc a { font-size: 13px; color: var(--sub); font-family: 'SF Mono','Cascadia Code',monospace; }
+.toc a:hover { color: var(--gold); text-decoration: none; }
+.toc-num { color: var(--muted); margin-right: 6px; }
+
+/* ── SECTIONS ── */
+section { margin-bottom: 56px; }
+.section-label { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+h2 { font-size: 22px; color: var(--gold2); border-bottom: 1px solid var(--b2); padding-bottom: 10px; margin-bottom: 24px; }
+h3 { font-size: 17px; color: var(--blue2); margin: 28px 0 12px; }
+h4 { font-size: 14px; color: var(--text); margin: 20px 0 8px; font-style: italic; }
+p { margin-bottom: 14px; color: var(--text); }
+ul, ol { padding-left: 22px; margin-bottom: 14px; }
+li { margin-bottom: 6px; }
+strong { color: var(--gold); font-weight: 600; }
+em { color: var(--sub); }
+
+/* ── CALLOUT BOXES ── */
+.callout { border-radius: 6px; padding: 16px 20px; margin: 20px 0; border-left: 3px solid; }
+.callout-gold { background: rgba(201,168,76,.07); border-color: var(--gold); }
+.callout-blue { background: rgba(78,157,232,.07); border-color: var(--blue); }
+.callout-green { background: rgba(75,232,122,.07); border-color: var(--green); }
+.callout-red { background: rgba(232,80,78,.07); border-color: var(--red); }
+.callout-purple { background: rgba(155,114,232,.07); border-color: var(--purple); }
+.callout-teal { background: rgba(75,232,212,.07); border-color: var(--teal); }
+.callout-title { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 8px; }
+.callout-gold .callout-title { color: var(--gold); }
+.callout-blue .callout-title { color: var(--blue); }
+.callout-green .callout-title { color: var(--green); }
+.callout-red .callout-title { color: var(--red); }
+.callout-purple .callout-title { color: var(--purple); }
+.callout-teal .callout-title { color: var(--teal); }
+
+/* ── TABLES ── */
+.tbl-wrap { overflow-x: auto; margin: 20px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { background: var(--s2); color: var(--gold); font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--b2); white-space: nowrap; }
+tbody td { padding: 10px 14px; border-bottom: 1px solid var(--b); vertical-align: top; }
+tbody tr:hover { background: var(--s1); }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; font-weight: 600; letter-spacing: .05em; }
+.tag-ga { background: rgba(75,232,122,.15); color: var(--green); border: 1px solid rgba(75,232,122,.3); }
+.tag-beta { background: rgba(78,157,232,.15); color: var(--blue); border: 1px solid rgba(78,157,232,.3); }
+.tag-alpha { background: rgba(201,168,76,.15); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
+.tag-cloud { background: rgba(75,232,212,.12); color: var(--teal); border: 1px solid rgba(75,232,212,.25); }
+.tag-desktop { background: rgba(155,114,232,.12); color: var(--purple); border: 1px solid rgba(155,114,232,.25); }
+.tag-hybrid { background: rgba(232,80,78,.12); color: var(--red); border: 1px solid rgba(232,80,78,.25); }
+
+/* ── AGENT CARDS ── */
+.agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+.agent-card { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 20px; }
+.agent-card-num { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; color: var(--muted); letter-spacing: .12em; margin-bottom: 6px; }
+.agent-card-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.agent-card-status { margin-bottom: 14px; }
+.agent-card p { font-size: 13px; color: var(--sub); margin-bottom: 8px; }
+.agent-stat { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 22px; color: var(--gold2); font-weight: 700; display: block; margin-top: 12px; }
+.agent-stat-label { font-size: 11px; color: var(--muted); }
+
+/* ── PRODUCT CARDS ── */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 20px 0; }
+.product-card { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 18px; }
+.product-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.product-card p { font-size: 12px; color: var(--sub); line-height: 1.6; margin: 0; }
+.product-card .tag { margin-bottom: 8px; display: inline-block; }
+
+/* ── STAT ROW ── */
+.stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
+.stat-box { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 18px 22px; flex: 1; min-width: 140px; text-align: center; }
+.stat-val { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 28px; color: var(--gold2); font-weight: 700; display: block; }
+.stat-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; display: block; }
+
+/* ── TIMELINE ── */
+.timeline { border-left: 2px solid var(--b2); padding-left: 24px; margin: 20px 0; }
+.timeline-item { position: relative; margin-bottom: 24px; }
+.timeline-item::before { content: ''; position: absolute; left: -30px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
+.timeline-date { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 11px; color: var(--gold); margin-bottom: 4px; }
+.timeline-event { font-size: 14px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
+.timeline-detail { font-size: 13px; color: var(--sub); }
+
+/* ── FOOTER ── */
+footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
+.footer-row { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
+.footer-copy { font-size: 12px; color: var(--muted); line-height: 1.7; }
+.sources-title { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.source-list { list-style: none; padding: 0; }
+.source-list li { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.source-list a { color: var(--muted); }
+.source-list a:hover { color: var(--blue); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="firm-label">Internal Briefing — Technology Intelligence</div>
+  <h1>CaseWare Verity</h1>
+  <div class="subtitle">AI Agents for Audit — What It Is, How It Works, and What It Means for the Firm</div>
+  <div class="meta-row">
+    <div class="meta-pill"><strong>Date</strong> May 2026</div>
+    <div class="meta-pill"><strong>Status</strong> Launched May 20, 2026</div>
+    <div class="meta-pill"><strong>Coverage</strong> Verity · DAS · Full CaseWare Stack</div>
+    <div class="meta-pill"><strong>Classification</strong> Internal Use</div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <div class="toc-grid">
+    <div><a href="#tldr"><span class="toc-num">01</span> Executive Summary</a></div>
+    <div><a href="#verity"><span class="toc-num">02</span> What Is Verity?</a></div>
+    <div><a href="#agents"><span class="toc-num">03</span> The Three AI Agents</a></div>
+    <div><a href="#das"><span class="toc-num">04</span> DAS Integration — The Full Picture</a></div>
+    <div><a href="#ecosystem"><span class="toc-num">05</span> CaseWare Product Ecosystem</a></div>
+    <div><a href="#tech"><span class="toc-num">06</span> AI Models &amp; Tech Stack</a></div>
+    <div><a href="#pricing"><span class="toc-num">07</span> Pricing &amp; Availability</a></div>
+    <div><a href="#cwx"><span class="toc-num">08</span> CWX Conference Coverage</a></div>
+    <div><a href="#competitive"><span class="toc-num">09</span> Competitive Landscape</a></div>
+    <div><a href="#adoption"><span class="toc-num">10</span> Firm Adoption &amp; Market Traction</a></div>
+    <div><a href="#implications"><span class="toc-num">11</span> Strategic Implications</a></div>
+    <div><a href="#gaps"><span class="toc-num">12</span> Known Gaps &amp; Open Questions</a></div>
+  </div>
+</div>
+
+<!-- 01 EXECUTIVE SUMMARY -->
+<section id="tldr">
+  <div class="section-label">Section 01</div>
+  <h2>Executive Summary</h2>
+
+  <div class="callout callout-gold">
+    <div class="callout-title">Bottom Line Up Front</div>
+    <p style="margin:0">CaseWare launched <strong>Verity</strong> on May 20, 2026 — their flagship agentic AI platform embedded directly inside the audit workflow. Unlike copilot-style AI tools that sit alongside the engagement, Verity agents work <em>inside</em> the file, understand engagement context, and produce citation-backed outputs auditors can accept, refine, or override. The first agent is <strong>generally available now in DAS</strong>; two more are in beta/alpha. This is CaseWare's $100M+ multi-year bet on AI-native audit.</p>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="stat-val">94%</span>
+      <span class="stat-lbl">Accuracy on beta test sets</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">85%</span>
+      <span class="stat-lbl">Time savings on targeted tasks</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">2.7 hrs</span>
+      <span class="stat-lbl">Saved per disclosure checklist workflow</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">$100M+</span>
+      <span class="stat-lbl">Multi-year investment committed</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">50%</span>
+      <span class="stat-lbl">Target: repetitive tasks automated</span>
+    </div>
+  </div>
+
+  <h3>Key Points for Leadership</h3>
+  <ul>
+    <li><strong>Verity is not a standalone product</strong> — it is an AI orchestration layer embedded natively into CaseWare's audit platforms, starting with DAS.</li>
+    <li>The <strong>Disclosure Checklist Agent is live today</strong> in DAS. Two more agents (Document Intelligence, Risk Suggestion) are in closed beta and alpha respectively.</li>
+    <li><strong>DAS + Verity is the integration story.</strong> Verity's primary launch home is DAS. Firms not on DAS will not have immediate access to Verity agents.</li>
+    <li>CaseWare's <strong>predecessor AI tool (AiDA) uses Anthropic Claude</strong> via Amazon Bedrock. Verity's model is undisclosed but the same infrastructure is assumed.</li>
+    <li>Pricing has <strong>not been announced</strong>. The CEO explicitly deferred commercialization details to a phased rollout cadence.</li>
+    <li>200+ firms and 1,000+ engagements are already live on DAS as of early 2025, including several T100 firms actively migrating.</li>
+  </ul>
+</section>
+
+<!-- 02 WHAT IS VERITY -->
+<section id="verity">
+  <div class="section-label">Section 02</div>
+  <h2>What Is Verity?</h2>
+
+  <p>Verity is CaseWare's <strong>AI intelligence and orchestration layer</strong> — announced May 20, 2026 and officially launched at the CwX 2026 conference in Fort Lauderdale (May 21–22, 2026). It is described as the <em>"industry-first agentic solution specifically designed for assurance professionals."</em></p>
+
+  <div class="callout callout-blue">
+    <div class="callout-title">The Core Concept — "The First AI That Understands the Engagement"</div>
+    <p style="margin:0">Most AI tools in audit sit <em>outside</em> the file — you paste content in, get a response, copy it back. Verity is built <em>inside</em> the engagement. It has access to the full context of the audit file: prior year workpapers, board minutes, financial statements, risk assessments, client history. This engagement-context awareness is CaseWare's primary differentiator claim.</p>
+  </div>
+
+  <h3>What Verity Is — and Isn't</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Verity IS</th><th>Verity IS NOT</th></tr></thead>
+    <tbody>
+      <tr><td>An AI orchestration layer embedded in the audit workflow</td><td>A standalone product you can buy separately</td></tr>
+      <tr><td>A collection of task-specific AI agents (each with a defined scope)</td><td>A general-purpose chatbot or copilot</td></tr>
+      <tr><td>Citation-backed — every output links to source evidence</td><td>A black box — all outputs are reviewable and auditable</td></tr>
+      <tr><td>Human-in-the-loop — auditor must accept/refine/override</td><td>Autonomous — it does not post to the file without human approval</td></tr>
+      <tr><td>Currently integrated into DAS (Dynamic Audit Solution)</td><td>Available in Working Papers (desktop) or other platforms yet</td></tr>
+      <tr><td>Role-aware (different surfaces for preparer vs. manager vs. partner)</td><td>One-size-fits-all</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Launch Timeline</h3>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">May 20, 2026</div>
+      <div class="timeline-event">Verity Press Release</div>
+      <div class="timeline-detail">Official press release via GlobeNewswire. $100M+ investment disclosed. Three agents announced. Tagline: "The first AI that understands the engagement."</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">May 21–22, 2026</div>
+      <div class="timeline-event">CwX 2026 — Fort Lauderdale, FL</div>
+      <div class="timeline-detail">Primary launch event. Live LinkedIn broadcast. Disclosure Checklist Agent announced as GA. Live demos of all three agents. CEO keynote on AI augmentation vs. replacement framing.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Q4 2025 / Q1 2026</div>
+      <div class="timeline-event">Closed Beta</div>
+      <div class="timeline-detail">Beta testing with select firms. 94% accuracy and 85% time savings metrics reported from these sessions. Beta firm names not disclosed publicly.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">January 2025</div>
+      <div class="timeline-event">Extractly.ai Acquisition</div>
+      <div class="timeline-detail">CaseWare acquires Extractly.ai — PDF data extraction and financial statement validation. Technology folded into Verity's Document Intelligence Agent.</div>
+    </div>
+  </div>
+
+  <h3>Governance &amp; Compliance</h3>
+  <ul>
+    <li><strong>SOC 2 Type II</strong> and <strong>ISO 27001</strong> certified</li>
+    <li>All AI outputs require <strong>human acceptance</strong> before entering the engagement file</li>
+    <li>Every output includes <strong>citations</strong> traceable to source documents</li>
+    <li>Auditors can <strong>accept, refine, or override</strong> any suggestion</li>
+    <li>Designed to meet professional standards requirements — outputs are a starting point, not a conclusion</li>
+  </ul>
+</section>
+
+<!-- 03 THE THREE AGENTS -->
+<section id="agents">
+  <div class="section-label">Section 03</div>
+  <h2>The Three AI Agents</h2>
+
+  <p>At launch, Verity consists of three distinct agents, each targeting a specific phase of the audit workflow. They are not interchangeable — each has a defined task scope and a defined place in the engagement timeline.</p>
+
+  <div class="agent-grid">
+
+    <div class="agent-card">
+      <div class="agent-card-num">AGENT 01</div>
+      <div class="agent-card-name">Disclosure Checklist Agent</div>
+      <div class="agent-card-status"><span class="tag tag-ga">GA — Live in DAS</span></div>
+      <p>Automates the financial statement disclosure review process. Reviews disclosures against applicable standards, flags gaps, and generates citation-backed suggestions the auditor can accept, refine, or override before posting to the workpaper.</p>
+      <p><strong>Where it lives:</strong> Embedded in DAS during the completion/reporting phase of the engagement.</p>
+      <p><strong>Key outcome:</strong> Replaces a largely manual checklist process that currently involves cross-referencing disclosures against GAAP/GAAS requirements.</p>
+      <span class="agent-stat">2.7 hrs</span>
+      <span class="agent-stat-label">saved per workflow</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-card-num">AGENT 02</div>
+      <div class="agent-card-name">Document Intelligence Agent</div>
+      <div class="agent-card-status"><span class="tag tag-beta">Closed Beta</span></div>
+      <p>Automates document review, analysis, and evidence extraction directly into workpapers. Ingests client-provided documents (contracts, agreements, statements) and extracts relevant information into the appropriate workpaper location.</p>
+      <p><strong>Where it lives:</strong> Fieldwork phase — populates evidence in workpapers from document uploads.</p>
+      <p><strong>Underlying tech:</strong> Powered in part by the Extractly.ai acquisition (Jan 2025), which specialized in PDF extraction and financial statement parsing.</p>
+      <span class="agent-stat">~80%</span>
+      <span class="agent-stat-label">document review time reduction (est.)</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-card-num">AGENT 03</div>
+      <div class="agent-card-name">Risk Suggestion Agent</div>
+      <div class="agent-card-status"><span class="tag tag-alpha">Alpha</span></div>
+      <p>Analyzes multi-year financial data combined with board minutes and prior-year risk documentation to generate risk suggestions at the planning stage. Surfaces risks the engagement team may not have explicitly identified.</p>
+      <p><strong>Where it lives:</strong> Planning phase — generates a suggested risk register that teams can accept, modify, or supplement.</p>
+      <p><strong>Why this matters:</strong> Risk identification quality is highly auditor-dependent; this aims to standardize and elevate the floor across all engagements and experience levels.</p>
+      <span class="agent-stat">Planning</span>
+      <span class="agent-stat-label">earliest in audit lifecycle</span>
+    </div>
+
+  </div>
+
+  <div class="callout callout-teal">
+    <div class="callout-title">The Full Workflow Coverage Ambition</div>
+    <p style="margin:0">Taken together, the three agents cover <strong>planning → fieldwork → completion</strong>. This is deliberate — CaseWare is signaling that Verity will eventually provide AI assistance across the entire engagement lifecycle, not just isolated tasks. The Risk Agent handles planning, Document Intelligence handles fieldwork, and Disclosure Checklist handles the completion/reporting phase.</p>
+  </div>
+</section>
+
+<!-- 04 DAS INTEGRATION -->
+<section id="das">
+  <div class="section-label">Section 04</div>
+  <h2>DAS Integration — The Full Picture</h2>
+
+  <div class="callout callout-green">
+    <div class="callout-title">Direct Answer: Yes — Verity's Home Is DAS</div>
+    <p style="margin:0"><strong>Verity is built into DAS.</strong> The Disclosure Checklist Agent is generally available inside DAS right now. The other two agents will also launch inside DAS first. This is not a light integration — Verity uses DAS's engagement data (prior year files, risk registers, financial statements) as the context that powers the AI. DAS is the reason Verity can claim to "understand the engagement."</p>
+  </div>
+
+  <h3>What Is DAS?</h3>
+  <p><strong>DAS (Dynamic Audit Solution)</strong> is a cloud-native, end-to-end audit platform co-developed by <strong>AICPA + CPA.com + CaseWare</strong>. It was commercially launched in Summer 2023. It is the most significant product in CaseWare's current portfolio and the center of their growth strategy.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Attribute</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Built on</strong></td><td>CaseWare Cloud platform</td></tr>
+      <tr><td><strong>Methodology</strong></td><td>AICPA audit methodology — embedded, not optional. The only commercial product co-developed with the AICPA.</td></tr>
+      <tr><td><strong>Audit approach</strong></td><td>Risk-based, full population testing (not just sampling), dynamic risk suggestions</td></tr>
+      <tr><td><strong>Population testing</strong></td><td>Full population analytics using IDEA's data engine — tests 100% of transactions by default</td></tr>
+      <tr><td><strong>Collaboration</strong></td><td>Real-time, role-based — preparers, managers, partners work in the same live file</td></tr>
+      <tr><td><strong>Target firms</strong></td><td>Regional and national firms performing financial statement audits; heavy T100 adoption</td></tr>
+      <tr><td><strong>Launched</strong></td><td>Summer 2023 (commercial); AICPA pilot began 2021</td></tr>
+      <tr><td><strong>Scale</strong></td><td>1,000+ engagements, 200+ firms as of early 2025</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>The DAS Suite — It's More Than One Product</h3>
+  <p>DAS is actually a suite of related products:</p>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Product</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>DAS</strong></td><td>Core financial statement audit platform (the flagship)</td></tr>
+      <tr><td><strong>DAS PCR</strong></td><td>Preparation, Compilation, and Review engagements (SSARS work)</td></tr>
+      <tr><td><strong>DAS EBP</strong></td><td>Employee Benefit Plan audits (ERISA / DOL requirements)</td></tr>
+      <tr><td><strong>Taxflow</strong></td><td>Tax return and provision workpapers integrated with the engagement</td></tr>
+      <tr><td><strong>Sherlock</strong></td><td>Practice intelligence and benchmarking — hours, realization, profitability analytics</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Why the AICPA Partnership Matters</h3>
+  <p>The AICPA co-development is not just a marketing badge. It means:</p>
+  <ul>
+    <li>The audit methodology is baked into the workflow — the "right" procedures surface at the right time based on assessed risk</li>
+    <li>Standard-setting changes flow through more quickly (AICPA has a stake in keeping DAS current)</li>
+    <li>AICPA endorses DAS in materials to member firms — implicit channel support</li>
+    <li>Verity's AI agents are built on top of this methodology, meaning risk suggestions and disclosure checklists are calibrated to AICPA standards</li>
+  </ul>
+
+  <div class="callout callout-red">
+    <div class="callout-title">Important Limitation to Flag</div>
+    <p style="margin:0">If your firm is <strong>not on DAS</strong> (i.e., still on Working Papers / CaseWare Hybrid), you do <strong>not</strong> have access to Verity agents today. There is no announced timeline for Verity availability in Working Papers or the hybrid environment. This is a migration forcing function — Verity is an incentive to move to the cloud/DAS platform.</p>
+  </div>
+</section>
+
+<!-- 05 PRODUCT ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="section-label">Section 05</div>
+  <h2>CaseWare Product Ecosystem</h2>
+
+  <p>CaseWare's product line can be confusing because they serve different deployment models, methodologies, and firm sizes. Here is the complete picture, organized by deployment type.</p>
+
+  <h3>The Three Deployment Models</h3>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Model</th><th>What It Means</th><th>Who Uses It</th><th>Verity Access</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tag tag-desktop">Desktop</span><br><strong>Working Papers</strong></td>
+        <td>Software installed on local machines. Files stored locally or on firm servers. The original CaseWare product — been around since the 1980s. 40,000+ firms globally still use it.</td>
+        <td>Smaller firms; firms not yet migrated; firms with data residency requirements</td>
+        <td style="color:var(--red)">No access to Verity agents</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-hybrid">Hybrid</span><br><strong>CaseWare Hybrid / Essentials</strong></td>
+        <td>Working Papers files stored in CaseWare Cloud, synced via HTTPS. The engagement file still opens in the desktop client, but storage and sharing is cloud-based. Middle ground between desktop and full cloud.</td>
+        <td>Firms transitioning to cloud; multi-office collaboration needs; want cloud storage without full platform change</td>
+        <td style="color:var(--red)">No access to Verity agents</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-cloud">Cloud</span><br><strong>CaseWare Cloud + DAS</strong></td>
+        <td>Fully browser-based. No desktop client required. Engagement lives entirely in the cloud. Built-in AICPA methodology (DAS), real-time collaboration, open API, full population testing.</td>
+        <td>Growth-oriented regional/national firms; firms modernizing audit methodology; T100 firms migrating</td>
+        <td style="color:var(--green)"><strong>Full Verity access</strong></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Complete Product Reference</h3>
+
+  <div class="product-grid">
+
+    <div class="product-card">
+      <span class="tag tag-desktop">Desktop</span>
+      <div class="product-name">Working Papers</div>
+      <p>Legacy engagement management platform. Installed software with 60+ GL integrations. The product that built CaseWare. Still the largest installed base globally. Supports compilation, review, audit, and tax engagements through add-on templates.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-hybrid">Hybrid</span>
+      <div class="product-name">CaseWare Hybrid / Essentials</div>
+      <p>Working Papers with cloud storage. Files sync via HTTPS to CaseWare Cloud. Teams can share files across offices; offline capability retained. Migration stepping stone — not the end state CaseWare is pushing toward.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Cloud Platform</span>
+      <div class="product-name">CaseWare Cloud</div>
+      <p>The underlying platform hosting 85+ applications. Not a product itself — the infrastructure layer. Think of it as the operating system that DAS, Financials, Sherlock, and all cloud products run on. Provides SSO, permissions, API, integrations.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Cloud — Audit</span>
+      <div class="product-name">DAS (Dynamic Audit Solution)</div>
+      <p>AICPA co-developed, end-to-end financial statement audit platform. Cloud-native, full population testing, embedded risk-based methodology. Primary home of Verity. The flagship growth product. See Section 04 for full detail.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Cloud — Audit</span>
+      <div class="product-name">Agile Audit</div>
+      <p>Lighter-weight cloud audit platform for firms wanting risk-based audit without the full DAS migration commitment. Less methodology-prescriptive than DAS; more flexible templating. Positioned below DAS in complexity/features.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Cloud — Audit</span>
+      <div class="product-name">OnPoint Audit</div>
+      <p>CaseWare-methodology audit platform, historically Canadian-market focused. Similar to DAS but uses CaseWare's own methodology rather than AICPA's. Some overlap with DAS as CaseWare consolidates product lines.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Cloud — Other</span>
+      <div class="product-name">OnPoint PCR / EBP</div>
+      <p>OnPoint PCR = Preparation, Compilation &amp; Review (SSARS). OnPoint EBP = Employee Benefit Plan audits. Cloud-native; methodology-embedded for each engagement type. DAS equivalents are DAS PCR and DAS EBP.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Cloud — Reporting</span>
+      <div class="product-name">CaseWare Financials</div>
+      <p>Financial statement preparation and reporting in the cloud. Automated disclosure drafting, roll-forward capability, XBRL/iXBRL tagging. Integrates with DAS engagement data — disclosures can be pushed from audit file to financial statements.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Analytics</span>
+      <div class="product-name">IDEA / IDEA Web</div>
+      <p>Data analytics platform with 100+ audit-specific tests. Industry standard for fraud detection, sampling, and anomaly testing. IDEA Web = browser-based version. The analytics engine that powers DAS's full population testing capability. Direct competitor to ACL/Galvanize.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">AI — Existing</span>
+      <div class="product-name">AiDA</div>
+      <p>CaseWare's in-engagement AI assistant (pre-Verity). Q&amp;A interface, document summarization, contextual help within the engagement file. Confirmed to use Anthropic Claude models via Amazon Bedrock. Verity is the evolution of AiDA into agentic action, not just conversation.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">AI — New</span>
+      <div class="product-name">Verity</div>
+      <p>Agentic AI orchestration layer. Three agents: Disclosure Checklist (GA), Document Intelligence (Beta), Risk Suggestion (Alpha). Embedded in DAS. Citation-backed. Human-in-the-loop. $100M+ investment. See Sections 02–04.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">AI — Acquired</span>
+      <div class="product-name">Extractly / Validate</div>
+      <p>Acquired January 2025. Extractly = AI-powered PDF data extraction from financial statements and documents. Validate = financial statement integrity checking. Technology now folded into Verity's Document Intelligence Agent.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Practice Intelligence</span>
+      <div class="product-name">Sherlock</div>
+      <p>Practice analytics platform — engagement hours, staff utilization, realization rates, profitability benchmarking. Pulls data from DAS and other engagement platforms. Partners/firm leadership tool; helps optimize pricing and staffing.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="tag tag-cloud">Quality</span>
+      <div class="product-name">SQM (System of Quality Management)</div>
+      <p>Cloud-based quality management system aligned to SQMS No. 1 (the new AICPA quality management standard effective Dec 2025). Manages firm-level quality policies, monitoring, and remediation. Separate from engagement-level quality review.</p>
+    </div>
+
+  </div>
+
+  <h3>The Migration Direction — Where CaseWare Is Pushing Firms</h3>
+  <div class="callout callout-purple">
+    <div class="callout-title">The Clear Signal</div>
+    <p style="margin:0">CaseWare's entire AI investment (Verity, Extractly acquisition, AiDA) is built on <strong>CaseWare Cloud / DAS</strong>. Working Papers and Hybrid are maintained but not where new innovation is landing. The message to firms is unambiguous: the future of CaseWare's platform is cloud-native, and the competitive advantages (Verity, full population testing, AICPA methodology) are only accessible there. This is a migration forcing function that will intensify over the next 2–3 years.</p>
+  </div>
+</section>
+
+<!-- 06 AI MODELS & TECH -->
+<section id="tech">
+  <div class="section-label">Section 06</div>
+  <h2>AI Models &amp; Tech Stack</h2>
+
+  <h3>What We Know</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Product</th><th>Model / Infrastructure</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AiDA</strong> (predecessor assistant)</td><td>Anthropic Claude, via Amazon Bedrock</td><td style="color:var(--green)">Confirmed — publicly documented by CaseWare</td></tr>
+      <tr><td><strong>Verity</strong></td><td>Not disclosed — referred to as "large language models"</td><td style="color:var(--gold)">Likely Claude (same Bedrock infrastructure) — unconfirmed</td></tr>
+      <tr><td><strong>Extractly (now in Verity)</strong></td><td>AI/ML for document extraction — model not specified</td><td style="color:var(--red)">Unknown</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Why CaseWare Uses Bedrock / Claude</h3>
+  <ul>
+    <li><strong>Enterprise data controls:</strong> Amazon Bedrock ensures client engagement data does not leave CaseWare's controlled environment and is not used to train foundation models — a critical requirement for audit data containing MNPI and confidential financial information</li>
+    <li><strong>Anthropic Claude</strong> is favored by compliance-sensitive industries for its Constitutional AI design and lower hallucination rates vs. alternatives on structured financial tasks</li>
+    <li><strong>Citation capability</strong> — the citation-backed output design aligns with Claude's retrieval and attribution strengths</li>
+  </ul>
+
+  <div class="callout callout-blue">
+    <div class="callout-title">What "Agentic" Actually Means Here</div>
+    <p style="margin:0">Verity agents are not simple prompt-and-response. An agent is a system that can <strong>plan, use tools, and take multi-step actions</strong> toward a goal. In Verity's case, the Disclosure Checklist Agent likely: (1) retrieves the financial statements, (2) identifies disclosure requirements from standards, (3) compares actual disclosures against requirements, (4) drafts gap findings with citations, (5) presents output for human review. This multi-step, tool-using architecture is what separates Verity from a chatbot overlay.</p>
+  </div>
+</section>
+
+<!-- 07 PRICING -->
+<section id="pricing">
+  <div class="section-label">Section 07</div>
+  <h2>Pricing &amp; Availability</h2>
+
+  <div class="callout callout-red">
+    <div class="callout-title">Not Disclosed</div>
+    <p style="margin:0">CaseWare has <strong>not announced pricing</strong> for Verity. The CEO explicitly stated at CwX 2026: <em>"Details around packaging and commercialization will be shared as the rollout progresses."</em> This is a phased rollout — Verity will be introduced incrementally by product area and workflow rather than as a single commercial launch.</p>
+  </div>
+
+  <h3>What We Can Infer</h3>
+  <ul>
+    <li>Verity will almost certainly be an <strong>add-on or tier upgrade</strong> on top of existing DAS licensing — not a separate product purchase</li>
+    <li>Given the $100M+ investment, CaseWare will need to monetize meaningfully — expect it to be positioned as a premium tier</li>
+    <li>Early access (beta/alpha phases) has been provided to select firms at no additional cost as part of the beta program</li>
+    <li>Pricing will likely be <strong>per-seat or per-engagement</strong>, consistent with DAS's current model</li>
+    <li>If your firm is evaluating DAS, asking for Verity access as part of contract negotiation is a reasonable ask at this stage</li>
+  </ul>
+
+  <h3>Availability Status by Agent</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Agent</th><th>Status</th><th>Platform</th><th>Availability</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Disclosure Checklist Agent</strong></td><td><span class="tag tag-ga">GA</span></td><td>DAS</td><td>Available now for DAS customers</td></tr>
+      <tr><td><strong>Document Intelligence Agent</strong></td><td><span class="tag tag-beta">Closed Beta</span></td><td>DAS</td><td>Select firm access only; GA timeline TBD</td></tr>
+      <tr><td><strong>Risk Suggestion Agent</strong></td><td><span class="tag tag-alpha">Alpha</span></td><td>DAS</td><td>Very limited access; earliest stage</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- 08 CWX -->
+<section id="cwx">
+  <div class="section-label">Section 08</div>
+  <h2>CWX Conference Coverage</h2>
+
+  <p>CwX (CaseWare Experience) is CaseWare's annual user conference. It has become the primary venue for major product announcements, including Verity.</p>
+
+  <h3>CwX 2026 — Fort Lauderdale, FL (May 21–22, 2026) <span class="tag tag-ga" style="font-size:11px;vertical-align:middle">Primary Verity Launch</span></h3>
+  <ul>
+    <li><strong>Verity officially launched</strong> the day before (May 20 press release) and demonstrated live at the conference</li>
+    <li>LinkedIn live broadcast of the launch session (recording may be accessible on CaseWare's LinkedIn page)</li>
+    <li>CEO keynote framed Verity around <strong>AI augmentation, not replacement</strong> — auditors remain responsible, Verity assists</li>
+    <li>All three agents were demonstrated live on stage</li>
+    <li>Disclosure Checklist Agent announced as generally available</li>
+    <li>$100M+ investment figure disclosed publicly for the first time</li>
+    <li>94% accuracy and 85% time savings metrics presented (from beta testing cohort)</li>
+  </ul>
+
+  <h3>CwX 2025 — Toronto, Canada</h3>
+  <ul>
+    <li>Verity introduced as CaseWare's <strong>flagship AI product roadmap</strong> — named for the first time publicly</li>
+    <li>CPO and CTO presented the multi-year AI strategy</li>
+    <li>Other AI tools demoed: <strong>AiDA, Validate, Extractly, Sherlock</strong></li>
+    <li>No agent was GA yet; Verity was positioned as "coming" with a 2026 launch horizon</li>
+    <li>Key theme: moving from AI assistance (AiDA) to AI action (Verity)</li>
+  </ul>
+
+  <h3>CwX 2024 — New York City (October 2, 2024)</h3>
+  <ul>
+    <li>Theme: "Powering Your Plan"</li>
+    <li>Verity referenced as an upcoming initiative but no feature-level announcement</li>
+    <li>Focus was on DAS adoption milestones and roadmap</li>
+    <li>AiDA was the primary AI product discussed</li>
+  </ul>
+</section>
+
+<!-- 09 COMPETITIVE -->
+<section id="competitive">
+  <div class="section-label">Section 09</div>
+  <h2>Competitive Landscape</h2>
+
+  <h3>How CaseWare Positions Verity</h3>
+  <p>CaseWare's primary competitive messaging attacks <strong>"disconnected copilots"</strong> and <strong>"standalone AI assistants"</strong> — tools that sit outside the engagement workflow and require the auditor to manually transfer context. Verity's claimed moat is <em>engagement context awareness</em>: because it lives inside DAS, it already knows the client, the risks, the prior year, and the engagement history.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Competitor</th><th>Primary Market</th><th>AI Capabilities</th><th>CaseWare's Differentiation</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>AuditBoard</strong></td>
+        <td>Internal audit, SOX, risk management</td>
+        <td>AI-assisted risk assessments, SOXHUB automation, AI-generated issue descriptions</td>
+        <td>AuditBoard is internal audit focused; CaseWare owns external financial statement audit. Different markets — but overlap at firms doing both.</td>
+      </tr>
+      <tr>
+        <td><strong>TeamMate+</strong> (Wolters Kluwer)</td>
+        <td>Internal audit management</td>
+        <td>Analytics-heavy, 120K+ auditors globally; AI in planning and reporting</td>
+        <td>TeamMate is internal audit; CaseWare differentiates on AICPA external methodology and agentic AI specifically for assurance engagements.</td>
+      </tr>
+      <tr>
+        <td><strong>Galvanize / ACL</strong> (now Diligent)</td>
+        <td>Data analytics, GRC</td>
+        <td>Strong continuous monitoring, risk analytics; acquired by Diligent 2021</td>
+        <td>IDEA competes directly with ACL Analytics. CaseWare argues tighter engagement integration vs. Galvanize's standalone analytics.</td>
+      </tr>
+      <tr>
+        <td><strong>Thomson Reuters / Checkpoint</strong></td>
+        <td>Research &amp; tax; some audit workflow</td>
+        <td>CoCounsel AI (legal/research); Checkpoint Edge; limited audit workflow AI</td>
+        <td>CaseWare has deeper audit workflow integration; TR is stronger in research and tax workflow.</td>
+      </tr>
+      <tr>
+        <td><strong>Caseware's own stack (pre-Verity)</strong></td>
+        <td>—</td>
+        <td>AiDA (Claude-powered assistant)</td>
+        <td>Verity supersedes AiDA in capability — agents take action vs. AiDA's conversational assistance.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout callout-gold">
+    <div class="callout-title">CaseWare's Unique Moat</div>
+    <p style="margin:0">No competitor has the combination of: (1) AICPA co-developed methodology embedded in the platform, (2) agentic AI built inside the engagement file with full context, and (3) the largest installed base in external audit specifically. The AICPA partnership is the hardest to replicate — it creates a standards-alignment advantage that pure-play AI tools cannot match.</p>
+  </div>
+</section>
+
+<!-- 10 ADOPTION -->
+<section id="adoption">
+  <div class="section-label">Section 10</div>
+  <h2>Firm Adoption &amp; Market Traction</h2>
+
+  <h3>DAS Adoption (the Verity platform)</h3>
+  <div class="stat-row">
+    <div class="stat-box">
+      <span class="stat-val">200+</span>
+      <span class="stat-lbl">Firms on DAS (early 2025)</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">1,000+</span>
+      <span class="stat-lbl">Engagements on DAS (early 2025)</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">T100</span>
+      <span class="stat-lbl">Several top-100 firms actively migrating</span>
+    </div>
+  </div>
+
+  <h3>Notable Recent Adoptions</h3>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>Firm</th><th>Date</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Carr, Riggs &amp; Ingram (CRI)</strong></td>
+        <td>April 2026</td>
+        <td>Selected DAS Suite — specifically cited readiness for "the Agentic Age." One of the largest regional firms in the US (Top 25). Press release used Verity language explicitly — timing is notable, coinciding with the Verity launch.</td>
+      </tr>
+      <tr>
+        <td><strong>AAFCPAs</strong></td>
+        <td>January 2025</td>
+        <td>Selected CaseWare DAS as new audit methodology platform. Massachusetts-based Top 100 firm, known for PE-backed clients and NFP practice.</td>
+      </tr>
+      <tr>
+        <td><strong>Multiple unnamed T100 firms</strong></td>
+        <td>2024–2025</td>
+        <td>Several Top 100 firms identified in CaseWare communications as actively migrating or piloting. Names not released publicly.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>The CRI adoption announcement language is worth noting — they explicitly tied the selection to "the Agentic Age," which is direct Verity language. This was likely a coordinated announcement designed to demonstrate enterprise adoption at Verity's launch.</p>
+</section>
+
+<!-- 11 IMPLICATIONS -->
+<section id="implications">
+  <div class="section-label">Section 11</div>
+  <h2>Strategic Implications for the Firm</h2>
+
+  <h3>If the Firm Is Currently on Working Papers / Hybrid</h3>
+  <ul>
+    <li><strong>Verity is not available to you today.</strong> There is no announced path to bring Verity agents to Working Papers.</li>
+    <li>The gap between desktop users and DAS/cloud users in terms of AI capability will <strong>widen significantly</strong> over the next 12–24 months.</li>
+    <li>This is a meaningful input to any ongoing platform evaluation — the AI roadmap is cloud-only.</li>
+    <li>If a DAS evaluation is not already underway, the question of <em>when</em> (not <em>if</em>) should be on the agenda.</li>
+  </ul>
+
+  <h3>If the Firm Is on DAS</h3>
+  <ul>
+    <li><strong>Request Verity access now.</strong> The Disclosure Checklist Agent is GA. If you are on DAS, your CaseWare rep should be able to activate it.</li>
+    <li>Identify a pilot engagement for the Disclosure Checklist Agent — a straightforward GAAP audit with standard disclosures is ideal for the first run.</li>
+    <li>Consider applying for the Document Intelligence Agent closed beta if your firm processes high volumes of third-party documents (lease abstracts, loan agreements, customer contracts).</li>
+    <li>Track time savings from the Disclosure Checklist Agent — the 2.7 hr/workflow figure gives a benchmark; your own data will be more credible for internal business case purposes.</li>
+  </ul>
+
+  <h3>Talent &amp; Training Considerations</h3>
+  <ul>
+    <li>Verity's human-in-the-loop design means <strong>auditors must be trained to critically evaluate AI output</strong>, not just accept it. Professional skepticism applies to AI suggestions as it does to client representations.</li>
+    <li>The Risk Suggestion Agent (alpha) has the highest professional judgment requirement — teams will need to understand when AI-generated risks are appropriate vs. generic.</li>
+    <li>Senior staff (managers/supervisors) reviewing AI-assisted workpapers will need guidance on what constitutes adequate review of AI-prepared content.</li>
+    <li>Standard-setters (PCAOB, AICPA) are actively developing guidance on AI use in audit — the firm's methodology group should monitor this closely.</li>
+  </ul>
+
+  <h3>Quality Management Angle</h3>
+  <ul>
+    <li>Under SQMS No. 1 (effective December 2025), firms are required to document technology risks in their quality management system. AI audit tools — including Verity — should be in scope of your firm's technology risk assessment.</li>
+    <li>CaseWare's SOC 2 Type II and ISO 27001 certifications provide the third-party assurance documentation firms will need for their own quality management files.</li>
+    <li>Consider how AI-assisted engagement steps should be documented in workpapers — regulators are beginning to ask about this in inspection contexts.</li>
+  </ul>
+</section>
+
+<!-- 12 GAPS -->
+<section id="gaps">
+  <div class="section-label">Section 12</div>
+  <h2>Known Gaps &amp; Open Questions</h2>
+
+  <div class="callout callout-purple">
+    <div class="callout-title">What We Could Not Confirm Publicly</div>
+    <ul style="margin:0;padding-left:20px">
+      <li><strong>LLM powering Verity</strong> — not disclosed. Claude inference via Bedrock is likely but unconfirmed. Ask your CaseWare rep directly.</li>
+      <li><strong>Pricing and licensing model</strong> — explicitly deferred by CEO. No timeline given.</li>
+      <li><strong>GA dates for Document Intelligence and Risk Suggestion agents</strong> — not disclosed.</li>
+      <li><strong>Working Papers / Hybrid roadmap for Verity</strong> — not announced. There may be a plan; it has not been communicated.</li>
+      <li><strong>Beta firm names</strong> — not released publicly.</li>
+      <li><strong>PCAOB/regulatory position on AI-assisted audit steps</strong> — standards guidance is pending; ask your professional standards group.</li>
+      <li><strong>CwX 2026 session recordings</strong> — LinkedIn live recording may be available on CaseWare's LinkedIn page; no official replay posted as of this writing.</li>
+      <li><strong>Performance metrics by industry/firm size</strong> — the 94% accuracy and 85% time savings are aggregate beta figures; no breakdown by engagement type or complexity.</li>
+    </ul>
+  </div>
+
+  <h3>Questions to Ask Your CaseWare Rep</h3>
+  <ol>
+    <li>Is Verity's Disclosure Checklist Agent activated on our DAS instance? If not, what is required to turn it on?</li>
+    <li>How do we apply for the Document Intelligence Agent closed beta?</li>
+    <li>What LLM infrastructure powers Verity? Is it isolated from other tenants and model training?</li>
+    <li>What is the expected commercialization timeline and pricing model?</li>
+    <li>Is there a roadmap for Verity availability in Working Papers or the Hybrid environment?</li>
+    <li>How does CaseWare recommend documenting Verity-assisted workpaper steps for quality review purposes?</li>
+    <li>What professional standards guidance has CaseWare received regarding AI-assisted audit procedures?</li>
+  </ol>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-row">
+    <div class="footer-copy">
+      <div class="sources-title">Primary Sources</div>
+      <ul class="source-list">
+        <li><a href="https://www.globenewswire.com/news-release/2026/05/20/3298537/0/en/caseware-launches-verity-to-bring-workflow-native-ai-agents-directly-into-assurance-engagements.html" target="_blank">GlobeNewswire — Verity Launch Press Release (May 20, 2026)</a></li>
+        <li><a href="https://www.accountingtoday.com/news/caseware-rolls-out-verity-ai-platform-and-agents" target="_blank">Accounting Today — CaseWare Rolls Out Verity</a></li>
+        <li><a href="https://www.caseware.com/us/resources/blog/elevating-the-audit-experience-key-takeaways-from-cwx-2025" target="_blank">CaseWare — CwX 2025 Key Takeaways Blog</a></li>
+        <li><a href="https://www.caseware.com/us/products/das/" target="_blank">CaseWare — DAS Product Page</a></li>
+        <li><a href="https://insights.caseware.com/ai-powered-audits-with-caseware-aida" target="_blank">CaseWare Insights — AiDA (Claude confirmation)</a></li>
+        <li><a href="https://www.cpa.com/blog/2023/12/01/dynamic-audit-solution-das-built-auditors-auditors" target="_blank">CPA.com — DAS Built by Auditors for Auditors</a></li>
+        <li><a href="https://www.globenewswire.com/news-release/2026/04/21/3277971/0/en/Carr-Riggs-Ingram-Chooses-Caseware-and-the-Dynamic-Audit-Solution-DAS-Suite-to-Power-its-Audit-Future-for-the-Agentic-Age.html" target="_blank">GlobeNewswire — CRI Selects DAS Suite (April 2026)</a></li>
+        <li><a href="https://www.aafcpa.com/2025/01/02/aafcpas-selects-casewares-das-as-new-audit-methodology-platform/" target="_blank">AAFCPAs — Selects CaseWare DAS (January 2025)</a></li>
+        <li><a href="https://www.globenewswire.com/news-release/2025/01/21/3012715/0/en/Caseware-Announces-Acquisition-of-Extractly-ai.html" target="_blank">GlobeNewswire — Extractly.ai Acquisition (January 2025)</a></li>
+      </ul>
+    </div>
+    <div class="footer-copy" style="text-align:right;max-width:300px">
+      <p style="font-size:12px;color:var(--muted);margin-bottom:6px">Prepared May 2026<br>Research via public sources only.<br>Pricing and model details unconfirmed — verify with CaseWare directly.<br>For internal use.</p>
+    </div>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
