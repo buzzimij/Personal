@@ -5,141 +5,161 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CaseWare Verity — Firm Briefing | May 2026</title>
 <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #09090f;
-  --s1: #0f1018;
-  --s2: #14151f;
-  --b: #1e2030;
-  --b2: #252840;
-  --gold: #c9a84c;
-  --gold2: #e8c870;
-  --blue: #4e9de8;
-  --blue2: #7bb8f0;
-  --green: #4be87a;
-  --red: #e8504e;
-  --purple: #9b72e8;
-  --teal: #4be8d4;
-  --text: #d8dce8;
-  --sub: #7a80a0;
-  --muted: #464870;
+  --navy: #0E1F3D;
+  --navy-mid: #1A3461;
+  --blue: #0057A8;
+  --blue-light: #EAF2FB;
+  --gray-50: #F8F9FA;
+  --gray-100: #F0F1F3;
+  --gray-200: #E2E4E8;
+  --gray-400: #9AA0AB;
+  --gray-600: #5A6270;
+  --gray-800: #2C3240;
+  --border: #D0D4DC;
+  --text: #1A1E2A;
+  --green: #1A6B3A;
+  --green-bg: #E6F4EC;
+  --red: #8B1A1A;
+  --red-bg: #FDECEA;
+  --purple: #4A1A8B;
+  --purple-bg: #F3EEFB;
+  --amber: #6B4A00;
+  --amber-bg: #FDF5DC;
+  --teal: #0D5A5A;
+  --teal-bg: #E3F6F5;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Georgia', 'Times New Roman', serif; font-size: 15px; line-height: 1.75; }
+html { font-size: 15px; }
+body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: #ECEEF2; color: var(--text); min-height: 100vh; line-height: 1.65; }
 a { color: var(--blue); text-decoration: none; }
-a:hover { color: var(--blue2); text-decoration: underline; }
+a:hover { text-decoration: underline; }
 
-/* ── LAYOUT ── */
-.wrap { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+/* ── TOP BAR ── */
+.top-bar { background: var(--navy); height: 5px; width: 100%; }
 
 /* ── HEADER ── */
-.masthead { border-bottom: 1px solid var(--b2); padding: 32px 0 24px; margin-bottom: 40px; }
-.firm-label { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-h1 { font-size: 32px; font-weight: 700; color: var(--gold2); line-height: 1.2; margin-bottom: 8px; }
-.subtitle { font-size: 16px; color: var(--sub); font-style: italic; margin-bottom: 18px; }
-.meta-row { display: flex; gap: 24px; flex-wrap: wrap; }
-.meta-pill { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 11px; background: var(--s2); border: 1px solid var(--b2); border-radius: 20px; padding: 3px 12px; color: var(--sub); }
-.meta-pill strong { color: var(--gold); }
+.header { background: var(--navy); color: white; padding: 44px 48px 40px; }
+.header-label { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .5; margin-bottom: 10px; }
+.header-title { font-size: 2.1rem; font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 8px; }
+.header-sub { font-size: .9rem; opacity: .65; max-width: 600px; line-height: 1.6; margin-bottom: 20px; }
+.meta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.meta-pill { font-size: .7rem; font-weight: 600; letter-spacing: .04em; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 20px; padding: 3px 12px; color: rgba(255,255,255,.75); }
+.meta-pill strong { color: white; }
 
-/* ── NAV ── */
-.toc { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 20px 24px; margin-bottom: 48px; }
-.toc-title { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 32px; }
-.toc a { font-size: 13px; color: var(--sub); font-family: 'SF Mono','Cascadia Code',monospace; }
-.toc a:hover { color: var(--gold); text-decoration: none; }
-.toc-num { color: var(--muted); margin-right: 6px; }
+/* ── LAYOUT ── */
+.container { max-width: 920px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* ── TOC ── */
+.toc { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 24px 28px; margin-bottom: 48px; }
+.toc-heading { font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 16px; }
+.toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 32px; }
+.toc a { font-size: .82rem; color: var(--gray-600); display: block; padding: 2px 0; }
+.toc a:hover { color: var(--blue); text-decoration: none; }
+.toc-num { color: var(--gray-400); margin-right: 6px; font-variant-numeric: tabular-nums; }
 
 /* ── SECTIONS ── */
-section { margin-bottom: 56px; }
-.section-label { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-h2 { font-size: 22px; color: var(--gold2); border-bottom: 1px solid var(--b2); padding-bottom: 10px; margin-bottom: 24px; }
-h3 { font-size: 17px; color: var(--blue2); margin: 28px 0 12px; }
-h4 { font-size: 14px; color: var(--text); margin: 20px 0 8px; font-style: italic; }
-p { margin-bottom: 14px; color: var(--text); }
+section { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 32px 36px; margin-bottom: 24px; }
+.section-label { font-size: .65rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 6px; }
+h2 { font-size: 1.35rem; font-weight: 800; color: var(--navy); letter-spacing: -.015em; border-bottom: 2px solid var(--gray-100); padding-bottom: 12px; margin-bottom: 24px; }
+h3 { font-size: 1rem; font-weight: 700; color: var(--navy-mid); margin: 28px 0 12px; }
+h4 { font-size: .88rem; font-weight: 700; color: var(--gray-800); margin: 18px 0 8px; }
+p { margin-bottom: 14px; color: var(--text); font-size: .9rem; }
 ul, ol { padding-left: 22px; margin-bottom: 14px; }
-li { margin-bottom: 6px; }
-strong { color: var(--gold); font-weight: 600; }
-em { color: var(--sub); }
+li { margin-bottom: 6px; font-size: .9rem; }
+strong { color: var(--navy); font-weight: 700; }
+em { color: var(--gray-600); font-style: italic; }
 
-/* ── CALLOUT BOXES ── */
+/* ── CALLOUTS ── */
 .callout { border-radius: 6px; padding: 16px 20px; margin: 20px 0; border-left: 3px solid; }
-.callout-gold { background: rgba(201,168,76,.07); border-color: var(--gold); }
-.callout-blue { background: rgba(78,157,232,.07); border-color: var(--blue); }
-.callout-green { background: rgba(75,232,122,.07); border-color: var(--green); }
-.callout-red { background: rgba(232,80,78,.07); border-color: var(--red); }
-.callout-purple { background: rgba(155,114,232,.07); border-color: var(--purple); }
-.callout-teal { background: rgba(75,232,212,.07); border-color: var(--teal); }
-.callout-title { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 8px; }
-.callout-gold .callout-title { color: var(--gold); }
-.callout-blue .callout-title { color: var(--blue); }
+.callout-title { font-size: .65rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+.callout-navy  { background: var(--blue-light); border-color: var(--blue); }
+.callout-navy  .callout-title { color: var(--blue); }
+.callout-green { background: var(--green-bg); border-color: var(--green); }
 .callout-green .callout-title { color: var(--green); }
-.callout-red .callout-title { color: var(--red); }
+.callout-red   { background: var(--red-bg); border-color: #C0392B; }
+.callout-red   .callout-title { color: #C0392B; }
+.callout-amber { background: var(--amber-bg); border-color: #B8860B; }
+.callout-amber .callout-title { color: var(--amber); }
+.callout-purple{ background: var(--purple-bg); border-color: #6A3DB8; }
 .callout-purple .callout-title { color: var(--purple); }
-.callout-teal .callout-title { color: var(--teal); }
+.callout-teal  { background: var(--teal-bg); border-color: #0A8080; }
+.callout-teal  .callout-title { color: var(--teal); }
+.callout p { margin: 0; font-size: .88rem; }
 
 /* ── TABLES ── */
-.tbl-wrap { overflow-x: auto; margin: 20px 0; }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-thead th { background: var(--s2); color: var(--gold); font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--b2); white-space: nowrap; }
-tbody td { padding: 10px 14px; border-bottom: 1px solid var(--b); vertical-align: top; }
-tbody tr:hover { background: var(--s1); }
-.tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; font-weight: 600; letter-spacing: .05em; }
-.tag-ga { background: rgba(75,232,122,.15); color: var(--green); border: 1px solid rgba(75,232,122,.3); }
-.tag-beta { background: rgba(78,157,232,.15); color: var(--blue); border: 1px solid rgba(78,157,232,.3); }
-.tag-alpha { background: rgba(201,168,76,.15); color: var(--gold); border: 1px solid rgba(201,168,76,.3); }
-.tag-cloud { background: rgba(75,232,212,.12); color: var(--teal); border: 1px solid rgba(75,232,212,.25); }
-.tag-desktop { background: rgba(155,114,232,.12); color: var(--purple); border: 1px solid rgba(155,114,232,.25); }
-.tag-hybrid { background: rgba(232,80,78,.12); color: var(--red); border: 1px solid rgba(232,80,78,.25); }
+.tbl-wrap { overflow-x: auto; margin: 20px 0; border: 1px solid var(--border); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+thead th { background: var(--gray-100); color: var(--navy); font-size: .65rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+tbody td { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); vertical-align: top; font-size: .83rem; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--gray-50); }
 
-/* ── AGENT CARDS ── */
-.agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
-.agent-card { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 20px; }
-.agent-card-num { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; color: var(--muted); letter-spacing: .12em; margin-bottom: 6px; }
-.agent-card-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.agent-card-status { margin-bottom: 14px; }
-.agent-card p { font-size: 13px; color: var(--sub); margin-bottom: 8px; }
-.agent-stat { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 22px; color: var(--gold2); font-weight: 700; display: block; margin-top: 12px; }
-.agent-stat-label { font-size: 11px; color: var(--muted); }
-
-/* ── PRODUCT CARDS ── */
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 20px 0; }
-.product-card { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 18px; }
-.product-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.product-card p { font-size: 12px; color: var(--sub); line-height: 1.6; margin: 0; }
-.product-card .tag { margin-bottom: 8px; display: inline-block; }
+/* ── STATUS TAGS ── */
+.tag { display: inline-block; padding: 2px 9px; border-radius: 3px; font-size: .63rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.tag-ga      { background: var(--green-bg);  color: var(--green);  border: 1px solid #A8D5B7; }
+.tag-beta    { background: var(--blue-light); color: var(--blue);   border: 1px solid #A8C8EF; }
+.tag-alpha   { background: var(--amber-bg);  color: var(--amber);  border: 1px solid #D4B875; }
+.tag-cloud   { background: var(--teal-bg);   color: var(--teal);   border: 1px solid #8AC8C8; }
+.tag-desktop { background: var(--purple-bg); color: var(--purple); border: 1px solid #B8A0D8; }
+.tag-hybrid  { background: var(--red-bg);    color: var(--red);    border: 1px solid #D49898; }
 
 /* ── STAT ROW ── */
-.stat-row { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
-.stat-box { background: var(--s1); border: 1px solid var(--b2); border-radius: 8px; padding: 18px 22px; flex: 1; min-width: 140px; text-align: center; }
-.stat-val { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 28px; color: var(--gold2); font-weight: 700; display: block; }
-.stat-lbl { font-size: 11px; color: var(--muted); margin-top: 4px; display: block; }
+.stat-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 20px 0; }
+.stat-box { background: var(--gray-50); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; flex: 1; min-width: 130px; text-align: center; }
+.stat-val { font-size: 1.75rem; font-weight: 800; color: var(--navy); display: block; letter-spacing: -.02em; line-height: 1.1; }
+.stat-lbl { font-size: .72rem; color: var(--gray-600); margin-top: 5px; display: block; line-height: 1.4; }
+
+/* ── AGENT CARDS ── */
+.agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+.agent-card { background: var(--gray-50); border: 1px solid var(--border); border-radius: 8px; padding: 22px; }
+.agent-card-num { font-size: .63rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 6px; }
+.agent-card-name { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.agent-card-status { margin-bottom: 14px; }
+.agent-card p { font-size: .83rem; color: var(--gray-600); margin-bottom: 8px; }
+.agent-stat { font-size: 1.5rem; font-weight: 800; color: var(--navy); display: block; margin-top: 14px; letter-spacing: -.02em; }
+.agent-stat-label { font-size: .72rem; color: var(--gray-400); margin-top: 2px; display: block; }
+
+/* ── PRODUCT GRID ── */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin: 20px 0; }
+.product-card { background: var(--gray-50); border: 1px solid var(--border); border-radius: 7px; padding: 18px; }
+.product-name { font-size: .9rem; font-weight: 700; color: var(--navy); margin: 8px 0 6px; }
+.product-card p { font-size: .78rem; color: var(--gray-600); line-height: 1.55; margin: 0; }
 
 /* ── TIMELINE ── */
-.timeline { border-left: 2px solid var(--b2); padding-left: 24px; margin: 20px 0; }
+.timeline { border-left: 2px solid var(--gray-200); padding-left: 24px; margin: 20px 0; }
 .timeline-item { position: relative; margin-bottom: 24px; }
-.timeline-item::before { content: ''; position: absolute; left: -30px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
-.timeline-date { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 11px; color: var(--gold); margin-bottom: 4px; }
-.timeline-event { font-size: 14px; color: var(--text); font-weight: 600; margin-bottom: 4px; }
-.timeline-detail { font-size: 13px; color: var(--sub); }
+.timeline-item::before { content: ''; position: absolute; left: -30px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); border: 2px solid white; box-shadow: 0 0 0 1px var(--blue); }
+.timeline-date { font-size: .72rem; font-weight: 700; color: var(--blue); letter-spacing: .04em; margin-bottom: 3px; }
+.timeline-event { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.timeline-detail { font-size: .82rem; color: var(--gray-600); }
 
 /* ── FOOTER ── */
-footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
-.footer-row { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 20px; }
-.footer-copy { font-size: 12px; color: var(--muted); line-height: 1.7; }
-.sources-title { font-family: 'SF Mono','Cascadia Code',monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+.page-footer { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 28px 36px; margin-top: 8px; }
+.footer-row { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; }
+.sources-title { font-size: .65rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 12px; }
 .source-list { list-style: none; padding: 0; }
-.source-list li { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-.source-list a { color: var(--muted); }
-.source-list a:hover { color: var(--blue); }
+.source-list li { font-size: .78rem; color: var(--gray-600); margin-bottom: 5px; }
+.source-list a { color: var(--blue); }
+.footer-note { font-size: .78rem; color: var(--gray-400); line-height: 1.7; text-align: right; max-width: 280px; }
+
+@media (max-width: 640px) {
+  .header { padding: 28px 20px 24px; }
+  .header-title { font-size: 1.55rem; }
+  .container { padding: 24px 16px 60px; }
+  section { padding: 24px 20px; }
+  .toc-grid { grid-template-columns: 1fr; }
+  .stat-row { gap: 10px; }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="top-bar"></div>
 
-<!-- MASTHEAD -->
-<div class="masthead">
-  <div class="firm-label">Internal Briefing — Technology Intelligence</div>
-  <h1>CaseWare Verity</h1>
-  <div class="subtitle">AI Agents for Audit — What It Is, How It Works, and What It Means for the Firm</div>
+<div class="header">
+  <div class="header-label">Internal Briefing &nbsp;·&nbsp; Technology Intelligence</div>
+  <div class="header-title">CaseWare Verity</div>
+  <div class="header-sub">AI Agents for Audit — What It Is, How It Works, and What It Means for the Firm</div>
   <div class="meta-row">
     <div class="meta-pill"><strong>Date</strong> May 2026</div>
     <div class="meta-pill"><strong>Status</strong> Launched May 20, 2026</div>
@@ -148,9 +168,11 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
   </div>
 </div>
 
+<div class="container">
+
 <!-- TOC -->
 <div class="toc">
-  <div class="toc-title">Contents</div>
+  <div class="toc-heading">Contents</div>
   <div class="toc-grid">
     <div><a href="#tldr"><span class="toc-num">01</span> Executive Summary</a></div>
     <div><a href="#verity"><span class="toc-num">02</span> What Is Verity?</a></div>
@@ -172,9 +194,9 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
   <div class="section-label">Section 01</div>
   <h2>Executive Summary</h2>
 
-  <div class="callout callout-gold">
+  <div class="callout callout-amber">
     <div class="callout-title">Bottom Line Up Front</div>
-    <p style="margin:0">CaseWare launched <strong>Verity</strong> on May 20, 2026 — their flagship agentic AI platform embedded directly inside the audit workflow. Unlike copilot-style AI tools that sit alongside the engagement, Verity agents work <em>inside</em> the file, understand engagement context, and produce citation-backed outputs auditors can accept, refine, or override. The first agent is <strong>generally available now in DAS</strong>; two more are in beta/alpha. This is CaseWare's $100M+ multi-year bet on AI-native audit.</p>
+    <p>CaseWare launched <strong>Verity</strong> on May 20, 2026 — their flagship agentic AI platform embedded directly inside the audit workflow. Unlike copilot-style AI tools that sit alongside the engagement, Verity agents work <em>inside</em> the file, understand engagement context, and produce citation-backed outputs auditors can accept, refine, or override. The first agent is <strong>generally available now in DAS</strong>; two more are in beta/alpha. This is CaseWare's $100M+ multi-year bet on AI-native audit.</p>
   </div>
 
   <div class="stat-row">
@@ -218,9 +240,9 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 
   <p>Verity is CaseWare's <strong>AI intelligence and orchestration layer</strong> — announced May 20, 2026 and officially launched at the CwX 2026 conference in Fort Lauderdale (May 21–22, 2026). It is described as the <em>"industry-first agentic solution specifically designed for assurance professionals."</em></p>
 
-  <div class="callout callout-blue">
+  <div class="callout callout-navy">
     <div class="callout-title">The Core Concept — "The First AI That Understands the Engagement"</div>
-    <p style="margin:0">Most AI tools in audit sit <em>outside</em> the file — you paste content in, get a response, copy it back. Verity is built <em>inside</em> the engagement. It has access to the full context of the audit file: prior year workpapers, board minutes, financial statements, risk assessments, client history. This engagement-context awareness is CaseWare's primary differentiator claim.</p>
+    <p>Most AI tools in audit sit <em>outside</em> the file — you paste content in, get a response, copy it back. Verity is built <em>inside</em> the engagement. It has access to the full context of the audit file: prior year workpapers, board minutes, financial statements, risk assessments, client history. This engagement-context awareness is CaseWare's primary differentiator claim.</p>
   </div>
 
   <h3>What Verity Is — and Isn't</h3>
@@ -282,7 +304,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
   <div class="agent-grid">
 
     <div class="agent-card">
-      <div class="agent-card-num">AGENT 01</div>
+      <div class="agent-card-num">Agent 01</div>
       <div class="agent-card-name">Disclosure Checklist Agent</div>
       <div class="agent-card-status"><span class="tag tag-ga">GA — Live in DAS</span></div>
       <p>Automates the financial statement disclosure review process. Reviews disclosures against applicable standards, flags gaps, and generates citation-backed suggestions the auditor can accept, refine, or override before posting to the workpaper.</p>
@@ -293,7 +315,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
     </div>
 
     <div class="agent-card">
-      <div class="agent-card-num">AGENT 02</div>
+      <div class="agent-card-num">Agent 02</div>
       <div class="agent-card-name">Document Intelligence Agent</div>
       <div class="agent-card-status"><span class="tag tag-beta">Closed Beta</span></div>
       <p>Automates document review, analysis, and evidence extraction directly into workpapers. Ingests client-provided documents (contracts, agreements, statements) and extracts relevant information into the appropriate workpaper location.</p>
@@ -304,7 +326,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
     </div>
 
     <div class="agent-card">
-      <div class="agent-card-num">AGENT 03</div>
+      <div class="agent-card-num">Agent 03</div>
       <div class="agent-card-name">Risk Suggestion Agent</div>
       <div class="agent-card-status"><span class="tag tag-alpha">Alpha</span></div>
       <p>Analyzes multi-year financial data combined with board minutes and prior-year risk documentation to generate risk suggestions at the planning stage. Surfaces risks the engagement team may not have explicitly identified.</p>
@@ -318,7 +340,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 
   <div class="callout callout-teal">
     <div class="callout-title">The Full Workflow Coverage Ambition</div>
-    <p style="margin:0">Taken together, the three agents cover <strong>planning → fieldwork → completion</strong>. This is deliberate — CaseWare is signaling that Verity will eventually provide AI assistance across the entire engagement lifecycle, not just isolated tasks. The Risk Agent handles planning, Document Intelligence handles fieldwork, and Disclosure Checklist handles the completion/reporting phase.</p>
+    <p>Taken together, the three agents cover <strong>planning → fieldwork → completion</strong>. This is deliberate — CaseWare is signaling that Verity will eventually provide AI assistance across the entire engagement lifecycle, not just isolated tasks. The Risk Agent handles planning, Document Intelligence handles fieldwork, and Disclosure Checklist handles the completion/reporting phase.</p>
   </div>
 </section>
 
@@ -329,7 +351,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 
   <div class="callout callout-green">
     <div class="callout-title">Direct Answer: Yes — Verity's Home Is DAS</div>
-    <p style="margin:0"><strong>Verity is built into DAS.</strong> The Disclosure Checklist Agent is generally available inside DAS right now. The other two agents will also launch inside DAS first. This is not a light integration — Verity uses DAS's engagement data (prior year files, risk registers, financial statements) as the context that powers the AI. DAS is the reason Verity can claim to "understand the engagement."</p>
+    <p><strong>Verity is built into DAS.</strong> The Disclosure Checklist Agent is generally available inside DAS right now. The other two agents will also launch inside DAS first. This is not a light integration — Verity uses DAS's engagement data (prior year files, risk registers, financial statements) as the context that powers the AI. DAS is the reason Verity can claim to "understand the engagement."</p>
   </div>
 
   <h3>What Is DAS?</h3>
@@ -377,7 +399,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 
   <div class="callout callout-red">
     <div class="callout-title">Important Limitation to Flag</div>
-    <p style="margin:0">If your firm is <strong>not on DAS</strong> (i.e., still on Working Papers / CaseWare Hybrid), you do <strong>not</strong> have access to Verity agents today. There is no announced timeline for Verity availability in Working Papers or the hybrid environment. This is a migration forcing function — Verity is an incentive to move to the cloud/DAS platform.</p>
+    <p>If your firm is <strong>not on DAS</strong> (i.e., still on Working Papers / CaseWare Hybrid), you do <strong>not</strong> have access to Verity agents today. There is no announced timeline for Verity availability in Working Papers or the hybrid environment. This is a migration forcing function — Verity is an incentive to move to the cloud/DAS platform.</p>
   </div>
 </section>
 
@@ -398,19 +420,19 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
         <td><span class="tag tag-desktop">Desktop</span><br><strong>Working Papers</strong></td>
         <td>Software installed on local machines. Files stored locally or on firm servers. The original CaseWare product — been around since the 1980s. 40,000+ firms globally still use it.</td>
         <td>Smaller firms; firms not yet migrated; firms with data residency requirements</td>
-        <td style="color:var(--red)">No access to Verity agents</td>
+        <td style="color:#C0392B;font-weight:600">No access to Verity agents</td>
       </tr>
       <tr>
         <td><span class="tag tag-hybrid">Hybrid</span><br><strong>CaseWare Hybrid / Essentials</strong></td>
         <td>Working Papers files stored in CaseWare Cloud, synced via HTTPS. The engagement file still opens in the desktop client, but storage and sharing is cloud-based. Middle ground between desktop and full cloud.</td>
         <td>Firms transitioning to cloud; multi-office collaboration needs; want cloud storage without full platform change</td>
-        <td style="color:var(--red)">No access to Verity agents</td>
+        <td style="color:#C0392B;font-weight:600">No access to Verity agents</td>
       </tr>
       <tr>
         <td><span class="tag tag-cloud">Cloud</span><br><strong>CaseWare Cloud + DAS</strong></td>
         <td>Fully browser-based. No desktop client required. Engagement lives entirely in the cloud. Built-in AICPA methodology (DAS), real-time collaboration, open API, full population testing.</td>
         <td>Growth-oriented regional/national firms; firms modernizing audit methodology; T100 firms migrating</td>
-        <td style="color:var(--green)"><strong>Full Verity access</strong></td>
+        <td style="color:var(--green);font-weight:600">Full Verity access</td>
       </tr>
     </tbody>
   </table>
@@ -509,7 +531,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
   <h3>The Migration Direction — Where CaseWare Is Pushing Firms</h3>
   <div class="callout callout-purple">
     <div class="callout-title">The Clear Signal</div>
-    <p style="margin:0">CaseWare's entire AI investment (Verity, Extractly acquisition, AiDA) is built on <strong>CaseWare Cloud / DAS</strong>. Working Papers and Hybrid are maintained but not where new innovation is landing. The message to firms is unambiguous: the future of CaseWare's platform is cloud-native, and the competitive advantages (Verity, full population testing, AICPA methodology) are only accessible there. This is a migration forcing function that will intensify over the next 2–3 years.</p>
+    <p>CaseWare's entire AI investment (Verity, Extractly acquisition, AiDA) is built on <strong>CaseWare Cloud / DAS</strong>. Working Papers and Hybrid are maintained but not where new innovation is landing. The message to firms is unambiguous: the future of CaseWare's platform is cloud-native, and the competitive advantages (Verity, full population testing, AICPA methodology) are only accessible there. This is a migration forcing function that will intensify over the next 2–3 years.</p>
   </div>
 </section>
 
@@ -523,9 +545,9 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
   <table>
     <thead><tr><th>Product</th><th>Model / Infrastructure</th><th>Confidence</th></tr></thead>
     <tbody>
-      <tr><td><strong>AiDA</strong> (predecessor assistant)</td><td>Anthropic Claude, via Amazon Bedrock</td><td style="color:var(--green)">Confirmed — publicly documented by CaseWare</td></tr>
-      <tr><td><strong>Verity</strong></td><td>Not disclosed — referred to as "large language models"</td><td style="color:var(--gold)">Likely Claude (same Bedrock infrastructure) — unconfirmed</td></tr>
-      <tr><td><strong>Extractly (now in Verity)</strong></td><td>AI/ML for document extraction — model not specified</td><td style="color:var(--red)">Unknown</td></tr>
+      <tr><td><strong>AiDA</strong> (predecessor assistant)</td><td>Anthropic Claude, via Amazon Bedrock</td><td style="color:var(--green);font-weight:600">Confirmed — publicly documented by CaseWare</td></tr>
+      <tr><td><strong>Verity</strong></td><td>Not disclosed — referred to as "large language models"</td><td style="color:var(--amber);font-weight:600">Likely Claude (same Bedrock infrastructure) — unconfirmed</td></tr>
+      <tr><td><strong>Extractly (now in Verity)</strong></td><td>AI/ML for document extraction — model not specified</td><td style="color:#C0392B;font-weight:600">Unknown</td></tr>
     </tbody>
   </table>
   </div>
@@ -537,9 +559,9 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
     <li><strong>Citation capability</strong> — the citation-backed output design aligns with Claude's retrieval and attribution strengths</li>
   </ul>
 
-  <div class="callout callout-blue">
+  <div class="callout callout-navy">
     <div class="callout-title">What "Agentic" Actually Means Here</div>
-    <p style="margin:0">Verity agents are not simple prompt-and-response. An agent is a system that can <strong>plan, use tools, and take multi-step actions</strong> toward a goal. In Verity's case, the Disclosure Checklist Agent likely: (1) retrieves the financial statements, (2) identifies disclosure requirements from standards, (3) compares actual disclosures against requirements, (4) drafts gap findings with citations, (5) presents output for human review. This multi-step, tool-using architecture is what separates Verity from a chatbot overlay.</p>
+    <p>Verity agents are not simple prompt-and-response. An agent is a system that can <strong>plan, use tools, and take multi-step actions</strong> toward a goal. In Verity's case, the Disclosure Checklist Agent likely: (1) retrieves the financial statements, (2) identifies disclosure requirements from standards, (3) compares actual disclosures against requirements, (4) drafts gap findings with citations, (5) presents output for human review. This multi-step, tool-using architecture is what separates Verity from a chatbot overlay.</p>
   </div>
 </section>
 
@@ -550,7 +572,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 
   <div class="callout callout-red">
     <div class="callout-title">Not Disclosed</div>
-    <p style="margin:0">CaseWare has <strong>not announced pricing</strong> for Verity. The CEO explicitly stated at CwX 2026: <em>"Details around packaging and commercialization will be shared as the rollout progresses."</em> This is a phased rollout — Verity will be introduced incrementally by product area and workflow rather than as a single commercial launch.</p>
+    <p>CaseWare has <strong>not announced pricing</strong> for Verity. The CEO explicitly stated at CwX 2026: <em>"Details around packaging and commercialization will be shared as the rollout progresses."</em> This is a phased rollout — Verity will be introduced incrementally by product area and workflow rather than as a single commercial launch.</p>
   </div>
 
   <h3>What We Can Infer</h3>
@@ -582,7 +604,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 
   <p>CwX (CaseWare Experience) is CaseWare's annual user conference. It has become the primary venue for major product announcements, including Verity.</p>
 
-  <h3>CwX 2026 — Fort Lauderdale, FL (May 21–22, 2026) <span class="tag tag-ga" style="font-size:11px;vertical-align:middle">Primary Verity Launch</span></h3>
+  <h3>CwX 2026 — Fort Lauderdale, FL (May 21–22, 2026) <span class="tag tag-ga" style="vertical-align:middle;margin-left:8px">Primary Verity Launch</span></h3>
   <ul>
     <li><strong>Verity officially launched</strong> the day before (May 20 press release) and demonstrated live at the conference</li>
     <li>LinkedIn live broadcast of the launch session (recording may be accessible on CaseWare's LinkedIn page)</li>
@@ -648,7 +670,7 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
         <td>CaseWare has deeper audit workflow integration; TR is stronger in research and tax workflow.</td>
       </tr>
       <tr>
-        <td><strong>Caseware's own stack (pre-Verity)</strong></td>
+        <td><strong>CaseWare's own stack (pre-Verity)</strong></td>
         <td>—</td>
         <td>AiDA (Claude-powered assistant)</td>
         <td>Verity supersedes AiDA in capability — agents take action vs. AiDA's conversational assistance.</td>
@@ -657,9 +679,9 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
   </table>
   </div>
 
-  <div class="callout callout-gold">
+  <div class="callout callout-amber">
     <div class="callout-title">CaseWare's Unique Moat</div>
-    <p style="margin:0">No competitor has the combination of: (1) AICPA co-developed methodology embedded in the platform, (2) agentic AI built inside the engagement file with full context, and (3) the largest installed base in external audit specifically. The AICPA partnership is the hardest to replicate — it creates a standards-alignment advantage that pure-play AI tools cannot match.</p>
+    <p>No competitor has the combination of: (1) AICPA co-developed methodology embedded in the platform, (2) agentic AI built inside the engagement file with full context, and (3) the largest installed base in external audit specifically. The AICPA partnership is the hardest to replicate — it creates a standards-alignment advantage that pure-play AI tools cannot match.</p>
   </div>
 </section>
 
@@ -780,9 +802,9 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
 </section>
 
 <!-- FOOTER -->
-<footer>
+<div class="page-footer">
   <div class="footer-row">
-    <div class="footer-copy">
+    <div>
       <div class="sources-title">Primary Sources</div>
       <ul class="source-list">
         <li><a href="https://www.globenewswire.com/news-release/2026/05/20/3298537/0/en/caseware-launches-verity-to-bring-workflow-native-ai-agents-directly-into-assurance-engagements.html" target="_blank">GlobeNewswire — Verity Launch Press Release (May 20, 2026)</a></li>
@@ -796,11 +818,14 @@ footer { border-top: 1px solid var(--b2); padding-top: 28px; margin-top: 60px; }
         <li><a href="https://www.globenewswire.com/news-release/2025/01/21/3012715/0/en/Caseware-Announces-Acquisition-of-Extractly-ai.html" target="_blank">GlobeNewswire — Extractly.ai Acquisition (January 2025)</a></li>
       </ul>
     </div>
-    <div class="footer-copy" style="text-align:right;max-width:300px">
-      <p style="font-size:12px;color:var(--muted);margin-bottom:6px">Prepared May 2026<br>Research via public sources only.<br>Pricing and model details unconfirmed — verify with CaseWare directly.<br>For internal use.</p>
+    <div class="footer-note">
+      Prepared May 2026<br>
+      Research via public sources only.<br>
+      Pricing and model details unconfirmed — verify with CaseWare directly.<br>
+      For internal use.
     </div>
   </div>
-</footer>
+</div>
 
 </div>
 </body>
