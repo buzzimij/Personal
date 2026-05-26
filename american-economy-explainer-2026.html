@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Is Everything So Expensive? — Economic Explainer 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0E1F3D;
+  --navy-mid: #1A3461;
+  --blue: #0057A8;
+  --blue-light: #EAF2FB;
+  --gray-50: #F8F9FA;
+  --gray-100: #F0F1F3;
+  --gray-200: #E2E4E8;
+  --gray-400: #9AA0AB;
+  --gray-600: #5A6270;
+  --gray-800: #2C3240;
+  --border: #D0D4DC;
+  --text: #1A1E2A;
+  --green: #1A6B3A;
+  --green-bg: #E6F4EC;
+  --red: #8B1A1A;
+  --red-bg: #FDECEA;
+  --purple: #4A1A8B;
+  --purple-bg: #F3EEFB;
+  --amber: #6B4A00;
+  --amber-bg: #FDF5DC;
+  --teal: #0D5A5A;
+  --teal-bg: #E3F6F5;
+}
+html { font-size: 15px; }
+body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif; background: #ECEEF2; color: var(--text); min-height: 100vh; line-height: 1.65; }
+
+/* ── TOP BAR & HEADER ── */
+.top-bar { background: var(--navy); height: 5px; width: 100%; }
+.header { background: var(--navy); color: white; padding: 44px 48px 40px; }
+.header-label { font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .5; margin-bottom: 10px; }
+.header-title { font-size: 2.1rem; font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 8px; }
+.header-sub { font-size: .9rem; opacity: .65; max-width: 680px; line-height: 1.6; }
+
+/* ── TAB NAV ── */
+.tab-nav-wrap { background: var(--navy-mid); border-bottom: 3px solid var(--blue); overflow-x: auto; }
+.tab-nav { display: flex; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.tab-btn { flex-shrink: 0; background: none; border: none; color: rgba(255,255,255,.55); font-family: inherit; font-size: .8rem; font-weight: 600; letter-spacing: .02em; padding: 14px 20px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: color .15s, border-color .15s; white-space: nowrap; }
+.tab-btn:hover { color: rgba(255,255,255,.85); }
+.tab-btn.active { color: white; border-bottom-color: #5BA8FF; }
+
+/* ── LAYOUT ── */
+.container { max-width: 920px; margin: 0 auto; padding: 40px 24px 80px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── TYPOGRAPHY ── */
+.section-label { font-size: .65rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 6px; }
+.panel-title { font-size: 1.7rem; font-weight: 800; color: var(--navy); letter-spacing: -.025em; margin-bottom: 6px; }
+.panel-sub { font-size: .92rem; color: var(--gray-600); margin-bottom: 32px; max-width: 680px; line-height: 1.6; }
+h3 { font-size: 1rem; font-weight: 700; color: var(--navy-mid); margin: 28px 0 10px; }
+h4 { font-size: .9rem; font-weight: 700; color: var(--gray-800); margin: 18px 0 6px; }
+p { margin-bottom: 14px; color: var(--text); font-size: .9rem; line-height: 1.7; }
+ul, ol { padding-left: 22px; margin-bottom: 14px; }
+li { margin-bottom: 7px; font-size: .9rem; line-height: 1.6; }
+strong { color: var(--navy); font-weight: 700; }
+em { color: var(--gray-600); font-style: italic; }
+
+/* ── CARDS ── */
+.card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 28px 32px; margin-bottom: 20px; }
+.card-sm { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; }
+
+/* ── CALLOUTS ── */
+.callout { border-radius: 6px; padding: 16px 20px; margin: 18px 0; border-left: 3px solid; }
+.callout-title { font-size: .65rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px; }
+.callout p { margin: 0; font-size: .88rem; }
+.callout ul { margin: 6px 0 0; font-size: .88rem; }
+.c-blue   { background: var(--blue-light); border-color: var(--blue); }
+.c-blue   .callout-title { color: var(--blue); }
+.c-green  { background: var(--green-bg); border-color: var(--green); }
+.c-green  .callout-title { color: var(--green); }
+.c-red    { background: var(--red-bg); border-color: #C0392B; }
+.c-red    .callout-title { color: #C0392B; }
+.c-amber  { background: var(--amber-bg); border-color: #B8860B; }
+.c-amber  .callout-title { color: var(--amber); }
+.c-purple { background: var(--purple-bg); border-color: #6A3DB8; }
+.c-purple .callout-title { color: var(--purple); }
+.c-teal   { background: var(--teal-bg); border-color: #0A8080; }
+.c-teal   .callout-title { color: var(--teal); }
+
+/* ── TABLES ── */
+.tbl-wrap { overflow-x: auto; margin: 18px 0; border: 1px solid var(--border); border-radius: 6px; }
+table { width: 100%; border-collapse: collapse; font-size: .83rem; }
+thead th { background: var(--gray-100); color: var(--navy); font-size: .63rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+tbody td { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--gray-50); }
+
+/* ── STAT ROW ── */
+.stat-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 20px 0; }
+.stat-box { background: var(--gray-50); border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; flex: 1; min-width: 130px; text-align: center; }
+.stat-val { font-size: 1.75rem; font-weight: 800; color: var(--navy); display: block; letter-spacing: -.02em; line-height: 1.1; }
+.stat-lbl { font-size: .72rem; color: var(--gray-600); margin-top: 5px; display: block; line-height: 1.4; }
+
+/* ── TIMELINE ── */
+.timeline { border-left: 2px solid var(--gray-200); padding-left: 24px; margin: 18px 0; }
+.timeline-item { position: relative; margin-bottom: 22px; }
+.timeline-item::before { content: ''; position: absolute; left: -30px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); border: 2px solid white; box-shadow: 0 0 0 1px var(--blue); }
+.tl-date { font-size: .72rem; font-weight: 700; color: var(--blue); letter-spacing: .04em; margin-bottom: 3px; }
+.tl-event { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+.tl-detail { font-size: .82rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ── GRID ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 18px 0; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0; }
+
+/* ── TAG ── */
+.tag { display: inline-block; padding: 2px 9px; border-radius: 3px; font-size: .63rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.tag-green  { background: var(--green-bg);  color: var(--green);  border: 1px solid #A8D5B7; }
+.tag-red    { background: var(--red-bg);    color: #C0392B;       border: 1px solid #D49898; }
+.tag-amber  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid #D4B875; }
+.tag-blue   { background: var(--blue-light);color: var(--blue);   border: 1px solid #A8C8EF; }
+.tag-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid #B8A0D8; }
+
+/* ── PAGE FOOTER ── */
+.page-footer { text-align: center; font-size: .75rem; color: var(--gray-400); padding: 32px 24px; border-top: 1px solid var(--border); margin-top: 20px; }
+
+@media (max-width: 640px) {
+  .header { padding: 28px 20px 24px; } .header-title { font-size: 1.55rem; }
+  .container { padding: 24px 16px 60px; }
+  .card { padding: 20px; } .two-col { grid-template-columns: 1fr; } .three-col { grid-template-columns: 1fr; }
+  .tab-btn { padding: 12px 14px; font-size: .75rem; }
+}
+</style>
+</head>
+<body>
+<div class="top-bar"></div>
+<div class="header">
+  <div class="header-label">Personal Research Library &nbsp;·&nbsp; Economics</div>
+  <div class="header-title">Why Is Everything So Expensive?</div>
+  <div class="header-sub">A plain-English guide to the economic forces behind unaffordable healthcare, housing, education, and stagnant wages — and how it all connects to 1971.</div>
+</div>
+
+<div class="tab-nav-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('gold')">Gold Standard &amp; 1971</button>
+    <button class="tab-btn" onclick="showTab('fed')">The Federal Reserve</button>
+    <button class="tab-btn" onclick="showTab('wages')">Wages &amp; Productivity</button>
+    <button class="tab-btn" onclick="showTab('housing')">Housing &amp; Cars</button>
+    <button class="tab-btn" onclick="showTab('healthcare')">Healthcare</button>
+    <button class="tab-btn" onclick="showTab('college')">College Costs</button>
+    <button class="tab-btn" onclick="showTab('debt')">National Debt</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════
+     TAB 1 — GOLD STANDARD & 1971
+══════════════════════════════════════════════ -->
+<div id="tab-gold" class="tab-panel active">
+  <div class="section-label">Chapter 01</div>
+  <div class="panel-title">The Gold Standard &amp; 1971</div>
+  <div class="panel-sub">How money worked for most of human history, what Bretton Woods was, why Nixon ended it on a Sunday night in August 1971, and what changed forever.</div>
+
+  <div class="card">
+    <h3>What Is the Gold Standard?</h3>
+    <p>A gold standard means the government's currency is directly redeemable for a fixed quantity of gold. If you hold a $20 bill, the government promises you can exchange it for $20 worth of physical gold. This means the government can only issue as much currency as it has gold to back it — it cannot simply print more money out of thin air.</p>
+    <p>The US was on some version of a gold standard from 1792 until 1971 — nearly 180 years. Gold acted as a hard constraint on government spending and money creation. It also meant long-run prices were remarkably stable: a dollar in 1800 bought roughly what a dollar bought in 1900.</p>
+
+    <div class="callout c-amber">
+      <div class="callout-title">Why Gold?</div>
+      <p>Gold has been money across virtually every civilization in history because of its properties: it cannot be created artificially, it does not corrode, it is divisible, portable, and universally recognized. Its scarcity is guaranteed by physics, not by government promises.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Bretton Woods (1944–1971)</h3>
+    <p>In July 1944, with World War II still ongoing, 44 Allied nations gathered at the Mount Washington Hotel in <strong>Bretton Woods, New Hampshire</strong> to design the post-war monetary order. The architects were <strong>John Maynard Keynes</strong> (UK) and <strong>Harry Dexter White</strong> (US).</p>
+    <p>Everyone remembered how the chaotic currency devaluations of the 1930s had deepened the Great Depression and fueled political instability. They wanted a stable, rules-based system.</p>
+
+    <h4>How Bretton Woods Worked</h4>
+    <ul>
+      <li>The <strong>US dollar was pegged to gold</strong> at $35 per ounce — any foreign government could redeem dollars for gold at that fixed price, on demand</li>
+      <li>Every <strong>other currency was pegged to the dollar</strong> at a fixed exchange rate</li>
+      <li>The dollar became the world's <strong>reserve currency</strong> — the thing all international trade was settled in</li>
+      <li>Two new institutions were created: the <strong>IMF</strong> (to manage balance of payment crises) and the <strong>World Bank</strong> (to fund reconstruction)</li>
+    </ul>
+    <p>This gave the US an enormous privilege: because everyone needed dollars to trade, the US could run deficits that other nations couldn't. French President de Gaulle famously called this the <strong>"exorbitant privilege."</strong></p>
+
+    <h4>Why It Eventually Broke Down — The Triffin Dilemma</h4>
+    <p>Yale economist Robert Triffin identified a fatal structural contradiction in the early 1960s: to supply the world with dollars, the US had to run trade deficits. But running deficits meant printing more dollars than gold could back — which undermined confidence in the $35/oz peg. You couldn't do both indefinitely. It was built to fail.</p>
+    <p>The Vietnam War and LBJ's domestic spending programs made it worse — more dollars flooded the world with less gold backing each one. De Gaulle started aggressively redeeming French dollar reserves for physical gold. Other nations followed. US gold reserves fell from ~20,000 tons after WWII to ~8,000 tons by 1971. A slow-motion bank run was underway.</p>
+  </div>
+
+  <div class="card">
+    <h3>The Nixon Shock — August 15, 1971</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-date">1944</div>
+        <div class="tl-event">Bretton Woods System Established</div>
+        <div class="tl-detail">44 nations agree: $1 = 1/35 oz gold. All currencies pegged to the dollar. IMF and World Bank created.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1960s</div>
+        <div class="tl-event">Vietnam + Great Society Spending</div>
+        <div class="tl-detail">US runs large deficits to fund the war and domestic programs. More dollars printed. Gold backing per dollar erodes. Triffin Dilemma kicks in.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1965–1971</div>
+        <div class="tl-event">Foreign Gold Redemptions Accelerate</div>
+        <div class="tl-detail">France leads a run on US gold. US reserves fall from ~20,000 to ~8,000 tons. The peg becomes increasingly untenable.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">August 15, 1971</div>
+        <div class="tl-event">Nixon Closes the Gold Window</div>
+        <div class="tl-detail">In a Sunday evening televised address, Nixon suspends dollar-to-gold convertibility. He calls it "temporary." It is permanent. The Bretton Woods system ends.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1973</div>
+        <div class="tl-event">Currencies Begin Floating</div>
+        <div class="tl-detail">Exchange rates are now set by market supply and demand rather than fixed pegs. The modern fiat currency era begins.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1971–Present</div>
+        <div class="tl-event">The Fiat Era</div>
+        <div class="tl-detail">No currency is backed by gold. Money is created by central banks and backed by government authority alone. The US dollar remains reserve currency on trust and inertia.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>What Changed After 1971</h3>
+    <div class="two-col">
+      <div class="card-sm">
+        <strong style="color:var(--green)">The Case For It</strong>
+        <ul style="margin-top:10px">
+          <li>Monetary flexibility to fight recessions</li>
+          <li>Could prevent deflationary spirals</li>
+          <li>Exchange rates self-adjust via markets</li>
+          <li>Avoided a chaotic dollar devaluation or default</li>
+          <li>Allowed massive post-war global economic expansion</li>
+        </ul>
+      </div>
+      <div class="card-sm">
+        <strong style="color:#C0392B">The Case Against It</strong>
+        <ul style="margin-top:10px">
+          <li>No constraint on money printing</li>
+          <li>Purchasing power eroded continuously</li>
+          <li>Asset prices inflated, benefiting the wealthy</li>
+          <li>Enabled runaway government deficit spending</li>
+          <li>Real wages stagnated relative to productivity</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout c-blue" style="margin-top:20px">
+      <div class="callout-title">The Cantillon Effect — Who Benefits From New Money</div>
+      <p>Named for 18th-century economist Richard Cantillon: newly created money doesn't spread evenly. It flows first through financial markets and credit — inflating asset prices (homes, stocks) before wages catch up. People who own assets get richer. People who only sell their labor fall behind. This effect has run continuously since 1971.</p>
+    </div>
+
+    <div class="tbl-wrap" style="margin-top:20px">
+    <table>
+      <thead><tr><th>Metric</th><th>Under Gold Standard Era</th><th>Post-1971 Fiat Era</th></tr></thead>
+      <tbody>
+        <tr><td>Dollar purchasing power</td><td>Stable over decades</td><td>Lost ~85% since 1971</td></tr>
+        <tr><td>Federal debt</td><td>Constrained, paid down after wars</td><td>Exponential increase, never paid down</td></tr>
+        <tr><td>Productivity vs. wages</td><td>Moved in lockstep</td><td>Productivity far outpaced wages</td></tr>
+        <tr><td>Home price / income ratio</td><td>~2–3x annual income</td><td>~6–8x annual income nationally</td></tr>
+        <tr><td>Financial crises</td><td>Frequent but self-correcting</td><td>Less frequent but requiring bailouts</td></tr>
+        <tr><td>Income inequality (Gini)</td><td>Declining 1930s–1971</td><td>Rising steadily post-1971</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2 — THE FEDERAL RESERVE
+══════════════════════════════════════════════ -->
+<div id="tab-fed" class="tab-panel">
+  <div class="section-label">Chapter 02</div>
+  <div class="panel-title">The Federal Reserve</div>
+  <div class="panel-sub">What it is, how it was created in 1913, what it actually does, and how it connects to inflation, interest rates, and everything else on this page.</div>
+
+  <div class="card">
+    <h3>What Is the Federal Reserve?</h3>
+    <p>The Federal Reserve ("the Fed") is the central bank of the United States. It is a quasi-governmental institution — created by Congress in 1913, but structured to operate independently from direct political control. It is not a private bank but it is not a typical government agency either; it exists in a deliberate gray zone.</p>
+
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-val">1913</span><span class="stat-lbl">Year the Fed was created</span></div>
+      <div class="stat-box"><span class="stat-val">12</span><span class="stat-lbl">Regional Federal Reserve Banks</span></div>
+      <div class="stat-box"><span class="stat-val">7</span><span class="stat-lbl">Board of Governors members</span></div>
+      <div class="stat-box"><span class="stat-val">$7T+</span><span class="stat-lbl">Fed balance sheet (2024)</span></div>
+    </div>
+
+    <h3>Why Was It Created?</h3>
+    <p>The US had no central bank for much of the 19th century and suffered repeated banking panics — 1873, 1893, 1907. In 1907, J.P. Morgan personally had to organize a private bailout to prevent the financial system from collapsing. It was obvious that leaving crisis management to one private banker was not sustainable.</p>
+    <p>Congress passed the <strong>Federal Reserve Act</strong> in December 1913, creating a central bank to act as a "lender of last resort" — an institution that could inject liquidity into the system during panics to prevent bank runs from cascading into full collapses.</p>
+
+    <div class="callout c-amber">
+      <div class="callout-title">Jekyll Island — The Secret Meeting</div>
+      <p>In November 1910, a group of the most powerful bankers in America secretly gathered at Jekyll Island, Georgia, disguised as a duck hunting trip. They drafted what became the Federal Reserve Act. The group included representatives of Rockefeller, Morgan, and Rothschild banking interests. This meeting is documented historical fact — not conspiracy theory — and is openly discussed in the Fed's own historical accounts.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>What the Fed Actually Does</h3>
+
+    <h4>1. Sets Interest Rates (The Federal Funds Rate)</h4>
+    <p>The Fed's most powerful tool is setting the federal funds rate — the interest rate at which banks lend money to each other overnight. This rate cascades through the entire economy: it affects mortgage rates, car loan rates, credit card rates, business borrowing costs, and by extension, economic activity and inflation.</p>
+    <ul>
+      <li><strong>Low rates</strong> → cheap borrowing → more spending and investment → economic stimulus → can cause inflation</li>
+      <li><strong>High rates</strong> → expensive borrowing → less spending → economic slowdown → reduces inflation</li>
+    </ul>
+
+    <h4>2. Controls the Money Supply</h4>
+    <p>The Fed can expand or contract the amount of money in the financial system through <strong>open market operations</strong> — buying or selling US Treasury bonds. When the Fed buys bonds, it creates new money and injects it into the banking system. When it sells bonds, it removes money.</p>
+    <p>Post-2008, the Fed dramatically expanded this with <strong>Quantitative Easing (QE)</strong> — buying trillions of dollars of bonds and mortgage-backed securities, expanding its balance sheet from ~$900 billion in 2008 to over $9 trillion by 2022.</p>
+
+    <h4>3. Regulates Banks</h4>
+    <p>The Fed supervises and regulates large commercial banks, sets reserve requirements, and acts as lender of last resort — providing emergency lending to banks that are solvent but facing liquidity crises.</p>
+
+    <h4>4. The Dual Mandate</h4>
+    <p>Unlike most central banks, the Fed has a <strong>dual mandate</strong> from Congress: maintain <strong>price stability</strong> (low inflation) AND <strong>maximum employment</strong>. These goals sometimes conflict — lowering unemployment can require stimulating the economy in ways that cause inflation.</p>
+  </div>
+
+  <div class="card">
+    <h3>How the Fed Creates Money — "Out of Thin Air"</h3>
+    <p>This is the part that surprises most people. When the Fed buys a Treasury bond from a bank, it doesn't transfer existing money — it literally <strong>creates new dollars</strong> as a digital entry. The money did not exist before the transaction. This is not controversial — it is how modern central banking works and the Fed explains it this way in its own educational materials.</p>
+
+    <div class="callout c-red">
+      <div class="callout-title">Fractional Reserve Banking Multiplies This Further</div>
+      <p>Banks are only required to hold a fraction of their deposits in reserve. When the Fed creates $1 million and deposits it in the banking system, banks can lend out most of it. That lending creates deposits at other banks, which lend out most of those deposits, and so on. The original $1 million can become $8–10 million in total money supply through this multiplication process. The Fed effectively controls the starting point; the banking system multiplies it.</p>
+    </div>
+
+    <h3>The Fed and Inflation — The 2021-2023 Case Study</h3>
+    <p>In 2020-2021, the Fed and Treasury injected approximately <strong>$5 trillion</strong> into the economy through stimulus checks, expanded unemployment benefits, and QE. This was the largest peacetime monetary expansion in US history. By 2021-2022, inflation hit <strong>9.1%</strong> — the highest since 1981.</p>
+    <p>The Fed then raised interest rates from near zero to over 5% in the fastest rate-hiking cycle since the 1980s to bring inflation back down. By 2024 inflation was ~3%, but prices remained at their elevated levels — inflation falling does not mean prices go back down, it just means they stop rising as fast.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Era</th><th>Fed Action</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>2008–2009</td><td>Cut rates to zero; QE1 ($600B)</td><td>Prevented depression; mild recovery</td></tr>
+        <tr><td>2010–2015</td><td>QE2, QE3 — balance sheet to $4.5T</td><td>Asset prices soared; slow wage recovery</td></tr>
+        <tr><td>2018–2019</td><td>Gradual rate hikes</td><td>Stock market sell-off; reversed quickly</td></tr>
+        <tr><td>2020</td><td>Rates to zero; $3T QE in 3 months</td><td>Markets recovered; seeds of inflation planted</td></tr>
+        <tr><td>2021–2022</td><td>Kept rates near zero too long</td><td>9.1% inflation by June 2022</td></tr>
+        <tr><td>2022–2024</td><td>Fastest rate hikes since 1980s</td><td>Inflation reduced; housing market frozen</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout c-purple">
+      <div class="callout-title">The Austrian Critique of the Fed</div>
+      <p>Austrian economists argue the Fed is the root cause of the boom-bust cycle. Artificially low interest rates encourage excessive borrowing and malinvestment — businesses and individuals take on more risk than they would with market-set rates. Eventually the excess is revealed, causing a crash. The Fed then responds with more stimulus, creating the next bubble. They call this "Cantillon enrichment" — each cycle transfers wealth from savers and wage earners to asset holders who benefit from cheap money first.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3 — WAGES & PRODUCTIVITY
+══════════════════════════════════════════════ -->
+<div id="tab-wages" class="tab-panel">
+  <div class="section-label">Chapter 03</div>
+  <div class="panel-title">Wages &amp; Productivity</div>
+  <div class="panel-sub">Since 1971, worker productivity increased 238% but compensation increased only 109%. Here is what explains the gap — and who is responsible.</div>
+
+  <div class="card">
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-val">+238%</span><span class="stat-lbl">Productivity growth, 1971–2023</span></div>
+      <div class="stat-box"><span class="stat-val">+109%</span><span class="stat-lbl">Compensation growth, 1971–2023</span></div>
+      <div class="stat-box"><span class="stat-val">1971</span><span class="stat-lbl">Year the lines diverged</span></div>
+      <div class="stat-box"><span class="stat-val">~35%</span><span class="stat-lbl">Union membership, 1955</span></div>
+      <div class="stat-box"><span class="stat-val">~10%</span><span class="stat-lbl">Union membership, 2024</span></div>
+    </div>
+
+    <div class="callout c-amber">
+      <div class="callout-title">What This Actually Means</div>
+      <p>From 1948 to 1971, productivity and wages moved in near-lockstep — when workers produced more, they earned more. After 1971, the lines decoupled. Workers kept producing more every year, but that value flowed disproportionately to capital (shareholders, executives, asset owners) rather than to the workers creating it. This is the central economic story of the last 50 years.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The Major Causes</h3>
+
+    <h4>1. Globalization and Labor Arbitrage</h4>
+    <p>From roughly 1980–2010, manufacturing jobs were offshored to China, Mexico, Vietnam, and other low-wage countries at massive scale. This created a global labor competition — US factory workers were now implicitly competing with workers earning $2–5/day. Wages for non-college workers in manufacturing-heavy regions were suppressed directly.</p>
+    <p>China's entry into the WTO in 2001 alone is estimated to have eliminated 2–2.4 million US manufacturing jobs. The communities affected — the Rust Belt, parts of the South — never fully recovered. This is often called the <strong>"China Shock"</strong> and is well-documented in academic economics.</p>
+
+    <h4>2. Union Decline</h4>
+    <p>Unions were historically the mechanism by which productivity gains were shared with workers. A union negotiates collective contracts that extract a portion of company profits as wages. When union power collapsed, that extraction mechanism disappeared.</p>
+    <ul>
+      <li>1935 — Wagner Act protects collective bargaining rights; unions grow rapidly</li>
+      <li>1947 — Taft-Hartley Act restricts union tactics; growth slows</li>
+      <li>1981 — Reagan fires 11,000 striking air traffic controllers (PATCO); signals government will not protect unions against employer retaliation</li>
+      <li>1980s–2000s — Corporate restructuring, offshoring, and hostile labor law enforcement accelerate membership collapse</li>
+      <li>2018 — Janus v. AFSCME Supreme Court ruling weakens public sector unions further</li>
+    </ul>
+
+    <h4>3. Automation and Technology</h4>
+    <p>Machines replaced routine, repetitive labor — assembly line work, data entry, routine cognitive tasks. This increased productivity (machines do more per hour) but reduced demand for those workers and suppressed their wages. Technology displaced middle-skill, middle-wage jobs disproportionately — a phenomenon economists call <strong>"hollowing out"</strong> of the labor market.</p>
+
+    <h4>4. Fiat Money and the Cantillon Effect</h4>
+    <p>Post-1971 monetary expansion inflated asset prices faster than wages. Someone who owned a home in 1971 saw their net worth increase with each round of monetary stimulus. A worker who only had wages saw their purchasing power erode. Over 50 years, this systematically transferred wealth from wage-earners to asset-holders.</p>
+
+    <h4>5. Corporate Power and Monopsony</h4>
+    <p>In many labor markets, especially smaller cities and specific industries, there is only one or a few major employers. Economists call this <strong>monopsony</strong> — the buyer of labor has market power. Workers can't simply leave for a competitor. This gives employers downward wage-setting power. Hospital systems, Amazon distribution centers, and agricultural employers in rural areas are common examples. Non-compete agreements (affecting ~30 million workers as of 2020) also suppress wages by limiting workers' ability to move to higher-paying jobs.</p>
+
+    <h4>6. Shareholder Primacy and the Friedman Doctrine</h4>
+    <p>In 1970, economist Milton Friedman published an influential essay arguing corporations' only responsibility is to maximize shareholder returns. Through the 1980s–90s, this philosophy became dominant in American boardrooms. Companies began systematically cutting labor costs, eliminating benefits, moving to part-time and contract work, and distributing profits as dividends and buybacks rather than wages. Executive pay, tied to stock performance, exploded — from ~20x worker pay in 1965 to ~350x by 2020.</p>
+  </div>
+
+  <div class="card">
+    <h3>Where Did the Productivity Gains Go?</h3>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Destination</th><th>Mechanism</th><th>Scale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Shareholder returns</strong></td><td>Dividends, stock buybacks — S&amp;P 500 returned more to shareholders than it invested in workers</td><td>Very large</td></tr>
+        <tr><td><strong>Executive compensation</strong></td><td>CEO pay rose from 20x to 350x median worker pay</td><td>Large</td></tr>
+        <tr><td><strong>Asset price inflation</strong></td><td>Corporate earnings capitalized into higher stock/real estate valuations</td><td>Very large</td></tr>
+        <tr><td><strong>Healthcare cost growth</strong></td><td>Employer-provided health insurance costs ate into compensation even if wages appeared stagnant</td><td>Significant</td></tr>
+        <tr><td><strong>Workers (top income)</strong></td><td>High-skill workers in technology, finance, and medicine captured disproportionate share</td><td>Moderate</td></tr>
+        <tr><td><strong>Workers (median/low income)</strong></td><td>Very little — this is the gap the chart shows</td><td>Small</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout c-blue">
+      <div class="callout-title">The K-Shaped Recovery Pattern</div>
+      <p>Since at least 2008, economic recoveries have been "K-shaped" — those in the top half of the income distribution see incomes, wealth, and asset values recover and grow. Those in the bottom half see stagnant wages and deteriorating living standards. The Fed's post-crisis stimulus primarily inflates asset prices, which only helps people who own assets. The K-shape has gotten more pronounced with every crisis cycle.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4 — HOUSING & CARS
+══════════════════════════════════════════════ -->
+<div id="tab-housing" class="tab-panel">
+  <div class="section-label">Chapter 04</div>
+  <div class="panel-title">Housing &amp; Cars</div>
+  <div class="panel-sub">A median home in 1970 cost 2–3x annual income. Today it costs 6–8x. Cars have followed a similar trajectory. Here is why — and why it is not just inflation.</div>
+
+  <div class="card">
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-val">2–3x</span><span class="stat-lbl">Home price / income ratio, 1970</span></div>
+      <div class="stat-box"><span class="stat-val">6–8x</span><span class="stat-lbl">Home price / income ratio, 2024</span></div>
+      <div class="stat-box"><span class="stat-val">$23K</span><span class="stat-lbl">Median home price, 1970</span></div>
+      <div class="stat-box"><span class="stat-val">$420K</span><span class="stat-lbl">Median home price, 2024</span></div>
+      <div class="stat-box"><span class="stat-val">~4 yrs</span><span class="stat-lbl">Years of work to buy a home, 1970</span></div>
+      <div class="stat-box"><span class="stat-val">~10 yrs</span><span class="stat-lbl">Years of work to buy a home, 2024</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Why Housing Got So Expensive</h3>
+
+    <h4>1. Zoning and Supply Restrictions — The Primary Driver</h4>
+    <p>This is the most important and most underdiscussed cause. American cities have made it extraordinarily difficult to build new housing through:</p>
+    <ul>
+      <li><strong>Single-family zoning</strong> — large portions of most US cities are legally prohibited from having apartments or multi-family buildings</li>
+      <li><strong>Minimum lot size requirements</strong> — you can't subdivide lots to build more units</li>
+      <li><strong>Parking minimums</strong> — every unit must include expensive parking even near transit</li>
+      <li><strong>Height limits</strong> — prevent density even where land values justify it</li>
+      <li><strong>Environmental review requirements (CEQA in California)</strong> — can delay projects for years</li>
+      <li><strong>NIMBYism (Not In My Backyard)</strong> — existing homeowners attend zoning hearings and block new supply because scarcity protects their home values</li>
+    </ul>
+    <p>The proof: <strong>Tokyo</strong>, one of the world's largest cities, has loose zoning and permissive building rules — and housing is remarkably affordable relative to income, despite similar monetary policy. Supply restrictions explain most of the US problem independently of monetary policy.</p>
+
+    <h4>2. Monetary Policy and Asset Price Inflation</h4>
+    <p>Post-1971 monetary expansion and post-2008 near-zero interest rates caused homes to be treated as investment assets rather than places to live. When you can borrow at 3%, home prices rise until the monthly payment consumes a "normal" share of income — which means much higher prices at low rates.</p>
+    <p>Investor and institutional purchasing of single-family homes (hedge funds, REITs) further competed for limited supply, treating housing as a financial instrument rather than shelter.</p>
+
+    <h4>3. Construction Cost Increases</h4>
+    <ul>
+      <li>Labor costs — construction workers have captured some productivity gains</li>
+      <li>Building codes — expanded requirements for energy efficiency, accessibility, and safety are good but add cost</li>
+      <li>Materials inflation — lumber, copper, concrete costs increased significantly especially post-2020</li>
+      <li>Permitting fees — some cities charge $50,000–$100,000+ in fees per unit before construction begins</li>
+    </ul>
+
+    <h4>4. The 2022–2024 Rate Lock-In Effect</h4>
+    <p>When the Fed raised rates from 3% to 7%+, homeowners who had locked in 3% mortgages were unwilling to sell — selling meant giving up a 3% rate and buying a new home at 7%, nearly doubling the monthly payment. This froze supply further and kept prices elevated even as demand fell. A perverse consequence of the rate cycle.</p>
+  </div>
+
+  <div class="card">
+    <h3>Why Cars Got So Expensive</h3>
+    <p>The average new car price in 2024 is approximately <strong>$48,000</strong>, up from ~$25,000 in 2000 (inflation-adjusted). Monthly payments on new cars now average over $700, consuming a larger share of income than ever. Here is why:</p>
+
+    <h4>1. Feature Creep and Regulation</h4>
+    <p>Modern cars include mandated safety equipment (airbags, backup cameras, collision warning systems), emissions controls, and fuel economy technology that add thousands of dollars per vehicle. The average car has gone from containing ~$2,000 in electronics in 2000 to ~$15,000+ today. Consumers also expect features — touchscreens, heated seats, advanced driver assistance — that have become standard. All of this is in the base price.</p>
+
+    <h4>2. Supply Chain Disruptions (2020–2022)</h4>
+    <p>COVID-19 caused a global semiconductor shortage. Cars contain hundreds of chips — for entertainment systems, safety features, engine management. Without chips, manufacturers couldn't build cars. Inventory collapsed, dealers charged above MSRP for the first time in decades, and prices exploded. The habit of paying over sticker price stuck even as supply recovered.</p>
+
+    <h4>3. Consolidation and Reduced Competition</h4>
+    <p>The US auto market is increasingly dominated by large trucks and SUVs where margins are highest. Manufacturers deliberately exited the affordable small-car segment — Ford stopped selling most cars in the US by 2019. The cheapest segments are now left to a few import brands. Less competition in the affordable range means higher floor prices.</p>
+
+    <h4>4. Financialization of Auto Buying</h4>
+    <p>Dealers and manufacturers shifted focus from purchase price to monthly payment. Longer loan terms (72 and 84-month loans are now common vs. 36-48 months previously) let buyers afford higher prices at the same monthly payment. But you pay far more in total interest, and many buyers end up "underwater" — owing more than the car is worth. This psychological pricing trick helped inflate prices over decades.</p>
+
+    <div class="callout c-red">
+      <div class="callout-title">The Real Affordability Picture</div>
+      <p>In 1970, a median-income worker could buy a median home with roughly 4 years of gross salary. They could buy a new car with about 4–5 months of salary. Today those same ratios are ~10 years for a home and ~8–9 months for a car. The cost of the two largest purchases in most Americans' lives has roughly doubled relative to income in 50 years.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 5 — HEALTHCARE
+══════════════════════════════════════════════ -->
+<div id="tab-healthcare" class="tab-panel">
+  <div class="section-label">Chapter 05</div>
+  <div class="panel-title">Healthcare</div>
+  <div class="panel-sub">The US spends ~17% of GDP on healthcare — nearly twice comparable nations — and gets worse outcomes. This is not an accident. It is the result of specific policy decisions made over 80 years.</div>
+
+  <div class="card">
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-val">17%</span><span class="stat-lbl">US healthcare as % of GDP</span></div>
+      <div class="stat-box"><span class="stat-val">~10%</span><span class="stat-lbl">Average for peer nations</span></div>
+      <div class="stat-box"><span class="stat-val">25–35%</span><span class="stat-lbl">Estimated admin overhead in US system</span></div>
+      <div class="stat-box"><span class="stat-val">#1</span><span class="stat-lbl">US rank in healthcare spending per capita</span></div>
+      <div class="stat-box"><span class="stat-val">#40+</span><span class="stat-lbl">US rank in life expectancy</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The Root Problem: Nobody Pays Directly</h3>
+    <p>In almost every functional market, buyers feel prices and respond to them. Healthcare systematically broke this mechanism. When a third party — an insurer or government program — pays the bill, patients don't shop on price and providers have no incentive to compete on price. This is called the <strong>third-party payer problem</strong> and it is the foundation of all other healthcare cost issues.</p>
+
+    <h3>How It Happened — Layer by Layer</h3>
+
+    <h4>Layer 1 — WWII Wage Controls (1942)</h4>
+    <p>During WWII, the government froze wages to prevent inflation. Employers couldn't attract workers by raising salaries, so they offered <strong>health insurance as a non-wage benefit</strong>. The IRS ruled employer-provided health insurance was <strong>tax-exempt</strong>. This was a wartime accident that became the permanent foundation of the US healthcare system.</p>
+    <p>The tax exemption is worth ~$300 billion annually — the largest single tax expenditure in the US federal budget. It locks in employer-tied insurance and ensures most Americans never see the true cost of their care.</p>
+
+    <h4>Layer 2 — Medicare and Medicaid (1965)</h4>
+    <p>LBJ's Great Society created Medicare (elderly) and Medicaid (low-income), covering roughly 40% of Americans. When the government becomes a massive payer with essentially unlimited ability to pay, two things happen: providers raise prices because the payer can't easily say no, and demand increases because insured patients use more care than they would paying out of pocket.</p>
+
+    <h4>Layer 3 — The Insurance Design Problem</h4>
+    <p>Insurance is supposed to cover catastrophic, unpredictable events — not routine, predictable ones. Car insurance doesn't pay for oil changes. But US health insurance pays for everything, including routine office visits, annual checkups, and standard prescriptions. Every small claim requires an administrative process — coding, submission, review, negotiation — that costs money at every step. Estimates suggest <strong>25–35 cents of every healthcare dollar</strong> goes to administration rather than care.</p>
+
+    <h4>Layer 4 — Hospital Consolidation</h4>
+    <p>The US has seen massive hospital consolidation since the 1990s. Large health systems have bought up competitors, independent hospitals, and physician practices. In many metropolitan areas, one or two systems control most of the market. This market power allows them to charge insurers whatever the traffic will bear — and insurers pass those costs to employers and workers through higher premiums. Studies consistently show that hospital mergers increase prices 20–40% with no improvement in quality.</p>
+
+    <h4>Layer 5 — Drug Pricing and the Free Rider Problem</h4>
+    <p>The US funds most of the world's pharmaceutical research through high drug prices. Other countries use government bargaining power to pay low prices — a new drug that costs $10,000/year in the US costs $1,000–2,000 in Germany or Canada. US patients subsidize global access. This is partly why the US pays 2–5x more for the same drugs than peer nations.</p>
+    <p>Additionally, the FDA approval process is expensive, patent protection grants long monopoly periods (often extended by minor formulation changes), and pharmacy benefit managers extract significant rents as middlemen.</p>
+
+    <h4>Layer 6 — Certificate of Need Laws</h4>
+    <p>Many states require hospitals and clinics to get government permission before adding capacity — new beds, MRI machines, surgical centers. These "Certificate of Need" laws were meant to prevent overbuilding but became tools for existing hospitals to block competition. Less competition equals higher prices.</p>
+
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Country</th><th>% GDP on Healthcare</th><th>Universal Coverage</th><th>Life Expectancy</th></tr></thead>
+      <tbody>
+        <tr><td><strong>United States</strong></td><td>~17%</td><td>No</td><td>~77 years</td></tr>
+        <tr><td>Germany</td><td>~12%</td><td>Yes</td><td>~81 years</td></tr>
+        <tr><td>Canada</td><td>~11%</td><td>Yes</td><td>~82 years</td></tr>
+        <tr><td>United Kingdom</td><td>~10%</td><td>Yes</td><td>~81 years</td></tr>
+        <tr><td>Japan</td><td>~11%</td><td>Yes</td><td>~84 years</td></tr>
+        <tr><td>Australia</td><td>~10%</td><td>Yes</td><td>~83 years</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="callout c-red">
+      <div class="callout-title">Why It Doesn't Self-Correct</div>
+      <p>Healthcare doesn't work like a normal market: demand is inelastic (you can't shop during an emergency), supply is restricted (medical licensing, regulations), the payer and consumer are different parties, and the most powerful actors in the system profit from its complexity. Hospital systems, insurers, pharma companies, and PBMs (pharmacy benefit managers) collectively spend hundreds of millions on lobbying annually to preserve the status quo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 6 — COLLEGE COSTS
+══════════════════════════════════════════════ -->
+<div id="tab-college" class="tab-panel">
+  <div class="section-label">Chapter 06</div>
+  <div class="panel-title">College Costs</div>
+  <div class="panel-sub">Tuition has increased over 1,200% since 1980 — far faster than inflation, healthcare, or housing. The reason is surprisingly specific: the federal student loan program removed price sensitivity from the market.</div>
+
+  <div class="card">
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-val">+1,200%</span><span class="stat-lbl">Tuition increase since 1980</span></div>
+      <div class="stat-box"><span class="stat-val">+240%</span><span class="stat-lbl">General inflation since 1980</span></div>
+      <div class="stat-box"><span class="stat-val">$1.7T</span><span class="stat-lbl">Total US student loan debt (2024)</span></div>
+      <div class="stat-box"><span class="stat-val">45M</span><span class="stat-lbl">Americans with student loan debt</span></div>
+      <div class="stat-box"><span class="stat-val">$37K</span><span class="stat-lbl">Average bachelor's degree debt</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The Bennett Hypothesis — The Core Mechanism</h3>
+    <p>In 1987, US Secretary of Education William Bennett argued: <em>"Increases in financial aid in recent years have enabled colleges and universities blithely to raise their tuitions."</em> This is known as the <strong>Bennett Hypothesis</strong> and decades of evidence has largely confirmed it.</p>
+
+    <div class="callout c-amber">
+      <div class="callout-title">The Textbook Mechanism</div>
+      <p>When the government makes it easy for anyone to borrow money for college — regardless of the degree's market value or the school's quality — it removes price sensitivity from the buyer. Students don't feel the cost of a $60,000/year tuition when it's financed by a loan they won't repay for 20 years. Colleges, knowing students can always borrow more, raise prices to capture the available subsidy. This is identical to what happened in healthcare and housing — government financing detaches the buyer from the price.</p>
+    </div>
+
+    <h3>The Timeline of How It Happened</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-date">1944</div>
+        <div class="tl-event">GI Bill</div>
+        <div class="tl-detail">Federal government pays for veterans' education. First major federal higher education subsidy. College enrollment expands dramatically but tuitions remain controlled by real affordability.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1965</div>
+        <div class="tl-event">Higher Education Act</div>
+        <div class="tl-detail">Creates federal student loan and grant programs (Pell Grants). Broadens access to college — a genuine social good — but also begins disconnecting tuition from what students directly pay.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1972</div>
+        <div class="tl-event">Sallie Mae Created</div>
+        <div class="tl-detail">Government-sponsored enterprise to buy and securitize student loans. Massively scales the market for student debt, making lending far easier and more available.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1978–1992</div>
+        <div class="tl-event">Loan Limits Repeatedly Raised</div>
+        <div class="tl-detail">Congress periodically increases the amount students can borrow. Each increase is followed by tuition increases that consume the new headroom. Colleges learn that any available loan money will be absorbed by price increases.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">2010</div>
+        <div class="tl-event">Federal Government Takes Over Student Lending</div>
+        <div class="tl-detail">The Student Aid and Fiscal Responsibility Act moves all federal student lending from private banks to the Department of Education. The government is now the direct lender to virtually all students. Credit standards are essentially non-existent — any enrolled student qualifies regardless of major, school quality, or employment prospects.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">2010s–2020s</div>
+        <div class="tl-event">Income-Driven Repayment and Forgiveness</div>
+        <div class="tl-detail">As debt loads become unmanageable, the government creates income-driven repayment plans and forgiveness programs. These further reduce the borrower's perceived cost — "I'll only pay a small percentage of my income for 20 years" — removing the last vestige of price discipline.</div>
+      </div>
+    </div>
+
+    <h3>Other Contributing Factors</h3>
+
+    <h4>The Administrative Bloat Explosion</h4>
+    <p>Between 1993 and 2009, the number of university administrators grew by <strong>60%</strong> while the number of faculty grew 6%. Universities have built enormous administrative bureaucracies — diversity offices, student affairs departments, marketing teams, compliance offices, title IX coordinators. This administrative overhead is a major driver of cost increases that has nothing to do with instruction quality.</p>
+
+    <h4>The Arms Race in Amenities</h4>
+    <p>Universities compete for students by building amenities — climbing walls, luxury dorms, gourmet dining, state-of-the-art recreation centers. Because students pay with loans rather than their own money, they respond to quality-of-life marketing rather than price. Universities that skimped on amenities lost enrollment to those that splurged. The result was an amenity arms race financed entirely by student debt.</p>
+
+    <h4>State Disinvestment in Public Universities</h4>
+    <p>State governments gradually shifted funding away from public universities from the 1970s onward. A public university that once received 70% of its funding from the state now might receive 20–30%. Schools responded by raising tuition — which was politically easier than fighting for state appropriations. The federal loan system made those tuition increases absorbable, reinforcing the cycle.</p>
+
+    <h4>Credential Inflation</h4>
+    <p>As a bachelor's degree became the baseline credential for middle-class employment, demand became inelastic — you "had to" go to college to access certain job markets. This reduced students' price sensitivity further; declining to attend because of cost meant accepting a lower-tier career path. College sold not just education but access to credentialed labor markets.</p>
+
+    <div class="callout c-blue">
+      <div class="callout-title">The Irony of Well-Intentioned Policy</div>
+      <p>Every expansion of student loan programs was intended to make college <em>more</em> affordable and accessible. The result was that college became <em>less</em> affordable while access expanded. This is a near-perfect case study in how government subsidies, absent market discipline, are captured by suppliers (universities) as price increases rather than passed through to consumers as savings. The same dynamic explains healthcare cost growth.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     TAB 7 — NATIONAL DEBT
+══════════════════════════════════════════════ -->
+<div id="tab-debt" class="tab-panel">
+  <div class="section-label">Chapter 07</div>
+  <div class="panel-title">The National Debt</div>
+  <div class="panel-sub">$34+ trillion and growing. How the US ended up here, who owns it, whether it matters, and what the competing schools of thought say about it.</div>
+
+  <div class="card">
+    <div class="stat-row">
+      <div class="stat-box"><span class="stat-val">$34T+</span><span class="stat-lbl">Total national debt (2024)</span></div>
+      <div class="stat-box"><span class="stat-val">124%</span><span class="stat-lbl">Debt as % of GDP (2024)</span></div>
+      <div class="stat-box"><span class="stat-val">$1T+</span><span class="stat-lbl">Annual interest payments (2024)</span></div>
+      <div class="stat-box"><span class="stat-val">$398B</span><span class="stat-lbl">National debt in 1971</span></div>
+      <div class="stat-box"><span class="stat-val">~$100K</span><span class="stat-lbl">Per-person share of national debt</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>How Did We Get Here?</h3>
+    <p>The US national debt in 1971, the year Nixon ended the gold standard, was approximately <strong>$398 billion</strong>. Today it exceeds <strong>$34 trillion</strong> — an 85-fold increase in nominal terms. The connection is not coincidental. Under a gold standard, the government could not print money to cover deficits; it had to borrow at market rates with real constraints on how much the market would lend. Under fiat money, the Fed can buy government bonds — effectively printing money to finance deficits.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="tl-date">1971</div>
+        <div class="tl-event">$398 Billion</div>
+        <div class="tl-detail">Gold standard ends. The hard constraint on money creation is removed. Debt begins accelerating.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">1981</div>
+        <div class="tl-event">$1 Trillion</div>
+        <div class="tl-detail">Reagan-era tax cuts + defense spending increases drive the first trillion. Reagan triples the debt during his presidency.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">2001–2008</div>
+        <div class="tl-event">$5 Trillion → $10 Trillion</div>
+        <div class="tl-detail">Bush tax cuts, Iraq/Afghanistan wars, Medicare Part D — all unfunded. Debt doubles in 8 years.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">2008–2009</div>
+        <div class="tl-event">Financial Crisis Bailouts</div>
+        <div class="tl-detail">TARP, stimulus, automatic stabilizers — debt rises ~$1.5T in one year. First explicit "too big to fail" bailouts.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">2020</div>
+        <div class="tl-event">COVID-19 — $4 Trillion in One Year</div>
+        <div class="tl-detail">CARES Act, stimulus checks, PPP loans, enhanced unemployment — largest single-year debt increase in history. Debt crosses $27 trillion.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="tl-date">2024</div>
+        <div class="tl-event">$34T+ and Accelerating</div>
+        <div class="tl-detail">Interest payments alone now exceed $1 trillion/year — more than the defense budget. Interest is the fastest-growing component of federal spending.</div>
+      </div>
+    </div>
+
+    <h3>Who Owns the US Debt?</h3>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Holder</th><th>Amount (approx.)</th><th>% of Total</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>US Government Itself</strong></td><td>~$7T</td><td>~21%</td><td>Social Security Trust Fund, other government accounts — money the government owes itself</td></tr>
+        <tr><td><strong>Federal Reserve</strong></td><td>~$5T</td><td>~15%</td><td>Purchased via QE programs. Effectively money the government printed to buy its own debt.</td></tr>
+        <tr><td><strong>US Individuals &amp; Institutions</strong></td><td>~$12T</td><td>~35%</td><td>Pension funds, mutual funds, banks, individual investors holding Treasury bonds</td></tr>
+        <tr><td><strong>Japan</strong></td><td>~$1.1T</td><td>~3%</td><td>Largest foreign holder</td></tr>
+        <tr><td><strong>China</strong></td><td>~$0.8T</td><td>~2%</td><td>Declining — China has been reducing US Treasury holdings</td></tr>
+        <tr><td><strong>Other Foreign</strong></td><td>~$5T</td><td>~15%</td><td>UK, Luxembourg, Cayman Islands, other central banks</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>Does the Debt Matter? The Competing Views</h3>
+
+    <h4>The "It Matters Enormously" View (Mainstream / Austrian)</h4>
+    <ul>
+      <li><strong>Interest burden is crowding out other spending</strong> — $1T+/year in interest is money that can't go to defense, infrastructure, or tax cuts. Interest is now the single largest federal expenditure category.</li>
+      <li><strong>It is inflationary</strong> — financing deficits with money creation (via the Fed buying Treasuries) expands the money supply and contributes to inflation</li>
+      <li><strong>Future generations inherit the burden</strong> — today's spending is tomorrow's taxes or inflation</li>
+      <li><strong>Risk of a debt spiral</strong> — if interest rates stay elevated and debt keeps growing, interest payments consume an ever-larger share of tax revenue, requiring more borrowing, creating a self-reinforcing cycle</li>
+      <li><strong>Reserve currency risk</strong> — if confidence in the dollar as reserve currency erodes, the US loses its "exorbitant privilege" to borrow cheaply, and rates spike</li>
+    </ul>
+
+    <h4>The MMT View (Modern Monetary Theory)</h4>
+    <p>MMT economists (Stephanie Kelton, et al.) argue the conventional framing is wrong for a country that issues its own currency:</p>
+    <ul>
+      <li>The US cannot "run out" of dollars — it creates them. The debt will never be "paid off" in the traditional sense and doesn't need to be.</li>
+      <li>The real constraint on government spending is not debt but <strong>inflation</strong> — you can spend until you create too much inflation, then pull back</li>
+      <li>Federal "debt" is really just dollars the government has injected into the private sector and not yet taxed back — it is private sector savings</li>
+      <li>The 2020 experiment (massive stimulus with initially mild inflation) is cited as supporting evidence</li>
+    </ul>
+
+    <div class="callout c-red">
+      <div class="callout-title">The Practical Problem With MMT Right Now</div>
+      <p>Whatever the theoretical validity, the US is currently paying over $1 trillion per year in interest — more than the entire defense budget. This is not hypothetical future risk; it is a present fiscal reality that is crowding out other priorities and absorbing an increasing share of every tax dollar collected. At current trajectory, interest alone will consume 25%+ of federal revenue by 2030.</p>
+    </div>
+
+    <div class="callout c-teal">
+      <div class="callout-title">The Reserve Currency Wildcard</div>
+      <p>The US can carry debt that would sink other nations because the dollar is the world's reserve currency — everyone needs dollars to buy oil, trade globally, and hold reserves. This gives the US uniquely low borrowing costs. If the dollar ever loses reserve currency status — a slow process that could take decades — the US would face dramatically higher interest rates on its debt, triggering a fiscal crisis. China's attempts to settle trade in yuan and the growth of alternative payment systems are very early signals worth watching over the long term.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .container -->
+
+<div class="page-footer">
+  Personal research library &nbsp;·&nbsp; Independent analysis &nbsp;·&nbsp; Not financial or legal advice &nbsp;·&nbsp; May 2026
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
