@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EQ Bard Guide — TOV Velious | Frostreaver</title>
+  <title>EQ Bard Guide â€” TOV Velious | Frostreaver</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -23,7 +23,7 @@
     html { font-size: 15px; }
     body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; background: #ECEEF2; color: var(--text); }
 
-    /* ── Header ── */
+    /* â”€â”€ Header â”€â”€ */
     .top-bar { background: var(--navy); height: 5px; }
     .header { background: var(--navy); color: white; padding: 40px 48px 36px; }
     .header-label { font-size:.7rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; opacity:.5; margin-bottom:10px; }
@@ -32,24 +32,24 @@
     .header-badges { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
     .badge { font-size:.65rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:4px; background:rgba(255,255,255,.12); color:rgba(255,255,255,.8); }
 
-    /* ── TOC ── */
+    /* â”€â”€ TOC â”€â”€ */
     .toc-bar { background:var(--navy-mid); padding:12px 48px; display:flex; gap:24px; flex-wrap:wrap; }
     .toc-bar a { color:rgba(255,255,255,.65); font-size:.78rem; font-weight:600; text-decoration:none; transition:color .15s; }
     .toc-bar a:hover { color:#fff; }
 
     .container { max-width:1020px; margin:0 auto; padding:40px 24px 80px; }
 
-    /* ── Section headers ── */
+    /* â”€â”€ Section headers â”€â”€ */
     .section { margin-bottom:52px; }
     .section-header { display:flex; align-items:center; gap:12px; margin-bottom:22px; padding-bottom:12px; border-bottom:2px solid var(--navy); }
     .section-icon { width:32px; height:32px; background:var(--navy); border-radius:6px; display:flex; align-items:center; justify-content:center; color:white; font-size:1rem; flex-shrink:0; }
     .section-title { font-size:1.25rem; font-weight:800; color:var(--navy); }
 
-    /* ── Cards ── */
+    /* â”€â”€ Cards â”€â”€ */
     .card { background:white; border-radius:8px; border:1px solid var(--border); padding:24px 28px; margin-bottom:16px; }
     .card-title { font-size:.8rem; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:var(--navy); margin-bottom:14px; }
 
-    /* ── Findings / callouts ── */
+    /* â”€â”€ Findings / callouts â”€â”€ */
     .finding { padding:14px 18px; border-radius:6px; margin-bottom:10px; }
     .finding-label { font-size:.63rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; }
     .finding-text { font-size:.85rem; line-height:1.6; color:var(--gray-800); }
@@ -60,7 +60,7 @@
     .f-red    { background:var(--red-bg);    border-left:3px solid var(--red);    } .f-red    .finding-label { color:var(--red);    }
     .f-purple { background:var(--purple-bg); border-left:3px solid var(--purple); } .f-purple .finding-label { color:var(--purple); }
 
-    /* ── Tags ── */
+    /* â”€â”€ Tags â”€â”€ */
     .tag { display:inline-block; font-size:.6rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:2px 7px; border-radius:3px; white-space:nowrap; }
     .t-cold    { background:var(--cold-bg);    color:var(--cold);   }
     .t-fire    { background:var(--fire-bg);    color:var(--fire);   }
@@ -78,7 +78,7 @@
     .t-slow-u  { background:#F5F0DC; color:#5A4000; }
     .t-rooted  { background:#E8E0FA; color:#3A1A7A; }
 
-    /* ── Tables ── */
+    /* â”€â”€ Tables â”€â”€ */
     .tbl-wrap { overflow-x:auto; margin-bottom:8px; }
     table { width:100%; border-collapse:collapse; font-size:.82rem; }
     th { background:var(--navy); color:white; padding:9px 13px; text-align:left; font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; white-space:nowrap; }
@@ -87,13 +87,13 @@
     tr:hover td { background:var(--gray-50); }
     .tbl-note { font-size:.74rem; color:var(--gray-400); margin-top:6px; font-style:italic; }
 
-    /* ── Maps ── */
+    /* â”€â”€ Maps â”€â”€ */
     .map-grid { display:grid; grid-template-columns:1fr; gap:20px; margin-bottom:8px; }
     .map-card { background:white; border-radius:8px; border:1px solid var(--border); overflow:hidden; }
     .map-img { width:100%; display:block; background:var(--gray-100); min-height:400px; object-fit:contain; }
     .map-caption { padding:10px 14px; font-size:.75rem; color:var(--gray-600); font-weight:600; border-top:1px solid var(--border); }
 
-    /* ── Melody blocks ── */
+    /* â”€â”€ Melody blocks â”€â”€ */
     .melody { background:#0E1F3D; border-radius:7px; padding:16px 18px; }
     .melody-lbl { font-size:.62rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:6px; }
     .melody-title { font-size:.88rem; font-weight:700; color:white; margin-bottom:10px; }
@@ -102,7 +102,7 @@
     .melody-song { color:#79C0FF; font-weight:700; }
     .melody-note { color:rgba(255,255,255,.45); font-size:.72rem; margin-left:2px; }
 
-    /* ── Dragon cards ── */
+    /* â”€â”€ Dragon cards â”€â”€ */
     .dragon-card { background:white; border-radius:10px; border:1px solid var(--border); margin-bottom:20px; overflow:hidden; }
     .dragon-card:hover { box-shadow:0 4px 20px rgba(14,31,61,.12); }
     .dc-header { background:var(--navy); padding:14px 20px; display:flex; align-items:center; gap:12px; }
@@ -120,15 +120,15 @@
     .song-col { }
     .song-col-lbl { font-size:.6rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--gray-400); margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid var(--gray-200); }
     .song-line { font-size:.76rem; color:var(--gray-800); padding:2px 0; display:flex; gap:6px; align-items:flex-start; }
-    .song-line::before { content:'▸'; color:var(--blue); flex-shrink:0; font-size:.65rem; margin-top:2px; }
+    .song-line::before { content:'â–¸'; color:var(--blue); flex-shrink:0; font-size:.65rem; margin-top:2px; }
     .song-line.puretone-note { color:var(--purple); font-style:italic; }
-    .song-line.puretone-note::before { content:'★'; color:var(--purple); }
+    .song-line.puretone-note::before { content:'â˜…'; color:var(--purple); }
     .dc-warn { background:var(--red-bg); border-top:1px solid #F0C0C0; padding:10px 20px; font-size:.78rem; color:var(--red); font-weight:600; display:flex; gap:8px; align-items:flex-start; }
 
-    /* ── DPS test table highlight ── */
+    /* â”€â”€ DPS test table highlight â”€â”€ */
     .row-winner td { background:#E6F4EC !important; }
 
-    /* ── Two-col layout ── */
+    /* â”€â”€ Two-col layout â”€â”€ */
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
     @media(max-width:680px) { .two-col { grid-template-columns:1fr; } .dc-body { grid-template-columns:1fr; } .dc-portrait { border-right:none; border-bottom:1px solid var(--border); } .songs-grid { grid-template-columns:1fr; } }
 
@@ -153,7 +153,7 @@
 <body>
 <div class="top-bar"></div>
 <div class="header">
-  <div class="header-label">EverQuest — Frostreaver TLP</div>
+  <div class="header-label">EverQuest â€” Frostreaver TLP</div>
   <div class="header-title">Bard Guide: Temple of Veeshan</div>
   <div class="header-sub">Personal reference for Montana. Empirically tested haste &amp; DPS data, instrument mechanics, resist values, per-dragon AE types, and exact song recommendations with and without epic. Velious era, L60.</div>
   <div class="header-badges">
@@ -173,20 +173,20 @@
 </div>
 
 <div class="container">
-  <a class="back-link" href="index.html">← Back to Index</a>
+  <a class="back-link" href="index.html">â† Back to Index</a>
 
-  <!-- ═══════════════════════════════ HASTE & DPS ═══════════════════════════════ -->
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• HASTE & DPS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="section" id="haste">
     <div class="section-header">
-      <div class="section-icon">⚔</div>
+      <div class="section-icon">âš”</div>
       <div class="section-title">Haste &amp; DPS Testing</div>
     </div>
 
     <div class="card">
-      <div class="card-title">Key Findings — Empirically Tested on Frostreaver</div>
-      <div class="finding f-green"><div class="finding-label">Winner</div><div class="finding-text"><strong>Verses of Victory beats McVaxius for DPS.</strong> VoV 30% haste vs McVaxius 22% = 103 more hits over 30 min. +9% DPS. McVaxius ATK+14 only adds ~+2 avg damage/hit — nowhere near enough to compensate.</div></div>
-      <div class="finding f-gold"><div class="finding-label">Confirmed</div><div class="finding-text"><strong>Brass horn has zero impact on swing speed.</strong> Tested: 36.0 swings/min with and without horn. Instrument modifier does not affect haste %. It only boosts secondary effects (STR/ATK/DS) — adds ~+2 avg damage/hit.</div></div>
-      <div class="finding f-purple"><div class="finding-label">Confirmed — With Restriction</div><div class="finding-text"><strong>Composition of Ervaj stacks on McVaxius or VoV</strong> in its own unique haste slot (+8–9% swings/min). <strong>However: it does NOT stack with Elemental Rhythms or any Psalm song.</strong> This means you cannot run Ervaj whenever resist songs are needed. It is only viable for pure tank-and-spank fights (no meaningful AEs) — ideal for DPS groups and monk groups on trash or non-AE bosses.</div></div>
+      <div class="card-title">Key Findings â€” Empirically Tested on Frostreaver</div>
+      <div class="finding f-green"><div class="finding-label">Winner</div><div class="finding-text"><strong>Verses of Victory beats McVaxius for DPS.</strong> VoV 30% haste vs McVaxius 22% = 103 more hits over 30 min. +9% DPS. McVaxius ATK+14 only adds ~+2 avg damage/hit â€” nowhere near enough to compensate.</div></div>
+      <div class="finding f-gold"><div class="finding-label">Confirmed</div><div class="finding-text"><strong>Brass horn has zero impact on swing speed.</strong> Tested: 36.0 swings/min with and without horn. Instrument modifier does not affect haste %. It only boosts secondary effects (STR/ATK/DS) â€” adds ~+2 avg damage/hit.</div></div>
+      <div class="finding f-purple"><div class="finding-label">Confirmed â€” With Restriction</div><div class="finding-text"><strong>Composition of Ervaj stacks on McVaxius or VoV</strong> in its own unique haste slot (+8â€“9% swings/min). <strong>However: it does NOT stack with Elemental Rhythms or any Psalm song.</strong> This means you cannot run Ervaj whenever resist songs are needed. It is only viable for pure tank-and-spank fights (no meaningful AEs) â€” ideal for DPS groups and monk groups on trash or non-AE bosses.</div></div>
       <div class="finding f-navy"><div class="finding-label">Exception</div><div class="finding-text"><strong>McVaxius wins only if you're already at the haste cap</strong> from item haste + enchanter Celerity. At cap, VoV haste is wasted; McVaxius ATK/STR secondary becomes the tiebreaker.</div></div>
     </div>
 
@@ -196,12 +196,12 @@
         <table>
           <thead><tr><th>Setup</th><th>Swings/min</th><th>Hits</th><th>Hit%</th><th>Avg Dmg/Hit</th><th>Total Dmg</th><th>DPS</th></tr></thead>
           <tbody>
-            <tr><td>No haste — baseline</td><td>30.2–30.4</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>No haste â€” baseline</td><td>30.2â€“30.4</td><td>â€”</td><td>â€”</td><td>â€”</td><td>â€”</td><td>â€”</td></tr>
             <tr><td>McVaxius, no horn</td><td>36.0</td><td>669</td><td>62%</td><td>41.8</td><td>27,979</td><td>15.5</td></tr>
             <tr><td>McVaxius + horn</td><td>36.0</td><td>618</td><td>57%</td><td>43.8</td><td>27,072</td><td>15.0</td></tr>
-            <tr><td>McVaxius + Ervaj</td><td>39.1–39.3</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>McVaxius + Ervaj</td><td>39.1â€“39.3</td><td>â€”</td><td>â€”</td><td>â€”</td><td>â€”</td><td>â€”</td></tr>
             <tr class="row-winner"><td><strong>VoV, no instrument</strong> <span class="tag t-win">Best DPS</span></td><td><strong>39.0</strong></td><td><strong>721</strong></td><td><strong>62%</strong></td><td><strong>40.9</strong></td><td><strong>29,524</strong></td><td><strong>16.4</strong></td></tr>
-            <tr><td>VoV + Ervaj</td><td>42.1–42.3</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>VoV + Ervaj</td><td>42.1â€“42.3</td><td>â€”</td><td>â€”</td><td>â€”</td><td>â€”</td><td>â€”</td></tr>
           </tbody>
         </table>
       </div>
@@ -209,15 +209,15 @@
     </div>
 
     <div class="card">
-      <div class="card-title">Haste — Three Stacking Categories</div>
+      <div class="card-title">Haste â€” Three Stacking Categories</div>
       <div class="finding f-navy"><div class="finding-label">Rule</div><div class="finding-text">Three categories stack additively: <strong>Item haste</strong> (belt) + <strong>Caster spell haste</strong> (enchanter) + <strong>Bard song haste</strong>. Within each category only highest applies. Instrument mod does NOT boost haste % on any song.</div></div>
       <div class="tbl-wrap"><table>
         <thead><tr><th>Category</th><th>Source</th><th>Haste %</th><th>Notes</th></tr></thead>
         <tbody>
           <tr><td>Item haste</td><td>Haste belt</td><td>~21%</td><td>Highest item wins</td></tr>
           <tr><td>Caster spell</td><td>Enchanter Celerity</td><td>~39%</td><td>Highest spell wins</td></tr>
-          <tr><td>Bard song</td><td>Verses of Victory</td><td>30%</td><td>Flat — instrument irrelevant</td></tr>
-          <tr><td>Bard song</td><td>McVaxius Rousing Rondo</td><td>22%</td><td>Flat — instrument irrelevant</td></tr>
+          <tr><td>Bard song</td><td>Verses of Victory</td><td>30%</td><td>Flat â€” instrument irrelevant</td></tr>
+          <tr><td>Bard song</td><td>McVaxius Rousing Rondo</td><td>22%</td><td>Flat â€” instrument irrelevant</td></tr>
           <tr><td>Unique Ervaj slot</td><td>Composition of Ervaj</td><td>10%</td><td>Stacks with VoV/McVaxius but NOT with Elemental Rhythms or any Psalm song. Pure tank-and-spank only.</td></tr>
           <tr class="row-winner"><td colspan="2"><strong>Full stack at L60</strong></td><td><strong>100% cap</strong></td><td>21 + 39 + 30 + 10 = 100</td></tr>
         </tbody>
@@ -225,200 +225,332 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ INSTRUMENTS ═══════════════════════════════ -->
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• INSTRUMENTS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="section" id="instruments">
     <div class="section-header">
-      <div class="section-icon">♪</div>
+      <div class="section-icon">â™ª</div>
       <div class="section-title">Instruments</div>
     </div>
     <div class="card">
       <div class="card-title">Modifier Formula &amp; Best-in-Slot</div>
-      <div class="finding f-navy"><div class="finding-label">Formula</div><div class="finding-text">Secondary effect = base value × multiplier. Multiplier = resonance ÷ 10. Haste % is always flat and never modified by instrument.</div></div>
+      <div class="finding f-navy"><div class="finding-label">Formula</div><div class="finding-text">Secondary effect = base value Ã— multiplier. Multiplier = resonance Ã· 10. Haste % is always flat and never modified by instrument.</div></div>
       <div class="tbl-wrap"><table>
         <thead><tr><th>Instrument</th><th>Type</th><th>Resonance</th><th>Multiplier</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Lute of the Howler <em>(current)</em></td><td>String</td><td>12</td><td>1.2×</td><td>Good mid-tier string</td></tr>
-          <tr class="row-winner"><td><strong>Lyran's Mystical Lute</strong></td><td>String</td><td>~15</td><td>~1.5×</td><td>BIS string — Veeshan's Peak</td></tr>
-          <tr class="row-winner"><td><strong>Immaculate Shell Horn</strong></td><td>Brass</td><td>15</td><td>1.5×</td><td>BIS brass — Siren's Grotto</td></tr>
-          <tr><td>Singing Short Sword <em>(Epic)</em></td><td>All types</td><td>—</td><td>1.8×</td><td>All types simultaneously. Takes higher of epic vs held instrument.</td></tr>
-          <tr class="row-winner"><td><strong>Puretone Discipline</strong></td><td>All types</td><td>—</td><td>2.8×</td><td>4 min / 72 min reuse. Highest modifier in game. Stop melody first.</td></tr>
+          <tr><td>Lute of the Howler <em>(current)</em></td><td>String</td><td>12</td><td>1.2Ã—</td><td>Good mid-tier string</td></tr>
+          <tr class="row-winner"><td><strong>Lyran's Mystical Lute</strong></td><td>String</td><td>~15</td><td>~1.5Ã—</td><td>BIS string â€” Veeshan's Peak</td></tr>
+          <tr class="row-winner"><td><strong>Immaculate Shell Horn</strong></td><td>Brass</td><td>15</td><td>1.5Ã—</td><td>BIS brass â€” Siren's Grotto</td></tr>
+          <tr><td>Singing Short Sword <em>(Epic)</em></td><td>All types</td><td>â€”</td><td>1.8Ã—</td><td>All types simultaneously. Takes higher of epic vs held instrument.</td></tr>
+          <tr class="row-winner"><td><strong>Puretone Discipline</strong></td><td>All types</td><td>â€”</td><td>2.8Ã—</td><td>4 min / 72 min reuse. Highest modifier in game. Stop melody first.</td></tr>
         </tbody>
       </table></div>
-      <div class="tbl-note">Dual instrument: string in primary + brass in secondary. Each applies to its song type in melody. Epic takes the higher of itself vs any held instrument — they don't add.</div>
+      <div class="tbl-note">Dual instrument: string in primary + brass in secondary. Each applies to its song type in melody. Epic takes the higher of itself vs any held instrument â€” they don't add.</div>
     </div>
     <div class="two-col">
       <div class="card">
         <div class="card-title">Puretone Discipline</div>
-        <div class="stat-row"><span class="stat-label">Modifier</span><span class="stat-value green">2.8× ALL types</span></div>
+        <div class="stat-row"><span class="stat-label">Modifier</span><span class="stat-value green">2.8Ã— ALL types</span></div>
         <div class="stat-row"><span class="stat-label">Duration</span><span class="stat-value">4 minutes</span></div>
         <div class="stat-row"><span class="stat-label">Reuse timer</span><span class="stat-value">72 minutes</span></div>
-        <div class="stat-row"><span class="stat-label">Gotcha</span><span class="stat-value">Stop melody BEFORE popping — disc cancels if song is active AND wastes the cooldown</span></div>
+        <div class="stat-row"><span class="stat-label">Gotcha</span><span class="stat-value">Stop melody BEFORE popping â€” disc cancels if song is active AND wastes the cooldown</span></div>
         <div class="stat-row"><span class="stat-label">Best use</span><span class="stat-value">Pop on named pull, ideally after swapping to Psalm of Warmth/Cooling</span></div>
       </div>
       <div class="card">
-        <div class="card-title">Bard Epic — Singing Short Sword</div>
-        <div class="stat-row"><span class="stat-label">Modifier</span><span class="stat-value blue">1.8× ALL types</span></div>
+        <div class="card-title">Bard Epic â€” Singing Short Sword</div>
+        <div class="stat-row"><span class="stat-label">Modifier</span><span class="stat-value blue">1.8Ã— ALL types</span></div>
         <div class="stat-row"><span class="stat-label">Key benefit</span><span class="stat-value">Boosts wind Psalms without needing a wind instrument</span></div>
-        <div class="stat-row"><span class="stat-label">vs Puretone</span><span class="stat-value">Epic 1.8× — Puretone still wins at 2.8×</span></div>
+        <div class="stat-row"><span class="stat-label">vs Puretone</span><span class="stat-value">Epic 1.8Ã— â€” Puretone still wins at 2.8Ã—</span></div>
         <div class="stat-row"><span class="stat-label">Dance of the Blade proc</span><span class="stat-value green">55% GROUP haste + STR+30 + ATK+30</span></div>
         <div class="stat-row"><span class="stat-label">Real value</span><span class="stat-value">Dance proc, not instrument mod</span></div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ RESIST SONGS ═══════════════════════════════ -->
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• RESIST SONGS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="section" id="resists">
     <div class="section-header">
-      <div class="section-icon">🛡</div>
+      <div class="section-icon">ðŸ›¡</div>
       <div class="section-title">Resist Songs</div>
     </div>
     <div class="card">
-      <div class="card-title">Measured Resist Values — Montana Base: MR 71 | Fire 67 | Cold 70</div>
+      <div class="card-title">Measured Resist Values â€” Montana Base: MR 71 | Fire 67 | Cold 70</div>
       <div class="tbl-wrap"><table>
         <thead><tr><th>Songs Running</th><th>Instrument</th><th>MR</th><th>Fire</th><th>Cold</th></tr></thead>
         <tbody>
-          <tr><td>None (base stats)</td><td>—</td><td>71</td><td>67</td><td>70</td></tr>
+          <tr><td>None (base stats)</td><td>â€”</td><td>71</td><td>67</td><td>70</td></tr>
           <tr><td>Guardian + Elemental</td><td>Drum</td><td>251 <small style="color:var(--gray-400)">(+180)</small></td><td>157 <small style="color:var(--gray-400)">(+90)</small></td><td>160 <small style="color:var(--gray-400)">(+90)</small></td></tr>
           <tr><td>Guardian + Elemental</td><td>Puretone</td><td>265 <small style="color:var(--gray-400)">(+194)</small></td><td>164 <small style="color:var(--gray-400)">(+97)</small></td><td>167 <small style="color:var(--gray-400)">(+97)</small></td></tr>
-          <tr><td>Guardian + Psalm of Cooling</td><td>Drum</td><td>—</td><td>137 <small style="color:var(--gray-400)">(+70)</small></td><td>—</td></tr>
-          <tr class="row-winner"><td>Guardian + Psalm of Cooling</td><td>Puretone</td><td>—</td><td><strong>262 (+195)</strong></td><td>—</td></tr>
-          <tr><td>Guardian + Psalm of Warmth</td><td>Drum</td><td>168 <small style="color:var(--gray-400)">(+97)</small></td><td>—</td><td>140 <small style="color:var(--gray-400)">(+70)</small></td></tr>
-          <tr class="row-winner"><td>Guardian + Psalm of Warmth</td><td>Puretone</td><td>168 <small style="color:var(--gray-400)">(+97)</small></td><td>—</td><td><strong>265 (+195)</strong></td></tr>
+          <tr><td>Guardian + Psalm of Cooling</td><td>Drum</td><td>â€”</td><td>137 <small style="color:var(--gray-400)">(+70)</small></td><td>â€”</td></tr>
+          <tr class="row-winner"><td>Guardian + Psalm of Cooling</td><td>Puretone</td><td>â€”</td><td><strong>262 (+195)</strong></td><td>â€”</td></tr>
+          <tr><td>Guardian + Psalm of Warmth</td><td>Drum</td><td>168 <small style="color:var(--gray-400)">(+97)</small></td><td>â€”</td><td>140 <small style="color:var(--gray-400)">(+70)</small></td></tr>
+          <tr class="row-winner"><td>Guardian + Psalm of Warmth</td><td>Puretone</td><td>168 <small style="color:var(--gray-400)">(+97)</small></td><td>â€”</td><td><strong>265 (+195)</strong></td></tr>
         </tbody>
       </table></div>
-      <div class="tbl-note">Drum barely boosts wind songs (Psalms) — near 1.0× on those. Puretone at 2.8× nearly doubles Psalm output. Epic at 1.8× gives Psalms mid-190s cold/fire (between drum and Puretone).</div>
+      <div class="tbl-note">Drum barely boosts wind songs (Psalms) â€” near 1.0Ã— on those. Puretone at 2.8Ã— nearly doubles Psalm output. Epic at 1.8Ã— gives Psalms mid-190s cold/fire (between drum and Puretone).</div>
     </div>
-    <div class="finding f-gold"><div class="finding-label">No Epic (Current)</div><div class="finding-text"><strong>Use Elemental Rhythms, not Psalms.</strong> Drum boosts Elemental (percussion = 157 fire / 160 cold). Psalms are wind songs — drum barely touches them (137/140). Psalms only win with epic or Puretone active.</div></div>
-    <div class="finding f-green"><div class="finding-label">With Epic</div><div class="finding-text"><strong>Swap to targeted Psalms.</strong> Epic 1.8× now makes Psalms beat Elemental for their specific element. Stack Guardian + Psalm of X, pop Puretone on the named pull to spike to 2.8×.</div></div>
+    <div class="finding f-gold"><div class="finding-label">No Epic (Current)</div><div class="finding-text"><strong>Use Elemental Rhythms, not Psalms.</strong> Drum boosts Elemental (percussion = 157 fire / 160 cold). Psalms are wind songs â€” drum barely touches them (137/140). Psalms only win with epic or Puretone active.</div></div>
+    <div class="finding f-green"><div class="finding-label">With Epic</div><div class="finding-text"><strong>Swap to targeted Psalms.</strong> Epic 1.8Ã— now makes Psalms beat Elemental for their specific element. Stack Guardian + Psalm of X, pop Puretone on the named pull to spike to 2.8Ã—.</div></div>
     <div class="finding f-purple"><div class="finding-label">MR Stacking</div><div class="finding-text"><strong>Both Guardian Rhythms AND Elemental Rhythms contribute MR.</strong> That's why Guardian + Elemental hits 251 MR vs Guardian alone at 168. Swapping Elemental for a Psalm loses ~83 MR.</div></div>
   </div>
 
-  <!-- ═══════════════════════════════ MELODY GUIDE ═══════════════════════════════ -->
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MELODY GUIDE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="section" id="melody">
     <div class="section-header">
-      <div class="section-icon">♫</div>
+      <div class="section-icon">â™«</div>
       <div class="section-title">Melody Guide</div>
     </div>
     <div class="two-col">
       <div>
         <div class="melody" style="margin-bottom:14px;">
-          <div class="melody-lbl">No Epic — Default</div>
+          <div class="melody-lbl">No Epic â€” Default</div>
           <div class="melody-title">Standard Melee Group</div>
-          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> — MR anchor, drum boosted</span></div>
-          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Elemental Rhythms</span><span class="melody-note"> — Fire/Cold/Poison/MR, drum boosted</span></div>
-          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> — 30% haste + AGI</span></div>
-          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana regen</span></div>
+          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> â€” MR anchor, drum boosted</span></div>
+          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Elemental Rhythms</span><span class="melody-note"> â€” Fire/Cold/Poison/MR, drum boosted</span></div>
+          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> â€” 30% haste + AGI</span></div>
+          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> â€” Mana regen</span></div>
         </div>
         <div class="melody">
-          <div class="melody-lbl">No Epic — Named Pull</div>
+          <div class="melody-lbl">No Epic â€” Named Pull</div>
           <div class="melody-title">Pop Puretone on Pull</div>
-          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">STOP melody</span><span class="melody-note"> — required before Puretone disc</span></div>
-          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Pop Puretone</span><span class="melody-note"> — 2.8× all types, 4 min</span></div>
-          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Restart melody</span><span class="melody-note"> — Guardian + Elemental still best (drum boosts both)</span></div>
-          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">VoV + Cantata</span><span class="melody-note"> — Haste + mana</span></div>
+          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">STOP melody</span><span class="melody-note"> â€” required before Puretone disc</span></div>
+          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Pop Puretone</span><span class="melody-note"> â€” 2.8Ã— all types, 4 min</span></div>
+          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Restart melody</span><span class="melody-note"> â€” Guardian + Elemental still best (drum boosts both)</span></div>
+          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">VoV + Cantata</span><span class="melody-note"> â€” Haste + mana</span></div>
         </div>
       </div>
       <div>
         <div class="melody" style="margin-bottom:14px;">
-          <div class="melody-lbl">With Epic — Max MR (Vyemm / Aaryonar)</div>
+          <div class="melody-lbl">With Epic â€” Max MR (Vyemm / Aaryonar)</div>
           <div class="melody-title">Magic Resist Priority</div>
-          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> — MR</span></div>
-          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Psalm of Mystical Shielding</span><span class="melody-note"> — MR (singing) — epic boosts</span></div>
-          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> — Haste + AGI</span></div>
-          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana</span></div>
+          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> â€” MR</span></div>
+          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Psalm of Mystical Shielding</span><span class="melody-note"> â€” MR (singing) â€” epic boosts</span></div>
+          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> â€” Haste + AGI</span></div>
+          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> â€” Mana</span></div>
         </div>
         <div class="melody" style="margin-bottom:14px;">
-          <div class="melody-lbl">With Epic — Cold Dragon</div>
+          <div class="melody-lbl">With Epic â€” Cold Dragon</div>
           <div class="melody-title">Cold Priority (265 cold w/ Puretone)</div>
-          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> — MR baseline</span></div>
-          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Psalm of Warmth</span><span class="melody-note"> — Cold — epic + Puretone → 265</span></div>
-          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> — Haste</span></div>
-          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana</span></div>
+          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> â€” MR baseline</span></div>
+          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Psalm of Warmth</span><span class="melody-note"> â€” Cold â€” epic + Puretone â†’ 265</span></div>
+          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> â€” Haste</span></div>
+          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> â€” Mana</span></div>
         </div>
         <div class="melody">
-          <div class="melody-lbl">With Epic — Fire Dragon</div>
+          <div class="melody-lbl">With Epic â€” Fire Dragon</div>
           <div class="melody-title">Fire Priority (262 fire w/ Puretone)</div>
-          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> — MR baseline</span></div>
-          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Psalm of Cooling</span><span class="melody-note"> — Fire — epic + Puretone → 262</span></div>
-          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> — Haste</span></div>
-          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana</span></div>
+          <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Guardian Rhythms</span><span class="melody-note"> â€” MR baseline</span></div>
+          <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">Psalm of Cooling</span><span class="melody-note"> â€” Fire â€” epic + Puretone â†’ 262</span></div>
+          <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> â€” Haste</span></div>
+          <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> â€” Mana</span></div>
         </div>
       </div>
     </div>
 
     <div class="finding f-red" style="margin-top:16px;">
-      <div class="finding-label">Composition of Ervaj — When NOT to Use It</div>
-      <div class="finding-text"><strong>Ervaj does not stack with Elemental Rhythms or any Psalm song.</strong> Any time resist songs are in the melody (Guardian + Elemental, Psalm of Warmth, Psalm of Cooling, Psalm of Mystical Shielding), drop Ervaj — it conflicts and gives you nothing. Swap Cantata out for Ervaj only on pure tank-and-spank mobs with no AEs to resist.</div>
+      <div class="finding-label">Composition of Ervaj â€” When NOT to Use It</div>
+      <div class="finding-text"><strong>Ervaj does not stack with Elemental Rhythms or any Psalm song.</strong> Any time resist songs are in the melody (Guardian + Elemental, Psalm of Warmth, Psalm of Cooling, Psalm of Mystical Shielding), drop Ervaj â€” it conflicts and gives you nothing. Swap Cantata out for Ervaj only on pure tank-and-spank mobs with no AEs to resist.</div>
     </div>
 
     <div class="melody" style="margin-top:12px;">
-      <div class="melody-lbl">Tank &amp; Spank Only — Pure DPS / Monk Group</div>
+      <div class="melody-lbl">Tank &amp; Spank Only â€” Pure DPS / Monk Group</div>
       <div class="melody-title">Composition of Ervaj Setup (No Resists Needed)</div>
-      <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> — 30% haste + AGI</span></div>
-      <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">McVaxius Rousing Rondo</span><span class="melody-note"> — 22% haste + ATK/STR/DS (brass boosted)</span></div>
-      <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Composition of Ervaj</span><span class="melody-note"> — +10% in unique slot — stacks on top of VoV + McVaxius</span></div>
-      <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana regen</span></div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1);font-size:.74rem;color:rgba(255,255,255,.4);">Note: No Guardian or Elemental in this melody — Ervaj conflicts with both. No resist coverage. Only use on mobs with no dangerous AEs.</div>
+      <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> â€” 30% haste + AGI</span></div>
+      <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">McVaxius Rousing Rondo</span><span class="melody-note"> â€” 22% haste + ATK/STR/DS (brass boosted)</span></div>
+      <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Composition of Ervaj</span><span class="melody-note"> â€” +10% in unique slot â€” stacks on top of VoV + McVaxius</span></div>
+      <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> â€” Mana regen</span></div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1);font-size:.74rem;color:rgba(255,255,255,.4);">Note: No Guardian or Elemental in this melody â€” Ervaj conflicts with both. No resist coverage. Only use on mobs with no dangerous AEs.</div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ ZONE MAPS ═══════════════════════════════ -->
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• ZONE MAPS â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="section" id="maps">
     <div class="section-header">
-      <div class="section-icon">🗺</div>
+      <div class="section-icon">ðŸ—º</div>
       <div class="section-title">Zone Maps</div>
     </div>
     <div class="map-grid">
       <div class="map-card">
         <img class="map-img" src="https://wiki.project1999.com/images/Map_tov.png" alt="TOV Zone Map" onerror="this.parentElement.style.display='none'">
-        <div class="map-caption">Temple of Veeshan — Main Zone Map</div>
+        <div class="map-caption">Temple of Veeshan â€” Main Zone Map</div>
       </div>
       <div class="map-card">
         <img class="map-img" src="https://wiki.project1999.com/images/Custom_ToV_1.jpg" alt="TOV Area Names" onerror="this.parentElement.style.display='none'">
-        <div class="map-caption">TOV — Common Area Names Reference</div>
+        <div class="map-caption">TOV â€” Common Area Names Reference</div>
       </div>
       <div class="map-card">
         <img class="map-img" src="https://wiki.project1999.com/images/Map_temple_of_veeshan_3d.png" alt="TOV 3D Map" onerror="this.parentElement.style.display='none'">
-        <div class="map-caption">TOV — 3D Layout Reference</div>
+        <div class="map-caption">TOV â€” 3D Layout Reference</div>
       </div>
       <div class="map-card">
         <img class="map-img" src="https://wiki.project1999.com/images/Map_temple_of_veeshan_HoT.gif" alt="Halls of Testing Map" onerror="this.parentElement.style.display='none'">
-        <div class="map-caption">Halls of Testing — East Wing</div>
+        <div class="map-caption">Halls of Testing â€” East Wing</div>
       </div>
     </div>
     <div class="credit">Maps courtesy of wiki.project1999.com</div>
     <div class="finding f-navy" style="margin-top:14px;">
       <div class="finding-label">Zone Layout</div>
-      <div class="finding-text"><strong>North Wing</strong> — most dangerous, all named dragons (L66+), Vulak'Aerr (L70). <strong>East Wing</strong> — Halls of Testing, quest mobs. <strong>West Wing</strong> — CoV-allied NPCs, safe if CoV faction. Entry via clickable tower in Western Wastes. Most AEs avoidable through walls — use LoS. Trash target: ~300 buffed fire and cold resist.</div>
+      <div class="finding-text"><strong>North Wing</strong> â€” most dangerous, all named dragons (L66+), Vulak'Aerr (L70). <strong>East Wing</strong> â€” Halls of Testing. Home of Dozekar the Cursed. <strong>West Wing</strong> â€” Gozzrem, Lendiniara the Keeper, Telkorenar. <strong>North Wing</strong> â€” main progression, most named, ends at Vulak. Entry via clickable tower in Western Wastes. Most AEs avoidable through walls â€” use LoS. Trash target: ~300 buffed fire and cold resist.</div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════ DRAGON GUIDE ═══════════════════════════════ -->
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DRAGON GUIDE â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="section" id="tov">
     <div class="section-header">
-      <div class="section-icon">🐉</div>
-      <div class="section-title">Dragon Quick Guide — AE Types &amp; Bard Songs</div>
+      <div class="section-icon">ðŸ‰</div>
+      <div class="section-title">Dragon Quick Guide â€” AE Types &amp; Bard Songs</div>
     </div>
 
     <div class="finding f-navy" style="margin-bottom:20px;">
       <div class="finding-label">How to Read This</div>
-      <div class="finding-text">Each dragon shows AE spell name, damage type (colored), and exact song recommendations for <strong>No Epic (drum)</strong> vs <strong>With Epic</strong>. Star (★) = pop Puretone on this pull. VoV and Cantata always in melody unless noted — only the resist slot changes.</div>
+      <div class="finding-text">Each dragon shows AE spell name, damage type (colored), and exact song recommendations for <strong>No Epic (drum)</strong> vs <strong>With Epic</strong>. Star (â˜…) = pop Puretone on this pull. VoV and Cantata always in melody unless noted â€” only the resist slot changes.</div>
     </div>
 
-    <div class="wing-label">North Wing — Named Dragons</div>
+    <div class="wing-label">East Wing â€” Halls of Testing</div>
+
+    <!-- Dozekar the Cursed -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">Dozekar the Cursed</div>
+        <div class="dc-tags"><span class="tag t-magic">Magic PBAE</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L66 â€” Halls of Testing</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_dozekar_the_cursed.png" alt="Dozekar the Cursed" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells</div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Chaos Breath</span><span class="ae-note">â€” Magic PBAE. MR is priority.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">No Epic (Drum)</div>
+              <div class="song-line">Guardian Rhythms <em>(MR 251)</em></div>
+              <div class="song-line">Elemental Rhythms</div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">With Epic</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Psalm of Mystical Shielding <em>(max MR)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+              <div class="song-line puretone-note">Puretone on pull</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wing-label">West Wing</div>
+
+    <!-- Gozzrem -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">Gozzrem</div>
+        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L66 â€” West Wing</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_gozzrem.png" alt="Gozzrem" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells</div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Ice Breath</span><span class="ae-note">â€” Cold-based breath AE. Cold resist priority.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">No Epic (Drum)</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Elemental Rhythms <em>(cold 160)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">With Epic</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Psalm of Warmth <em>(cold priority)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+              <div class="song-line puretone-note">Puretone â†’ 265 cold</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lendiniara the Keeper -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">Lendiniara the Keeper</div>
+        <div class="dc-tags"><span class="tag t-magic">Magic</span><span class="tag t-slow-n">âœ— Unslowable</span><span class="tag t-gray">L66 â€” 12% Spawn</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lendiniara_the_keeper.png" alt="Lendiniara" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells</div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Silver Breath</span><span class="ae-note">â€” Magic-based breath AE. Unslowable.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">No Epic (Drum)</div>
+              <div class="song-line">Guardian Rhythms <em>(MR 251)</em></div>
+              <div class="song-line">Elemental Rhythms</div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">With Epic</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Psalm of Mystical Shielding <em>(max MR)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+              <div class="song-line puretone-note">Puretone on pull</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Telkorenar -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">Telkorenar</div>
+        <div class="dc-tags"><span class="tag t-fire">Fire AE</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L66 â€” West Wing</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_telkorenar.png" alt="Telkorenar" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells</div>
+          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Fire Breath</span><span class="ae-note">â€” Fire-based breath AE. Fire resist priority.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">No Epic (Drum)</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Elemental Rhythms <em>(fire 157)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">With Epic</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Psalm of Cooling <em>(fire priority)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+              <div class="song-line puretone-note">Puretone â†’ 262 fire</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wing-label">North Wing â€” Named Dragons</div>
 
     <!-- Lord Vyemm -->
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Vyemm</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic PBAE</span><span class="tag t-extreme">Hardest in TOV</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-rooted">⚓ Perma-Rooted</span><span class="tag t-gray">L66 Paladin</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic PBAE</span><span class="tag t-extreme">Hardest in TOV</span><span class="tag t-slow-n">âœ— Unslowable</span><span class="tag t-rooted">âš“ Perma-Rooted</span><span class="tag t-gray">L66 Paladin</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_vyemm2.jpg" alt="Lord Vyemm" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Chaos Breath</span><span class="ae-note">— PBAE magic DD. Hits very hard. MR is your #1 priority.</span></div>
-          <div class="ae-row"><span class="tag t-gray">None</span><span class="ae-note">Extreme melee also — guards Hsrek &amp; Lurian must die first.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Chaos Breath</span><span class="ae-note">â€” PBAE magic DD. Hits very hard. MR is your #1 priority.</span></div>
+          <div class="ae-row"><span class="tag t-gray">None</span><span class="ae-note">Extreme melee also â€” guards Hsrek &amp; Lurian must die first.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -433,12 +565,12 @@
               <div class="song-line">Psalm of Mystical Shielding <em>(max MR)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Pop Puretone on pull — max MR spike</div>
+              <div class="song-line puretone-note">Pop Puretone on pull â€” max MR spike</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Arguably harder than Vulak. Extreme incoming damage. Assign dedicated healer rotation before engaging.</div>
+      <div class="dc-warn">âš  Arguably harder than Vulak. Extreme incoming damage. Assign dedicated healer rotation before engaging.</div>
     </div>
 
     <!-- Aaryonar -->
@@ -451,8 +583,8 @@
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_aaryonar.png" alt="Aaryonar" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">— Every 10s. Teleports tank under dragon.</span></div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Cloud of Disempowerment</span><span class="ae-note">— Every 12s. Magic-based AE debuff (ATK reduction).</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">â€” Every 10s. Teleports tank under dragon.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Cloud of Disempowerment</span><span class="ae-note">â€” Every 12s. Magic-based AE debuff (ATK reduction).</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -472,22 +604,22 @@
           </div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Guards North Wing entrance. Will assist nearby dragons — pull him away from others first.</div>
+      <div class="dc-warn">âš  Guards North Wing entrance. Will assist nearby dragons â€” pull him away from others first.</div>
     </div>
 
     <!-- Eashen -->
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Eashen of the Sky</div>
-        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">L66 Drake Wizard</span></div>
+        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic</span><span class="tag t-slow-n">âœ— Unslowable</span><span class="tag t-gray">L66 Drake Wizard</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_eashen_of_the_sky.png" alt="Eashen of the Sky" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Rain of Molten Lava</span><span class="ae-note">— Avoidable behind wall.</span></div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Cold</span><span class="ae-note">— Avoidable behind wall.</span></div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Thunder Blast</span><span class="ae-note">— Lightning-based. Dangerous in open.</span></div>
+          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Rain of Molten Lava</span><span class="ae-note">â€” Avoidable behind wall.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Cold</span><span class="ae-note">â€” Avoidable behind wall.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Thunder Blast</span><span class="ae-note">â€” Lightning-based. Dangerous in open.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -507,20 +639,20 @@
           </div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Unslowable + three AE types. Use LoS behind walls. Healers use Remedy to heal from safety. Hardest elemental fight in TOV.</div>
+      <div class="dc-warn">âš  Unslowable + three AE types. Use LoS behind walls. Healers use Remedy to heal from safety. Hardest elemental fight in TOV.</div>
     </div>
 
     <!-- Ikatiar -->
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Ikatiar the Venom</div>
-        <div class="dc-tags"><span class="tag t-poison">Poison</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">L66 Wyvern Rogue</span></div>
+        <div class="dc-tags"><span class="tag t-poison">Poison</span><span class="tag t-slow-n">âœ— Unslowable</span><span class="tag t-gray">L66 Wyvern Rogue</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_ikatiar_the_venom.png" alt="Ikatiar the Venom" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-poison">Poison</span><span class="ae-spell">Ikatiar's Revenge</span><span class="ae-note">— Poison-based proc AE. Elemental Rhythms covers poison.</span></div>
+          <div class="ae-row"><span class="tag t-poison">Poison</span><span class="ae-spell">Ikatiar's Revenge</span><span class="ae-note">â€” Poison-based proc AE. Elemental Rhythms covers poison.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -535,7 +667,7 @@
               <div class="song-line">Elemental Rhythms <em>(still best for poison)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone if available — boosts Elemental</div>
+              <div class="song-line puretone-note">Puretone if available â€” boosts Elemental</div>
             </div>
           </div>
         </div>
@@ -546,15 +678,15 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Dagarn the Destroyer</div>
-        <div class="dc-tags"><span class="tag t-fire">Fire PBAE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-extreme">L70 Wurm</span></div>
+        <div class="dc-tags"><span class="tag t-fire">Fire PBAE</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-extreme">L70 Wurm</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_dagarn_the_destroyer2.jpg" alt="Dagarn the Destroyer" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Rain of Molten Lava</span><span class="ae-note">— Fire PBAE ~200 DD.</span></div>
-          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Wave of Heat</span><span class="ae-note">— Fire AE. Fire resist is your #1 priority.</span></div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">— Summons tank under dragon.</span></div>
+          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Rain of Molten Lava</span><span class="ae-note">â€” Fire PBAE ~200 DD.</span></div>
+          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Wave of Heat</span><span class="ae-note">â€” Fire AE. Fire resist is your #1 priority.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">â€” Summons tank under dragon.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -566,10 +698,10 @@
             <div class="song-col">
               <div class="song-col-lbl">With Epic</div>
               <div class="song-line">Guardian Rhythms</div>
-              <div class="song-line">Psalm of Cooling <em>(fire — max priority)</em></div>
+              <div class="song-line">Psalm of Cooling <em>(fire â€” max priority)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone → 262 fire on pull</div>
+              <div class="song-line puretone-note">Puretone â†’ 262 fire on pull</div>
             </div>
           </div>
         </div>
@@ -580,19 +712,19 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Feshlak</div>
-        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-rooted">⚓ Perma-Rooted</span><span class="tag t-gray">L66 — AE Very Weak</span></div>
+        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-rooted">âš“ Perma-Rooted</span><span class="tag t-gray">L66 â€” AE Very Weak</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_feshlak2.jpg" alt="Lord Feshlak" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Cold</span><span class="ae-note">— Weak AE per wiki ("VERY weak").</span></div>
-          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Wave of Fire</span><span class="ae-note">— Weak AE. Clerics can't LoS but it barely matters.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Cold</span><span class="ae-note">â€” Weak AE per wiki ("VERY weak").</span></div>
+          <div class="ae-row"><span class="tag t-fire">Fire</span><span class="ae-spell">Wave of Fire</span><span class="ae-note">â€” Weak AE. Clerics can't LoS but it barely matters.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
               <div class="song-line">Guardian Rhythms</div>
-              <div class="song-line">Elemental Rhythms <em>(balanced — AE weak anyway)</em></div>
+              <div class="song-line">Elemental Rhythms <em>(balanced â€” AE weak anyway)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
             </div>
@@ -602,7 +734,7 @@
               <div class="song-line">Elemental Rhythms <em>(balanced for dual element)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Save Puretone for a harder fight — AE is very weak here</div>
+              <div class="song-line puretone-note">Save Puretone for a harder fight â€” AE is very weak here</div>
             </div>
           </div>
         </div>
@@ -613,19 +745,19 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lady Mirenilla</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic Fear</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">L66 Lava Dragon</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic Fear</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-gray">L66 Lava Dragon</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lady_mirenilla.png" alt="Lady Mirenilla" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Frost Strike</span><span class="ae-note">— Cold DD AE.</span></div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Cloud of Fear</span><span class="ae-note">— Magic-based AE fear. MR helps resist.</span></div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">— Summons tank.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Frost Strike</span><span class="ae-note">â€” Cold DD AE.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Cloud of Fear</span><span class="ae-note">â€” Magic-based AE fear. MR helps resist.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">â€” Summons tank.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
-              <div class="song-line">Guardian Rhythms <em>(MR 251 — resists fear)</em></div>
+              <div class="song-line">Guardian Rhythms <em>(MR 251 â€” resists fear)</em></div>
               <div class="song-line">Elemental Rhythms <em>(cold 160)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
@@ -633,28 +765,28 @@
             <div class="song-col">
               <div class="song-col-lbl">With Epic</div>
               <div class="song-line">Guardian Rhythms</div>
-              <div class="song-line">Psalm of Mystical Shielding <em>(max MR — resists fear AE)</em></div>
+              <div class="song-line">Psalm of Mystical Shielding <em>(max MR â€” resists fear AE)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone on pull — max MR to reduce fear procs</div>
+              <div class="song-line puretone-note">Puretone on pull â€” max MR to reduce fear procs</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Guards: Gra'Vloren and We'lWnas — clear first. Cloud of Fear can break the raid if MR is low.</div>
+      <div class="dc-warn">âš  Guards: Gra'Vloren and We'lWnas â€” clear first. Cloud of Fear can break the raid if MR is low.</div>
     </div>
 
     <!-- Lord Kreizenn -->
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Kreizenn</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-warn">Wave of Flame = Cold</span><span class="tag t-gray">L66 Lava Dragon</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-n">âœ— Unslowable</span><span class="tag t-warn">Wave of Flame = Cold</span><span class="tag t-gray">L66 Lava Dragon</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_kreizenn2.jpg" alt="Lord Kreizenn" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Flame</span><span class="ae-note">— Cold DD with zero-second stun AE. Despite the name "Flame" — it's cold damage.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Flame</span><span class="ae-note">â€” Cold DD with zero-second stun AE. Despite the name "Flame" â€” it's cold damage.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -669,7 +801,7 @@
               <div class="song-line">Psalm of Warmth <em>(cold priority)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone → 265 cold</div>
+              <div class="song-line puretone-note">Puretone â†’ 265 cold</div>
             </div>
           </div>
         </div>
@@ -680,14 +812,14 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Jorlleag</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-warn">CH + Gates</span><span class="tag t-gray">L66 Cleric Dragon</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-warn">CH + Gates</span><span class="tag t-gray">L66 Cleric Dragon</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_jorlleag.png" alt="Jorlleag" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Frost Breath</span><span class="ae-note">— Cold PBAE. Cold resist priority.</span></div>
-          <div class="ae-row"><span class="tag t-gray">Ability</span><span class="ae-spell">Complete Heal + Gate</span><span class="ae-note">— Interrupt or fight resets. Requires 6 clerics on rotation.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Frost Breath</span><span class="ae-note">â€” Cold PBAE. Cold resist priority.</span></div>
+          <div class="ae-row"><span class="tag t-gray">Ability</span><span class="ae-spell">Complete Heal + Gate</span><span class="ae-note">â€” Interrupt or fight resets. Requires 6 clerics on rotation.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -702,12 +834,12 @@
               <div class="song-line">Psalm of Warmth <em>(cold priority)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone on pull → 265 cold</div>
+              <div class="song-line puretone-note">Puretone on pull â†’ 265 cold</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Cleric dragon — interrupt Complete Heal or fight never ends. Bard: consider Anthem of Arms for interrupt assist.</div>
+      <div class="dc-warn">âš  Cleric dragon â€” interrupt Complete Heal or fight never ends. Bard: consider Anthem of Arms for interrupt assist.</div>
     </div>
 
     <!-- Lady Nevederia -->
@@ -720,7 +852,7 @@
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Ladyn.png" alt="Lady Nevederia" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Enchanter Abilities</span><span class="ae-note">— Possible mez/charm/debuff AEs. MR reduces proc chance. "Among the most fearsome air dragons."</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Enchanter Abilities</span><span class="ae-note">â€” Possible mez/charm/debuff AEs. MR reduces proc chance. "Among the most fearsome air dragons."</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -732,7 +864,7 @@
             <div class="song-col">
               <div class="song-col-lbl">With Epic</div>
               <div class="song-line">Guardian Rhythms</div>
-              <div class="song-line">Psalm of Mystical Shielding <em>(max MR — resists debuffs)</em></div>
+              <div class="song-line">Psalm of Mystical Shielding <em>(max MR â€” resists debuffs)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
               <div class="song-line puretone-note">Puretone on pull</div>
@@ -752,7 +884,7 @@
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Lord_Koi%60Doken2.jpg" alt="Lord Koi'Doken" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Water/Cold AEs</span><span class="ae-note">— Water dragon. Cold resist priority.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Water/Cold AEs</span><span class="ae-note">â€” Water dragon. Cold resist priority.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -767,58 +899,26 @@
               <div class="song-line">Psalm of Warmth <em>(cold priority)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone → 265 cold</div>
+              <div class="song-line puretone-note">Puretone â†’ 265 cold</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Lendiniara -->
-    <div class="dragon-card">
-      <div class="dc-header">
-        <div class="dc-name">Lendiniara the Keeper</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic/Cold</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">L66 — 12% Spawn</span></div>
-      </div>
-      <div class="dc-body">
-        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lendiniara_the_keeper.png" alt="Lendiniara" onerror="this.style.display='none'" /></div>
-        <div class="dc-content">
-          <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Silver Breath</span><span class="ae-note">— Magic-based breath AE. Unslowable.</span></div>
-          <div class="songs-grid">
-            <div class="song-col">
-              <div class="song-col-lbl">No Epic (Drum)</div>
-              <div class="song-line">Guardian Rhythms <em>(MR 251)</em></div>
-              <div class="song-line">Elemental Rhythms</div>
-              <div class="song-line">Verses of Victory</div>
-              <div class="song-line">Cantata of Soothing</div>
-            </div>
-            <div class="song-col">
-              <div class="song-col-lbl">With Epic</div>
-              <div class="song-line">Guardian Rhythms</div>
-              <div class="song-line">Psalm of Mystical Shielding <em>(max MR)</em></div>
-              <div class="song-line">Verses of Victory</div>
-              <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone on pull</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="wing-label">North Wing — The Triplets</div>
+    <div class="wing-label">North Wing â€” The Triplets</div>
 
     <!-- Cekenar -->
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Cekenar</div>
-        <div class="dc-tags"><span class="tag t-magic">Electric/Magic</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">Triplet — Belly Caster</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Electric/Magic</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">Triplet â€” Belly Caster</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_cekenar.png" alt="Cekenar" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Electric Blast</span><span class="ae-note">— Lightning/magic AE. Belly caster — position underneath. Gates even with no mana.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Electric Blast</span><span class="ae-note">â€” Lightning/magic AE. Belly caster â€” position underneath. Gates even with no mana.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -844,13 +944,13 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Zlexak</div>
-        <div class="dc-tags"><span class="tag t-disease">Disease AE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">Triplet — AE Every 18s</span></div>
+        <div class="dc-tags"><span class="tag t-disease">Disease AE</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-gray">Triplet â€” AE Every 18s</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_zlexak.png" alt="Zlexak" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-disease">Disease</span><span class="ae-spell">Diseased Cloud</span><span class="ae-note">— Disease PBAE every ~18 seconds. Elemental Rhythms covers disease.</span></div>
+          <div class="ae-row"><span class="tag t-disease">Disease</span><span class="ae-spell">Diseased Cloud</span><span class="ae-note">â€” Disease PBAE every ~18 seconds. Elemental Rhythms covers disease.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -876,13 +976,13 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Sevalak</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic/Chaos</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">Easiest Triplet — Belly Caster</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic/Chaos</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-gray">Easiest Triplet â€” Belly Caster</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_sevalak.png" alt="Sevalak" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Chaos Breath</span><span class="ae-note">— Magic-based chaos AE. Slowable. Easiest of the three triplets.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Chaos Breath</span><span class="ae-note">â€” Magic-based chaos AE. Slowable. Easiest of the three triplets.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -897,7 +997,7 @@
               <div class="song-line">Psalm of Mystical Shielding <em>(max MR)</em></div>
               <div class="song-line">Verses of Victory</div>
               <div class="song-line">Cantata of Soothing</div>
-              <div class="song-line puretone-note">Puretone — save for a harder fight if on cooldown</div>
+              <div class="song-line puretone-note">Puretone â€” save for a harder fight if on cooldown</div>
             </div>
           </div>
         </div>
@@ -910,21 +1010,21 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Vulak'Aerr</div>
-        <div class="dc-tags"><span class="tag t-unres">Unresistable PBAE</span><span class="tag t-disease">Disease PBAE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-rooted">⚓ Perma-Rooted</span><span class="tag t-extreme">L70 — Final Boss</span></div>
+        <div class="dc-tags"><span class="tag t-unres">Unresistable PBAE</span><span class="tag t-disease">Disease PBAE</span><span class="tag t-slow-y">âœ“ Slowable</span><span class="tag t-rooted">âš“ Perma-Rooted</span><span class="tag t-extreme">L70 â€” Final Boss</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_vulak%60aerr.png" alt="Vulak'Aerr" onerror="this.src='https://wiki.project1999.com/images/Npc_vulak%60aerr2.png'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-unres">Unresistable</span><span class="ae-spell">Gift of Aerr</span><span class="ae-note">— PBAE 50 HP DoT. Completely unresistable — resist songs don't help here.</span></div>
-          <div class="ae-row"><span class="tag t-disease">Disease</span><span class="ae-spell">Ancient Breath</span><span class="ae-note">— PBAE DoT + -40% Attack Speed + 250 HP DD per tick. Disease-based — DR helps.</span></div>
-          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">— Summons tank under dragon. Hits 1200+ melee, flurries.</span></div>
+          <div class="ae-row"><span class="tag t-unres">Unresistable</span><span class="ae-spell">Gift of Aerr</span><span class="ae-note">â€” PBAE 50 HP DoT. Completely unresistable â€” resist songs don't help here.</span></div>
+          <div class="ae-row"><span class="tag t-disease">Disease</span><span class="ae-spell">Ancient Breath</span><span class="ae-note">â€” PBAE DoT + -40% Attack Speed + 250 HP DD per tick. Disease-based â€” DR helps.</span></div>
+          <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Call of the Zero</span><span class="ae-note">â€” Summons tank under dragon. Hits 1200+ melee, flurries.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
               <div class="song-line">Guardian Rhythms</div>
-              <div class="song-line">Elemental Rhythms <em>(disease resist — Ancient Breath)</em></div>
-              <div class="song-line">Verses of Victory <em>(haste — Gift is unresistable, focus DPS)</em></div>
+              <div class="song-line">Elemental Rhythms <em>(disease resist â€” Ancient Breath)</em></div>
+              <div class="song-line">Verses of Victory <em>(haste â€” Gift is unresistable, focus DPS)</em></div>
               <div class="song-line">Cantata of Soothing</div>
             </div>
             <div class="song-col">
@@ -938,13 +1038,13 @@
           </div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Kill ALL other TOV named before engaging Vulak. Gift of Aerr is unresistable — tight healer rotation is life or death. Ancient Breath -40% attack speed kills DPS and prolongs the fight.</div>
+      <div class="dc-warn">âš  Kill ALL other TOV named before engaging Vulak. Gift of Aerr is unresistable â€” tight healer rotation is life or death. Ancient Breath -40% attack speed kills DPS and prolongs the fight.</div>
     </div>
 
     <div class="credit" style="margin-top:16px;">Dragon images and AE data courtesy of wiki.project1999.com</div>
   </div>
 
 </div>
-<div class="footer">EQ Bard Guide — Frostreaver TLP Velious &nbsp;·&nbsp; Montana &nbsp;·&nbsp; Live-tested data June 2026 &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">← Back to Index</a></div>
+<div class="footer">EQ Bard Guide â€” Frostreaver TLP Velious &nbsp;Â·&nbsp; Montana &nbsp;Â·&nbsp; Live-tested data June 2026 &nbsp;Â·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">â† Back to Index</a></div>
 </body>
 </html>
