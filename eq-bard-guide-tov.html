@@ -73,6 +73,10 @@
     .t-warn    { background:var(--gold-bg);    color:var(--gold);   }
     .t-extreme { background:var(--red-bg);     color:var(--red);    }
     .t-gray    { background:var(--gray-100);   color:var(--gray-600); }
+    .t-slow-y  { background:#E6F4EC; color:#1A6B3A; }
+    .t-slow-n  { background:#FAE8E8; color:#8B1A1A; }
+    .t-slow-u  { background:#F5F0DC; color:#5A4000; }
+    .t-rooted  { background:#E8E0FA; color:#3A1A7A; }
 
     /* ── Tables ── */
     .tbl-wrap { overflow-x:auto; margin-bottom:8px; }
@@ -84,9 +88,9 @@
     .tbl-note { font-size:.74rem; color:var(--gray-400); margin-top:6px; font-style:italic; }
 
     /* ── Maps ── */
-    .map-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:8px; }
+    .map-grid { display:grid; grid-template-columns:1fr; gap:20px; margin-bottom:8px; }
     .map-card { background:white; border-radius:8px; border:1px solid var(--border); overflow:hidden; }
-    .map-img { width:100%; display:block; background:var(--gray-100); min-height:180px; object-fit:contain; }
+    .map-img { width:100%; display:block; background:var(--gray-100); min-height:400px; object-fit:contain; }
     .map-caption { padding:10px 14px; font-size:.75rem; color:var(--gray-600); font-weight:600; border-top:1px solid var(--border); }
 
     /* ── Melody blocks ── */
@@ -104,9 +108,9 @@
     .dc-header { background:var(--navy); padding:14px 20px; display:flex; align-items:center; gap:12px; }
     .dc-name { font-size:1.05rem; font-weight:800; color:white; flex:1; }
     .dc-tags { display:flex; gap:6px; flex-wrap:wrap; }
-    .dc-body { display:grid; grid-template-columns:140px 1fr; gap:0; }
-    .dc-portrait { background:var(--gray-100); display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); min-height:130px; }
-    .dc-portrait img { width:130px; height:130px; object-fit:contain; display:block; }
+    .dc-body { display:grid; grid-template-columns:260px 1fr; gap:0; }
+    .dc-portrait { background:var(--gray-100); display:flex; align-items:center; justify-content:center; border-right:1px solid var(--border); min-height:240px; }
+    .dc-portrait img { width:240px; height:240px; object-fit:contain; display:block; }
     .dc-content { padding:16px 20px; }
     .dc-section-lbl { font-size:.62rem; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--gray-400); margin-bottom:6px; }
     .ae-row { display:flex; align-items:center; gap:8px; margin-bottom:5px; font-size:.82rem; }
@@ -126,7 +130,7 @@
 
     /* ── Two-col layout ── */
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    @media(max-width:680px) { .two-col { grid-template-columns:1fr; } .dc-body { grid-template-columns:1fr; } .dc-portrait { border-right:none; border-bottom:1px solid var(--border); } .songs-grid { grid-template-columns:1fr; } .map-grid { grid-template-columns:1fr; } }
+    @media(max-width:680px) { .two-col { grid-template-columns:1fr; } .dc-body { grid-template-columns:1fr; } .dc-portrait { border-right:none; border-bottom:1px solid var(--border); } .songs-grid { grid-template-columns:1fr; } }
 
     .stat-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--gray-200); font-size:.82rem; }
     .stat-row:last-child { border-bottom:none; }
@@ -392,10 +396,10 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Vyemm</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic PBAE</span><span class="tag t-extreme">Hardest in TOV</span><span class="tag t-gray">L66 Paladin</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic PBAE</span><span class="tag t-extreme">Hardest in TOV</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-rooted">⚓ Perma-Rooted</span><span class="tag t-gray">L66 Paladin</span></div>
       </div>
       <div class="dc-body">
-        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_vyemm3.png" alt="Lord Vyemm" onerror="this.src='https://wiki.project1999.com/images/Npc_lord_vyemm2.jpg'" /></div>
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_vyemm2.jpg" alt="Lord Vyemm" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
           <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Chaos Breath</span><span class="ae-note">— PBAE magic DD. Hits very hard. MR is your #1 priority.</span></div>
@@ -426,7 +430,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Aaryonar</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic Debuff AE</span><span class="tag t-warn">Assists Others</span><span class="tag t-gray">L66 Paladin</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic Debuff AE</span><span class="tag t-warn">Assists Others</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L66 Paladin</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_aaryonar.png" alt="Aaryonar" onerror="this.style.display='none'" /></div>
@@ -460,7 +464,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Eashen of the Sky</div>
-        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic</span><span class="tag t-warn">Unslowable</span><span class="tag t-gray">L66 Drake Wizard</span></div>
+        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">L66 Drake Wizard</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_eashen_of_the_sky.png" alt="Eashen of the Sky" onerror="this.style.display='none'" /></div>
@@ -495,7 +499,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Ikatiar the Venom</div>
-        <div class="dc-tags"><span class="tag t-poison">Poison</span><span class="tag t-warn">Unslowable</span><span class="tag t-gray">L66 Wyvern Rogue</span></div>
+        <div class="dc-tags"><span class="tag t-poison">Poison</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">L66 Wyvern Rogue</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_ikatiar_the_venom.png" alt="Ikatiar the Venom" onerror="this.style.display='none'" /></div>
@@ -527,7 +531,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Dagarn the Destroyer</div>
-        <div class="dc-tags"><span class="tag t-fire">Fire PBAE</span><span class="tag t-extreme">L70 Wurm</span></div>
+        <div class="dc-tags"><span class="tag t-fire">Fire PBAE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-extreme">L70 Wurm</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_dagarn_the_destroyer2.jpg" alt="Dagarn the Destroyer" onerror="this.style.display='none'" /></div>
@@ -561,7 +565,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Feshlak</div>
-        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-gray">L66 Lava Dragon — AE Very Weak</span></div>
+        <div class="dc-tags"><span class="tag t-fire">Fire</span><span class="tag t-cold">Cold</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-rooted">⚓ Perma-Rooted</span><span class="tag t-gray">L66 — AE Very Weak</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_feshlak2.jpg" alt="Lord Feshlak" onerror="this.style.display='none'" /></div>
@@ -594,7 +598,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lady Mirenilla</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic Fear</span><span class="tag t-gray">L66 Lava Dragon — Slowable</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold</span><span class="tag t-magic">Magic Fear</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">L66 Lava Dragon</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lady_mirenilla.png" alt="Lady Mirenilla" onerror="this.style.display='none'" /></div>
@@ -629,10 +633,10 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Kreizenn</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-warn">Misleading Name</span><span class="tag t-gray">L66 Lava Dragon</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-warn">Wave of Flame = Cold</span><span class="tag t-gray">L66 Lava Dragon</span></div>
       </div>
       <div class="dc-body">
-        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_kreizenn.png" alt="Lord Kreizenn" onerror="this.style.display='none'" /></div>
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_kreizenn2.jpg" alt="Lord Kreizenn" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
           <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Wave of Flame</span><span class="ae-note">— Cold DD with zero-second stun AE. Despite the name "Flame" — it's cold damage.</span></div>
@@ -661,7 +665,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Jorlleag</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-warn">Complete Heals + Gates</span><span class="tag t-gray">L66 Lava Dragon Cleric</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold AE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-warn">CH + Gates</span><span class="tag t-gray">L66 Cleric Dragon</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_jorlleag.png" alt="Jorlleag" onerror="this.style.display='none'" /></div>
@@ -695,10 +699,10 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lady Nevederia</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic Debuff</span><span class="tag t-gray">L66 Enchanter Dragon</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic Debuff</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L66 Enchanter Dragon</span></div>
       </div>
       <div class="dc-body">
-        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lady_nevederia.png" alt="Lady Nevederia" onerror="this.style.display='none'" /></div>
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Ladyn.png" alt="Lady Nevederia" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
           <div class="ae-row"><span class="tag t-magic">Magic</span><span class="ae-spell">Enchanter Abilities</span><span class="ae-note">— Possible mez/charm/debuff AEs. MR reduces proc chance. "Among the most fearsome air dragons."</span></div>
@@ -727,10 +731,10 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lord Koi'Doken</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold/Water</span><span class="tag t-gray">L66 Water Dragon Rogue</span></div>
+        <div class="dc-tags"><span class="tag t-cold">Cold/Water</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L66 Water Dragon Rogue</span></div>
       </div>
       <div class="dc-body">
-        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lord_koi%60doken.png" alt="Lord Koi'Doken" onerror="this.style.display='none'" /></div>
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Lord_Koi%60Doken2.jpg" alt="Lord Koi'Doken" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
           <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Water/Cold AEs</span><span class="ae-note">— Water dragon. Cold resist priority.</span></div>
@@ -759,7 +763,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Lendiniara the Keeper</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic/Cold</span><span class="tag t-warn">Unslowable</span><span class="tag t-gray">L66 — 12% Spawn</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic/Cold</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">L66 — 12% Spawn</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_lendiniara_the_keeper.png" alt="Lendiniara" onerror="this.style.display='none'" /></div>
@@ -793,7 +797,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Cekenar</div>
-        <div class="dc-tags"><span class="tag t-magic">Electric/Magic</span><span class="tag t-gray">Triplet — Belly Caster</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Electric/Magic</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">Triplet — Belly Caster</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_cekenar.png" alt="Cekenar" onerror="this.style.display='none'" /></div>
@@ -825,7 +829,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Zlexak</div>
-        <div class="dc-tags"><span class="tag t-disease">Disease AE</span><span class="tag t-gray">Triplet — AE Every 18s</span></div>
+        <div class="dc-tags"><span class="tag t-disease">Disease AE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">Triplet — AE Every 18s</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_zlexak.png" alt="Zlexak" onerror="this.style.display='none'" /></div>
@@ -857,7 +861,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Sevalak</div>
-        <div class="dc-tags"><span class="tag t-magic">Magic/Chaos</span><span class="tag t-gray">Easiest Triplet</span></div>
+        <div class="dc-tags"><span class="tag t-magic">Magic/Chaos</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">Easiest Triplet — Belly Caster</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_sevalak.png" alt="Sevalak" onerror="this.style.display='none'" /></div>
@@ -891,7 +895,7 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Vulak'Aerr</div>
-        <div class="dc-tags"><span class="tag t-unres">Unresistable PBAE</span><span class="tag t-disease">Disease PBAE</span><span class="tag t-extreme">L70 — Final Boss</span></div>
+        <div class="dc-tags"><span class="tag t-unres">Unresistable PBAE</span><span class="tag t-disease">Disease PBAE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-rooted">⚓ Perma-Rooted</span><span class="tag t-extreme">L70 — Final Boss</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_vulak%60aerr.png" alt="Vulak'Aerr" onerror="this.src='https://wiki.project1999.com/images/Npc_vulak%60aerr2.png'" /></div>
