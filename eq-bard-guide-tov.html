@@ -186,7 +186,7 @@
       <div class="card-title">Key Findings — Empirically Tested on Frostreaver</div>
       <div class="finding f-green"><div class="finding-label">Winner</div><div class="finding-text"><strong>Verses of Victory beats McVaxius for DPS.</strong> VoV 30% haste vs McVaxius 22% = 103 more hits over 30 min. +9% DPS. McVaxius ATK+14 only adds ~+2 avg damage/hit — nowhere near enough to compensate.</div></div>
       <div class="finding f-gold"><div class="finding-label">Confirmed</div><div class="finding-text"><strong>Brass horn has zero impact on swing speed.</strong> Tested: 36.0 swings/min with and without horn. Instrument modifier does not affect haste %. It only boosts secondary effects (STR/ATK/DS) — adds ~+2 avg damage/hit.</div></div>
-      <div class="finding f-purple"><div class="finding-label">Confirmed</div><div class="finding-text"><strong>Composition of Ervaj stacks on both songs</strong> in its own unique haste slot. Adds ~8–9% additional swings/min on top of McVaxius or VoV, independently.</div></div>
+      <div class="finding f-purple"><div class="finding-label">Confirmed — With Restriction</div><div class="finding-text"><strong>Composition of Ervaj stacks on McVaxius or VoV</strong> in its own unique haste slot (+8–9% swings/min). <strong>However: it does NOT stack with Elemental Rhythms or any Psalm song.</strong> This means you cannot run Ervaj whenever resist songs are needed. It is only viable for pure tank-and-spank fights (no meaningful AEs) — ideal for DPS groups and monk groups on trash or non-AE bosses.</div></div>
       <div class="finding f-navy"><div class="finding-label">Exception</div><div class="finding-text"><strong>McVaxius wins only if you're already at the haste cap</strong> from item haste + enchanter Celerity. At cap, VoV haste is wasted; McVaxius ATK/STR secondary becomes the tiebreaker.</div></div>
     </div>
 
@@ -218,7 +218,7 @@
           <tr><td>Caster spell</td><td>Enchanter Celerity</td><td>~39%</td><td>Highest spell wins</td></tr>
           <tr><td>Bard song</td><td>Verses of Victory</td><td>30%</td><td>Flat — instrument irrelevant</td></tr>
           <tr><td>Bard song</td><td>McVaxius Rousing Rondo</td><td>22%</td><td>Flat — instrument irrelevant</td></tr>
-          <tr><td>Unique Ervaj slot</td><td>Composition of Ervaj</td><td>10%</td><td>Stacks on top of everything</td></tr>
+          <tr><td>Unique Ervaj slot</td><td>Composition of Ervaj</td><td>10%</td><td>Stacks with VoV/McVaxius but NOT with Elemental Rhythms or any Psalm song. Pure tank-and-spank only.</td></tr>
           <tr class="row-winner"><td colspan="2"><strong>Full stack at L60</strong></td><td><strong>100% cap</strong></td><td>21 + 39 + 30 + 10 = 100</td></tr>
         </tbody>
       </table></div>
@@ -344,6 +344,21 @@
           <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana</span></div>
         </div>
       </div>
+    </div>
+
+    <div class="finding f-red" style="margin-top:16px;">
+      <div class="finding-label">Composition of Ervaj — When NOT to Use It</div>
+      <div class="finding-text"><strong>Ervaj does not stack with Elemental Rhythms or any Psalm song.</strong> Any time resist songs are in the melody (Guardian + Elemental, Psalm of Warmth, Psalm of Cooling, Psalm of Mystical Shielding), drop Ervaj — it conflicts and gives you nothing. Swap Cantata out for Ervaj only on pure tank-and-spank mobs with no AEs to resist.</div>
+    </div>
+
+    <div class="melody" style="margin-top:12px;">
+      <div class="melody-lbl">Tank &amp; Spank Only — Pure DPS / Monk Group</div>
+      <div class="melody-title">Composition of Ervaj Setup (No Resists Needed)</div>
+      <div class="melody-row"><div class="melody-num">1</div><span class="melody-song">Verses of Victory</span><span class="melody-note"> — 30% haste + AGI</span></div>
+      <div class="melody-row"><div class="melody-num">2</div><span class="melody-song">McVaxius Rousing Rondo</span><span class="melody-note"> — 22% haste + ATK/STR/DS (brass boosted)</span></div>
+      <div class="melody-row"><div class="melody-num">3</div><span class="melody-song">Composition of Ervaj</span><span class="melody-note"> — +10% in unique slot — stacks on top of VoV + McVaxius</span></div>
+      <div class="melody-row"><div class="melody-num">4</div><span class="melody-song">Cantata of Soothing</span><span class="melody-note"> — Mana regen</span></div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1);font-size:.74rem;color:rgba(255,255,255,.4);">Note: No Guardian or Elemental in this melody — Ervaj conflicts with both. No resist coverage. Only use on mobs with no dangerous AEs.</div>
     </div>
   </div>
 
