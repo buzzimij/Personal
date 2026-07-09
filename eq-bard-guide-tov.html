@@ -148,6 +148,17 @@
 
     .footer { text-align:center; font-size:.75rem; color:var(--gray-400); padding:32px 24px; border-top:1px solid var(--border); }
     @media(max-width:600px) { .header { padding:28px 20px 24px; } .header-title { font-size:1.5rem; } .toc-bar { padding:10px 20px; } .container { padding:28px 16px 60px; } }
+
+    /* ── Tab navigation ── */
+    .tab-nav { background: var(--navy-mid); padding: 0 48px; display: flex; gap: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
+    .tab-btn { background: transparent; border: none; border-bottom: 3px solid transparent; color: rgba(255,255,255,.5); font-family: inherit; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 14px 22px; cursor: pointer; transition: all .15s; }
+    .tab-btn:hover { color: rgba(255,255,255,.85); background: rgba(255,255,255,.05); }
+    .tab-btn.active { color: white; border-bottom-color: #79C0FF; }
+
+    /* ── Gear tab ── */
+    .gear-tbl td:first-child { font-weight: 700; white-space: nowrap; }
+    .gear-tbl td { vertical-align: middle; }
+    .priority-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: white; font-size: .7rem; font-weight: 800; }
   </style>
 </head>
 <body>
@@ -163,6 +174,11 @@
     <span class="badge">Montana</span>
   </div>
 </div>
+<div class="tab-nav">
+  <button class="tab-btn active" id="btn-guide" onclick="switchTab('guide')">Raid Guide</button>
+  <button class="tab-btn" id="btn-gear" onclick="switchTab('gear')">Bard Gear</button>
+</div>
+<div id="tab-guide">
 <div class="toc-bar">
   <a href="#haste">Haste &amp; DPS Data</a>
   <a href="#instruments">Instruments</a>
@@ -1339,9 +1355,20 @@
               <div class="song-line">Cantata of Soothing</div>
             </div>
           </div>
+          <div class="dc-section-lbl" style="margin-top:14px;">Field Log — Montana 2026-06-29</div>
+          <table class="gear-tbl" style="font-size:12px;margin-top:6px;">
+            <thead><tr><th>Song</th><th>School</th><th>Casts</th><th>Resists</th><th>Land %</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Tuyen's Chant of Flame</td><td>Fire</td><td>4</td><td>0</td><td style="color:#2ecc71;font-weight:bold">100%</td><td>Lands clean</td></tr>
+              <tr><td>Tuyen's Chant of Frost</td><td>Cold</td><td>4</td><td>0</td><td style="color:#2ecc71;font-weight:bold">100%</td><td>Lands clean</td></tr>
+              <tr><td>Cassindra's Elegy</td><td>Mana Drain</td><td>4</td><td>0</td><td style="color:#2ecc71;font-weight:bold">100%</td><td>Lands clean</td></tr>
+              <tr><td>Fufil's Curtailing Chant</td><td>Slow</td><td>3</td><td>0</td><td style="color:#e67e22;font-weight:bold">N/A</td><td>⚠ KT is unslowable — this song does nothing, swap it out</td></tr>
+            </tbody>
+          </table>
+          <div style="color:#888;font-size:11px;margin-top:5px;">Parsed from Montana's EQ log. Fight duration ~46s.</div>
         </div>
       </div>
-      <div class="dc-warn">⚠ Sees invis and hidden. Rampages + Enrages. 450,000 HP — 7-day respawn. Belly caster. Pure DPS race — no slow available.</div>
+      <div class="dc-warn">⚠ Sees invis and hidden. Rampages + Enrages. 450,000 HP — 7-day respawn. Belly caster. Pure DPS race — no slow available. Drop Fufil's Curtailing Chant — KT is slow immune, replace with a DPS or sustain song.</div>
     </div>
 
     <div class="wing-label">Avatar Trigger — Clear Throne Room First</div>
@@ -1476,7 +1503,15 @@
   <div class="section" id="st">
     <div class="section-header">
       <div class="section-icon">⚰</div>
-      <div class="section-title">Sleeper's Tomb — The Four Warders</div>
+      <div class="section-title">Sleeper's Tomb — Warders, Golems &amp; the Sleeper</div>
+    </div>
+    <div class="finding f-navy" style="margin-bottom:12px;">
+      <div class="finding-label">Zone Strategy — What You Actually Farm</div>
+      <div class="finding-text">Sleeper's Tomb has two halves. <strong>Upper zone — the four Warders:</strong> slowable dragons with cold/magic/fire breath AEs (resist fights). <strong>Golem room — the farm:</strong> Master of the Guard, The Progenitor, and The Final Arbiter. The golems cast <strong>no elemental breath AE</strong> — they're pure melee + add-wave fights, so a bard <strong>drops resist songs and runs the DPS/haste setup</strong> (VoV + McVaxius + Composition of Ervaj + Cantata). Each golem kill gives <strong>−35 Disciples of Kerafyrm</strong> faction and loot from the <strong>Primal Velium</strong> (pre-awakening) / <strong>Ancient Prismatic</strong> (post-awakening) weapon lines — and <strong>Composition of Ervaj itself drops in this zone.</strong> <strong>Exception:</strong> The Final Arbiter procs a <strong>cold DD on the tank</strong> (Frigid Shard Pummel) — its tank group runs cold, not Ervaj. Master of the Guard and The Progenitor have no confirmed tank DD.</div>
+    </div>
+    <div class="finding f-red" style="margin-bottom:12px;">
+      <div class="finding-label">⚠ Do NOT Wake the Sleeper</div>
+      <div class="finding-text"><strong>Killing all four Warders simultaneously wakes Kerafyrm</strong> — a one-time, irreversible, server-wide event that removes the Warders forever and unleashes an effectively unkillable dragon. Farm the golems; always leave at least one Warder alive. (Full Kerafyrm card at the bottom of this section.)</div>
     </div>
     <div class="finding f-red" style="margin-bottom:20px;">
       <div class="finding-label">Bard Warning — Mesmerizing Breath</div>
@@ -1525,13 +1560,13 @@
     <div class="dragon-card">
       <div class="dc-header">
         <div class="dc-name">Nanzata the Warder</div>
-        <div class="dc-tags"><span class="tag t-cold">Cold Targeted AE</span><span class="tag t-slow-u">~ Slow Unconfirmed</span><span class="tag t-gray">L70 — Sleeper's Tomb</span></div>
+        <div class="dc-tags"><span class="tag t-warn">⚠ Breath Disputed</span><span class="tag t-cold">Cold?</span><span class="tag t-fire">Fire?</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-gray">L70 — Sleeper's Tomb</span></div>
       </div>
       <div class="dc-body">
         <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_nanzata_the_warder.png" alt="Nanzata the Warder" onerror="this.style.display='none'" /></div>
         <div class="dc-content">
           <div class="dc-section-lbl">AE Spells</div>
-          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Frost Breath</span><span class="ae-note">— 500 cold DD. Targeted AE — hits everyone near the tank.</span></div>
+          <div class="ae-row"><span class="tag t-cold">Cold?</span><span class="tag t-fire">Fire?</span><span class="ae-spell">Frost / Lava Breath</span><span class="ae-note">— ⚠ Disputed: P99 lists <strong>Frost Breath (cold)</strong>; live/TAKP data lists <strong>Lava Breath (fire)</strong>. On live-code Frostreaver it's likely <strong>fire (Psalm of Cooling)</strong> — parse the resist message on your first pull to confirm. ~500 DD targeted AE. Note: your guild doesn't currently pull the Warders.</span></div>
           <div class="songs-grid">
             <div class="song-col">
               <div class="song-col-lbl">No Epic (Drum)</div>
@@ -1623,9 +1658,239 @@
       </div>
       <div class="dc-warn">⚠ "Stream of Acid" is FIRE resist despite the name — use fire resist songs, not poison. 65% movement slow from the DoT makes repositioning hard. Slowable — get slow up early. Rampages.</div>
     </div>
+
+    <div class="wing-label">Golem Room — The Farm (No Breath AE · DPS Setup)</div>
+
+    <!-- Master of the Guard -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">Master of the Guard</div>
+        <div class="dc-tags"><span class="tag t-gray">No Breath AE</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-warn">⚑ 8-Golem Add Ring</span><span class="tag t-win">DPS Setup Viable</span><span class="tag t-gray">L70 Golem</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_master_of_the_guard.png" alt="Master of the Guard" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells</div>
+          <div class="ae-row"><span class="tag t-gray">None</span><span class="ae-spell">Come to My Aid</span><span class="ae-note">— No elemental breath. ~1 min in, activates his ring of <strong>8 golem adds</strong> (2 at a time). Melee hits <strong>237–632</strong>. Corpse shout: "this one is but one of many." This is your main ST farm target.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">No Epic — DPS Setup</div>
+              <div class="song-line">Verses of Victory <em>(30% haste)</em></div>
+              <div class="song-line">McVaxius Rousing Rondo <em>(22% haste + ATK/STR)</em></div>
+              <div class="song-line">Composition of Ervaj <em>(no AE = Ervaj is viable)</em></div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">With Epic — DPS Setup</div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">McVaxius Rousing Rondo</div>
+              <div class="song-line">Composition of Ervaj</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dc-warn">⚑ Slowable — get a slow on him (Turgur's lands per your logs). Real threat is the 8-golem ring: kite him until 2 adds activate, peel those, repeat. Bard: Selo's to split/kite adds. No resist songs needed (no tank DD documented — parse the tank if unsure).</div>
+    </div>
+
+    <!-- The Progenitor -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">The Progenitor</div>
+        <div class="dc-tags"><span class="tag t-gray">No Breath AE</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-warn">⚑ Summons Adds</span><span class="tag t-win">DPS Setup Viable</span><span class="tag t-gray">L70 Golem</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_the_progenitor.png" alt="The Progenitor" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells</div>
+          <div class="ae-row"><span class="tag t-gray">None</span><span class="ae-spell">Melee + Add Wave</span><span class="ae-note">— No elemental breath (confirmed in your kill log). Hits tank <strong>390–539</strong>, flurries + enrages. Summons ~7 "newly created sentry" adds that respawn as they die. Unmezzable / unstunable / unsnareable.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">No Epic — DPS Setup</div>
+              <div class="song-line">Verses of Victory <em>(30% haste)</em></div>
+              <div class="song-line">McVaxius Rousing Rondo <em>(22% haste + ATK/STR)</em></div>
+              <div class="song-line">Composition of Ervaj <em>(no AE = Ervaj is viable)</em></div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">With Epic — DPS Setup</div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">McVaxius Rousing Rondo</div>
+              <div class="song-line">Composition of Ervaj</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dc-warn">✗ Unslowable — don't waste a slow. Real threat is the respawning sentry wave + flurry melee. Ervaj is legal (no resist songs needed). Drops the Prismatic weapon line + Composition of Ervaj. If a future kill logs an AE, revisit — online data hints fire but it's unconfirmed.</div>
+    </div>
+
+    <!-- The Final Arbiter -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">The Final Arbiter</div>
+        <div class="dc-tags"><span class="tag t-cold">Cold DD on Tank</span><span class="tag t-slow-y">✓ Slowable</span><span class="tag t-extreme">200k HP · Flurry/Rampage</span><span class="tag t-warn">⚑ Summons Adds</span><span class="tag t-gray">L70 Golem — Deepest</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_the_final_arbiter.png" alt="The Final Arbiter" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">AE Spells &amp; Procs</div>
+          <div class="ae-row"><span class="tag t-cold">Cold</span><span class="ae-spell">Frigid Shard Pummel</span><span class="ae-note">— <strong>500 cold DD proc on the tank</strong>, resist adjust <strong>−150</strong>. This is the reason the tank group runs COLD. Stack the tank to <strong>~600 cold</strong> — resists easily there.</span></div>
+          <div class="ae-row"><span class="tag t-gray">Melee</span><span class="ae-spell">200k HP + Adds</span><span class="ae-note">— Melee <strong>150–425 × 4–6 swings</strong> + Flurry / Rampage / Enrage + summons adds. <strong>Slowable</strong> (slow it first); unmezzable / unsnareable / uncharmable. Loc ~(-2383, -753), deepest, 3-day respawn.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">Tank Group — No Epic</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Elemental Rhythms <em>(cold 160 — Frigid Shard)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line">Cantata of Soothing</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">Tank Group — With Epic</div>
+              <div class="song-line">Guardian Rhythms</div>
+              <div class="song-line">Psalm of Warmth <em>(cold — max cold resist)</em></div>
+              <div class="song-line">Verses of Victory</div>
+              <div class="song-line puretone-note">Puretone on pull → 265 cold</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dc-warn">⚑ SLOW IT FIRST (slow lands, unlike Progenitor). <strong>Tank group runs COLD</strong> for Frigid Shard Pummel (~600 cold, −150 mod). Off-tank / DPS groups (not hit by the tank proc) can run the Ervaj DPS setup instead. Off-tank the adds, back off on Enrage, melee behind it for Rampage. Longer fight (200k HP). Drops Primal Velium weapon + Prismatic Dragon Scale.</div>
+    </div>
+
+    <div class="wing-label">The Sleeper — Do Not Wake</div>
+
+    <!-- Kerafyrm the Sleeper -->
+    <div class="dragon-card">
+      <div class="dc-header">
+        <div class="dc-name">Kerafyrm — The Sleeper</div>
+        <div class="dc-tags"><span class="tag t-extreme">Effectively Unkillable</span><span class="tag t-unres">Unresistable AEs</span><span class="tag t-slow-n">✗ Unslowable</span><span class="tag t-gray">Prismatic Dragon</span></div>
+      </div>
+      <div class="dc-body">
+        <div class="dc-portrait"><img src="https://wiki.project1999.com/images/Npc_kerafyrm.png" alt="Kerafyrm the Sleeper" onerror="this.style.display='none'" /></div>
+        <div class="dc-content">
+          <div class="dc-section-lbl">Not a Loot Target — Read This</div>
+          <div class="ae-row"><span class="tag t-unres">Unres</span><span class="ae-spell">Wake Event</span><span class="ae-note">— Woken by killing <strong>all four Warders simultaneously</strong>. One-time, irreversible, server-wide: the Warders never respawn and Kerafyrm rampages the zone. Killed only once in EQ history (Rallos Zek, 2003 — three guilds + a GM). <strong>No bard song resists his AEs</strong> — treat them as unresistable.</span></div>
+          <div class="songs-grid">
+            <div class="song-col">
+              <div class="song-col-lbl">Bard Reality</div>
+              <div class="song-line">No resist song helps</div>
+              <div class="song-line">Selo's to flee if he's loose</div>
+            </div>
+            <div class="song-col">
+              <div class="song-col-lbl">Correct Play</div>
+              <div class="song-line">Never kill the last Warder</div>
+              <div class="song-line">Farm the golems instead</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dc-warn">⚠ Waking the Sleeper ends Warder farming permanently and wipes raids. This is a spectacle, not a loot raid — leave at least one Warder alive at all times.</div>
+    </div>
   </div>
 
 </div>
+</div><!-- end tab-guide -->
+
+<div id="tab-gear" style="display:none">
+  <div class="container">
+
+    <!-- Tonight's Bids -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">⚔</div>
+        <div class="section-title">Tonight's DKP Bids</div>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Active Bids — Tonight's Raid</div>
+          <div class="finding f-green"><div class="finding-label">#1 — Do Not Lose This</div><div class="finding-text"><strong>Dain Frostreaver's Head x2</strong> → Belt of Dwarf Slaying. BIS waist #1 (STR+15 WIS+15 INT+15 HP+100, all saves +5). Currently wearing AC 10 Imperial Wardog Collar. Killing Yelinak tonight also gives +1500 King Tormax faction — enables all head turnins after this raid.</div></div>
+          <div class="finding f-green"><div class="finding-label">#2</div><div class="finding-text"><strong>Yelinak's Head</strong> → Gauntlets of Dragon Slaying (BIS hands #2, score 12161). Beats Onyx Gauntlets (BIS #3, score 11513). Do not bid Onyx Gauntlets while this is available.</div></div>
+          <div class="finding f-navy"><div class="finding-label">#3 — Cheap Grab</div><div class="finding-text"><strong>Cloak of the Falling Stars</strong> — Fire+10, Magic+10, HP+100, AC 20. Equip immediately — raid bard gets enchanter haste so Cloak of Flames 36% worn haste is redundant. Magic resist directly helps vs fear and silence.</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Skip Tonight</div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Item</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>Onyx Gauntlets</td><td>Yelinak's Head → Gauntlets of Dragon Slaying is better (BIS #2 vs #3)</td></tr>
+              <tr><td>Belt of the Destroyer</td><td>Waist covered by Dain's Head quest — Belt of Dwarf Slaying is BIS</td></tr>
+              <tr><td>Girdle of Dark Power</td><td>Same + weighs 25.0 stones</td></tr>
+              <tr><td>Beldron's Vambraces</td><td>Bid low if leftover DKP only</td></tr>
+              <tr><td>Mithril Boots</td><td>Only if very cheap — Maclaer's off Vulak is the real goal</td></tr>
+            </tbody>
+          </table></div>
+          <div class="finding f-green" style="margin-top:12px;"><div class="finding-label">Free Upgrade — Do This Now</div><div class="finding-text"><strong>Equip Velium Blue Diamond Bracelet x2 already in bags.</strong> Zero DKP cost. All saves +9–11 each. Lose Singing Steel Bracer's AC 16 and Shield of Flame proc — but resist stacking matters more in NToV content.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full Gear Table -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">🛡</div>
+        <div class="section-title">Full BIS Gear Progression — All Slots</div>
+      </div>
+      <div class="card">
+        <div class="tbl-wrap"><table class="gear-tbl">
+          <thead><tr><th>Slot</th><th>Current (Montana)</th><th>Status</th><th>Next Target</th><th>BIS / Endgame</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr class="row-winner"><td>Chest</td><td>Breastplate of Eradication</td><td><span class="tag t-win">BIS Done</span></td><td>—</td><td>Already BIS — AC 55, HP+100, DEX+15, STA+20, all saves +8</td><td>Statue of Rallos Zek, Kael</td></tr>
+            <tr><td>Legs</td><td>Imbrued Platemail Greaves</td><td><span class="tag t-extreme">Worst Slot</span></td><td>Ancient Wurm Hide Greaves (AC 46)</td><td>Ancient Wurm Hide Greaves — BIS legs (no Vulak/NToV beats it)</td><td>Dagarn the Destroyer, ToV</td></tr>
+            <tr><td>Waist</td><td>Imperial Wardog Collar</td><td><span class="tag t-warn">↑ Tonight</span></td><td><strong>Belt of Dwarf Slaying ← tonight</strong></td><td>Feeliux's Cord of Velocity (41% haste, STR/DEX/AGI+25)</td><td>Quest → Vulak</td></tr>
+            <tr><td>Hands</td><td>Troubadour's Gauntlets</td><td><span class="tag t-warn">↑ Tonight</span></td><td><strong>Gauntlets of Dragon Slaying ← tonight</strong></td><td>Do'Vassir's Gauntlets of Might (AC 40, all stats +15)</td><td>Quest → Vulak</td></tr>
+            <tr><td>Back</td><td>Cloak of Flames (36% haste)</td><td><span class="tag t-warn">↑ Tonight</span></td><td><strong>Cloak of the Falling Stars ← tonight</strong></td><td>Cloak of the Fire Storm (40% haste)</td><td>NToV quest</td></tr>
+            <tr><td>Head</td><td>Troubadour's Helm</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>Crown of the Kromzek Kings (SV Magic +25)</td><td>Hobart's War Helmet</td><td>King Tormax → Vulak</td></tr>
+            <tr><td>Feet</td><td>Troubadour's Boots</td><td><span class="tag t-extreme">Weak — No HP</span></td><td>Mithril Boots if cheap DKP</td><td>Maclaer's Boots of Silence (DEX+25, AC 40)</td><td>Vulak</td></tr>
+            <tr><td>Arms</td><td>Troubadour's Vambraces</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>Beldron's Vambraces of Impiety</td><td>Kelsiferous' Armband of Artistry (AC 45, DEX/STA/CHA/INT+15)</td><td>Vulak</td></tr>
+            <tr><td>Wrist x2</td><td>Singing Steel Bracer x2</td><td><span class="tag t-win">Free Upgrade in Bags</span></td><td>Velium Blue Diamond Bracelet x2 (already in inventory)</td><td>Silver Bracelet of Speed (41% haste) / Camii's Bracer of Vigor</td><td>NToV quest / Vulak</td></tr>
+            <tr><td>Neck</td><td>Golden Blue Diamond Pendant</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>—</td><td>Valtron's Necklace of Wonder (STR/DEX/AGI+15, HP+100, all saves +15)</td><td>Vulak</td></tr>
+            <tr><td>Face</td><td>Golden Diamond Mask</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>—</td><td>Akkirus' Mask of Warfare (all stats +10, HP+100, all saves +8)</td><td>Vulak</td></tr>
+            <tr><td>Shoulders</td><td>Tattered Mantle</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>—</td><td>Viik's Pauldrons of Pain (AC 38, STR+15, HP+75)</td><td>Vulak</td></tr>
+            <tr><td>Ear x2</td><td>BD Earring + Sarnak Bauble</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>—</td><td>Vyrinn's Earring of Insanity x2 (AC 25, STR+15, HP+50, all saves +5)</td><td>Vulak</td></tr>
+            <tr><td>Fingers x2</td><td>Velium Diamond Wedding Ring x2</td><td><span class="tag t-gray">Decent for Now</span></td><td>Ring of Destruction (NToV)</td><td>Crystasia's Crystal Ring x2 (AC 30, HP+100, Mana+100, all saves +10)</td><td>NToV / Vulak</td></tr>
+            <tr><td>Range</td><td>Bronze Statue of Bathezid</td><td><span class="tag t-gray">Upgrade Needed</span></td><td>—</td><td>Vyemm's Left Eye (HP+75, SV Magic +25)</td><td>Lord Vyemm, NToV</td></tr>
+            <tr><td>Primary</td><td>Lute of the Howler (1.2×)</td><td><span class="tag t-gray">Mid-Tier</span></td><td>—</td><td>Bard Epic — Singing Short Sword (1.8× all, Dance of the Blade overhaste proc)</td><td>Epic Quest</td></tr>
+            <tr class="row-winner"><td>Secondary</td><td>Drums of the Beast</td><td><span class="tag t-win">Strong</span></td><td>—</td><td>Nature's Melody (DMG 15/Dly 19, HP+100, all saves +13)</td><td>Tunare, PoGrowth</td></tr>
+          </tbody>
+        </table></div>
+        <div class="tbl-note">* Ancient Wurm Hide Greaves IS BIS legs for bard in Velious — Vulak'Aerr drops zero legs slot items. Greaves of Twilight (Skyshrine bard quest, AC 31) has lower AC despite more balanced stats.</div>
+      </div>
+    </div>
+
+    <!-- DKP Priority -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon">📋</div>
+        <div class="section-title">Overall DKP Priority Order</div>
+      </div>
+      <div class="card">
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>#</th><th>Item</th><th>Slot</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr class="row-winner"><td><span class="priority-num">1</span></td><td><strong>Dain Frostreaver's Head x2 → Belt of Dwarf Slaying</strong></td><td>Waist</td><td>BIS waist #1 + Tormax faction. Currently AC 10. Don't lose this bid.</td></tr>
+            <tr class="row-winner"><td><span class="priority-num">2</span></td><td><strong>Yelinak's Head → Gauntlets of Dragon Slaying</strong></td><td>Hands</td><td>BIS hands #2. Better than everything in slot until Do'Vassir's off Vulak.</td></tr>
+            <tr><td><span class="priority-num">3</span></td><td>Ancient Wurm Hide Greaves</td><td>Legs</td><td>AC 16 → 46. Worst slot on body right now. BIS legs — bid every time it comes up.</td></tr>
+            <tr><td><span class="priority-num">4</span></td><td>Cloak of the Falling Stars</td><td>Back</td><td>Low DKP. Fire+10 Magic+10 HP+100. Equip now — enc haste makes CoF haste redundant.</td></tr>
+            <tr><td><span class="priority-num">5</span></td><td>Beldron's Vambraces of Impiety</td><td>Arms</td><td>Modest upgrade. Bid low only.</td></tr>
+            <tr><td><span class="priority-num">6</span></td><td>Mithril Boots</td><td>Feet</td><td>If very cheap only — Troubadour's Boots are weak but Maclaer's (Vulak) is the real goal.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="finding f-navy" style="margin-top:16px;"><div class="finding-label">Endgame Note</div><div class="finding-text"><strong>Vulak'Aerr is the answer to nearly every slot.</strong> Face, neck, shoulders, ears, fingers, wrists, arms, hands, waist (haste), and feet all point to Vulak. Crown of the Kromzek Kings (drops from King Tormax, SV Magic +25) is the best accessible head upgrade in the meantime. Once faction is rebuilt post-turnins, King Tormax is on the kill list anyway.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- end tab-gear -->
+
 <div class="footer">EQ Bard Guide — Frostreaver TLP Velious &nbsp;·&nbsp; Montana &nbsp;·&nbsp; Live-tested data June 2026 &nbsp;·&nbsp; <a href="index.html" style="color:var(--blue);text-decoration:none;">← Back to Index</a></div>
+<script>
+function switchTab(tab) {
+  document.getElementById('tab-guide').style.display = tab === 'guide' ? 'block' : 'none';
+  document.getElementById('tab-gear').style.display = tab === 'gear' ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('btn-' + tab).classList.add('active');
+}
+</script>
 </body>
 </html>
